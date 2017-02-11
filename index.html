@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/stanxia/stanxia.github.io.git"></form>
@@ -147,7 +147,71 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/11/你好世界/" data-id="ciz0kmgq300006el8opax5x79" class="article-share-link">Share</a>
+      <a data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/11/你好世界/" data-id="ciz0kqjra0000b2l8l07b9836" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hadoop原生集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/11/hadoop原生集群搭建/" class="article-date">
+  <time datetime="2017-02-10T17:38:55.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/hadoop原生集群搭建/">hadoop原生集群搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置yarn-site.xml</p>
+<property><br>   <name>yarn.nodemanager.aux-services</name><br>   <value>mapreduce_shuffle</value><br></property>
+
+
+<p>配置mapred-site.xml</p>
+<property><br>   <name>mapreduce.framework.name</name><br>   <value>yarn</value><br></property><br><property><br>   <name>mapreduce.jobhistory.address</name><br>   <value>monsterxls:10020</value><br></property><br><property><br>   <name>mapreduce.jobhistory.webapp.address</name><br>   <value>monsterxls:19888</value><br></property>
+
+<p>配置hdfs-site.xml</p>
+<property><br>   <name>dfs.replication</name><br>   <value>2</value><br></property><br><property><br>   <name>dfs.datanode.ipc.address</name><br>   <value>0.0.0.0:50020</value><br></property><br><property><br>   <name>dfs.datanode.http.address</name><br>   <value>0.0.0.0:50075</value><br></property>
+
+
+<p>配置core-site.xml</p>
+<property><br>   <name>fs.default.name</name><br>   <value>hdfs://monsterxls:9000</value><br></property><br><property><br>   <name>hadoop.tmp.dir</name><br>   <value>/opt/tmp</value><br></property>
+
+
+<p>配置hadoop-env.sh<br>export JAVA_HOME=/opt/jdk1.8</p>
+<p>配置yarn-env.sh<br>export HADOOP_YARN_USER=/opt/hadoopL</p>
+<p>配置/etc/profile:jdk hadoop环境变量</p>
+<p>echo ‘export JAVA_HOME=/opt/jdk1.8’ &gt;&gt;/etc/profile<br>echo ‘export HADOOP_HOME=/opt/hadoop’ &gt;&gt;/etc/profile<br>echo ‘export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin’ &gt;&gt;/etc/profile<br>source /etc/profile</p>
+<p>配置/etc/ntp.conf时间同步<br>yum -y install ntp<br>server ntp7.aliyun.com  iburst</p>
+<p>service ntpd start<br>ntpdate -u ntp7.aliyun.com<br>service ntpd restart<br>ntpstat</p>
+<p>192.168.221.136 monsterxls<br>192.168.221.135 slave1xls<br>192.168.221.137 slave2xls<br>配置/etc/hostname,/etc/hosts<br>echo ‘monsterxls’ &gt;/etc/hostname<br>echo ‘192.168.221.136 monsterxls’ &gt;&gt;/etc/hosts</p>
+<p>配置/etc/sysconfig/network<br>echo ‘NETWORKING=yes’ &gt;&gt;/etc/sysconfig/network<br>echo ‘HOSTNAME=slave2xls’ &gt;&gt;/etc/sysconfig/network</p>
+<p>关闭防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>添加hadoop用户<br>adduser hadoop<br>passwd hadoop<br>将hadoop用户放在root组<br>usermod -g root hadoop </p>
+<p>解压hadoop.tar.gz和jdk<br>tar -zxvf jdk1.8.gz -C /opt/<br>tar -zxvf hadoop-2.6.0.tar.gz -C /opt/</p>
+<p>ssh相互通信<br>ssh-keygen -t rsa -P ‘’<br>scp -r id_rsa.pub root@slave1xls:/home/hadoop/.ssh/<br>authorized_keys</p>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/11/hadoop原生集群搭建/" data-id="ciz0kqjrg0001b2l8wokgdbkt" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -182,12 +246,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
             <a href="/2017/02/11/你好世界/">cdh集群搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/11/hadoop原生集群搭建/">hadoop原生集群搭建</a>
           </li>
         
       </ul>
@@ -203,7 +271,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 夏<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
