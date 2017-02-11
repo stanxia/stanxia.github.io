@@ -6,17 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/stanxia/stanxia.github.io.git">
-  <title>Archives | 小世界，大梦想</title>
+  <title>hadoop原生集群搭建 | 小世界，大梦想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随便说说">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小世界，大梦想">
-<meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git/archives/index.html">
+  <meta name="description" content="配置yarn-site.xml
+   yarn.nodemanager.aux-services   mapreduce_shuffle
+
+
+配置mapred-site.xml
+   mapreduce.framework.name   yarn   mapreduce.jobhistory.address   monsterxls:10020   mapreduce.jobhistory.web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop原生集群搭建">
+<meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git/2017/02/11/hadoop原生集群搭建/index.html">
 <meta property="og:site_name" content="小世界，大梦想">
-<meta property="og:description" content="随便说说">
+<meta property="og:description" content="配置yarn-site.xml
+   yarn.nodemanager.aux-services   mapreduce_shuffle
+
+
+配置mapred-site.xml
+   mapreduce.framework.name   yarn   mapreduce.jobhistory.address   monsterxls:10020   mapreduce.jobhistory.web">
+<meta property="og:updated_time" content="2017-02-11T02:56:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小世界，大梦想">
-<meta name="twitter:description" content="随便说说">
+<meta name="twitter:title" content="hadoop原生集群搭建">
+<meta name="twitter:description" content="配置yarn-site.xml
+   yarn.nodemanager.aux-services   mapreduce_shuffle
+
+
+配置mapred-site.xml
+   mapreduce.framework.name   yarn   mapreduce.jobhistory.address   monsterxls:10020   mapreduce.jobhistory.web">
   
     <link rel="alternative" href="/atom.xml" title="小世界，大梦想" type="application/atom+xml">
   
@@ -156,36 +172,82 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-hadoop原生集群搭建" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      hadoop原生集群搭建
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/11/hadoop原生集群搭建/" class="archive-article-date">
+
+        
+        <a href="/2017/02/11/hadoop原生集群搭建/" class="archive-article-date">
   	<time datetime="2017-02-11T02:55:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/11/hadoop原生集群搭建/">hadoop原生集群搭建</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置yarn-site.xml</p>
+<property><br>   <name>yarn.nodemanager.aux-services</name><br>   <value>mapreduce_shuffle</value><br></property>
 
-        <div class="article-info info-on-right">
-          
+
+<p>配置mapred-site.xml</p>
+<property><br>   <name>mapreduce.framework.name</name><br>   <value>yarn</value><br></property><br><property><br>   <name>mapreduce.jobhistory.address</name><br>   <value>monsterxls:10020</value><br></property><br><property><br>   <name>mapreduce.jobhistory.webapp.address</name><br>   <value>monsterxls:19888</value><br></property>
+
+<p>配置hdfs-site.xml</p>
+<property><br>   <name>dfs.replication</name><br>   <value>2</value><br></property><br><property><br>   <name>dfs.datanode.ipc.address</name><br>   <value>0.0.0.0:50020</value><br></property><br><property><br>   <name>dfs.datanode.http.address</name><br>   <value>0.0.0.0:50075</value><br></property>
+
+
+<p>配置core-site.xml</p>
+<property><br>   <name>fs.default.name</name><br>   <value>hdfs://monsterxls:9000</value><br></property><br><property><br>   <name>hadoop.tmp.dir</name><br>   <value>/opt/tmp</value><br></property>
+
+
+<p>配置hadoop-env.sh<br>export JAVA_HOME=/opt/jdk1.8</p>
+<p>配置yarn-env.sh<br>export HADOOP_YARN_USER=/opt/hadoopL</p>
+<p>配置/etc/profile:jdk hadoop环境变量</p>
+<p>echo ‘export JAVA_HOME=/opt/jdk1.8’ &gt;&gt;/etc/profile<br>echo ‘export HADOOP_HOME=/opt/hadoop’ &gt;&gt;/etc/profile<br>echo ‘export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin’ &gt;&gt;/etc/profile<br>source /etc/profile</p>
+<p>配置/etc/ntp.conf时间同步<br>yum -y install ntp<br>server ntp7.aliyun.com  iburst</p>
+<p>service ntpd start<br>ntpdate -u ntp7.aliyun.com<br>service ntpd restart<br>ntpstat</p>
+<p>192.168.221.136 monsterxls<br>192.168.221.135 slave1xls<br>192.168.221.137 slave2xls<br>配置/etc/hostname,/etc/hosts<br>echo ‘monsterxls’ &gt;/etc/hostname<br>echo ‘192.168.221.136 monsterxls’ &gt;&gt;/etc/hosts</p>
+<p>配置/etc/sysconfig/network<br>echo ‘NETWORKING=yes’ &gt;&gt;/etc/sysconfig/network<br>echo ‘HOSTNAME=slave2xls’ &gt;&gt;/etc/sysconfig/network</p>
+<p>关闭防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>添加hadoop用户<br>adduser hadoop<br>passwd hadoop<br>将hadoop用户放在root组<br>usermod -g root hadoop </p>
+<p>解压hadoop.tar.gz和jdk<br>tar -zxvf jdk1.8.gz -C /opt/<br>tar -zxvf hadoop-2.6.0.tar.gz -C /opt/</p>
+<p>ssh相互通信<br>ssh-keygen -t rsa -P ‘’<br>scp -r id_rsa.pub root@slave1xls:/home/hadoop/.ssh/<br>authorized_keys</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -197,57 +259,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/stanxia/stanxia.github.io.git/2017/02/11/hadoop原生集群搭建/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/11/ssh互信/" class="archive-article-date">
-  	<time datetime="2017-02-11T01:58:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-11</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/11/ssh互信/">ssh互信</a>
-    </h1>
+  
+    <a href="/2017/02/11/ssh互信/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssh互信</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -270,8 +363,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

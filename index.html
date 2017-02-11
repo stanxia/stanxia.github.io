@@ -158,6 +158,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hadoop原生集群搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/hadoop原生集群搭建/">hadoop原生集群搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/11/hadoop原生集群搭建/" class="archive-article-date">
+  	<time datetime="2017-02-11T02:55:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置yarn-site.xml</p>
+<property><br>   <name>yarn.nodemanager.aux-services</name><br>   <value>mapreduce_shuffle</value><br></property>
+
+
+<p>配置mapred-site.xml</p>
+<property><br>   <name>mapreduce.framework.name</name><br>   <value>yarn</value><br></property><br><property><br>   <name>mapreduce.jobhistory.address</name><br>   <value>monsterxls:10020</value><br></property><br><property><br>   <name>mapreduce.jobhistory.webapp.address</name><br>   <value>monsterxls:19888</value><br></property>
+
+<p>配置hdfs-site.xml</p>
+<property><br>   <name>dfs.replication</name><br>   <value>2</value><br></property><br><property><br>   <name>dfs.datanode.ipc.address</name><br>   <value>0.0.0.0:50020</value><br></property><br><property><br>   <name>dfs.datanode.http.address</name><br>   <value>0.0.0.0:50075</value><br></property>
+
+
+<p>配置core-site.xml</p>
+<property><br>   <name>fs.default.name</name><br>   <value>hdfs://monsterxls:9000</value><br></property><br><property><br>   <name>hadoop.tmp.dir</name><br>   <value>/opt/tmp</value><br></property>
+
+
+<p>配置hadoop-env.sh<br>export JAVA_HOME=/opt/jdk1.8</p>
+<p>配置yarn-env.sh<br>export HADOOP_YARN_USER=/opt/hadoopL</p>
+<p>配置/etc/profile:jdk hadoop环境变量</p>
+<p>echo ‘export JAVA_HOME=/opt/jdk1.8’ &gt;&gt;/etc/profile<br>echo ‘export HADOOP_HOME=/opt/hadoop’ &gt;&gt;/etc/profile<br>echo ‘export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin’ &gt;&gt;/etc/profile<br>source /etc/profile</p>
+<p>配置/etc/ntp.conf时间同步<br>yum -y install ntp<br>server ntp7.aliyun.com  iburst</p>
+<p>service ntpd start<br>ntpdate -u ntp7.aliyun.com<br>service ntpd restart<br>ntpstat</p>
+<p>192.168.221.136 monsterxls<br>192.168.221.135 slave1xls<br>192.168.221.137 slave2xls<br>配置/etc/hostname,/etc/hosts<br>echo ‘monsterxls’ &gt;/etc/hostname<br>echo ‘192.168.221.136 monsterxls’ &gt;&gt;/etc/hosts</p>
+<p>配置/etc/sysconfig/network<br>echo ‘NETWORKING=yes’ &gt;&gt;/etc/sysconfig/network<br>echo ‘HOSTNAME=slave2xls’ &gt;&gt;/etc/sysconfig/network</p>
+<p>关闭防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>添加hadoop用户<br>adduser hadoop<br>passwd hadoop<br>将hadoop用户放在root组<br>usermod -g root hadoop </p>
+<p>解压hadoop.tar.gz和jdk<br>tar -zxvf jdk1.8.gz -C /opt/<br>tar -zxvf hadoop-2.6.0.tar.gz -C /opt/</p>
+<p>ssh相互通信<br>ssh-keygen -t rsa -P ‘’<br>scp -r id_rsa.pub root@slave1xls:/home/hadoop/.ssh/<br>authorized_keys</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/11/hadoop原生集群搭建/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-ssh互信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
