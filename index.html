@@ -158,6 +158,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cdh集群搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/cdh集群搭建/">cdh集群搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/11/cdh集群搭建/" class="archive-article-date">
+  	<time datetime="2017-02-11T03:03:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.如果存在jdk：<br>卸载方式：rpm -qa | grep jdk<br>rpm -e —nodeps 加上上面返回的结构</p>
+<p>2.安装jdk：<br>rpm -ivh jdk-7u80-linux-x64.rpm </p>
+<p>3.配置hostname<br>vi /etc/sysconfig/network<br>NETWORKING=yes<br>HOSTNAME=master</p>
+<p>4.vi /etc/hostname</p>
+<p>#删除文件内容  ,然后输入<br>master</p>
+<p>5.修改host映射<br>vi /etc/hosts</p>
+<p>10.211.55.9 master</p>
+<p>#ipDress1为master服务器的IP地址</p>
+<p>6.selinux 关闭<br>vi /etc/sysconfig/selinux<br>SELINUX=disable</p>
+<p>7.重启<br>reboot</p>
+<p>8.更改防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>9.安装时间同步服务<br>yum -y install ntp<br>vi /etc/ntp.conf</p>
+<p>#注释掉所有的server<em>.</em>.* 的指向 ，新添加一条可连接的ntp服务器<br>server ntp.sjtu.edu.cn iburst</p>
+<p>#启动时间同步服务<br>service ntpd start </p>
+<p>#执行命令<br>ntpdate -u 1.asia.pool.ntp.org</p>
+<p>#重启时间同步服务<br>service ntpd restart</p>
+<p>10.ssh无密码登陆配置<br>ssh-keygen -t rsa #一直使用默认</p>
+<p>11.安装mysql</p>
+<p>#查看mysql是否意境安装：<br>rpm -qa | grep mariadb </p>
+<p>#如果存在：<br>cd </p>
+<p>#安装mysql依赖：<br>yum install -y perl-Module-Install.noarch</p>
+<p>unzip <strong>.zip<br>rpm -ivh </strong>.rpm </p>
+<p>#修改配置文件目录<br>cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
+<p>#在配置文件中增加以下配置并保存：<br>vi /etc/my.cnf<br>default-storage-engine = innodb<br>innodb_file_per_table<br>collation-server = utf8_general_ci<br>init-connect = ‘SET NAMES utf8’<br>character-set-server=utf8</p>
+<p>#初始化数据库执行：<br>/usr/bin/mysql_install_db</p>
+<p>#开启mysql服务：<br>service mysql restart</p>
+<p>#查看mysql root 初始化密码：<br>cat /root/.mysql_secret</p>
+<p>T1STjiM6A1TXQB5p</p>
+<p>#登陆mysql：<br>mysql -u root -p<br>SET PASSWORD=PASSWORD(‘123456’)#复制root的初始密码<br>mysql下面执行：<br>SET PASSWORDcd /=PASSWORD(‘123456’)</p>
+<p>#linux开启开机启动：<br>chkconfig mysql on</p>
+<p>#linux下面执行 拷贝mysql-connector-java-5.1.25-bin.jar 到/usr/share/java/mysql-connector-java.jar</p>
+<p>#创建数据库：<br>mysql<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database hue DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database monitor DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</p>
+<p>use mysql;<br>grant all on <em>.</em> to root@‘master’ Identified by ‘123456’;<br>flush privileges;</p>
+<p>12.安装cloudera-manager</p>
+<p>#解压cm tar 包到指定目录<br>mkdir /opt/cloudera-manager<br>tar -zxvf cloudier-manager-centos7-cm5.6.0_x86_64.tar.gz -C<br>/opt/cloudera-manager</p>
+<p>#创建cloudera-scm用户：<br>[root@master cloudera-manager]# useradd –system –home=/opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-server–no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
+<p>#在注解点创建cloudera-manager-server的本地元数据保存目录<br>mkdir /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /opt/cloudera-manager</p>
+<p>#配置从节点cloudera-manager-agent 指向注解点服务器<br>vi /opt/cloudera-manager/cm-5.6.0/etc/cloudera-scm-agent/config.ini</p>
+<p>#将server host改为CMS所在的主机名即master</p>
+<p>#注解点中创建parcel-repo 仓库目录：<br>mkdir -p /opt/cloudera/parcel-repo<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcel-repo<br>cp CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel  CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel.sha   manifest.json /opt/cloudera/parcel-repo</p>
+<p>#所有节点创建parcel目录：<br>mkdir -p /opt/cloudera/parcels<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcels</p>
+<p>13.初始化脚本配置数据库：<br>/opt/cloudera-manager/cm-5.6.0/share/cmf/schema/scm_prepare_database.sh mysql -hmaster -uroot -p123456 —sim-host master scmdbn scmdbu scmdbp</p>
+<p>14.启动注解点cloudera scm server<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-server  /etc/init.d/cloudera-scm-server</p>
+<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-server</p>
+<p>将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
+<p>chkconfig cloudera-scm-server on</p>
+<p>#启动注解点cloudera scm server</p>
+<p>mkdir /opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-agent<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-agent /etc/init.d/cloudera-scm-agent</p>
+<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-agent</p>
+<p>#将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
+<p>chkconfig cloudera-scm-agent on</p>
+<p>service cloudera-scm-server start</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/11/cdh集群搭建/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-hadoop原生集群搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
