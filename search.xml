@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[kafka安装与简单的应用]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>安装</p>
+<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
+<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
+<p>ps -ef | grep kafka | grep -v grep</p>
+<p>ps -ef | grep zookeeper | grep -v grep</p>
+<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
+<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
+<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[第一阶段项目所用知识点]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/12/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE%E6%89%80%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+      <content type="html"><![CDATA[<p>在hive外部执行hive语句，可多条语句一起执行<br>hive -e ‘’</p>
+<p>查看表结构：<br>desc tablename;</p>
+<p>查看详细表结构：<br>desc formatted tablename;</p>
+<p>创建表：</p>
+<p>CREATE TABLE IF NOT EXISTS   xls.bank_xls(<br>name STRING,<br>cost INT<br>)<br>PARTITIONED BY (date STRING)<br>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘ ‘;</p>
+<p>创建一张和目标表结构一样的表<br>CREATE TABLE IF NOT EXISTS xls.bank_xls LIKE wy.bank_wy;</p>
+<p>删除表：<br>DROP TABLE IF EXISTS xls.bank_xls;</p>
+<p>清空表数据，但不删除表：<br>TRUNCATE TABLE xls.bank_xlsx;</p>
+<p>导入本地数据到hive表中：<br>LOAD DATA INPATH ‘/tmp/xls/20170103_customer_tx.txt’ OVERWRITE INTO TABLE xls.bank_xls PARTITION (date=to_date(‘20170103’));</p>
+<p>查看表中的内容：<br>SLELCT * FROM xls.bank_xls;</p>
+<p>SELECT name,sum(cost) FROM xls.bank_xls WHERE date=’20170105’ GROUP BY name;</p>
+<p>hdfs dfs -ls /user/hive/warehouse/xls.db/bank_xls</p>
+<p>hadoop jar /root/makebankrecord.jar MakeBankRecord</p>
+<p>hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“</p>
+<p>文件监听器<br>nohup hadoop jar filemonitor.jar FileChangeMain /home/xls/ &amp;</p>
+<p>#获取到输出的结构<br><code>ps -ef | grep $1 | grep -v grep | awk &#39;{print $1}&#39;</code></p>
+<p>指定某用户的crontab操作<br>crontab -u xls -e  编辑xls用户的crontab<br>crontab -u xls -r 删除xls用户的crontab</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[cdh集群搭建]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/cdh%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>1.如果存在jdk：<br>卸载方式：rpm -qa | grep jdk<br>rpm -e —nodeps 加上上面返回的结构</p>
+<p>2.安装jdk：<br>rpm -ivh jdk-7u80-linux-x64.rpm </p>
+<p>3.配置hostname<br>vi /etc/sysconfig/network<br>NETWORKING=yes<br>HOSTNAME=master</p>
+<p>4.vi /etc/hostname</p>
+<p>#删除文件内容  ,然后输入<br>master</p>
+<p>5.修改host映射<br>vi /etc/hosts</p>
+<p>10.211.55.9 master</p>
+<p>#ipDress1为master服务器的IP地址</p>
+<p>6.selinux 关闭<br>vi /etc/sysconfig/selinux<br>SELINUX=disable</p>
+<p>7.重启<br>reboot</p>
+<p>8.更改防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>9.安装时间同步服务<br>yum -y install ntp<br>vi /etc/ntp.conf</p>
+<p>#注释掉所有的server<em>.</em>.* 的指向 ，新添加一条可连接的ntp服务器<br>server ntp.sjtu.edu.cn iburst</p>
+<p>#启动时间同步服务<br>service ntpd start </p>
+<p>#执行命令<br>ntpdate -u 1.asia.pool.ntp.org</p>
+<p>#重启时间同步服务<br>service ntpd restart</p>
+<p>10.ssh无密码登陆配置<br>ssh-keygen -t rsa #一直使用默认</p>
+<p>11.安装mysql</p>
+<p>#查看mysql是否意境安装：<br>rpm -qa | grep mariadb </p>
+<p>#如果存在：<br>cd </p>
+<p>#安装mysql依赖：<br>yum install -y perl-Module-Install.noarch</p>
+<p>unzip <strong>.zip<br>rpm -ivh </strong>.rpm </p>
+<p>#修改配置文件目录<br>cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
+<p>#在配置文件中增加以下配置并保存：<br>vi /etc/my.cnf<br>default-storage-engine = innodb<br>innodb_file_per_table<br>collation-server = utf8_general_ci<br>init-connect = ‘SET NAMES utf8’<br>character-set-server=utf8</p>
+<p>#初始化数据库执行：<br>/usr/bin/mysql_install_db</p>
+<p>#开启mysql服务：<br>service mysql restart</p>
+<p>#查看mysql root 初始化密码：<br>cat /root/.mysql_secret</p>
+<p>T1STjiM6A1TXQB5p</p>
+<p>#登陆mysql：<br>mysql -u root -p<br>SET PASSWORD=PASSWORD(‘123456’)#复制root的初始密码<br>mysql下面执行：<br>SET PASSWORDcd /=PASSWORD(‘123456’)</p>
+<p>#linux开启开机启动：<br>chkconfig mysql on</p>
+<p>#linux下面执行 拷贝mysql-connector-java-5.1.25-bin.jar 到/usr/share/java/mysql-connector-java.jar</p>
+<p>#创建数据库：<br>mysql<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database hue DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database monitor DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</p>
+<p>use mysql;<br>grant all on <em>.</em> to root@‘master’ Identified by ‘123456’;<br>flush privileges;</p>
+<p>12.安装cloudera-manager</p>
+<p>#解压cm tar 包到指定目录<br>mkdir /opt/cloudera-manager<br>tar -zxvf cloudier-manager-centos7-cm5.6.0_x86_64.tar.gz -C<br>/opt/cloudera-manager</p>
+<p>#创建cloudera-scm用户：<br>[root@master cloudera-manager]# useradd –system –home=/opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-server–no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
+<p>#在注解点创建cloudera-manager-server的本地元数据保存目录<br>mkdir /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /opt/cloudera-manager</p>
+<p>#配置从节点cloudera-manager-agent 指向注解点服务器<br>vi /opt/cloudera-manager/cm-5.6.0/etc/cloudera-scm-agent/config.ini</p>
+<p>#将server host改为CMS所在的主机名即master</p>
+<p>#注解点中创建parcel-repo 仓库目录：<br>mkdir -p /opt/cloudera/parcel-repo<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcel-repo<br>cp CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel  CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel.sha   manifest.json /opt/cloudera/parcel-repo</p>
+<p>#所有节点创建parcel目录：<br>mkdir -p /opt/cloudera/parcels<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcels</p>
+<p>13.初始化脚本配置数据库：<br>/opt/cloudera-manager/cm-5.6.0/share/cmf/schema/scm_prepare_database.sh mysql -hmaster -uroot -p123456 —sim-host master scmdbn scmdbu scmdbp</p>
+<p>14.启动注解点cloudera scm server<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-server  /etc/init.d/cloudera-scm-server</p>
+<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-server</p>
+<p>将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
+<p>chkconfig cloudera-scm-server on</p>
+<p>#启动注解点cloudera scm server</p>
+<p>mkdir /opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-agent<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-agent /etc/init.d/cloudera-scm-agent</p>
+<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-agent</p>
+<p>#将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
+<p>chkconfig cloudera-scm-agent on</p>
+<p>service cloudera-scm-server start</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hadoop原生集群搭建]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/hadoop%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>配置yarn-site.xml</p>
+<property><br>   <name>yarn.nodemanager.aux-services</name><br>   <value>mapreduce_shuffle</value><br></property>
+
+
+<p>配置mapred-site.xml</p>
+<property><br>   <name>mapreduce.framework.name</name><br>   <value>yarn</value><br></property><br><property><br>   <name>mapreduce.jobhistory.address</name><br>   <value>monsterxls:10020</value><br></property><br><property><br>   <name>mapreduce.jobhistory.webapp.address</name><br>   <value>monsterxls:19888</value><br></property>
+
+<p>配置hdfs-site.xml</p>
+<property><br>   <name>dfs.replication</name><br>   <value>2</value><br></property><br><property><br>   <name>dfs.datanode.ipc.address</name><br>   <value>0.0.0.0:50020</value><br></property><br><property><br>   <name>dfs.datanode.http.address</name><br>   <value>0.0.0.0:50075</value><br></property>
+
+
+<p>配置core-site.xml</p>
+<property><br>   <name>fs.default.name</name><br>   <value>hdfs://monsterxls:9000</value><br></property><br><property><br>   <name>hadoop.tmp.dir</name><br>   <value>/opt/tmp</value><br></property>
+
+
+<p>配置hadoop-env.sh<br>export JAVA_HOME=/opt/jdk1.8</p>
+<p>配置yarn-env.sh<br>export HADOOP_YARN_USER=/opt/hadoopL</p>
+<p>配置/etc/profile:jdk hadoop环境变量</p>
+<p>echo ‘export JAVA_HOME=/opt/jdk1.8’ &gt;&gt;/etc/profile<br>echo ‘export HADOOP_HOME=/opt/hadoop’ &gt;&gt;/etc/profile<br>echo ‘export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin’ &gt;&gt;/etc/profile<br>source /etc/profile</p>
+<p>配置/etc/ntp.conf时间同步<br>yum -y install ntp<br>server ntp7.aliyun.com  iburst</p>
+<p>service ntpd start<br>ntpdate -u ntp7.aliyun.com<br>service ntpd restart<br>ntpstat</p>
+<p>192.168.221.136 monsterxls<br>192.168.221.135 slave1xls<br>192.168.221.137 slave2xls<br>配置/etc/hostname,/etc/hosts<br>echo ‘monsterxls’ &gt;/etc/hostname<br>echo ‘192.168.221.136 monsterxls’ &gt;&gt;/etc/hosts</p>
+<p>配置/etc/sysconfig/network<br>echo ‘NETWORKING=yes’ &gt;&gt;/etc/sysconfig/network<br>echo ‘HOSTNAME=slave2xls’ &gt;&gt;/etc/sysconfig/network</p>
+<p>关闭防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
+<p>添加hadoop用户<br>adduser hadoop<br>passwd hadoop<br>将hadoop用户放在root组<br>usermod -g root hadoop </p>
+<p>解压hadoop.tar.gz和jdk<br>tar -zxvf jdk1.8.gz -C /opt/<br>tar -zxvf hadoop-2.6.0.tar.gz -C /opt/</p>
+<p>ssh相互通信<br>ssh-keygen -t rsa -P ‘’<br>scp -r id_rsa.pub root@slave1xls:/home/hadoop/.ssh/<br>authorized_keys</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ssh互信]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/ssh%E4%BA%92%E4%BF%A1/</url>
+      <content type="html"><![CDATA[<p>1.ssh-keygen -t rsa -P ‘’<br>-t  rsa表示通过rsa算法<br>-P表示设置密码</p>
+<p>cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥</p>
+<p> 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop </p>
+<p>2.跨机器传输：<br>scp 文件 hadoop@hadoop1:/目标路径</p>
+<p>scp idrsa.pub hadoop@hadoop1:/home/hadoop/<br>文件夹为：scp -r …</p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
