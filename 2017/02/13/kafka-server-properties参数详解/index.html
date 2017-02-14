@@ -10,6 +10,8 @@
     
     <title>
         
+            kafka-server-properties参数详解 | 
+        
         小世界，大梦想
     </title>
 
@@ -46,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="小世界，大梦想">
+    <meta property="og:title" content="kafka-server-properties参数详解 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -231,7 +233,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#以下是Leader，replicas配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">以下是Leader，replicas配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#kafka中zookeeper参数配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">kafka中zookeeper参数配置</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#server-properties参数说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">server.properties参数说明</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#以下是Leader，replicas配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">以下是Leader，replicas配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#kafka中zookeeper参数配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">kafka中zookeeper参数配置</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -267,7 +269,7 @@
         
     
             <p class="article-headline-p">
-                
+                kafka-server-properties参数详解
             </p>
         </div>
 
@@ -286,7 +288,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 14, 2017</span>
+        <span>2月 13, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -307,7 +309,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADgklEQVR42u3ay47iMBAFUP7/p7u3LSHCrYczGel4hYLA9smiVI/Xj/VnvRDgwIEDBw4cOHDgwPFgjle83n/1cYPLX10///vt/H+iu+DAgQMHjgMcX0LR2xGTbz9dLHl+fb1PKNW74MCBAweO0xzXG+cb9OBysvkLwIEDBw4cz+ToweWp2jVrwo0DBw4cOJ7PkdDkwTJP4XDgwIEDx//IUSioDUpy+fWuw3m1GYYDBw4cOO7kyEPg8z/fOt+BAwcOHDjeOHqrN5TQC6L562neBQcOHDhwrHJUg1k1WcpbSr3BuN44BQ4cOHDgOMeRXKa3fT6UkBy92mpKiHHgwIEDxz0cyVGqpbrk2+rlJyg4cODAgeMcR15u6yV4SdGwN2ZXJS4UB3HgwIEDxwGOXujKRw22ioP5a8OBAwcOHHdy5ElUfo3JZaolyEnzCQcOHDhw7HJM0qQ8PZtfIAFtPsGBAwcOHKscvaZRD7SXHE7aWhE3Dhw4cOBY5UjGGnrpXLVlVf28BoQDBw4cOFY55psl6Vy1EbXVZFpL4XDgwIEDx6DtVB1uqIbGPMxXC4t5YwwHDhw4cJzm6I0aJOXCapBOxiPycNsMtDhw4MCBY8CRE+THmoThavtqYTgPBw4cOHCscszHAnqhMUnV8rStOsCHAwcOHDju5Ljephdck7BaLVkmHBETDhw4cOBY5ei1oCbBOB9omJ+hHGhx4MCBA8cBjlE6FBx3MiTXG7/4woQDBw4cOFY5emMK1ZRvPlpXTeGagRYHDhw4cIw5tsYR8gNVU8cqWRULBw4cOHDscvSO2CsU5qXABH0S2nHgwIEDxzmOaohKErzk/3uNqK2RPhw4cODAcT9HNQ2bBNTo0MXwPCoO4sCBAweOAUcyrLCbaPXaSJNhiy974cCBAweOVY5q4yc5StTsGQNtJZk4cODAgWOX4/RoWrVllfMlIXkhhcOBAwcOHK3iYL6uw1i1wJd/znepFhBx4MCBA8cuR68Ad2LUIL9kLwkspHA4cODAgWPMsRVcJ2nepARZDcM4cODAgeMejl7grI7HVX/VazstBFocOHDgwHELx2QooRpod5+Xu3A4cODAgeMWjt5gQU6cQOcvCQcOHDhw/FuOXnEwv3wOtPWfUSsLBw4cOHAc4KgGyEkQTVKsako2QcGBAwcOHLscFg4cOHDgwIEDBw4cOB62fgFRCotMeVBxQQAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADjUlEQVR42u3ay47iQAwFUP7/p2e2I6EJ99qVNC2drFDThPLJwvjx+uP653ohwIEDBw4cOHDgwIHjizle8fX+qfc7vL/7v++6PkP+/wdiwYEDBw4cN3B8SEWXoV4Hkwech9c+hut4ceDAgQPHfRxJYHn6zFnzsBP0NhYcOHDgwPE9HElptynVkvvsY8GBAwcOHD/LkTT+8mSZl3A4cODAgeM3chQNtUVLLg/vugl4faqHeqU4cODAgWO90PD9rx/d78CBAwcOHG8cs2u2lDBLovnjGcaCAwcOHDiOcrTJrC2W8pHSbDFuNhLDgQMHDhz3cSRHaVNvu5SQHL0dNeVx4cCBAweOOzg+pKJFizB/tw1+g4IDBw4cOO7jaNtt0fJZvHyQD7ryMVj9EwEHDhw4cNzGUSwuj9Yd8mDy5mCSdHHgwIEDx/MceRGVh7EJJh8mtX+PSjgcOHDgwLHg2JRJ+/bfZkCVD6tw4MCBA8eTHKeGRm2Db3OfdhiGAwcOHDie5EiWGzapt12AyF8fA8KBAwcOHEc5zn7Z7G7tgGp2/tXvDhw4cODAsRg75SVWkqRn16yx2NLjwIEDB477OGarBtdf0342ufLgV4kWBw4cOHAsOHKCWdiz4+YF3oHlPBw4cODAcZRjlj7zI25Ktbxsy0dfw98dOHDgwIEj5th8QZ5ck7TatizzMxfNQRw4cODAseaYlWezVYN2oaEeIM3KSxw4cODAcZSjbbolCXIWUv7ZFv3DTwocOHDgwHGUo20CtkVUW5K1J2kbmnWvFAcOHDhwLOYss7Q6G1bN2oj5w8ixcODAgQPHWY48+GQcNUvAs+bgJrXjwIEDB477ONoUlYx2kvvPBlH7wq8eO+HAgQMHjkMcbRl2R/Cz9YjDCw04cODAgWM0dpoF07bz2jWF/MofLQ4cOHDguJujDS8/yuFDxwVeW2TiwIEDB46zHJvVtOT1vgk4a18Wd8CBAwcOHEc52itv5G0Qk0ZkvniBAwcOHDie5Jg14Nr1hTyR59+4X3HAgQMHDhz3ceTJtUWpDxcXY/tHggMHDhw47ua4btttBkKz1uFm7HQg0eLAgQMHjkc4NksJbaI9+/d6CocDBw4cOB7hmC0W5MQJdP6QcODAgQPHz3JsmoNJ8DnQqXtGoywcOHDgwHEDR5sgN0k0KbHakmyDggMHDhw4znK4cODAgQMHDhw4cODA8WXXX42m+83Q/PqAAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -319,7 +321,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/kafka/">kafka</a>
     </ul>
     
 
@@ -333,7 +335,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/14/kafka-server-properties参数详解/" class="leancloud-views_num" data-flag-title="">
+                <span id="/2017/02/13/kafka-server-properties参数详解/" class="leancloud-views_num" data-flag-title="kafka-server-properties参数详解">
      &nbsp;浏览量
 </span>
 
@@ -356,7 +358,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/kafka-server-properties参数详解/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kafka-server-properties参数详解&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka-server-properties参数详解/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -365,7 +367,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/kafka-server-properties参数详解/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kafka-server-properties参数详解&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka-server-properties参数详解/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -374,7 +376,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/kafka-server-properties参数详解/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka-server-properties参数详解/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -383,7 +385,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/kafka-server-properties参数详解/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka-server-properties参数详解/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -395,7 +397,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/14/kafka-server-properties参数详解/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=kafka-server-properties参数详解&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka-server-properties参数详解/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -413,7 +415,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <table>
+        <h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
 <thead>
 <tr>
 <th style="text-align:right">参数</th>
@@ -700,8 +702,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/14/kafka-server-properties参数详解/"
-        data-title="">
+        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka-server-properties参数详解/"
+        data-title="kafka-server-properties参数详解">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -717,13 +719,21 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/02/13/kafka安装与简单的应用/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/14/zookeeper启动时数组越界异常/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/12/第一阶段项目所用知识点/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
