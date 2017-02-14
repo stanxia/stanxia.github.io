@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[完善ntp时间同步]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/14/%E5%AE%8C%E5%96%84ntp%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/</url>
+      <url>https://stanxia.github.io/2017/02/14/%E5%AE%8C%E5%96%84ntp%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/</url>
       <content type="html"><![CDATA[<h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><p>ntp同步时间过长</p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 /etc/ntp.conf</p>
 <p>主节点配置：</p>
@@ -18,7 +18,7 @@
     
     <entry>
       <title><![CDATA[zookeeper启动时数组越界异常]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/14/zookeeper%E5%90%AF%E5%8A%A8%E6%97%B6%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8/</url>
+      <url>https://stanxia.github.io/2017/02/14/zookeeper%E5%90%AF%E5%8A%A8%E6%97%B6%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8/</url>
       <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><img src="zk-aoi.png" alt=""></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div></pre></td></tr></table></figure></p>
 ]]></content>
@@ -26,7 +26,7 @@
     
     <entry>
       <title><![CDATA[kafka-server-properties参数详解]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
+      <url>https://stanxia.github.io/2017/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
       <content type="html"><![CDATA[<h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
 <thead>
 <tr>
@@ -290,7 +290,7 @@
     
     <entry>
       <title><![CDATA[kafka安装与简单的应用]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>安装</p>
 <h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
 <p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
@@ -304,7 +304,7 @@
     
     <entry>
       <title><![CDATA[第一阶段项目所用知识点]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/12/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE%E6%89%80%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+      <url>https://stanxia.github.io/2017/02/12/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE%E6%89%80%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
       <content type="html"><![CDATA[<p>在hive外部执行hive语句，可多条语句一起执行<br>hive -e ‘’</p>
 <p>查看表结构：<br>desc tablename;</p>
 <p>查看详细表结构：<br>desc formatted tablename;</p>
@@ -327,7 +327,7 @@
     
     <entry>
       <title><![CDATA[cdh集群搭建]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/cdh%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <url>https://stanxia.github.io/2017/02/11/cdh%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<p>1.如果存在jdk：<br>卸载方式：rpm -qa | grep jdk<br>rpm -e —nodeps 加上上面返回的结构</p>
 <p>2.安装jdk：<br>rpm -ivh jdk-7u80-linux-x64.rpm </p>
 <p>3.配置hostname<br>vi /etc/sysconfig/network<br>NETWORKING=yes<br>HOSTNAME=master</p>
@@ -385,7 +385,7 @@
     
     <entry>
       <title><![CDATA[hadoop原生集群搭建]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/hadoop%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <url>https://stanxia.github.io/2017/02/11/hadoop%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<p>配置yarn-site.xml</p>
 <property><br>   <name>yarn.nodemanager.aux-services</name><br>   <value>mapreduce_shuffle</value><br></property>
 
@@ -418,7 +418,7 @@
     
     <entry>
       <title><![CDATA[ssh互信]]></title>
-      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/11/ssh%E4%BA%92%E4%BF%A1/</url>
+      <url>https://stanxia.github.io/2017/02/11/ssh%E4%BA%92%E4%BF%A1/</url>
       <content type="html"><![CDATA[<p>1.ssh-keygen -t rsa -P ‘’<br>-t  rsa表示通过rsa算法<br>-P表示设置密码</p>
 <p>cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥</p>
 <p> 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop </p>
