@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[zookeeper启动时数组越界异常]]></title>
       <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/14/zookeeper%E5%90%AF%E5%8A%A8%E6%97%B6%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8/</url>
-      <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div></pre></td></tr></table></figure></p>
+      <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><img src="zk-aoi.png" alt=""></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
