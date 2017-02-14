@@ -10,7 +10,7 @@
     
     <title>
         
-            kafka安装与简单的应用 | 
+            完善ntp时间同步 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="kafka安装与简单的应用 | 小世界，大梦想">
+    <meta property="og:title" content="完善ntp时间同步 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -233,7 +233,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz"><span class="post-toc-number">1.</span> <span class="post-toc-text">tar xzvf kafka-0.8.0-beta1-src.tgz</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cd-kafka-0-8-0-beta1-src"><span class="post-toc-number">2.</span> <span class="post-toc-text">cd kafka-0.8.0-beta1-src</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-update"><span class="post-toc-number">3.</span> <span class="post-toc-text">./sbt update</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-package"><span class="post-toc-number">4.</span> <span class="post-toc-text">./sbt package</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-assembly-package-dependency"><span class="post-toc-number">5.</span> <span class="post-toc-text">./sbt assembly-package-dependency</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题1"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题1</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题2"><span class="post-toc-number">3.</span> <span class="post-toc-text">问题2</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案-1"><span class="post-toc-number">4.</span> <span class="post-toc-text">解决方案</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -269,7 +269,7 @@
         
     
             <p class="article-headline-p">
-                kafka安装与简单的应用
+                完善ntp时间同步
             </p>
         </div>
 
@@ -288,7 +288,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 13, 2017</span>
+        <span>2月 14, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -309,7 +309,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADlklEQVR42u3aS27jQAwFQN//0jPbATyR3yPVhgKUVoGjtMTyguHn9cf1z/VCgAMHDhw4cODAgQPHgzle8fWfg0afv595/azrO5PffjgfBw4cOHAc4PiQioKwr1/x/Z48vOS5m1hw4MCBA8c5jjykfZL+CWgTdhsLDhw4cOB4DsdPhVYSfEu84cOBAwcOHL+FY9YQbE9oyXDgwIEDx9M48gR5nQI3Y6p2KLVvdOLAgQMHjhMceYPv+T9/db8DBw4cOHC8cbRXnvbuSqKbdmQUEQ4cOHDguJUjT1Sz0i5v/G1S++z9ceDAgQPHCY7VQZeJs33KvcsKyaALBw4cOHCc4GhLrDzVbZYhZstzszU7HDhw4MBxL0cSRhvYbCyUp/P8q7qOAgcOHDhwnObYj5qSl5sF1q4y5KMpHDhw4MDxfY72nrbZl4+U2hZk9FwcOHDgwPFFjqQQmq2+JWG3iXb2LwIOHDhw4DjHkbzc/vNZKdgWcgU3Dhw4cOC4lSMf3rRLA0mrbtMobBM/Dhw4cOD4Dkd+bdYU8uTalmSbAhIHDhw4cJzgaFNd/oqbRYS2yMxT8ofmIA4cOHDgWHNcP3JTzrVkM4i8CVj/34EDBw4cONa7YW0TMHpYnBqvv5JNo7BuDuLAgQMHjgNzlllBlbzWrJzbNB8/nIwDBw4cOI5xzBbgNm3BvORrU2nxLBw4cODAcSvHfvkgecVNo7AYIM3SMA4cOHDguJUjHy/lA6r2zv2y3WyVAQcOHDhwnObI02cbXpsI2y8gP7OewuHAgQMHjpKjXRHIW35tAJvmYDsww4EDBw4c5zjyhmD+ukX5tGgOtoOuG0o4HDhw4MBRLjS05dNdK9Tt+ZvCDwcOHDhwnOaYtfzyAi8vqzaBbQZXOHDgwIHjBEfe5muZ2hWEdvSVL94Vm4M4cODAgeMmjs3AqQ0yT7r52kRbBOLAgQMHjtMceVKcDXvaAqxtXOblKA4cOHDgOMcxW0Fo0+T+hDbUotTEgQMHDhy3cswabW3izD9PBlFtsv8QBQ4cOHDgOMCRJ9e8OThbjCjGRaOvCgcOHDhwfJNjlsCu/7aladt8myU5HDhw4MDxNI7knBY0T/Z3FXI4cODAgeM5HLNg2rKtXYNIRl84cODAgeM7HLMVhNnaQQ6xGUFFhSUOHDhw4DjAkSettpTKl+dmT0+S94en48CBAweOWzlcOHDgwIEDBw4cOHDgeNj1FxAjm3TAvipIAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADkElEQVR42u3aQU4lMQwE0H//S89skRBNlZ3A18zLCiHoTl4vSnb8+mN9WC8EOHDgwIEDBw4cOHC8MccrXh///vPPn5+WPP/5OV8e4PE5+Vlw4MCBA8c9jm+i6ItXJkDJc/KtP7+xPQsOHDhw4LjNkYdrHrdJiD5H5oyjCHUcOHDgwPGrHM8x2T5nFsZ55OPAgQMHjvfnmG3rOVajy6GypYgDBw4cON6Bo2ioBeVWdOUTHKAl+9FeKQ4cOHDguDbQ8D4/v8V8Bw4cOHD8xxyzNQvXU2Xh2YUDBw4cOM5y5EdqL4E2JV8+HrFpFOLAgQMHjtscZzc9I5vtIRnIq4MWBw4cOHAsOPYlWR7bbQm3GYCIPgMOHDhw4DjKkTwobxHmB5tF4wZxeO2EAwcOHDgWHHnBtjlA+79t2zHfDw4cOHDguMHRjhG0ZC1KEpNJe3E1OYgDBw4cONYcs7bgbPigfXs7stAGNg4cOHDguMGRF0Vtg29zcZXHbXKhVdzC4cCBAweOBcesRZiTzcq5G63DuleKAwcOHDgWHEkEJnF4amShbRHmkR8FLQ4cOHDgWHC0xzh1EdVeWbXhXcDhwIEDB46jHPuBg32Trv0MM8To2gkHDhw4cBziSK55ZuXcvkhrP1XSIsSBAwcOHD/Dkbfw8te3rcMNVv5JcODAgQPHPY5Z1LVl2CywN8VbcdGFAwcOHDgucLQXQhu+PAJnF1T1b3DgwIEDxwWO5MonX5uGXVtAHhjOw4EDBw4cRzlmIwJ5kdaOR2wO3P6MAwcOHDhuczwXXc8HiCItjufkXXm5+E2048CBAweOCxynxheKTZSNvLbILKIaBw4cOHBc4Hgt1iyw8/+alZTDayccOHDgwLHmaI86K+fy4+WHz9uOw1s4HDhw4MCx5pgVb7OW36yBmHyM+jPjwIEDB45rHMnrN6XUjYIwH2LAgQMHDhy/xdGWT21BlZdbs6O2HxUHDhw4cJzl2Iw1tEXahjUha/eJAwcOHDhucMyCqg6z+O9n43GzUQYcOHDgwHGPYxOubZvvVOnYXm4VzUEcOHDgwHGIIw/C/HinInw/VIEDBw4cOP4Njnz8Ln/jN82+uKjDgQMHDhzvwJEfbzb6kBRySZlX7AcHDhw4cFzjaI86a+dthg9miPXkIA4cOHDgWHMcaLHFUXeqYGsD9cud4MCBAweOoxwWDhw4cODAgQMHDhw43mz9BfVbL+C/H7tpAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -321,7 +321,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/kafka/">kafka</a>
+        <a class="post_tag-link" href="/tags/ntp/">ntp</a>
     </ul>
     
 
@@ -335,7 +335,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/13/kafka安装与简单的应用/" class="leancloud-views_num" data-flag-title="kafka安装与简单的应用">
+                <span id="/2017/02/14/完善ntp时间同步/" class="leancloud-views_num" data-flag-title="完善ntp时间同步">
      &nbsp;浏览量
 </span>
 
@@ -358,7 +358,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kafka安装与简单的应用&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=完善ntp时间同步&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/完善ntp时间同步/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -367,7 +367,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kafka安装与简单的应用&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=完善ntp时间同步&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/完善ntp时间同步/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -376,7 +376,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/完善ntp时间同步/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -385,7 +385,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/完善ntp时间同步/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -397,7 +397,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=kafka安装与简单的应用&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=完善ntp时间同步&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/14/完善ntp时间同步/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -415,15 +415,14 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
-
+        <h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><p>ntp同步时间过长</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 /etc/ntp.conf</p>
+<p>主节点配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">server ntp7.aliyun.com iburst</div><div class="line">restrict ntp7.aliyun.com nomodify notrap noquery</div></pre></td></tr></table></figure>
+<p>从节点配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">restrict hadoop1(主机名) nomodify notrap noquery</div><div class="line">server hadoop1(主机名) iburst</div></pre></td></tr></table></figure>
+<h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><p>ntp时间同步之后，显示非中国时区</p>
+<h1 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div></pre></td></tr></table></figure>
     
 
     
@@ -452,8 +451,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka安装与简单的应用/"
-        data-title="kafka安装与简单的应用">
+        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/14/完善ntp时间同步/"
+        data-title="完善ntp时间同步">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -469,21 +468,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/13/kafka-server-properties参数详解/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/12/第一阶段项目所用知识点/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/14/zookeeper启动时数组越界异常/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

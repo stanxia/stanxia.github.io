@@ -10,7 +10,7 @@
     
     <title>
         
-            kafka安装与简单的应用 | 
+            标签: ntp | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="kafka安装与简单的应用 | 小世界，大梦想">
+    <meta property="og:title" content="标签: ntp | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -207,295 +207,93 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
+    
+    <div class="locate-thumbnail-symbol"></div>
 
     
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz"><span class="post-toc-number">1.</span> <span class="post-toc-text">tar xzvf kafka-0.8.0-beta1-src.tgz</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cd-kafka-0-8-0-beta1-src"><span class="post-toc-number">2.</span> <span class="post-toc-text">cd kafka-0.8.0-beta1-src</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-update"><span class="post-toc-number">3.</span> <span class="post-toc-text">./sbt update</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-package"><span class="post-toc-number">4.</span> <span class="post-toc-text">./sbt package</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-assembly-package-dependency"><span class="post-toc-number">5.</span> <span class="post-toc-text">./sbt assembly-package-dependency</span></a></li></ol>
-
-        <!--
-        <li class="mdl-menu__item">
-            Some Action
-        </li>
-        -->
-    </ul>
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
+        
+    
 
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/02/14/完善ntp时间同步/">完善ntp时间同步</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            问题1ntp...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/02/14/完善ntp时间同步/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
+            </div>
+            <div>
+                <strong>夏</strong>
+                <span>2月 14, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
+
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
+                </span>
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+    
+
+    
+
+    
+        <script>
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
+
+        locatePost = locatePost.next();
+    }
 </script>
 
-        
-    
-            <p class="article-headline-p">
-                kafka安装与简单的应用
-            </p>
-        </div>
-
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>夏</strong>
-        <span>2月 13, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">devices other</i>
-            <span class="visuallyhidden">devices other</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADlklEQVR42u3aS27jQAwFQN//0jPbATyR3yPVhgKUVoGjtMTyguHn9cf1z/VCgAMHDhw4cODAgQPHgzle8fWfg0afv595/azrO5PffjgfBw4cOHAc4PiQioKwr1/x/Z48vOS5m1hw4MCBA8c5jjykfZL+CWgTdhsLDhw4cOB4DsdPhVYSfEu84cOBAwcOHL+FY9YQbE9oyXDgwIEDx9M48gR5nQI3Y6p2KLVvdOLAgQMHjhMceYPv+T9/db8DBw4cOHC8cbRXnvbuSqKbdmQUEQ4cOHDguJUjT1Sz0i5v/G1S++z9ceDAgQPHCY7VQZeJs33KvcsKyaALBw4cOHCc4GhLrDzVbZYhZstzszU7HDhw4MBxL0cSRhvYbCyUp/P8q7qOAgcOHDhwnObYj5qSl5sF1q4y5KMpHDhw4MDxfY72nrbZl4+U2hZk9FwcOHDgwPFFjqQQmq2+JWG3iXb2LwIOHDhw4DjHkbzc/vNZKdgWcgU3Dhw4cOC4lSMf3rRLA0mrbtMobBM/Dhw4cOD4Dkd+bdYU8uTalmSbAhIHDhw4cJzgaFNd/oqbRYS2yMxT8ofmIA4cOHDgWHNcP3JTzrVkM4i8CVj/34EDBw4cONa7YW0TMHpYnBqvv5JNo7BuDuLAgQMHjgNzlllBlbzWrJzbNB8/nIwDBw4cOI5xzBbgNm3BvORrU2nxLBw4cODAcSvHfvkgecVNo7AYIM3SMA4cOHDguJUjHy/lA6r2zv2y3WyVAQcOHDhwnObI02cbXpsI2y8gP7OewuHAgQMHjpKjXRHIW35tAJvmYDsww4EDBw4c5zjyhmD+ukX5tGgOtoOuG0o4HDhw4MBRLjS05dNdK9Tt+ZvCDwcOHDhwnOaYtfzyAi8vqzaBbQZXOHDgwIHjBEfe5muZ2hWEdvSVL94Vm4M4cODAgeMmjs3AqQ0yT7r52kRbBOLAgQMHjtMceVKcDXvaAqxtXOblKA4cOHDgOMcxW0Fo0+T+hDbUotTEgQMHDhy3cswabW3izD9PBlFtsv8QBQ4cOHDgOMCRJ9e8OThbjCjGRaOvCgcOHDhwfJNjlsCu/7aladt8myU5HDhw4MDxNI7knBY0T/Z3FXI4cODAgeM5HLNg2rKtXYNIRl84cODAgeM7HLMVhNnaQQ6xGUFFhSUOHDhw4DjAkSettpTKl+dmT0+S94en48CBAweOWzlcOHDgwIEDBw4cOHDgeNj1FxAjm3TAvipIAAAAAElFTkSuQmCC">
-        </ul>
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/kafka/">kafka</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    <!-- Leancloud Views -->
-        <a class="post_share-link" href="#">
-            <li class="mdl-menu__item">
-                <span id="/2017/02/13/kafka安装与简单的应用/" class="leancloud-views_num" data-flag-title="kafka安装与简单的应用">
-     &nbsp;浏览量
-</span>
-
-            </li>
-        </a>
-    
-
-    
-        
-            <!-- Busuanzi Views -->
-            <a class="post_share-link" href="#">
-                <li class="mdl-menu__item">
-                    <span id="busuanzi_container_page_pv">
-                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
-                    </span>
-                </li>
-            </a>
-        
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kafka安装与简单的应用&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kafka安装与简单的应用&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html&via=夏" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=kafka安装与简单的应用&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-</div>
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-        <p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
-
-    
-
     
 </div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key=""
-        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka安装与简单的应用/"
-        data-title="kafka安装与简单的应用">
-    </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-
-
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/02/13/kafka-server-properties参数详解/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/02/12/第一阶段项目所用知识点/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
-        </div>
-    </div>
-
 
 
                     
@@ -665,14 +463,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 
