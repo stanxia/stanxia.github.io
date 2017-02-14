@@ -10,7 +10,7 @@
     
     <title>
         
-            cdh集群搭建 | 
+            zookeeper启动时数组越界异常 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://github.com/stanxia/stanxia.github.io.git">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="cdh集群搭建 | 小世界，大梦想">
+    <meta property="og:title" content="zookeeper启动时数组越界异常 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -269,7 +269,7 @@
         
     
             <p class="article-headline-p">
-                cdh集群搭建
+                zookeeper启动时数组越界异常
             </p>
         </div>
 
@@ -288,7 +288,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 11, 2017</span>
+        <span>2月 14, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -309,7 +309,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADfklEQVR42u3aS24bMRAFQN3/0sk2gKHBe92krADFlUGMNGR50erP64/1z3ohwIEDBw4cOHDgwIHjizle8fr5fPHKx0/93H/eef6e/C44cODAgeMeR3KZ9ijvPvtu53k/+ce0d8GBAwcOHLc5ZleqXx/vPO/n53wmw4EDBw4cv8vRJks5ZXK9/EcADhw4cOD4XzjyoDh7PikvPodhHDhw4MDxPRyzNKwt8LXf05J9tFaKAwcOHDgODTR889+/MN+BAwcOHDiurQ3lflhheGYcOHDgwHGU40ZLKU/VZkMMp5JMHDhw4MBxg2PfTMoLgrOBhuRsyfhd8bsDBw4cOHCsOTYpWT7QNkvh8kZU/v04cODAgeMex/Nr2mB2arghP0/dZNrMd+DAgQMHjoCjTdhmlAluEuZzrOIWOHDgwIHjKEc+grAZNcifn43BrUIvDhw4cOC4xtGGuhxrH6pbmuIWOHDgwIHjAsepI86w9o2uHK5uO+HAgQMHjpKjDWmz6yWhfTPEkAfyou2EAwcOHDgWHM8Qe6Yi7JXvbdPLKNDiwIEDB44FRxLSkoCXh8AcfdYeqxtpOHDgwIHjKEd+9FPNoVMJ5IwPBw4cOHB8hiMJhEVSVBb1WsSz58GBAwcOHLc58vQsb/O0l2xTtbYEiQMHDhw47nG0LZzZ320JckaQlztx4MCBA8c9jln7J29cJWPTmybW/i04cODAgeMGR1scnIXSU4XF2U+Etzs4cODAgeMCx6lrtGNws3LhJvHDgQMHDhy3OWYNnjzlm7WgkrO1QFGgxYEDBw4ca452zQap8yLj6mKzwTscOHDgwHGUow2ir2DlV0qCepv+1eEfBw4cOHBc42gTqpyyDc+nAjwOHDhw4PhdjtvDB3mqtilTtoVIHDhw4MBxjyNPh17xyo84G3Rrgy4OHDhw4Pg8x2z4ID9E0i6aDVvkSSYOHDhw4LjHMRtoyAfj2kJkW+w7UHbEgQMHDhxHOQ4EqjJUJ9fOS4rt8zhw4MCB4zMcbdMoH1PYjB3k0G2Yx4EDBw4cn+HYB8X86LPAvC8L4sCBAweOb+bIi4btsEICMRtrKFI4HDhw4MDxEY7NUELbEGrTvCTBOxxoceDAgQPHujjYjhe0hbzZedrCIg4cOHDguM0xK7HdS7ROJY0RHA4cOHDgOMph4cCBAwcOHDhw4MCB48vWX+73tXZIlIjCAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEGUlEQVR42u3bUXLqMAwFUPa/6b4FdIB7pXQeMcdfDCWJffJhSVYfP0YwHggwYcKECRMmAxMmTJg+nukRj+T3v+/87HNyh/z3ydPzNWLChAkTpvOY3myNTx6Z/D6/Q0KW/P7104s5Y8KECROm45iSByebdxIWPLvbZpu/+CpMmDBhwvSVTAlNkvrmW3VC/PpFYsKECRMmTG1AkADNirz5stvvMWHChAkTpnbLb4ODnDi/w6zo/Oe1cEyYMGHC9GFM7fZ8x8//ob8JEyZMmDB9ANNsXJuOzl7b7MC1WCMmTJgwYTqCKTkmfLNxlr/Mr5qlyps5YMKECROms5nabbU9jJx9384hCV+isjImTJgwYTqIaZNM5keJxWYcbOR5Kp6HI5gwYcKE6Wym1yj5RIfHh4vtPF9F8YIxYcKECdMRTPmmvkkvZ69kc6jZzgETJkyYMJ3K1G78Cc2sdebaxDhPdDFhwoQJ0zcw5eXRWZq6v1tbgN5AY8KECROmk5iGaeGovWYWCrQByiblxoQJEyZM5zFdlVgmk8436X2T62aNmDBhwoTpbKbN1PPtOS/7bppy2qZVTJgwYcJ0HlOS0M5aZGap6ax83AYlmDBhwoTp25iKi0dJaUvfXrs/iI1q4ZgwYcKE6Qim2UTrBtDR4mcHlvlTMGHChAnTeUz5jfZF4bYEPCvU5qBvfokJEyZMmI5gmhVDZ4u8qk0nWfAsqcaECRMmTN/JlCei+XFje2yZEO9fDyZMmDBhOo9pcyQ5a9OZHXm2r2Qzc0yYMGHCdBLTfmE5VhsEzLb2NsgoiryYMGHChOm2TLNGnPZwcdYGtC8it9diwoQJE6ZTmX7i8ReTa1/JZuO/rHEHEyZMmDB9PNOsXJsnq20AkQQoSSq+OS7FhAkTJkwnMeVl3Lxdpg0vZmPWVosJEyZMmDC17aSb1DR/1qz0PGsAwoQJEyZMpzLtk97kbpv0uA1HkgT46YowYcKECdNxTHUTZ1l4nRWI81bUFuINPSZMmDBhOogpTxTbtPmqV5JTtsl2UeTFhAkTJky3ZcoLuLMG0E2I0IYm7T97rCoEmDBhwoTpJkztsV/y+E2osZlD/tfLUl9MmDBhwvTBTG2xtW1jTRaQb9758efFjTuYMGHChOm2TO1oE+D8r22RN2edHXNiwoQJE6YzmGbbc/J5f20bpuQBRPRKMGHChAnTQUzt0WbejpOQtSHFpohcpMSYMGHChOk4prZ0e+33q4JsWUqO7oAJEyZMmL6YqU0+kwLrPnRor30TfGDChAkTpq9kSpLJq0q37cafpNB5wRcTJkyYMJ3HtCndbgKFtklo06yTvGBMmDBhwnQeU9u4k5Ri8/AiT63b7b89jsWECRMmTOcxGZgwYcKECRMmAxMmTJhuNf4BPoQ/PiSPawcAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -321,7 +321,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/hadoop/">hadoop</a>
+        <a class="post_tag-link" href="/tags/zookeeper/">zookeeper</a>
     </ul>
     
 
@@ -335,7 +335,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/11/cdh集群搭建/" class="leancloud-views_num" data-flag-title="cdh集群搭建">
+                <span id="/2017/02/14/zookeeper启动时数组越界异常/" class="leancloud-views_num" data-flag-title="zookeeper启动时数组越界异常">
      &nbsp;浏览量
 </span>
 
@@ -358,7 +358,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=cdh集群搭建&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/11/cdh集群搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=zookeeper启动时数组越界异常&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/zookeeper启动时数组越界异常/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -367,7 +367,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=cdh集群搭建&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/11/cdh集群搭建/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=zookeeper启动时数组越界异常&url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/zookeeper启动时数组越界异常/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -376,7 +376,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/11/cdh集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/zookeeper启动时数组越界异常/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -385,7 +385,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/11/cdh集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/stanxia/stanxia.github.io.git//2017/02/14/zookeeper启动时数组越界异常/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -397,7 +397,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=cdh集群搭建&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/11/cdh集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=zookeeper启动时数组越界异常&summary=随便说说&pics=https://github.com/stanxia/stanxia.github.io.git/img/favicon.png&url=https://github.com/stanxia/stanxia.github.io.git/2017/02/14/zookeeper启动时数组越界异常/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -415,58 +415,12 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>1.如果存在jdk：<br>卸载方式：rpm -qa | grep jdk<br>rpm -e —nodeps 加上上面返回的结构</p>
-<p>2.安装jdk：<br>rpm -ivh jdk-7u80-linux-x64.rpm </p>
-<p>3.配置hostname<br>vi /etc/sysconfig/network<br>NETWORKING=yes<br>HOSTNAME=master</p>
-<p>4.vi /etc/hostname</p>
-<p>#删除文件内容  ,然后输入<br>master</p>
-<p>5.修改host映射<br>vi /etc/hosts</p>
-<p>10.211.55.9 master</p>
-<p>#ipDress1为master服务器的IP地址</p>
-<p>6.selinux 关闭<br>vi /etc/sysconfig/selinux<br>SELINUX=disable</p>
-<p>7.重启<br>reboot</p>
-<p>8.更改防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
-<p>9.安装时间同步服务<br>yum -y install ntp<br>vi /etc/ntp.conf</p>
-<p>#注释掉所有的server<em>.</em>.* 的指向 ，新添加一条可连接的ntp服务器<br>server ntp.sjtu.edu.cn iburst</p>
-<p>#启动时间同步服务<br>service ntpd start </p>
-<p>#执行命令<br>ntpdate -u 1.asia.pool.ntp.org</p>
-<p>#重启时间同步服务<br>service ntpd restart</p>
-<p>10.ssh无密码登陆配置<br>ssh-keygen -t rsa #一直使用默认</p>
-<p>11.安装mysql</p>
-<p>#查看mysql是否意境安装：<br>rpm -qa | grep mariadb </p>
-<p>#如果存在：<br>cd </p>
-<p>#安装mysql依赖：<br>yum install -y perl-Module-Install.noarch</p>
-<p>unzip <strong>.zip<br>rpm -ivh </strong>.rpm </p>
-<p>#修改配置文件目录<br>cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
-<p>#在配置文件中增加以下配置并保存：<br>vi /etc/my.cnf<br>default-storage-engine = innodb<br>innodb_file_per_table<br>collation-server = utf8_general_ci<br>init-connect = ‘SET NAMES utf8’<br>character-set-server=utf8</p>
-<p>#初始化数据库执行：<br>/usr/bin/mysql_install_db</p>
-<p>#开启mysql服务：<br>service mysql restart</p>
-<p>#查看mysql root 初始化密码：<br>cat /root/.mysql_secret</p>
-<p>T1STjiM6A1TXQB5p</p>
-<p>#登陆mysql：<br>mysql -u root -p<br>SET PASSWORD=PASSWORD(‘123456’)#复制root的初始密码<br>mysql下面执行：<br>SET PASSWORDcd /=PASSWORD(‘123456’)</p>
-<p>#linux开启开机启动：<br>chkconfig mysql on</p>
-<p>#linux下面执行 拷贝mysql-connector-java-5.1.25-bin.jar 到/usr/share/java/mysql-connector-java.jar</p>
-<p>#创建数据库：<br>mysql<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database hue DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database monitor DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</p>
-<p>use mysql;<br>grant all on <em>.</em> to root@‘master’ Identified by ‘123456’;<br>flush privileges;</p>
-<p>12.安装cloudera-manager</p>
-<p>#解压cm tar 包到指定目录<br>mkdir /opt/cloudera-manager<br>tar -zxvf cloudier-manager-centos7-cm5.6.0_x86_64.tar.gz -C<br>/opt/cloudera-manager</p>
-<p>#创建cloudera-scm用户：<br>[root@master cloudera-manager]# useradd –system –home=/opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-server–no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
-<p>#在注解点创建cloudera-manager-server的本地元数据保存目录<br>mkdir /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /opt/cloudera-manager</p>
-<p>#配置从节点cloudera-manager-agent 指向注解点服务器<br>vi /opt/cloudera-manager/cm-5.6.0/etc/cloudera-scm-agent/config.ini</p>
-<p>#将server host改为CMS所在的主机名即master</p>
-<p>#注解点中创建parcel-repo 仓库目录：<br>mkdir -p /opt/cloudera/parcel-repo<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcel-repo<br>cp CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel  CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel.sha   manifest.json /opt/cloudera/parcel-repo</p>
-<p>#所有节点创建parcel目录：<br>mkdir -p /opt/cloudera/parcels<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcels</p>
-<p>13.初始化脚本配置数据库：<br>/opt/cloudera-manager/cm-5.6.0/share/cmf/schema/scm_prepare_database.sh mysql -hmaster -uroot -p123456 —sim-host master scmdbn scmdbu scmdbp</p>
-<p>14.启动注解点cloudera scm server<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-server  /etc/init.d/cloudera-scm-server</p>
-<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-server</p>
-<p>将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
-<p>chkconfig cloudera-scm-server on</p>
-<p>#启动注解点cloudera scm server</p>
-<p>mkdir /opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-agent<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-agent /etc/init.d/cloudera-scm-agent</p>
-<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-agent</p>
-<p>#将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
-<p>chkconfig cloudera-scm-agent on</p>
-<p>service cloudera-scm-server start</p>
+        <p>#问题：</p>
+<p>#解决方案：<br>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号</p>
+<pre><code>测试代码块
+vi /zookeeper/conf/zoo.cfg
+测试完毕
+</code></pre><p>end!</p>
 
     
 
@@ -496,8 +450,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/11/cdh集群搭建/"
-        data-title="cdh集群搭建">
+        data-url="https://github.com/stanxia/stanxia.github.io.git/2017/02/14/zookeeper启动时数组越界异常/"
+        data-title="zookeeper启动时数组越界异常">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -513,21 +467,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/12/第一阶段项目所用知识点/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/11/hadoop原生集群搭建/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/13/kafka安装与简单的应用/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

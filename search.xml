@@ -4,6 +4,18 @@
   
     
     <entry>
+      <title><![CDATA[zookeeper启动时数组越界异常]]></title>
+      <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/14/zookeeper%E5%90%AF%E5%8A%A8%E6%97%B6%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8/</url>
+      <content type="html"><![CDATA[<p>#问题：</p>
+<p>#解决方案：<br>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号</p>
+<pre><code>测试代码块
+vi /zookeeper/conf/zoo.cfg
+测试完毕
+</code></pre><p>end!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[kafka安装与简单的应用]]></title>
       <url>https://github.com/stanxia/stanxia.github.io.git/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>安装</p>
