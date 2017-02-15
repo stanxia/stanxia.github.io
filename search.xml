@@ -23,10 +23,15 @@
       <title><![CDATA[利用微博作为图床]]></title>
       <url>https://stanxia.github.io/2017/02/15/%E5%88%A9%E7%94%A8%E5%BE%AE%E5%8D%9A%E4%BD%9C%E4%B8%BA%E5%9B%BE%E5%BA%8A/</url>
       <content type="html"><![CDATA[<h3 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h3><ol>
-<li>登陆微博，右上角点击发布微博</li>
-<li>选择图片上传，选择需要上传的图片</li>
-<li>右键图片，复制图片网络链接</li>
-<li>将图片网址作为图片地址应用到网站中</li>
+<li><p>登陆微博，右上角点击发布微博</p>
+</li>
+<li><p>选择图片上传，选择需要上传的图片</p>
+</li>
+<li><p>右键图片，复制图片网络链接</p>
+</li>
+<li><p>将图片网址作为图片地址应用到网站中</p>
+<p><img src="" alt="http://wx1.sinaimg.cn/mw690/6aae3cf3gy1fcr3nqql3pj20rm0rcdgj.jpg"></p>
+</li>
 </ol>
 ]]></content>
     </entry>
