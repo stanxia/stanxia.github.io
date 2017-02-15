@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[测试视频播放]]></title>
+      <url>https://stanxia.github.io/2017/02/15/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/</url>
+      <content type="html"><![CDATA[<h2 id="测试视频播放"><a href="#测试视频播放" class="headerlink" title="测试视频播放"></a>测试视频播放</h2><iframe src="https://www.bilibili.com/html/html5player.html?aid=3521416&cid=6041635" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Kafka文件存储机制及partition和offset]]></title>
       <url>https://stanxia.github.io/2017/02/15/Kafka%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6%E5%8F%8Apartition%E5%92%8Coffset/</url>
       <content type="html"><![CDATA[<h2 id="初识kafka"><a href="#初识kafka" class="headerlink" title="初识kafka"></a>初识kafka</h2><p>kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。</p>

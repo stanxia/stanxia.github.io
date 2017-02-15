@@ -10,7 +10,7 @@
     
     <title>
         
-            kafka安装与简单的应用 | 
+            测试视频播放 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="kafka安装与简单的应用 | 小世界，大梦想">
+    <meta property="og:title" content="测试视频播放 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz"><span class="post-toc-number">1.</span> <span class="post-toc-text">tar xzvf kafka-0.8.0-beta1-src.tgz</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cd-kafka-0-8-0-beta1-src"><span class="post-toc-number">2.</span> <span class="post-toc-text">cd kafka-0.8.0-beta1-src</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-update"><span class="post-toc-number">3.</span> <span class="post-toc-text">./sbt update</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-package"><span class="post-toc-number">4.</span> <span class="post-toc-text">./sbt package</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-assembly-package-dependency"><span class="post-toc-number">5.</span> <span class="post-toc-text">./sbt assembly-package-dependency</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试视频播放"><span class="post-toc-number">1.</span> <span class="post-toc-text">测试视频播放</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -257,7 +257,7 @@
         
     
             <p class="article-headline-p">
-                kafka安装与简单的应用
+                测试视频播放
             </p>
         </div>
 
@@ -276,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 13, 2017</span>
+        <span>2月 15, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3klEQVR42u3aS24jMQwFQN//0pPtAEba71Ed2JaqVwHisFVahObn8e/I54GNjY2NjY2NjY39kexH/Pz/+ecIL175FOf5b5M4szNjY2Njn8BOXtPC8p+v4ydXn5wZGxsb+wR2nrSuD/Rboso/mZOKRIuNjY2NHZciL0qCUYQkBWJjY2Njt69JqG1Km7WisLGxsbHbr/73liXte9/QS8PGxsb+ePZs0Pven98238bGxsb+MHb7tEXIvcilk2NjY2Nvyr4uLZJ2f9LQbxPPLMINFRg2Njb217Lbls2sAdQ2+pPrzttV2NjY2Luyk6/++UXcOwxo132u34KNjY29N3v24mJdJhgDtys7+dVgY2Nj783OYSsN/ZW1zqLYaOfb2NjY2Fuwk3/9bXsoTzPX19EODIrxADY2NvZ27DbobCScx5mlqzqBYWNjY2/BLpoywSHqln3cbMoLG2xsbOzT2HnolWXKPOGtDAmGKzvY2NjYX85OkkE7+l1pWq1Ew8bGxj6ZPaO2qWt2HXmEF9eEjY2NvSk7H83mR5yNafMkOkt72NjY2LuyV9ru+dUUizVlE6oodbCxsbG3ZufFQzvuTQbAbRrLyw9sbGzsE9hJo3+WwNrxbVKoLA2YsbGxsTdlJ6miLTzaNtPK+KEYDGNjY2Nvym6Tx3oZM4s/u1ZsbGzsE9hty2YlFUWtn2T5poyJjY2NvTc7CbqyNHPX3+ZlDzY2NjZ23vrPf7vSGMqHytjY2NhnsodD0/K4K+uYyTmjCNjY2Nibsusv9KOlyaTkWBlR3FaKYGNjY38he7YWMyshrql5WsoXQLGxsbHPYc8aTElxkqelYYERrw1hY2Njn8Buy4ZhIllIkEtjBmxsbGzs5ZZ921RqL2tYimBjY2MfzM5bSHkBs/L5PyxFsLGxsb+Evd5UylNOO+6dDSGwsbGxz2HfNeidNff/evCAjY2NvTf7nAcbGxsbGxsbGxv7Y54f8ueHKZCLLGIAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACzElEQVR42u3aSbLbMAwFQN//0skFfuT3ACWxxebK5dLA5sIwhtevI9cLGxsbGxsbGxsb+yPZr3gl1//pydffX1/5A6DcMzY2NvYJ7Dc//fEWrzd6/bTrJ2z2jI2NjX0O+zpoXX9uD6h98mbP2NjY2Njt1vcpzfXxYWNjY2PvA9isrHP9ljzlwMbGxsbeF2g2mOt7W/Y/qqVhY2Njfzy7TQw+4fN/6G9jY2NjfyR7tpJ2b1sY2gfCN3vGxsbGfig72fpmtSWhdqAnPzJsbGzsZ7OLmxcFoOSuZOhnVtLCxsbGfio7STPu2sosUG1CIzY2NvY57Dy05GWjJEC2wWxV8MLGxsY+mD0LaclAZM5LUpqbAxg2Njb2V7Hbcnw70NO+qxjEyVMjbGxs7MPY+0RlVpDKj7Ud8cHGxsY+gT3bXM5ug+WmpHVDVwQbGxv7S9ibAce2JLRpHrRH/yaAYWNjYz+IvUkD8hZsEpzaxOavZGDY2NjYX8t+jda+SdwmNu0zsbGxsc9hR3/lRwOXs9bsbGDohpEdbGxs7K9lt3/3kwPK722bxG1rARsbG/sE9qygk3+fNyHy9+bNCWxsbOxns/NwlSQJ9VaClGNWVMLGxsY+jZ2P4LTDNHnRPwmHeVAshi+xsbGxH8HOX3kXpm0hb1IUbGxs7HPYswRjdnCzkZ1Z8MPGxsY+gZ0Eg3b4sj2OWWArDhcbGxv70exZOemuFGJ2KHmRCxsbG/s0djsWuce06Uq+sLGxsU9gt2vWcJ0lFW0hqWj0YmNjYz+I3QaDFrYf1tmnTNjY2NgnsJOglYecGSZvSAxTIGxsbOwD2LNyf1vKTzCz4IqNjY2NvWHPilP5kW0KTNjY2NjY96YfLX7WHsbGxsY+k52XfmYpQZ545M/Jgxw2Njb2s9mzRm9d1imvz0PsMBXBxsbGfgT7nIWNjY2NjY2NjY39Mes3ManilXTBndIAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -309,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/kafka/">kafka</a>
+        <a class="post_tag-link" href="/tags/hexo/">hexo</a>
     </ul>
     
 
@@ -323,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/13/kafka安装与简单的应用/" class="leancloud-views_num" data-flag-title="kafka安装与简单的应用">
+                <span id="/2017/02/15/测试视频播放/" class="leancloud-views_num" data-flag-title="测试视频播放">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kafka安装与简单的应用&url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=测试视频播放&url=https://stanxia.github.io//2017/02/15/测试视频播放/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kafka安装与简单的应用&url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=测试视频播放&url=https://stanxia.github.io//2017/02/15/测试视频播放/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/15/测试视频播放/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/15/测试视频播放/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=kafka安装与简单的应用&summary=随便说说&pics=https://stanxia.github.iohttp://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcr3nqql3pj20rm0rcdgj.jpg&url=https://stanxia.github.io/2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=测试视频播放&summary=随便说说&pics=https://stanxia.github.iohttp://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcr3nqql3pj20rm0rcdgj.jpg&url=https://stanxia.github.io/2017/02/15/测试视频播放/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,14 +392,9 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
+        <h2 id="测试视频播放"><a href="#测试视频播放" class="headerlink" title="测试视频播放"></a>测试视频播放</h2><iframe src="https://www.bilibili.com/html/html5player.html?aid=3521416&cid=6041635" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
 
     
 
@@ -429,8 +424,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/13/kafka安装与简单的应用/"
-        data-title="kafka安装与简单的应用">
+        data-url="https://stanxia.github.io/2017/02/15/测试视频播放/"
+        data-title="测试视频播放">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -446,21 +441,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/13/kafka-server-properties参数详解/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/12/第一阶段项目所用知识点/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/15/Kafka文件存储机制及partition和offset/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
