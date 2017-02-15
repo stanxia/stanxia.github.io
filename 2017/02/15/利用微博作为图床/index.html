@@ -10,7 +10,7 @@
     
     <title>
         
-            kafka安装与简单的应用 | 
+            利用微博作为图床 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="kafka安装与简单的应用 | 小世界，大梦想">
+    <meta property="og:title" content="利用微博作为图床 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -226,7 +226,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz"><span class="post-toc-number">1.</span> <span class="post-toc-text">tar xzvf kafka-0.8.0-beta1-src.tgz</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cd-kafka-0-8-0-beta1-src"><span class="post-toc-number">2.</span> <span class="post-toc-text">cd kafka-0.8.0-beta1-src</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-update"><span class="post-toc-number">3.</span> <span class="post-toc-text">./sbt update</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-package"><span class="post-toc-number">4.</span> <span class="post-toc-text">./sbt package</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sbt-assembly-package-dependency"><span class="post-toc-number">5.</span> <span class="post-toc-text">./sbt assembly-package-dependency</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上传图片"><span class="post-toc-number">1.</span> <span class="post-toc-text">上传图片</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -262,7 +262,7 @@
         
     
             <p class="article-headline-p">
-                kafka安装与简单的应用
+                利用微博作为图床
             </p>
         </div>
 
@@ -281,7 +281,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 13, 2017</span>
+        <span>2月 15, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -302,7 +302,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3klEQVR42u3aS24jMQwFQN//0pPtAEba71Ed2JaqVwHisFVahObn8e/I54GNjY2NjY2NjY39kexH/Pz/+ecIL175FOf5b5M4szNjY2Njn8BOXtPC8p+v4ydXn5wZGxsb+wR2nrSuD/Rboso/mZOKRIuNjY2NHZciL0qCUYQkBWJjY2Njt69JqG1Km7WisLGxsbHbr/73liXte9/QS8PGxsb+ePZs0Pven98238bGxsb+MHb7tEXIvcilk2NjY2Nvyr4uLZJ2f9LQbxPPLMINFRg2Njb217Lbls2sAdQ2+pPrzttV2NjY2Luyk6/++UXcOwxo132u34KNjY29N3v24mJdJhgDtys7+dVgY2Nj783OYSsN/ZW1zqLYaOfb2NjY2Fuwk3/9bXsoTzPX19EODIrxADY2NvZ27DbobCScx5mlqzqBYWNjY2/BLpoywSHqln3cbMoLG2xsbOzT2HnolWXKPOGtDAmGKzvY2NjYX85OkkE7+l1pWq1Ew8bGxj6ZPaO2qWt2HXmEF9eEjY2NvSk7H83mR5yNafMkOkt72NjY2LuyV9ru+dUUizVlE6oodbCxsbG3ZufFQzvuTQbAbRrLyw9sbGzsE9hJo3+WwNrxbVKoLA2YsbGxsTdlJ6miLTzaNtPK+KEYDGNjY2Nvym6Tx3oZM4s/u1ZsbGzsE9hty2YlFUWtn2T5poyJjY2NvTc7CbqyNHPX3+ZlDzY2NjZ23vrPf7vSGMqHytjY2NhnsodD0/K4K+uYyTmjCNjY2Nibsusv9KOlyaTkWBlR3FaKYGNjY38he7YWMyshrql5WsoXQLGxsbHPYc8aTElxkqelYYERrw1hY2Njn8Buy4ZhIllIkEtjBmxsbGzs5ZZ921RqL2tYimBjY2MfzM5bSHkBs/L5PyxFsLGxsb+Evd5UylNOO+6dDSGwsbGxz2HfNeidNff/evCAjY2NvTf7nAcbGxsbGxsbGxv7Y54f8ueHKZCLLGIAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aQXLbQAwEQP//084DXGZmACkRuc2TyqbI7fVhDGC/vo+8vrCxsbGxsbGxsbE/kv0VXz/v/+05f3n9L8+8/rxZMzY2NvYJ7GShCe96U5KnXX93tmZsbGzsc9jXoXUdHtdPSLYgD8J2zdjY2NjYSWAkjGT7kuIHGxsbG3sfYG3TZ9N++qDcxsbGxv54dvv6GaYtSzbrwcbGxj6H3RYGn/D5P8y3sbGxsT+SPbve0fRpG1j1mrGxsbEfyk4a+rMW/6ZVNCtXVocvsbGxsW/LnhUAyWvyRecHOtvDndjY2NgnsNujkO2Ydn8oZ9/8wsbGxj6B3YKLAiDeuDbe6p9jY2NjP5qd/+uft43aIzj7kqY+soONjY39CHY+ji0OxywKlc09w14aNjY29s3ZeUOn3aAk2GZvb8MPGxsb+wT25t/9/cGddjvyw0PY2NjYJ7BfFRt57G0ODK3WjI2Njf1Q9qyJv9mC5NqPdYtSBBsbG/vm7LyoeG0jKX/7ZrSAjY2NfRq7PSiTj3LbyMnLjORPgo2Njf1sdh4tCSZZVh6Es1hdDXqxsbGxb8jeBNhsPJA3p5LgLO7ExsbGfih7FjCzIe6mmdU2qrCxsbGxv8ur3bLNmGG4WdjY2NgPZW9CqD1Y0343Cc5itdjY2NgPZRft9aDB1MZb24SaFTzY2NjY57DfUTbM7tyUNMMKDBsbG/vm7CSoZiOBZAvy0e8sbrGxsbFPY89ipi0b2t/m7yqaStjY2NiPYM8GuvutyVv8m7DExsbGPoHdRtGrgidvUeUF0nDQi42Njf0Idjvi3QCiBtAowN7SVMLGxsa+FXtGyu9Pmvv71lU96MXGxsY+mP2q0LpuSOUFzz8KMGxsbOybs5NWUV5s5O2hHIyNjY19Mns23N2XHDksjy5sbGzs09izQW8efrMWf/6WaIOwsbGxH8o+58LGxsbGxsbGxsb+mOsPXdcggoxvZhUAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -314,7 +314,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/kafka/">kafka</a>
+        <a class="post_tag-link" href="/tags/生活小知识/">生活小知识</a>
     </ul>
     
 
@@ -328,7 +328,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/13/kafka安装与简单的应用/" class="leancloud-views_num" data-flag-title="kafka安装与简单的应用">
+                <span id="/2017/02/15/利用微博作为图床/" class="leancloud-views_num" data-flag-title="利用微博作为图床">
      &nbsp;浏览量
 </span>
 
@@ -351,7 +351,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kafka安装与简单的应用&url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=利用微博作为图床&url=https://stanxia.github.io//2017/02/15/利用微博作为图床/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -360,7 +360,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kafka安装与简单的应用&url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=利用微博作为图床&url=https://stanxia.github.io//2017/02/15/利用微博作为图床/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -369,7 +369,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/15/利用微博作为图床/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -378,7 +378,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/15/利用微博作为图床/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,7 +390,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=kafka安装与简单的应用&summary=随便说说&pics=https://stanxia.github.io/img/favicon.png&url=https://stanxia.github.io/2017/02/13/kafka安装与简单的应用/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=利用微博作为图床&summary=随便说说&pics=https://stanxia.github.io/img/favicon.png&url=https://stanxia.github.io/2017/02/15/利用微博作为图床/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -408,14 +408,12 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
+        <h3 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h3><ol>
+<li>登陆微博，右上角点击发布微博</li>
+<li>选择图片上传，选择需要上传的图片</li>
+<li>右键图片，复制图片网络链接</li>
+<li>​</li>
+</ol>
 
     
 
@@ -445,8 +443,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/13/kafka安装与简单的应用/"
-        data-title="kafka安装与简单的应用">
+        data-url="https://stanxia.github.io/2017/02/15/利用微博作为图床/"
+        data-title="利用微博作为图床">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -462,21 +460,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/14/zookeeper启动时数组越界异常/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/13/kafka-server-properties参数详解/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/14/完善ntp时间同步/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
