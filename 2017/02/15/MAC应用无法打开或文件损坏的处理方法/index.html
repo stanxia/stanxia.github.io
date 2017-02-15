@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">2.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了"><span class="post-toc-number">4.</span> <span class="post-toc-text">macOS Sierra 10.12以上版本的：打开终端，执行 sudo spctl --master-disable就可以了</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">2.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#"><span class="post-toc-number">4.</span> <span class="post-toc-text"></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#-1"><span class="post-toc-number">5.</span> <span class="post-toc-text"></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了"><span class="post-toc-number">6.</span> <span class="post-toc-text">macOS Sierra 10.12以上版本的：打开终端，执行 sudo spctl --master-disable就可以了</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -393,13 +393,14 @@
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”</p>
+<p><img src="http://img.xclient.info/attachment/cdn/large/006ehIt6jw1execfbx4xnj30nc0b6dgh.jpg" alt="img1"></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>在MAC下安装一些软件时提示”来自身份不明开发者”，其实这是MAC新系统启用了新的安全机制。<br>默认只信任 <strong>Mac App Store</strong> 下载的软件和拥有开发者 ID 签名的应用程序。<br>换句话说就是 MAC 系统默认只能安装靠谱渠道（有苹果审核的 <strong>Mac App Store</strong>）下载的软件或被认可的人开发的软件。</p>
 <p>这当然是为了用户不会稀里糊涂安装流氓软件中招，但没有开发者签名的 “老实软件” 也受影响了，安装就会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
 <li><p>最简单的方式：按住Control后，再次点击软件图标，即可。</p>
 </li>
-<li><p>修改系统配置：系统偏好设置… -&gt; 安全性与隐私… -&gt;通用… -&gt;选择任何来源。</p>
-</li>
+<li><p>修改系统配置：系统偏好设置… -&gt; 安全性与隐私… -&gt;通用… -&gt;选择任何来源。<img src="http://ww2.sinaimg.cn/large/006ehIt6jw1exed22xlgpj30os0m6ae7.jpg" alt="img2"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://ww2.sinaimg.cn/large/006ehIt6jw1exed2kg4wbj30oe0jqtbd.jpg" alt="imag3"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://ww2.sinaimg.cn/large/006ehIt6jw1exed0cuqtyj30oe0js77b.jpg" alt="img4"></h2></li>
 <li><h2 id="macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了"><a href="#macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了" class="headerlink" title="macOS Sierra 10.12以上版本的：打开终端，执行 sudo spctl --master-disable就可以了"></a>macOS Sierra 10.12以上版本的：打开终端，执行 <code>sudo spctl --master-disable</code>就可以了</h2></li>
 </ol>
 
