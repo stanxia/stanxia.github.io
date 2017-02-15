@@ -10,7 +10,7 @@
     
     <title>
         
-            标签: zookeeper | 
+            MAC应用无法打开或文件损坏的处理方法 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: zookeeper | 小世界，大梦想">
+    <meta property="og:title" content="MAC应用无法打开或文件损坏的处理方法 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -195,93 +195,278 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
     
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">2.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了"><span class="post-toc-number">4.</span> <span class="post-toc-text">macOS Sierra 10.12以上版本的：打开终端，执行 sudo spctl --master-disable就可以了</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/14/zookeeper启动时数组越界异常/">zookeeper启动时数组越界异常</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            问题
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/14/zookeeper启动时数组越界异常/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 14, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
-    }
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                MAC应用无法打开或文件损坏的处理方法
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>夏</strong>
+        <span>2月 15, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADkElEQVR42u3aS27jMBAFQN//0pltgIHl97rFRAiKqyCRGbK0aPfn9WV9Wy8EOHDgwIEDBw4cOHA8mOMVr+tPtXu+PVywZ/LZ4i44cODAgeMAx4dQFDxz/eT338+Y3u2zvwsOHDhw4DjH8e5w14fID/ruf82gk3NeP4MDBw4cOJ7GcR3q2lRt9jJw4MCBA8df4sjTp3zn6+JgUkDEgQMHDhzP4chLcvk12uB6zT17VQdrpThw4MCBYz3Q8Pyff3S+AwcOHDhw/MfRrnYEYbPDbP/6PDhw4MCB41aO/RBbO8rQDiu0baf6/Dhw4MCB41aOTWsnT67axtKM7Hrnt2VHHDhw4MBxK8e5Nk9+0LxNNTvnhxeMAwcOHDhu5UgKeXmxr020ZojtPh9ePA4cOHDgOMBxHa7aRC4v3rUhuU3VIlYcOHDgwHGMI79YXqTLhxLasmPym3qgAQcOHDhwrDnakNZi5S2uu1pKbcqHAwcOHDhOcLSDcbNmVU6ZJ3j5fykCLQ4cOHDgWHC0YW9T5jvXQEqAioEGHDhw4MCx4NgX7/Lwdu+YwrDJhAMHDhw4fpWjDZyzFKttI7UnKQYacODAgQPHmqNN5NrxgrvaVG3YLhpXOHDgwIHjVo68rNYmeLOyY/L7Wemw/t6BAwcOHDgWHO1lXsFKBhTaEuQM68OncODAgQPHYY52EKENkMnPsxfWfgnAgQMHDhw/wzErHZ54clb4q1tlOHDgwIHjVo7rUmCClSdOeaKY7LAZgMCBAwcOHOc4NqW6pFyYp4ub0bdVgocDBw4cOA5z5KW99q+bUN3uXySEOHDgwIHjAEcedPPrbYJiOyTXBmwcOHDgwHGOo4WYpXBtOPwK1ixprGulOHDgwIGj5GjLanmDZ//kbKiuTvZw4MCBA8cxjvwa7UjBphTYgrZjDThw4MCB4xxHPrKwf3I2vjAL2zhw4MCB43c5ZuMOdyVj+etJ4G4rDuLAgQMHjrLtlK+Eb3OZD0Exvur1Djhw4MCB4xzHLFDNxg7yUmPLvSpW4sCBAweOAxz5Ido2VR5QNyMU7Zlx4MCBA8fPcGwGGmZJ1F0DCvkXBRw4cODA8XyOPOzNRiLyQN6eFgcOHDhwPI2jDa77tQ/PRXEQBw4cOHCsOdohhiSM5SgtcZsoHmk74cCBAweO9UBDMuiwbxG1gxQzaBw4cODAcYLDwoEDBw4cOHDgwIEDx8PWP6tR4yzKZGVKAAAAAElFTkSuQmCC">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/mac/">mac</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/02/15/MAC应用无法打开或文件损坏的处理方法/" class="leancloud-views_num" data-flag-title="MAC应用无法打开或文件损坏的处理方法">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=MAC应用无法打开或文件损坏的处理方法&url=https://stanxia.github.io//2017/02/15/MAC应用无法打开或文件损坏的处理方法/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=MAC应用无法打开或文件损坏的处理方法&url=https://stanxia.github.io//2017/02/15/MAC应用无法打开或文件损坏的处理方法/index.html&via=夏" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/15/MAC应用无法打开或文件损坏的处理方法/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/15/MAC应用无法打开或文件损坏的处理方法/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=MAC应用无法打开或文件损坏的处理方法&summary=随便说说&pics=https://stanxia.github.io/img/favicon.png&url=https://stanxia.github.io/2017/02/15/MAC应用无法打开或文件损坏的处理方法/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>在MAC下安装一些软件时提示”来自身份不明开发者”，其实这是MAC新系统启用了新的安全机制。<br>默认只信任 <strong>Mac App Store</strong> 下载的软件和拥有开发者 ID 签名的应用程序。<br>换句话说就是 MAC 系统默认只能安装靠谱渠道（有苹果审核的 <strong>Mac App Store</strong>）下载的软件或被认可的人开发的软件。</p>
+<p>这当然是为了用户不会稀里糊涂安装流氓软件中招，但没有开发者签名的 “老实软件” 也受影响了，安装就会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
+<li><p>最简单的方式：按住Control后，再次点击软件图标，即可。</p>
+</li>
+<li><p>修改系统配置：系统偏好设置… -&gt; 安全性与隐私… -&gt;通用… -&gt;选择任何来源。</p>
+</li>
+<li><h2 id="macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了"><a href="#macOS-Sierra-10-12以上版本的：打开终端，执行-sudo-spctl-master-disable就可以了" class="headerlink" title="macOS Sierra 10.12以上版本的：打开终端，执行 sudo spctl --master-disable就可以了"></a>macOS Sierra 10.12以上版本的：打开终端，执行 <code>sudo spctl --master-disable</code>就可以了</h2></li>
+</ol>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key=""
+        data-url="https://stanxia.github.io/2017/02/15/MAC应用无法打开或文件损坏的处理方法/"
+        data-title="MAC应用无法打开或文件损坏的处理方法">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/15/利用微博作为图床/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -451,6 +636,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
