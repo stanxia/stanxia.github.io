@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[这个杀手不太冷]]></title>
+      <url>https://stanxia.github.io/2017/02/17/%E8%BF%99%E4%B8%AA%E6%9D%80%E6%89%8B%E4%B8%8D%E5%A4%AA%E5%86%B7/</url>
+      <content type="html"><![CDATA[<iframe src="https://www.bilibili.com/html/html5player.html?aid=3209983&cid=5061993" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[海贼王856“少骗人了”]]></title>
       <url>https://stanxia.github.io/2017/02/16/%E6%B5%B7%E8%B4%BC%E7%8E%8B856%E2%80%9C%E5%B0%91%E9%AA%97%E4%BA%BA%E4%BA%86%E2%80%9D/</url>
       <content type="html"><![CDATA[<h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcspiw6k1lj20nm10477f.jpg" alt="0"></p>
@@ -285,6 +291,20 @@
     </entry>
     
     <entry>
+      <title><![CDATA[kafka安装与简单的应用]]></title>
+      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>安装</p>
+<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
+<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
+<p>ps -ef | grep kafka | grep -v grep</p>
+<p>ps -ef | grep zookeeper | grep -v grep</p>
+<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
+<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
+<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[kafka-server-properties参数详解]]></title>
       <url>https://stanxia.github.io/2017/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
       <content type="html"><![CDATA[<h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
@@ -545,20 +565,6 @@
 </tr>
 </tbody>
 </table>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[kafka安装与简单的应用]]></title>
-      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-      <content type="html"><![CDATA[<p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
 ]]></content>
     </entry>
     
