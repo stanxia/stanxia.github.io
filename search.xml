@@ -4,6 +4,38 @@
   
     
     <entry>
+      <title><![CDATA[yarn三种调度规则]]></title>
+      <url>https://stanxia.github.io/2017/02/16/yarn%E4%B8%89%E7%A7%8D%E8%B0%83%E5%BA%A6%E8%A7%84%E5%88%99/</url>
+      <content type="html"><![CDATA[<h2 id="yarn三种调度机制"><a href="#yarn三种调度机制" class="headerlink" title="yarn三种调度机制"></a>yarn三种调度机制</h2><ol>
+<li><p>FIFO Scheduler先进先出调度机制</p>
+</li>
+<li><p>Fair Scheduler公平调度机制</p>
+</li>
+<li><p>Capacity Scheduler容量机制</p>
+</li>
+</ol>
+<h2 id="FIFO-Scheduler"><a href="#FIFO-Scheduler" class="headerlink" title="FIFO Scheduler"></a>FIFO Scheduler</h2><p>按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。</p>
+<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。</p>
+<p>面对以上缺点，yarn提出了另两种策略，更加适合共享集群。</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsouzgzg1j20q80eqabe.jpg" alt="3"></p>
+<h2 id="Capacity-Scheduler"><a href="#Capacity-Scheduler" class="headerlink" title="Capacity Scheduler"></a>Capacity Scheduler</h2><p>定位：多人共享调度器。</p>
+<p>机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。</p>
+<p>特性：queue elasticity （弹性队列）根据实际情况分配资源</p>
+<p>Capacity Scheduler 的队列时支持层级关系的：</p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7b1tkj216m068mxf.jpg" alt="capacity1"></p>
+<p>相关配置如下：</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7u5psj20vy13m44h.jpg" alt="capacity2"></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouw6wsej20p60g8401.jpg" alt="1"></p>
+<h5 id="队列设置"><a href="#队列设置" class="headerlink" title="队列设置"></a>队列设置</h5><p>如果是mapreduce任务，通过 <code>mapreduce.job.queuename</code>来设置执行队列。</p>
+<h2 id="Fair-Scheduler"><a href="#Fair-Scheduler" class="headerlink" title="Fair Scheduler"></a>Fair Scheduler</h2><p>机制：为每一个任务均匀分配资源，一个任务就可以用整个集群资源，两个任务就平分集群资源，依次类推。</p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg" alt="2"></p>
+<h5 id="开启Fair-Scheduler"><a href="#开启Fair-Scheduler" class="headerlink" title="开启Fair Scheduler"></a>开启Fair Scheduler</h5><p>在<strong>yarn-site.xml</strong>中设置 <code>yarn.resourcemanager.scheduler.class</code>为<code>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</code> 。NOTE:CDH默认的就是Faire Scheduler ，CDH并不支持 Capacity Scheduler.</p>
+<h5 id="队列设置-1"><a href="#队列设置-1" class="headerlink" title="队列设置"></a>队列设置</h5><p>设置fair-scheduler.xml文件，可参考下图：</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsortg5yjj215c0litcz.jpg" alt="fair"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[接入bilibili视频播放]]></title>
       <url>https://stanxia.github.io/2017/02/15/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/</url>
       <content type="html"><![CDATA[<h2 id="测试视频播放"><a href="#测试视频播放" class="headerlink" title="测试视频播放"></a>测试视频播放</h2><p>接入bilibili的视频，只需要在md文档中添加如下代码即可：</p>
@@ -222,8 +254,9 @@
     <entry>
       <title><![CDATA[zookeeper启动时数组越界异常]]></title>
       <url>https://stanxia.github.io/2017/02/14/zookeeper%E5%90%AF%E5%8A%A8%E6%97%B6%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8/</url>
-      <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><img src="zk-aoi.png" alt=""></p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div></pre></td></tr></table></figure></p>
+      <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>启动zookeeper时，出现以下异常信息：</p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsp95necuj21ji0jidla.jpg" alt="1"></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改服务器id和ip映射时注意格式为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div><div class="line">server.1=host:port:port或者host:port或者host:port:port:type</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
