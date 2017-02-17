@@ -90,7 +90,7 @@ location="https://stanxia.github.io/";
       <content type="html"><![CDATA[<h2 id="测试视频播放"><a href="#测试视频播放" class="headerlink" title="测试视频播放"></a>测试视频播放</h2><p>接入bilibili的视频，只需要在md文档中添加如下代码即可：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"https://www.bilibili.com/html/html5player.html?aid=3521416&amp;cid=6041635"</span> <span class="attr">width</span>=<span class="string">"640"</span> <span class="attr">height</span>=<span class="string">"480"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">webkitallowfullscreen</span> <span class="attr">mozallowfullscreen</span> <span class="attr">allowfullscreen</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>其中aid和cid在bilibili网页上都可以爬出来。</p>
-<embed src="http://player.youku.com/player.php/sid/XMjUxMjY4MTA3Mg==/v.swf" allowfullscreen="true" quality="high" width="480" height="400" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash">
+<iframe src="http://t.cn/RqpwLqC" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
 
 <p>效果如下：</p>
 <iframe src="https://www.bilibili.com/html/html5player.html?aid=3521416&cid=6041635" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>]]></content>
