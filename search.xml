@@ -15,8 +15,6 @@
       <content type="html"><![CDATA[<h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;center&gt;</div><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 </div><div class="line">	src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;</div><div class="line">&lt;/iframe&gt;	</div><div class="line">&lt;/center&gt;</div></pre></td></tr></table></figure>
 <center><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" ​="" src="//music.163.com/outchain/player?type=2&id=4938705&auto=1&height=66"></iframe></center>
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4938705&auto=0&height=66"></iframe>
-
 <script>
 
 if ("xls123456"==prompt("通关密码"))
