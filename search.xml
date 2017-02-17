@@ -12,8 +12,12 @@
     <entry>
       <title><![CDATA[海贼王856“少骗人了”]]></title>
       <url>https://stanxia.github.io/2017/02/16/%E6%B5%B7%E8%B4%BC%E7%8E%8B856%E2%80%9C%E5%B0%91%E9%AA%97%E4%BA%BA%E4%BA%86%E2%80%9D/</url>
-      <content type="html"><![CDATA[<h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">	if(&quot;12345678&quot;==prompt(&quot;请输入密码&quot;))</div><div class="line">	&#123;</div><div class="line">		alert(&quot;正确&quot;);</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		alert(&quot;错误&quot;);</div><div class="line">		location=&quot;http://blog.laphets.com&quot;; #返回网站，请自定义</div><div class="line">	&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+      <content type="html"><![CDATA[<h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;center&gt;</div><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 </div><div class="line">	src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;</div><div class="line">&lt;/iframe&gt;	</div><div class="line">&lt;/center&gt;</div></pre></td></tr></table></figure>
+<center><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" ​="" src="//music.163.com/outchain/player?type=2&id=4938705&auto=1&height=66"></iframe></center>
+
 <script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=4938705&auto=0&height=66"></iframe>
 
 if ("xls123456"==prompt("通关密码"))
 
