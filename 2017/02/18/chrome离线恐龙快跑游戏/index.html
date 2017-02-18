@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#游戏介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">游戏介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#食用指南"><span class="post-toc-number">2.</span> <span class="post-toc-text">食用指南</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#游戏介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">游戏介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装指南"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装指南</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#食用指南"><span class="post-toc-number">3.</span> <span class="post-toc-text">食用指南</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -384,9 +384,16 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4960497&auto=1&height=66"></iframe>
-
-<h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
+<h2 id="安装指南"><a href="#安装指南" class="headerlink" title="安装指南"></a>安装指南</h2><ol>
+<li><p>右键<a href="https://unpkg.com/t-rex-runner/dist/runner.js" style="text-decoration:none" target="_blank" rel="external">这里</a>存储连接下载源码</p>
+</li>
+<li><p>将下载的js文件放置在source/js/下面</p>
+</li>
+<li><p>在页面上添加如下代码即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/runner.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"> initRunner('#container');</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="食用指南"><a href="#食用指南" class="headerlink" title="食用指南"></a>食用指南</h2><p>手机端：点触屏幕即可开始和操作。</p>
 <p>电脑端：点击小恐龙，按空格键即可开始和操作。</p>
 <p><div id="container"></div></p>
