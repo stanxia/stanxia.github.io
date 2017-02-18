@@ -6,7 +6,9 @@
     <entry>
       <title><![CDATA[chrome离线恐龙快跑游戏]]></title>
       <url>https://stanxia.github.io/2017/02/18/chrome%E7%A6%BB%E7%BA%BF%E6%81%90%E9%BE%99%E5%BF%AB%E8%B7%91%E6%B8%B8%E6%88%8F/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4960497&auto=1&height=66"></iframe>
+
+<h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
 <h2 id="食用指南"><a href="#食用指南" class="headerlink" title="食用指南"></a>食用指南</h2><p>手机端：点触屏幕即可开始和操作。</p>
 <p>电脑端：点击小恐龙，按空格键即可开始和操作。</p>
 <p><div id="container"></div></p>
