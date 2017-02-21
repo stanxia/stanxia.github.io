@@ -10,7 +10,7 @@
     
     <title>
         
-            分类: 生活 | 
+            IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="分类: 生活 | 小世界，大梦想">
+    <meta property="og:title" content="IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -195,213 +195,276 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
     
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题一：java-compiler-error"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题一：java compiler error</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决办法"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决办法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题二：Usage-of-API-documented-as-since-1-6-1-7-…"><span class="post-toc-number">3.</span> <span class="post-toc-text">问题二：Usage of API documented as  @since 1.6/1.7/…</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案："><span class="post-toc-number">4.</span> <span class="post-toc-text">解决方案：</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/15/测试视频播放/">接入bilibili视频播放</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/15/测试视频播放/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 15, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/生活/">生活</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://img.xclient.info/attachment/cdn/large/006ehIt6jw1execfbx4xnj30nc0b6dgh.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/15/MAC应用无法打开或文件损坏的处理方法/">MAC应用无法打开或文件损坏的处理方法</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/15/MAC应用无法打开或文件损坏的处理方法/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 15, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/生活/">生活</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/15/利用微博作为图床/">利用微博作为图床</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/15/利用微博作为图床/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 15, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/生活/">生活</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
-    }
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>夏</strong>
+        <span>2月 21, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAEx0lEQVR42u3aUXLbMAwEUN//0u0BOlF2AdJx28cvTypL5FNnvAT4+mUsxgsBPnz48Bn48OHDZ+DD95fwveLxfH304PhuyZX53/+cw2zt+PDhw4cP3ym+ZNkJRPKt52U/z6r9e0Jcrx0fPnz48OE7xJc8JoksedCZRZmcPnlWS4wPHz58+PC9ky+PLy1WHiCSz7N/xYcPHz58+D6ZL5/orD2wiSx58wAfPnz48OH7Kb5ZaGhL+XlwyQNT3ho/0KjAhw8fPnz41nztQbF/6fMPnO/Dhw8fPnz/Md9snD0QlrfbZzSzgsKXq8OHDx8+fPgWfLN2+L4o316ZNLyTO0dFgU2vAx8+fPjw4Yv3vMnD9lEjfz1JSzu/Zn9YDR8+fPjw4bvBl2z72+L+2WNnZ1v1+bPw4cOHDx++s3ybGJGjb9rYs8bAqZY/Pnz48OHDt+e795M/25BvNv9teBoeAsCHDx8+fPgu8G2a5W2MSA6TtYWJou1dQuPDhw8fPnxn+fJFnm2fb2hqgk1DHR8+fPjw4VvwFe3hUaCZRZb9s9rI9fzfAh8+fPjw4bvBt9mEzwJQUixog1HSRG9LCfjw4cOHD98NvoTjmx/1uNAw28bP/r5p9tclA3z48OHDhy/gy1Fm5YDZHU6VDNooU7TJ8eHDhw8fvhHf5oe/DSjPEeFUQMkb9m3xAh8+fPjw4bvBl/+QJ68hKZEny8i3/ckc2qNv+PDhw4cP356v/nK8mCRMtDEijyP5DNsn4sOHDx8+fKf48uJ7XgRvv/WetnfbWsCHDx8+fPjO8uUt59Vm++2b/9mLLA6o4cOHDx8+fCO+dhJ5i71taefXb8LKrKiBDx8+fPjwneVrD5adWmoOsWkYtMUFfPjw4cOH7wbfrISdFAtmm/kN+qwNn88THz58+PDhO8WXjNnG+yuCFmXTOG+5izY5Pnz48OHDN+JrC+6bI2KbqDQrYexfAD58+PDhw3eDb1bmzmNHi9iGoednPc+8cMCHDx8+fPgu8OXb9WTS7R02xfqcYxa88OHDhw8fvj1f+0M+W3bbDMiLBflaWr6614EPHz58+PCVxfr2OFpbYshfQH5N+902WuHDhw8fPnyn+JJptSGgDQqb0nweXHJ6fPjw4cOH7x5fvpgcdBZiNq2CttmflPvx4cOHDx++G3ybrXVbsm83+bPQk69rWFzAhw8fPnz4DvGdijKbIv7sypZj1iDHhw8fPnz47vElt86ZNmX9dp7trOqiAz58+PDhw7fgmxXT8413/hra1ngenjYR55vggg8fPnz48C34Zk3rDWvbLJ+9jLZVUBTr8eHDhw8fvkNt8k1cmDXOk2b5LLK8yjEs1uPDhw8fPnzxnrdoEo/iSF70z5c9o5mFJ3z48OHDh+8UX/vIfZjYN9T3IWb2GR8+fPjw4TvFl4SVzbfyksRsqW2gadsM+PDhw4cP3w2+vGG8CTqbbX9emMi525I9Pnz48OHD936+vHDfholZ0eHUwTV8+PDhw4fv0/hmZfe8cLAp1rct+fZZ+PDhw4cP31m+9gBZMok24uzDxyxUFRr48OHDhw/fmm9WfE8K4knjuY0+bSO/LdZ/c2d8+PDhw4dvwWe0Ax8+fPjwGfjw4cNn4MP3weM3gqpyeE1mZGEAAAAASUVORK5CYII=">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/idea编译报错/">idea编译报错</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/" class="leancloud-views_num" data-flag-title="IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8&url=https://stanxia.github.io//2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8&url=https://stanxia.github.io//2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/index.html&via=夏" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题一：java-compiler-error"><a href="#问题一：java-compiler-error" class="headerlink" title="问题一：java compiler error"></a>问题一：java compiler error</h2><p>运行java程序时，编译报错：java compiler error，如下图所示：</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcy0jlezsnj214m08ytaq.jpg" alt="1"></p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开idea设置=&gt;&gt;Build,Execution,Deployment=&gt;&gt;Compiler=&gt;&gt;Java Compiler=&gt;&gt;左边框Pre-module bytecode version =&gt;&gt;找到程序所在的模块=&gt;&gt;Target Bytecode version 选择提示中的需要目标发行版本=&gt;&gt;Apply=&gt;&gt;ok,如下图所示：</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fcy0jpf2uzj21kw0x6q9o.jpg" alt="2"></p>
+<h2 id="问题二：Usage-of-API-documented-as-since-1-6-1-7-…"><a href="#问题二：Usage-of-API-documented-as-since-1-6-1-7-…" class="headerlink" title="问题二：Usage of API documented as  @since 1.6/1.7/…"></a>问题二：Usage of API documented as  @since 1.6/1.7/…</h2><p>当使用了一些api之后，idea会提示Usage of API documented as  @since 1.6/1.7/…如下图所示：</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fcy0jq6pbnj20t809wwga.jpg" alt="3"></p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>右键项目=&gt;&gt;open module setting=&gt;&gt;Laguage Level =&gt;&gt;选择（大于或等于）提示中@since的版本，如下图所示：</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcy0jpvbxfj21kw0xzahh.jpg" alt="4"></p>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key=""
+        data-url="https://stanxia.github.io/2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/"
+        data-title="IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
