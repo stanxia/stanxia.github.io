@@ -4,6 +4,24 @@
   
     
     <entry>
+      <title><![CDATA[HBase1.3新版本 新特性预览]]></title>
+      <url>https://stanxia.github.io/2017/02/22/HBase1-3%E6%96%B0%E7%89%88%E6%9C%AC-%E6%96%B0%E7%89%B9%E6%80%A7%E9%A2%84%E8%A7%88/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="新版本特性"><a href="#新版本特性" class="headerlink" title="新版本特性"></a>新版本特性</h2><p>2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：</p>
+<ul>
+<li>支持分层数据的压缩</li>
+<li>多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等</li>
+</ul>
+<h2 id="新特性解析"><a href="#新特性解析" class="headerlink" title="新特性解析"></a>新特性解析</h2><h3 id="分层压缩"><a href="#分层压缩" class="headerlink" title="分层压缩"></a>分层压缩</h3><h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><p>数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。</p>
+<h5 id="解决痛点："><a href="#解决痛点：" class="headerlink" title="解决痛点："></a>解决痛点：</h5><p>使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。</p>
+<h3 id="多预写日志"><a href="#多预写日志" class="headerlink" title="多预写日志"></a>多预写日志</h3><p>每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。</p>
+<h5 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h5><p>改进后的 <strong>多预写日志(WAL)</strong> 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志 提供了三个区域分组策略来分配 预写日志：每个区域的 预写日志都有 一个身份 标识，轮询调度算法 保证 每个区域映射的预写日志 都有其边界，区域中 不同 命名空间 的表 被映射到 不同的 预写日志 中。</p>
+<p>性能测试报告 显示：<strong>预写日志 在纯SATA 磁盘中的运行平均延时 减少了 20% ；在SATA-SSD磁盘中运行延时 减少了 40%</strong>。</p>
+<h3 id="新的RPC调度器"><a href="#新的RPC调度器" class="headerlink" title="新的RPC调度器"></a>新的RPC调度器</h3><p>新的RPC调度器基于 <strong>CoDel算法</strong> ，用于阻止 可用IO无法满足过高清秋频率引起的 长连接队列。</p>
+<p>CoDel算法 用可控的延迟 来管理 活动队列，他根据 定义好的 <strong>阈值</strong> 来裁决队列中的<strong>最小延迟</strong>。一旦最小延迟超过阈值，该链接便会 被丢弃以便处理其他更有力的 最小延迟。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[IntelliJ Idea编译报错：javacTask: 源发行版 1.8 需要目标发行版 1.8]]></title>
       <url>https://stanxia.github.io/2017/02/21/IntelliJ-Idea%E7%BC%96%E8%AF%91%E6%8A%A5%E9%94%99%EF%BC%9AjavacTask-%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88-1-7-%E9%9C%80%E8%A6%81%E7%9B%AE%E6%A0%87%E5%8F%91%E8%A1%8C%E7%89%88-1-7/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题一：java-compiler-error"><a href="#问题一：java-compiler-error" class="headerlink" title="问题一：java compiler error"></a>问题一：java compiler error</h2><p>运行java程序时，编译报错：java compiler error，如下图所示：</p>
@@ -369,20 +387,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[kafka安装与简单的应用]]></title>
-      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[kafka-server-properties参数详解]]></title>
       <url>https://stanxia.github.io/2017/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
@@ -643,6 +647,20 @@
 </tr>
 </tbody>
 </table>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[kafka安装与简单的应用]]></title>
+      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>安装</p>
+<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
+<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
+<p>ps -ef | grep kafka | grep -v grep</p>
+<p>ps -ef | grep zookeeper | grep -v grep</p>
+<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
+<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
+<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
 ]]></content>
     </entry>
     

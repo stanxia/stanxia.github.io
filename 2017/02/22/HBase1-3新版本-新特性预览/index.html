@@ -10,7 +10,7 @@
     
     <title>
         
-            这个杀手不太冷 | 
+            HBase1.3新版本 新特性预览 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="这个杀手不太冷 | 小世界，大梦想">
+    <meta property="og:title" content="HBase1.3新版本 新特性预览 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版本特性"><span class="post-toc-number">1.</span> <span class="post-toc-text">新版本特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新特性解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">新特性解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分层压缩"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">分层压缩</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用场景："><span class="post-toc-number">2.1.0.1.</span> <span class="post-toc-text">使用场景：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#解决痛点："><span class="post-toc-number">2.1.0.2.</span> <span class="post-toc-text">解决痛点：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多预写日志"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">多预写日志</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新特性"><span class="post-toc-number">2.2.0.1.</span> <span class="post-toc-text">新特性</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新的RPC调度器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">新的RPC调度器</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,11 +245,19 @@
                 
     <!-- Paradox Post Header -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://s6.sinaimg.cn/middle/7026251dhbd0f61578d05&690)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
     
             <p class="article-headline-p">
-                这个杀手不太冷
+                HBase1.3新版本 新特性预览
             </p>
         </div>
 
@@ -268,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>1月 17, 2017</span>
+        <span>2月 22, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -289,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACzklEQVR42u3ay24bMRAEQP3/TzvXAIGJbs7Kkcnak6DHLouX1szw9XXl9cLGxsbGxsbGxsb+SPYrvv7+/vr1tw/+527r366fla8ZGxsb+wZ2styEsd6s9fvJnSdrxsbGxr6BPQmt9dInEZX8ar1mbGxsbOz28fMowsbGxsZ+Nzv/dO8ObXBiY2NjY+cNmrxN/9Q9P6KXho2Njf3x7GcHvT/z+uPm29jY2Nj/iT25kgKjLTnacC1Wi42NjX0o+6lmffJpXqjsbcqol4aNjY39a9nrW0yKhHaQ0B6ybxtb2NjY2Dewk+Pv+RH5NsD2grDYYmxsbOxD2XlsrMHvaypNqNjY2Ng3sJOGzuQgZrvFbVFUfAcbGxv7aPYDRxvjhtG81NmLMWxsbOxT2XuhsjdImG9BPiTAxsbGvofdNoDyAW3y6bzsKZpi2NjY2Jex2/Z9Ek7J6LddQ1EsYWNjYx/KzmOgDYy9tlQSeO2oABsbG/sGdr7EtqH/1D3XG1QPerGxsbGPYyeLzpH5cudjhmKjsbGxsY9m53/rJ4OBpGGUr+GBIzvY2NjYR7DbsWt+uGfSqNobIdRTEWxsbOwj2HmoFO2brdb/XonyQCmCjY2NfRx7XjwkoTiPpdHhS2xsbOzj2G147LWWJi3++TFNbGxs7FPZ+R/6vaXvHanMt34zwLCxsbEPYucBliw9H9yu79+2pbCxsbFvZs+Dqr2+yuupI5jY2NjYp7LbtlFCSkqO+ujkeA3Y2NjYp7LfESft8LgdUeStKGxsbOwb2JNg2Cs5kuFBvnFJOwkbGxv7BnYeWu1IOC91Js+KohcbGxv7AnYbJ5P4yWOvHTnUAYaNjY19JbsuA7Y2Yt6uwsbGxsaef6cdHrfIoqTBxsbGvoCdN5UmLfv5kZ2HAwwbGxv7CPb8YGUbP3sDgL2RAzY2NvbZ7HsubGxsbGxsbGxs7I+5/gCzWT9xmzxSHwAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aQVIDMQwEwPz/03ClClhGkhM2du8pRYjj9gEhjR8fRz4PbGxsbGxsbGxs7FuyH/Hzw0KXP//6bnW1779zvVqyZ2xsbOy92X/86Q94vQNKGNXVfj04bGxs7APYv33l9evkJwm4ACjuGRsbGxs7YfzRBgRlKS+K2NjY2NjPYydbnzQY2NjY2NjzodJ1ceqNpapl7B9madjY2Ni3Z+eh6X1evzTfxsbGxr4xu/rkYUASHkzC4/LOsbGxsTdl54Wh10IkYe31oSRXOaMDxcbGxt6a/YyIN9nuPCQoxA/Y2NjYm7Ini+bNRr7O5GgWDJWwsbGx35CdtxnVw5qM+JMjzuMEbGxs7NPYUTEYDJuq39uLeLGxsbHPYc8ZSQyQl7HeOtGesbGxsbdmTy7Z5J9NNnoNnkTR2NjY2Luye0OlfLgzaVSSkKDQJmFjY2Nvzc7H9En56UW2veueCRgbGxt7b3a+dPUgJpc1qxc6FwyVsLGxsd+WnV+vWRXH9g69d2TY2NjYJ7N7+Dw2nlymbEbF2NjY2Juyk3/xk2agWlSqgW41PI46MGxsbOwt2KtC1nnRWhVRYGNjY5/GrrYckwAgv3CTNyfNy5fY2NjYG7F7l2OaX7woVMjfxcbGxj6BnV/QqQ6M8ti4Wvx6l4qwsbGxd2U/gmfVhZ5njI0WxAPY2NjYW7CTctIrdfmmJ+OkqIHBxsbGPoydR7bzqznJTnoDKWxsbOwz2XNMPvrJh0qTZgkbGxt7b3b1qQ79q8Ftb6gU7QQbGxt7U3ZzQNNqBqrjpGo4sTjoxcbGxn4rdu/6ziSyTY51UsCwsbGxz2Q3hzXB1lcVs2pIgI2NjY09KWCTT+VNzksLGDY2NvZG7F5g0NturwRiY2Njn8nuhazVazfVmDYfPz0xHsDGxsa+Pbs3uEm2lQz084PrtUbY2NjYe7PPebCxsbGxsbGxsbFv83wCzCBTJT6fVrYAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -301,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/电影/">电影</a>
+        <a class="post_tag-link" href="/tags/HBase/">HBase</a>
     </ul>
     
 
@@ -315,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/01/17/这个杀手不太冷/" class="leancloud-views_num" data-flag-title="这个杀手不太冷">
+                <span id="/2017/02/22/HBase1-3新版本-新特性预览/" class="leancloud-views_num" data-flag-title="HBase1.3新版本 新特性预览">
      &nbsp;浏览量
 </span>
 
@@ -327,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=这个杀手不太冷&url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HBase1.3新版本 新特性预览&url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -336,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=这个杀手不太冷&url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=HBase1.3新版本 新特性预览&url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -345,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -354,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -366,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=这个杀手不太冷&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=HBase1.3新版本 新特性预览&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -384,7 +392,19 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><iframe src="https://www.bilibili.com/html/html5player.html?aid=3209983&cid=5061993" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="新版本特性"><a href="#新版本特性" class="headerlink" title="新版本特性"></a>新版本特性</h2><p>2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：</p>
+<ul>
+<li>支持分层数据的压缩</li>
+<li>多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等</li>
+</ul>
+<h2 id="新特性解析"><a href="#新特性解析" class="headerlink" title="新特性解析"></a>新特性解析</h2><h3 id="分层压缩"><a href="#分层压缩" class="headerlink" title="分层压缩"></a>分层压缩</h3><h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><p>数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。</p>
+<h5 id="解决痛点："><a href="#解决痛点：" class="headerlink" title="解决痛点："></a>解决痛点：</h5><p>使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。</p>
+<h3 id="多预写日志"><a href="#多预写日志" class="headerlink" title="多预写日志"></a>多预写日志</h3><p>每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。</p>
+<h5 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h5><p>改进后的 <strong>多预写日志(WAL)</strong> 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志 提供了三个区域分组策略来分配 预写日志：每个区域的 预写日志都有 一个身份 标识，轮询调度算法 保证 每个区域映射的预写日志 都有其边界，区域中 不同 命名空间 的表 被映射到 不同的 预写日志 中。</p>
+<p>性能测试报告 显示：<strong>预写日志 在纯SATA 磁盘中的运行平均延时 减少了 20% ；在SATA-SSD磁盘中运行延时 减少了 40%</strong>。</p>
+<h3 id="新的RPC调度器"><a href="#新的RPC调度器" class="headerlink" title="新的RPC调度器"></a>新的RPC调度器</h3><p>新的RPC调度器基于 <strong>CoDel算法</strong> ，用于阻止 可用IO无法满足过高清秋频率引起的 长连接队列。</p>
+<p>CoDel算法 用可控的延迟 来管理 活动队列，他根据 定义好的 <strong>阈值</strong> 来裁决队列中的<strong>最小延迟</strong>。一旦最小延迟超过阈值，该链接便会 被丢弃以便处理其他更有力的 最小延迟。</p>
+
     
 
     
@@ -413,8 +433,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/01/17/这个杀手不太冷/"
-        data-title="这个杀手不太冷">
+        data-url="https://stanxia.github.io/2017/02/22/HBase1-3新版本-新特性预览/"
+        data-title="HBase1.3新版本 新特性预览">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -430,21 +450,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/01/18/chrome离线恐龙快跑游戏/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/16/海贼王856“少骗人了”/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
