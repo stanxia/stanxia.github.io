@@ -4,6 +4,18 @@
   
     
     <entry>
+      <title><![CDATA[Hive与Impala]]></title>
+      <url>https://stanxia.github.io/2017/02/23/Hive%E4%B8%8EImpala/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="HiveQl执行过程："><a href="#HiveQl执行过程：" class="headerlink" title="HiveQl执行过程："></a>HiveQl执行过程：</h2><p>==》驱动模块<br>==》编译器进行编译  Antlr<br>==》优化器进行优化<br>==》执行器执行（执行map reduce任务）   全表扫描* 不会执行 map reduce 任务</p>
+<h2 id="HiveQL查询的-MapReduce-作业转化流程："><a href="#HiveQL查询的-MapReduce-作业转化流程：" class="headerlink" title="HiveQL查询的 MapReduce 作业转化流程："></a>HiveQL查询的 MapReduce 作业转化流程：</h2><p>==》用户输入sql<br>==》抽象语法树 AST Tree<br>==》查询块 QueryBlock<br>==》逻辑查询计划  OperatorTree<br>==》重写逻辑查询计划<br>==》物理计划<br>==》选择最优的优化查询策略<br>==》输出</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd0twkpnl9j20t2104wjn.jpg" alt="1"></p>
+<h2 id="Impala与Hive的区别："><a href="#Impala与Hive的区别：" class="headerlink" title="Impala与Hive的区别："></a>Impala与Hive的区别：</h2><p>1.Hive适合长时间的批处理查询分析；Impala适合实时的sql查询<br>2.Hive依赖于MapReduce，执行计划组合成管道形的MapReduce任务模式；Impala执行计划表现为一颗完整的执行计划树<br>3.Hive在查询过程中，内存不够用时会使用外存；Impala在内存不够用时，不会使用外存，所有Impala在查询的时候会存在一定的限制</p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fd0twll2zoj20qc0myn04.jpg" alt="2"></p>
+<h2 id="Impala与Hive的相同点："><a href="#Impala与Hive的相同点：" class="headerlink" title="Impala与Hive的相同点："></a>Impala与Hive的相同点：</h2><p>1.使用相同的存储数据池，都支持 HDFS,HBase<br>2.使用相同的元数据<br>3.对SQL的解释处理比较相似，都是通过 语法分析 生成执行计划</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[HBase1.3新版本 新特性预览]]></title>
       <url>https://stanxia.github.io/2017/02/22/HBase1-3%E6%96%B0%E7%89%88%E6%9C%AC-%E6%96%B0%E7%89%B9%E6%80%A7%E9%A2%84%E8%A7%88/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="新版本特性"><a href="#新版本特性" class="headerlink" title="新版本特性"></a>新版本特性</h2><p>2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：</p>
