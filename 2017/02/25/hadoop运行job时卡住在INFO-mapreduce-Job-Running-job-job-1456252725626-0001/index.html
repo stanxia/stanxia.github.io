@@ -10,7 +10,7 @@
     
     <title>
         
-            chrome离线恐龙快跑游戏 | 
+            hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="chrome离线恐龙快跑游戏 | 小世界，大梦想">
+    <meta property="og:title" content="hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#游戏介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">游戏介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装指南"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装指南</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#食用指南"><span class="post-toc-number">3.</span> <span class="post-toc-text">食用指南</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题详情："><span class="post-toc-number">1.</span> <span class="post-toc-text">问题详情：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题原因："><span class="post-toc-number">2.</span> <span class="post-toc-text">问题原因：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#遇到了问题，首先从哪里找？"><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">遇到了问题，首先从哪里找？</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案："><span class="post-toc-number">3.</span> <span class="post-toc-text">解决方案：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重启hadoop服务再试试mapreduce"><span class="post-toc-number">4.</span> <span class="post-toc-text">重启hadoop服务再试试mapreduce</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,11 +245,19 @@
                 
     <!-- Paradox Post Header -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcv1r9h16bj20xc08cwel.jpg)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
     
             <p class="article-headline-p">
-                chrome离线恐龙快跑游戏
+                hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001
             </p>
         </div>
 
@@ -268,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>1月 18, 2017</span>
+        <span>2月 25, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -289,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3ElEQVR42u3aUXKjQAwEUN//0tkDuMJ2a6ACzOMr5RCbNx+R1dLnZ8vrg42NjY2NjY2NjX1L9ie+frv/+/X8/Y/v/P7t7JmxsbGxd2D/51//10cmdx7/7eygZ8+MjY2NvQ/7+IOTYjMrfm1pHD4zNjY2NvaoRB03KknTkhRUbGxsbOz1AnYWLL8HGxsbG3spoCmjohk7f57LszRsbGzs27PbsP4OP//BfBsbGxv7lux6hbFsVNqIPy9jS8uX2NjY2C9i5x8/uzMPofL2I4+ZsLGxsXdgJ2/axjftok/Ly48AGxsbewf2bC2mDZ7aI1gponUrgo2Njf1wdvsWZ8X6eXSVNzx1loaNjY39CvaM167dnLt2OTsUbGxs7Leyk2KWlJ+2eWjbmPwQsbGxsfdktxHSbKiQREjJ621rhI2Njf1udo5pS0g7uF1ZABoOerGxsbFfx76izVhf35m1K9jY2Ng7s9voP1qXCZZyzhr3FlMRbGxs7Jey27HrrBDmkdNZxQwbGxv73ew2fM+LX9KW5KOCdmyMjY2NvQN7ZUjQjhDOCrPaFSJsbGzsfdg5Y9ZgtEewXvawsbGxd2O37UQezc/GvbOyN6zb2NjY2K9g54B2QJuPFmb3LIVK2NjY2A9nt01CXrrastSWqEvm29jY2NgPZOfxzSzET0YRLSNf3MHGxsbejd0uOLZHNit+7SEOV3awsbGxH8tOvu4Xw9R4NJu0JUlJKw4IGxsb+6XstpCsLEEWUX5JTcoYNjY29g7slTLWlpO8XWkPCBsbG3s39sra5coy5SxmSn4ezrexsbGxH85uo6I23MnbjzYwKkIxbGxs7A3YeUATffVfLnKzQ6kLGDY2NvZm7CLEKdkrY4B6PICNjY2NfdLKTjswWHo2bGxs7A3Y+XC3DffzaGkWY12epWFjY2Pfnt1+9c/Dptkrs/HA5fNtbGxs7Fuy97mwsbGxsbGxsbGxb3P9AzDsPhDsQROzAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAE10lEQVR42u3aUU7kShQDUPa/6ZkF8Gjs69Bi9E6+EIKk6gSpL3Z9/HEN1wcCfPjw4XPhw4cPnwsfvn+E7yO+/uNGn77f/u5Xd/hmA59+9/PXyZpve8eHDx8+fPh2vmS5rxeRLyi/Q0uTM017x4cPHz58+B7iy7eaLyIZTdohKfl6GXde3xMfPnz48OH7DXzJfZ7ibgemfPzChw8fPnz4fidfPnAkBG1onryedlX48OHDhw/f+/n2xxwXFNfwOf1+f3z48OHDh+/n+J6qt//Fr996vg8fPnz48P3v+dorGQ72Kn05rJYfYjsK4MOHDx8+fANfWza3P7lE8wnNrQifdoEPHz58+PANfO04ssff+fb2ceo16+3p+PDhw4cP38K3Dy57BNCu4XY0rR2Giq4DHz58+PDhO/Hli1gWnRfwt6o7jxja4QYfPnz48OF7iu92hKuNy/PgoB2P2l0sBT8+fPjw4cO38CXbaAeR5Hdvm89Zl9r+GwF8+PDhw4dv4Ls9JllEHri3IcUSMSwvFR8+fPjw4dv5nv3I34P42zh1O07XHtHDhw8fPnz4dr7lQ709+JVHD3kNcAss8t1FkQE+fPjw4cMX8+Xh9Y2gLciXA3NtBZ6vDR8+fPjw4XuK7xamt5tpy/XbsbnkJ/MCoIgM8OHDhw8fvlNYf/sgz4P+PBQoSutyEElw8eHDhw8fvvfztfHB7WXcaoAlIMgrc3z48OHDh+8n+PIjX0kF3gbue/XexvftsBWF9fjw4cOHD1/J11574Z0//TZgtUF/EVLgw4cPHz58A1/7kX8rnvNR46nfze/w+s748OHDhw/fs3y3o2bL0HALEW5Pb0v66BAePnz48OHDN/O1g8tTw8EyuCRDzFK6110HPnz48OHDd6rJ2zh7GYPawuAWDdzuXw8u+PDhw4cPXxzWtzTJg/NKYAG6vc5kbV9+Bx8+fPjw4Zv58so838DtEFgb0OcVfv6db14kPnz48OHDN/DlQfmtGm/jiRwxGXHasSYZcfDhw4cPH75n+XKyfFzIx4I8MsgHjmRVxRPx4cOHDx++gW/ZwA309k/+Ui3sgxo+fPjw4cP3FF9eUT87RiRBf1IP3ArvKbzAhw8fPnz4Br5beN0eKUu481B+P5p2qxbw4cOHDx++ne+2vaUaX7b3E2PWY5EBPnz48OHDN0cGrx+QV+z5v/fLa1iOoBWH6vDhw4cPH76B7xZYt9F8/nU+uOyBwi22wIcPHz58+Ba+dtTIA/r8xbSbuZXl7csrwnp8+PDhw4cv5mtHk3x79b/iAUdeJOxV/Zc/jw8fPnz48D3Et1fXOXQ+0LT3zCuHdtf48OHDhw/fzne7RT7utMNQfuX/8D/1LHz48OHDh2/na69kM8VSysI7H0faYCIfhvDhw4cPH76F7/jhXRbbtw0/G0w8VZbjw4cPHz58O9/tmNetYl/CheTl3YaSYl/48OHDhw/fQ3ztMJGHCLcYIokk2vJ7L+Dx4cOHDx++9/PdivAkYnhqeMpHpfrPBR8+fPjw4Xs7XzuyFGNBue22UE/+COqaHB8+fPjw4TvxJUNDvog2Ynjg6NgwvhT3xIcPHz58+Ga+W1zebq8N3JfXkIcadbWPDx8+fPjwDXyu9sKHDx8+fC58+PDhc+HD94uvv2XbWdcdTwWMAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -301,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/折腾/">折腾</a>
+        <a class="post_tag-link" href="/tags/hadoop问题/">hadoop问题</a>
     </ul>
     
 
@@ -315,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/01/18/chrome离线恐龙快跑游戏/" class="leancloud-views_num" data-flag-title="chrome离线恐龙快跑游戏">
+                <span id="/2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/" class="leancloud-views_num" data-flag-title="hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001">
      &nbsp;浏览量
 </span>
 
@@ -327,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=chrome离线恐龙快跑游戏&url=https://stanxia.github.io//2017/01/18/chrome离线恐龙快跑游戏/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001&url=https://stanxia.github.io//2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -336,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=chrome离线恐龙快跑游戏&url=https://stanxia.github.io//2017/01/18/chrome离线恐龙快跑游戏/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001&url=https://stanxia.github.io//2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -345,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/01/18/chrome离线恐龙快跑游戏/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -354,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/01/18/chrome离线恐龙快跑游戏/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -366,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=chrome离线恐龙快跑游戏&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/01/18/chrome离线恐龙快跑游戏/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -384,23 +392,23 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
-<h2 id="安装指南"><a href="#安装指南" class="headerlink" title="安装指南"></a>安装指南</h2><ol>
-<li><p>右键<a href="https://unpkg.com/t-rex-runner/dist/runner.js" style="text-decoration:none" target="_blank" rel="external">这里</a>存储连接下载源码</p>
-</li>
-<li><p>将下载的js文件放置在source/js/下面</p>
-</li>
-<li><p>在页面上添加如下代码即可：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/runner.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"> initRunner('#container');</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="食用指南"><a href="#食用指南" class="headerlink" title="食用指南"></a>食用指南</h2><p>手机端：点触屏幕即可开始和操作。</p>
-<p>电脑端：点击小恐龙，按空格键即可开始和操作。</p>
-<p><div id="container"></div></p>
-<script src="/js/runner.js"></script>
-<script>
- initRunner('#container');
-</script>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题详情："><a href="#问题详情：" class="headerlink" title="问题详情："></a>问题详情：</h2><p>在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job <em> 1456252725626 </em> 0001的位置。</p>
+<h2 id="问题原因："><a href="#问题原因：" class="headerlink" title="问题原因："></a>问题原因：</h2><h5 id="遇到了问题，首先从哪里找？"><a href="#遇到了问题，首先从哪里找？" class="headerlink" title="遇到了问题，首先从哪里找？"></a>遇到了问题，首先从哪里找？</h5><p>当发现问题的时候，首先去查看相应的日志，查找问题产生的原因，对症下药。</p>
+<p>在hadoop2.6以及以上版本中，mapreduce任务都是交给yarn资源管理器 管理的，所以首先去 查看 <strong>yarn-hadoop-nodemanager-slave01.log</strong> 日志。</p>
+<p>终端输入：</p>
+<p><code>cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log</code></p>
+<p>如果显示如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO org.apache.hadoop.ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8031. Already tried 4 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)</div></pre></td></tr></table></figure>
+<p>字面上的意思每次尝试连接0.0.0.0/0.0.0.0:8031失败，google 百度一下 找到如下办法（<u>不能保证百分百有效果，但也是值得一试的</u>）</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>从问题可以推断出，可能是 配置文件有问题，打开文件 hadoop文件目录/etc/hadoop/yarn-site.xml查看详细配置；</p>
+<p>终端中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi hadoop目录/etc/hadoop/yarn-site.xml</div></pre></td></tr></table></figure>
+<p> 添加如下 配置到 文件中：（只需要将下面的 monsterxls修改为你集群中的namenode所在的主机名即可 ）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>集群中的每台服务器都修改一下。</p>
+<h2 id="重启hadoop服务再试试mapreduce"><a href="#重启hadoop服务再试试mapreduce" class="headerlink" title="重启hadoop服务再试试mapreduce"></a>重启hadoop服务再试试mapreduce</h2><p>重启服务，执行任务试试效果。</p>
+<p>Good Luck!</p>
+
     
 
     
@@ -429,8 +437,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/01/18/chrome离线恐龙快跑游戏/"
-        data-title="chrome离线恐龙快跑游戏">
+        data-url="https://stanxia.github.io/2017/02/25/hadoop运行job时卡住在INFO-mapreduce-Job-Running-job-job-1456252725626-0001/"
+        data-title="hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -446,21 +454,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/11/ssh互信/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/17/这个杀手不太冷/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/23/Hive与Impala/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
