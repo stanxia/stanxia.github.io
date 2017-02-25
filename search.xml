@@ -4,6 +4,154 @@
   
     
     <entry>
+      <title><![CDATA[Hadoop原生集群添加hive组件]]></title>
+      <url>https://stanxia.github.io/2017/02/25/Hadoop%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E6%B7%BB%E5%8A%A0hive%E7%BB%84%E4%BB%B6/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="一：前提"><a href="#一：前提" class="headerlink" title="一：前提"></a>一：前提</h2><ol>
+<li>准备MYSQL JDBC驱动</li>
+<li>本机已经安装了JDK</li>
+<li>基于自己已有的HADOOP集群进行操作</li>
+</ol>
+<p>安装前提： Hadoop集群启动，包括 HDFS与YARN  ，并且已经时间同步成功</p>
+<p>开启HDFS + YARN+ntpd时间同步</p>
+<h2 id="二：HIVE下载"><a href="#二：HIVE下载" class="headerlink" title="二：HIVE下载"></a>二：HIVE下载</h2><ol>
+<li>HIVE的安装包下载</li>
+</ol>
+<p><code>wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz</code></p>
+<ol>
+<li>然后解压</li>
+</ol>
+<p><code>tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/</code></p>
+<p><code>cd /opt/</code></p>
+<p><code>mv apache-hive-1.2.1-bin hive</code></p>
+<ol>
+<li>配置环境变量</li>
+</ol>
+<p><code>vi /etc/profile</code></p>
+<p>添加以下内容：</p>
+<p><code>HIVE_HOME=/opt/hive</code></p>
+<p><code>export PATH=$PATH:$HIVE_HOME/bin</code></p>
+<p>文件生效：</p>
+<p><code>source /etc/profile</code></p>
+<p>最好 ROOT用户与 <strong>HADOOP用户</strong>都执行一次</p>
+<h2 id="三：安装依赖包"><a href="#三：安装依赖包" class="headerlink" title="三：安装依赖包"></a>三：安装依赖包</h2><ol>
+<li>安装nettools</li>
+</ol>
+<p><code>yum -y install net-tools</code></p>
+<ol>
+<li>安装perl</li>
+</ol>
+<p><code>yum install -y perl-Module-Install.noarch</code></p>
+<h2 id="四：MySQL安装与配置"><a href="#四：MySQL安装与配置" class="headerlink" title="四：MySQL安装与配置"></a>四：MySQL安装与配置</h2><ol>
+<li><h5 id="安装MYSQL"><a href="#安装MYSQL" class="headerlink" title="安装MYSQL"></a>安装MYSQL</h5></li>
+</ol>
+<ul>
+<li><p>查看是否已经安装MYSQL执行命令如下：</p>
+<p><code>rpm -qa | grep mariadb</code></p>
+</li>
+<li><p>如果存在 执行卸载:</p>
+<p> <code>yum remove mariadb-libs</code>  然后 <code>yum remove mariadb</code></p>
+</li>
+<li><p>安装MYSQL  简易版需要安装 unzip工具 </p>
+<p><code>yum -y install unzip</code></p>
+</li>
+<li><p>下载mysql并解压，建议下载rpm包：</p>
+<p>点击<a href="http://www.mysql.com/downloads" target="_blank" rel="external">MySQL 下载</a></p>
+<p>解压下载的zip：</p>
+<p><code>unzip **.zip</code></p>
+<p>进入到解压的MYSQL目录，安装rpm包：</p>
+<p><code>rpm –ivh **.rpm</code></p>
+</li>
+</ul>
+<ol>
+<li><h5 id="配置MYSQL"><a href="#配置MYSQL" class="headerlink" title="配置MYSQL"></a>配置MYSQL</h5></li>
+</ol>
+<ul>
+<li><p>修改配置文件路径：cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
+</li>
+<li><p>在配置文件中增加以下配置并保存：</p>
+<p><code>vim /etc/my.cnf</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">default-storage-engine = innodb</div><div class="line"></div><div class="line">innodb_file_per_table</div><div class="line"></div><div class="line">collation-server = utf8_general_ci</div><div class="line"></div><div class="line">init-connect = 'SET NAMES utf8'</div><div class="line"></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>初始化数据库执行：</p>
+<p><code>/usr/bin/mysql_install_db</code></p>
+</li>
+<li><p>开启MYSQL服务：</p>
+<p><code>service mysql restart</code></p>
+</li>
+<li><p>查看mysql root初始化密码：</p>
+<p><code>cat /root/.mysql_secret</code></p>
+</li>
+<li><p>登陆mysql ：</p>
+<p> <code>mysql -u root –p</code> </p>
+<ul>
+<li>复制root的初始密码</li>
+</ul>
+<p>（MYSQL下执行）<code>SET PASSWORD=PASSWORD(&#39;123456&#39;);</code></p>
+<ul>
+<li><p>创建HIVE用户，HIVE数据库</p>
+<p><code>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</code></p>
+<p><code>use mysql;</code></p>
+<p><code>grant all privileges on *.* to hive@&quot;%&quot; identified by &quot;hive&quot; with grant option;</code></p>
+<p><code>flush privileges;</code></p>
+<p>最好添加如下代码（否则可能会有乱码产生）：</p>
+<p><code>alter database hive CHARACTER SET latin1</code></p>
+</li>
+</ul>
+</li>
+<li><p>（LINUX下执行）开启开机启动：</p>
+<p><code>chkconfig mysql on</code></p>
+</li>
+<li><p>（LINUX下执行）拷贝mysql驱动包到 hive/lib目录下面,否则hive不能连接上mysql：</p>
+<p><code>cp mysql-connector-java-5.1.34-bin.jar /opt/hive/lib</code></p>
+</li>
+</ol>
+<h2 id="五：解决冲突包"><a href="#五：解决冲突包" class="headerlink" title="五：解决冲突包"></a>五：解决冲突包</h2><p>查看<em>hadoop目录/share/hadoop/yarn/lib</em>和<em>hive目录/lib</em>，检查jlinexxxx.jar 的版本，将低版本的替换为另一边高版本的。</p>
+<p>例如：/opt/Hadoop/share/Hadoop/yarn/lib下的jline为jline 2.xx，而/opt/hive/lib/jiline为jline 0.xxx版本，则将</p>
+<p>/opt/Hadoop/share/Hadoop/yarn/lib下的jline 2.xx包复制到/opt/hive/lib/下面，并且删除/opt/hive/lib/jline 0.xxx包。</p>
+<p><code>ls /opt/hadoop/share/hadoop/yarn/lib</code> </p>
+<p><code>ls /opt/hive/lib/</code> </p>
+<h2 id="六：-修改配置文件"><a href="#六：-修改配置文件" class="headerlink" title="六： 修改配置文件"></a>六： 修改配置文件</h2><p>进入到hive的配置文件目录下，找到hive-default.xml.template，cp为hive-default.xml</p>
+<p><code>cd /opt/hive/conf/</code></p>
+<p><code>cp hive-default.xml.template hive-default.xml</code></p>
+<p>另创建hive-site.xml并添加参数</p>
+<p><code>vi hive-site.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0"?&gt;</div><div class="line"></div><div class="line">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>location of default database for the warehouse<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.querylog.location<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hivelog<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">      Location of Hive run time structured log file</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive-$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Scratch space for Hive jobs<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://monsterxls:3306/hive?createDatabaseIfNotExist=true&amp; useUnicode=true&amp;characterEncoding=utf-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>复制 hive-env.sh.template文件为 hive-env.sh</p>
+<p><code>cp hive-env.sh.template hive-env.sh</code></p>
+<p>主要修改以下三行</p>
+<p><code>vi hive-env.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HADOOP_HOME=/opt/hadoop</div><div class="line"></div><div class="line">export HIVE_CONF_DIR=/opt/hive/conf</div><div class="line"></div><div class="line">export HIVE_AUX_JARS_PATH=/opt/hive/lib</div></pre></td></tr></table></figure>
+<h2 id="七：-Hive启动"><a href="#七：-Hive启动" class="headerlink" title="七： Hive启动"></a>七： Hive启动</h2><ol>
+<li><p>启动命令如下</p>
+<p><code>hive --service metastore &amp;</code></p>
+</li>
+<li><p>查看启动后，进程是否存在</p>
+<p><code>jps</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">10288 RunJar  #多了一个进程</div><div class="line"></div><div class="line">9365 NameNode</div><div class="line"></div><div class="line">9670 SecondaryNameNode</div><div class="line"></div><div class="line">11096 Jps</div><div class="line"></div><div class="line">9944 NodeManager</div><div class="line"></div><div class="line">9838 ResourceManager</div><div class="line"></div><div class="line">9471 DataNode</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="八：Hive服务器端访问"><a href="#八：Hive服务器端访问" class="headerlink" title="八：Hive服务器端访问"></a>八：Hive服务器端访问</h2><p>直接在命令控制台输入：</p>
+<p><code>hive</code> </p>
+<p>即可进入hive的控制台界面</p>
+<p>进行一些简单的操作查看hive是否安装成功：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">hive&gt; show databases;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">default</div><div class="line"></div><div class="line">Time taken: <span class="number">1.332</span> seconds, Fetched: <span class="number">2</span> row(s)</div><div class="line"></div><div class="line">hive&gt; use default;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.037</span> seconds</div><div class="line"></div><div class="line">hive&gt; create table test1(id int);</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.572</span> seconds</div><div class="line"></div><div class="line">hive&gt; show tables;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">test1</div><div class="line"></div><div class="line">Time taken: <span class="number">0.057</span> seconds, Fetched: <span class="number">3</span> row(s)</div><div class="line"></div><div class="line">hive&gt;</div></pre></td></tr></table></figure>
+<p>创建表 testload  字段包含 id1,id2,id3，以逗号分割：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; CREATE TABLE testload (id1 STRING,id2 STRING,id3 STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;,&apos;;</div></pre></td></tr></table></figure>
+<p> 使用 Hiveload进入testload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; LOAD DATA LOCAL INPATH &apos;目标文件&apos; OVERWRITE INTO TABLE  testload;</div></pre></td></tr></table></figure>
+<p>测试能否执行mapreduce任务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; SELECT count(*) FROM testload;</div></pre></td></tr></table></figure>
+<h2 id="结束语："><a href="#结束语：" class="headerlink" title="结束语："></a>结束语：</h2><ol>
+<li>安装集群需要耐心以及细心，否则前面错一步后面会很难找到错误的来源。</li>
+<li>出现错误请看日志，一般都会在日志中找到问题的原因。</li>
+</ol>
+<p>GOOD LUCK!!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[hadoop运行job时卡住在INFO mapreduce.Job: Running job:job _1456252725626_0001]]></title>
       <url>https://stanxia.github.io/2017/02/25/hadoop%E8%BF%90%E8%A1%8Cjob%E6%97%B6%E5%8D%A1%E4%BD%8F%E5%9C%A8INFO-mapreduce-Job-Running-job-job-1456252725626-0001/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题详情："><a href="#问题详情：" class="headerlink" title="问题详情："></a>问题详情：</h2><p>在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job <em> 1456252725626 </em> 0001的位置。</p>
@@ -421,20 +569,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[kafka安装与简单的应用]]></title>
-      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>安装</p>
-<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
-<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
-<p>ps -ef | grep kafka | grep -v grep</p>
-<p>ps -ef | grep zookeeper | grep -v grep</p>
-<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
-<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
-<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[kafka-server-properties参数详解]]></title>
       <url>https://stanxia.github.io/2017/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
@@ -695,6 +829,20 @@
 </tr>
 </tbody>
 </table>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[kafka安装与简单的应用]]></title>
+      <url>https://stanxia.github.io/2017/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>安装</p>
+<h1 id="tar-xzvf-kafka-0-8-0-beta1-src-tgz"><a href="#tar-xzvf-kafka-0-8-0-beta1-src-tgz" class="headerlink" title="tar xzvf kafka-0.8.0-beta1-src.tgz"></a>tar xzvf kafka-0.8.0-beta1-src.tgz</h1><h1 id="cd-kafka-0-8-0-beta1-src"><a href="#cd-kafka-0-8-0-beta1-src" class="headerlink" title="cd kafka-0.8.0-beta1-src"></a>cd kafka-0.8.0-beta1-src</h1><h1 id="sbt-update"><a href="#sbt-update" class="headerlink" title="./sbt update"></a>./sbt update</h1><h1 id="sbt-package"><a href="#sbt-package" class="headerlink" title="./sbt package"></a>./sbt package</h1><h1 id="sbt-assembly-package-dependency"><a href="#sbt-assembly-package-dependency" class="headerlink" title="./sbt assembly-package-dependency"></a>./sbt assembly-package-dependency</h1><p>首先开启zookeeper服务，因为kafka是基于zookeeper<br>nohup /opt/kafka/bin/zookeeper-server-start.sh  /opt/kafka/config/zookeeper.properties &amp;</p>
+<p>再开启kafka<br>nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp;</p>
+<p>ps -ef | grep kafka | grep -v grep</p>
+<p>ps -ef | grep zookeeper | grep -v grep</p>
+<p>创建topics<br>/opt/kafka/bin/kafka-topics.sh –zookeeper 192.168.221.138:2181 –create –topic test –replication-factor 1 –partition 1</p>
+<p>发消息<br>bin/kafka-console-producer.sh –broker-list localhost:9092 –topic test &gt;/dev/null</p>
+<p>收消息<br> bin/kafka-console-consumer.sh –zookeeper localhost:2181 –topic test –from-beginning 2&gt;/dev/null</p>
 ]]></content>
     </entry>
     
