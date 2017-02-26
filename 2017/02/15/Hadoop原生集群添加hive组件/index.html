@@ -10,7 +10,7 @@
     
     <title>
         
-            zookeeper集群搭建 | 
+            Hadoop原生集群添加hive组件 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="zookeeper集群搭建 | 小世界，大梦想">
+    <meta property="og:title" content="Hadoop原生集群添加hive组件 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、环境准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#服务器准备："><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">服务器准备：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#jdk环境："><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">jdk环境：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#下载zookeeper："><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">下载zookeeper：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、安装zookeeper"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、安装zookeeper</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建zookeeper-项目目录："><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">创建zookeeper 项目目录：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#解压："><span class="post-toc-number">2.0.0.2.</span> <span class="post-toc-text">解压：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、修改配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#修改zoo-cfg"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">修改zoo.cfg:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建myid文件："><span class="post-toc-number">3.0.0.2.</span> <span class="post-toc-text">创建myid文件：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、启动zookeeper"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、启动zookeeper</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#启动服务："><span class="post-toc-number">4.0.0.1.</span> <span class="post-toc-text">启动服务：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#检查服务器状态："><span class="post-toc-number">4.0.0.2.</span> <span class="post-toc-text">检查服务器状态：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注意："><span class="post-toc-number">5.0.0.1.</span> <span class="post-toc-text">注意：</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一：前提"><span class="post-toc-number">1.</span> <span class="post-toc-text">一：前提</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二：HIVE下载"><span class="post-toc-number">2.</span> <span class="post-toc-text">二：HIVE下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三：安装依赖包"><span class="post-toc-number">3.</span> <span class="post-toc-text">三：安装依赖包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四：MySQL安装与配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">四：MySQL安装与配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#安装MYSQL"><span class="post-toc-number">4.0.0.1.</span> <span class="post-toc-text">安装MYSQL</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#配置MYSQL"><span class="post-toc-number">4.0.0.2.</span> <span class="post-toc-text">配置MYSQL</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五：解决冲突包"><span class="post-toc-number">5.</span> <span class="post-toc-text">五：解决冲突包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六：-修改配置文件"><span class="post-toc-number">6.</span> <span class="post-toc-text">六： 修改配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七：-Hive启动"><span class="post-toc-number">7.</span> <span class="post-toc-text">七： Hive启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#八：Hive服务器端访问"><span class="post-toc-number">8.</span> <span class="post-toc-text">八：Hive服务器端访问</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结束语："><span class="post-toc-number">9.</span> <span class="post-toc-text">结束语：</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -257,7 +257,7 @@
         
     
             <p class="article-headline-p">
-                zookeeper集群搭建
+                Hadoop原生集群添加hive组件
             </p>
         </div>
 
@@ -276,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 26, 2017</span>
+        <span>2月 15, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aQW4jMQwEQP//0841h2Cmm7IRWyqdAsejYSnAcknq8TxyPbCxsbGxsbGxsbE/kv2I1+/vX+/wxyuD3a53XokZGxsb+wT2zT/9ZUDtDtf4ZLfojdjY2NgHsNukdb1DnnKun83feBMzNjY2NvYCsk2HsxiwsbGxsddbP0mDKYHlBQ82NjY2dtugaYOYhdjG8PZeGjY2NvbHs2eD3v/9+d/m29jY2Ngfxm5Xm6Jmh5hfBioix8bGxt6UnQ9W2yDaMUDehIrS1awCw8bGxv5Cdju+bUcCeVpqjyNPhNjY2NgnsFdGtgmy/WZ7iMnYABsbG3tXdnKBctbEnxU8eYpKrmxiY2Njn8CevbJNZm35MUts9aAXGxsbezt22+hZaQzlDan8O/V8GxsbG3sjdjvczX+73hK6/rwYFWNjY2Nvys4b+nkbqGjZj1Lm9bNFLw0bGxt7I3abWmaBtgOJpKTJjxsbGxv7BHb0cHnVMm8AtQ2j+nNsbGzsTdlJGsjT0nqKesarvR6KjY2NvSs7obZt+vbz/BLP0jgBGxsbe1N2m8bWj6ZNey8rhLCxsbE3Za+0jR7xap9dHydgY2Njn8N+xwg2HzO0B5oPNrCxsbFPY6+XGe0BJTvnaXJYgWFjY2Nvwc5TyzomP7jZUzcJDxsbG3trdv7f+pXm0ewQ29jqKzvY2NjYX86eNdxb9krbqG1FYWNjY2O3pcX6lZ1ZWsrB2NjY2Huz22HqzdajyzqvKlFu9sHGxsbelN2u9ZZT23haaSRhY2Njn8CepYc89HY0O2tOYWNjY2MnSastOWblyqy1lBRL2NjY2CewZy2hPKUlvHZ0URQ/2NjY2NhlELMhRFu65KNfbGxsbOzZqCC5alOUE6Pkh42NjX0OO28qzYa+s6ZSnkpvosXGxsbemj272ngd4srnedrL/xjY2NjYu7LPWdjY2NjY2NjY2Ngfs34A51kLbcan6jAAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACyklEQVR42u3aQW7kMAwEwPn/p7Mf2Bl0kw4ytkqnADFslXLokNTr58j1wsbGxsbGxsbGxv5K9ite757//J5oQx/fmTyffB0bGxv72exkW8kn8zd8Br9DzvaMjY2NfQ47CZL/vG50BHk0zg4OGxsbGzuh5kGYly6fn8TGxsbGvjbAZmE2K2Au+FNhY2NjH8BuP39V26gNxT/opWFjY2N/PbstDL7h5z+Yb2NjY2N/JfuqtWnrt+E03CE2Njb2Q9l5Y+jaZlNbzCTlyuryJTY2NvZt2W1stJcvk5Fte4knj0lsbGzsE9h5CdHG0iz8ZiPk4aAXGxsb+xHsJFpmDfp982gzHsbGxsY+k91+OD+aq4Iw2W0dYNjY2Ng3Z+ctnnzrOaY9jnY/2NjY2CewkyDZt+n37aTZ4WJjY2OfwN4UEnWDfjTi3b8NGxsb+0z27PNt678N0balhY2NjX0CO99c3taftYfycGqHwdjY2NinsfeXJjclTRtOydAXGxsb+zR23ojPr2P+lGt2cBeUItjY2Ni3Zc/GAJuLO/nP+apLEWxsbOxHsNuY+Q3A55207SdsbGzs09hta779bX647UHkYGxsbOxns9srjPtxbPJk1O4vixNsbGzsp7L3bZ02ftoja0MLGxsb+zR2vrl8u7PG0GZsfPF4ABsbG/vm7Dyu9mOAawfDqwDDxsbGvjl79u9+GyH5d/NGUvFFbGxs7IPZs9b/DNkG6i8GGDY2NvZN2O1qh7uz4NmMGYY3lbCxsbFvy37FK4+ftg3UFkXDYgkbGxv70ew2TvKR7azxtBnxvn0SGxsb+wD2fqybj3KjjZbhio2NjY3dsvOoaxv6des/OQ5sbGxs7HgouxkAb8bDw6YSNjY29oPYSSy1B9QeQd54SvaGjY2NfQ67HfTmrf/ZseblTRGH2NjY2A9ln7OwsbGxsbGxsbGxv2b9A2y2mt2ovmeoAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -309,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/zookeeper/">zookeeper</a>
+        <a class="post_tag-link" href="/tags/hive/">hive</a>
     </ul>
     
 
@@ -323,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/26/zookeeper集群搭建/" class="leancloud-views_num" data-flag-title="zookeeper集群搭建">
+                <span id="/2017/02/15/Hadoop原生集群添加hive组件/" class="leancloud-views_num" data-flag-title="Hadoop原生集群添加hive组件">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=zookeeper集群搭建&url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hadoop原生集群添加hive组件&url=https://stanxia.github.io//2017/02/15/Hadoop原生集群添加hive组件/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=zookeeper集群搭建&url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Hadoop原生集群添加hive组件&url=https://stanxia.github.io//2017/02/15/Hadoop原生集群添加hive组件/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/15/Hadoop原生集群添加hive组件/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/15/Hadoop原生集群添加hive组件/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=zookeeper集群搭建&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/26/zookeeper集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=Hadoop原生集群添加hive组件&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/15/Hadoop原生集群添加hive组件/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,29 +392,147 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h5 id="服务器准备："><a href="#服务器准备：" class="headerlink" title="服务器准备："></a>服务器准备：</h5><p>Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。</p>
-<h5 id="jdk环境："><a href="#jdk环境：" class="headerlink" title="jdk环境："></a>jdk环境：</h5><p>zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。</p>
-<h5 id="下载zookeeper："><a href="#下载zookeeper：" class="headerlink" title="下载zookeeper："></a>下载zookeeper：</h5><p><a href="http://www.apache.org/dyn/closer.cgi/zookeeper/" target="_blank" rel="external">点我下载zookeeper</a></p>
-<p>或者直接在服务器上面下载：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</div></pre></td></tr></table></figure>
-<h2 id="二、安装zookeeper"><a href="#二、安装zookeeper" class="headerlink" title="二、安装zookeeper"></a>二、安装zookeeper</h2><p>首先确定好zookeeper的目录结构，避免在项目过的时候找不到所需的项目。</p>
-<p>在这里博主统一把所有组件都安装在/opt下的。</p>
-<h5 id="创建zookeeper-项目目录："><a href="#创建zookeeper-项目目录：" class="headerlink" title="创建zookeeper 项目目录："></a>创建zookeeper 项目目录：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -r /opt/zookeeper  <span class="comment">#创建zookeeper项目目录</span></div><div class="line">mkdir -r /opt/zookeeper/zkdata <span class="comment">#存放快照日志</span></div><div class="line">mkdir -r /opt/zookeeper/zkdatalog <span class="comment">#存放事务日志</span></div></pre></td></tr></table></figure>
-<h5 id="解压："><a href="#解压：" class="headerlink" title="解压："></a>解压：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf zookeeper-3.4.6.tar.gz -C /opt/zookeeper  <span class="comment">#解压到/opt/zookeeper下</span></div><div class="line">mv zookeeper-3.4.6 zookeeper <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
-<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><p>zookeeper的相关配置都在zoo.cfg文件中。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/conf/ <span class="comment">#进入conf目录</span></div><div class="line">ll <span class="comment">#查看配置文件</span></div><div class="line">cp zoo_sample.cfg zoo.cfg <span class="comment">#复制并更名为zoo.cfg，zookeeper指定的命名规范为zoo.cfg</span></div></pre></td></tr></table></figure>
-<h5 id="修改zoo-cfg"><a href="#修改zoo-cfg" class="headerlink" title="修改zoo.cfg:"></a>修改zoo.cfg:</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">vi zoo.cfg <span class="comment">#设置如下属性：</span></div><div class="line">tickTime=2000 <span class="comment">#用于配置zookeeper中的最小时间单元的长度。默认为3000ms，很多运行时的时间间隔都是tickTime的倍数。例如：zookeeper中会话的最小超时时间默认为2*tickTime.</span></div><div class="line">initLimit=10 <span class="comment">#默认为10，表示参数tickTime的10倍。用于配置Leader服务器等待Follower启动并完成数据同步的时间。Leader允许Follower在initLimit时间内与Leader完成连接并数据同步。</span></div><div class="line">syncLimit=5 <span class="comment">#默认5，表示参数tickTime的5倍。用于配置Leader与Follower之间心跳连接的最长延时时间。如果Leader在syncLimit时间内无法获取到Follower的心跳检测相应，则会认为该Follower已经脱离了和自己的同步。</span></div><div class="line">dataDir=/opt/zookeeper/zkdata <span class="comment">#无默认值，必须配置。用于配置存放快照文件的目录。如果没有配置参数dataLogDir属性，那么会默认把日志文件存在该目录下。所以最好设置dataLogDir参数。</span></div><div class="line">dataLogDir=/opt/zookeeper/zkdatalog <span class="comment">#zookeeper存放日志的目录。</span></div><div class="line">clientPort=2181  <span class="comment">#必须配置。用于配置该服务器对外的服务端口。客户端会通过该服务端口语zookeeper服务器创建连接，一般设置为2181。每台服务器都可以随意设置该端口号，同个集群中的每个服务器也可以设置不同的端口号。</span></div><div class="line"><span class="comment">#server.id=host:port:port 无默认值。用于配置集群中的服务器列表。id为ServerID,与myid文件中的保持一致，用于辨识这是哪一台服务器，所以必须要唯一。第一个端口用于指定Follower与Leader之间通信和数据同步的端口。第二个端口专门用于Leader选举的投票端口。</span></div><div class="line">server.1=192.168.7.100:12888:13888 </div><div class="line">server.2=192.168.7.101:12888:13888</div><div class="line">server.3=192.168.7.107:12888:13888</div></pre></td></tr></table></figure>
-<h5 id="创建myid文件："><a href="#创建myid文件：" class="headerlink" title="创建myid文件："></a>创建myid文件：</h5><p>myid文件用于存放当前服务器的ServerID，即当前服务器的唯一标识，必须唯一。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"ServerId"</span>&gt;&gt;/opt/zookeeper/zkdata/myid <span class="comment">#存放在zkdata下，ServerID必须与zoo.cfg中的id保持一致。</span></div></pre></td></tr></table></figure>
-<h2 id="四、启动zookeeper"><a href="#四、启动zookeeper" class="headerlink" title="四、启动zookeeper"></a>四、启动zookeeper</h2><h5 id="启动服务："><a href="#启动服务：" class="headerlink" title="启动服务："></a>启动服务：</h5><p>进入到zookeeper/bin目录下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/bin/ <span class="comment">#进入zookeeper/bin目录下</span></div><div class="line">./zkServer.sh start <span class="comment">#启动zookeeper服务，集群所有的服务器都需要开启</span></div></pre></td></tr></table></figure>
-<h5 id="检查服务器状态："><a href="#检查服务器状态：" class="headerlink" title="检查服务器状态："></a>检查服务器状态：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./zkServer.sh status <span class="comment">#查看zookeeper服务器状态</span></div></pre></td></tr></table></figure>
-<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
-<li>注意创建zkdata与zkdatalog文件夹用于存放数据与日志。如果没有设置zkdatalog，zookeeper会默认把日志都存放在zkdata中，但是这样会严重影响zookeeper的性能。作为性能调优的地方，最好将zkdatalog设置在单独的磁盘中。</li>
-<li>注意各个端口的设置，如果不使用默认的端口，尽量设置大端口号，以免端口冲突。TCP能设置的最大端口号：65535</li>
-<li>注意设置ServerID的时候，一定要保证唯一，否则将不能识别该服务器。</li>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一：前提"><a href="#一：前提" class="headerlink" title="一：前提"></a>一：前提</h2><ol>
+<li>准备MYSQL JDBC驱动</li>
+<li>本机已经安装了JDK</li>
+<li>基于自己已有的HADOOP集群进行操作</li>
+<li>在开启HIve之前，开启HDFS + YARN+ntpd时间同步</li>
 </ol>
-<p>Good Luck!</p>
+<h2 id="二：HIVE下载"><a href="#二：HIVE下载" class="headerlink" title="二：HIVE下载"></a>二：HIVE下载</h2><ol>
+<li>HIVE的安装包下载</li>
+</ol>
+<p><code>wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz</code></p>
+<ol>
+<li>然后解压</li>
+</ol>
+<p><code>tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/</code></p>
+<p><code>cd /opt/</code></p>
+<p><code>mv apache-hive-1.2.1-bin hive</code></p>
+<ol>
+<li>配置环境变量</li>
+</ol>
+<p><code>vi /etc/profile</code></p>
+<p>添加以下内容：</p>
+<p><code>HIVE_HOME=/opt/hive</code></p>
+<p><code>export PATH=$PATH:$HIVE_HOME/bin</code></p>
+<p>文件生效：</p>
+<p><code>source /etc/profile</code></p>
+<p>最好 ROOT用户与 <strong>HADOOP用户</strong>都执行一次</p>
+<h2 id="三：安装依赖包"><a href="#三：安装依赖包" class="headerlink" title="三：安装依赖包"></a>三：安装依赖包</h2><ol>
+<li>安装nettools</li>
+</ol>
+<p><code>yum -y install net-tools</code></p>
+<ol>
+<li>安装perl</li>
+</ol>
+<p><code>yum install -y perl-Module-Install.noarch</code></p>
+<h2 id="四：MySQL安装与配置"><a href="#四：MySQL安装与配置" class="headerlink" title="四：MySQL安装与配置"></a>四：MySQL安装与配置</h2><ol>
+<li><h5 id="安装MYSQL"><a href="#安装MYSQL" class="headerlink" title="安装MYSQL"></a>安装MYSQL</h5></li>
+</ol>
+<ul>
+<li><p>查看是否已经安装MYSQL执行命令如下：</p>
+<p><code>rpm -qa | grep mariadb</code></p>
+</li>
+<li><p>如果存在 执行卸载:</p>
+<p> <code>yum remove mariadb-libs</code>  然后 <code>yum remove mariadb</code></p>
+</li>
+<li><p>安装MYSQL  简易版需要安装 unzip工具 </p>
+<p><code>yum -y install unzip</code></p>
+</li>
+<li><p>下载mysql并解压，建议下载rpm包：</p>
+<p>点击<a href="http://www.mysql.com/downloads" target="_blank" rel="external">MySQL 下载</a></p>
+<p>解压下载的zip：</p>
+<p><code>unzip **.zip</code></p>
+<p>进入到解压的MYSQL目录，安装rpm包：</p>
+<p><code>rpm –ivh **.rpm</code></p>
+</li>
+</ul>
+<ol>
+<li><h5 id="配置MYSQL"><a href="#配置MYSQL" class="headerlink" title="配置MYSQL"></a>配置MYSQL</h5></li>
+</ol>
+<ul>
+<li><p>修改配置文件路径：cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
+</li>
+<li><p>在配置文件中增加以下配置并保存：</p>
+<p><code>vim /etc/my.cnf</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">default-storage-engine = innodb</div><div class="line"></div><div class="line">innodb_file_per_table</div><div class="line"></div><div class="line">collation-server = utf8_general_ci</div><div class="line"></div><div class="line">init-connect = 'SET NAMES utf8'</div><div class="line"></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>初始化数据库执行：</p>
+<p><code>/usr/bin/mysql_install_db</code></p>
+</li>
+<li><p>开启MYSQL服务：</p>
+<p><code>service mysql restart</code></p>
+</li>
+<li><p>查看mysql root初始化密码：</p>
+<p><code>cat /root/.mysql_secret</code></p>
+</li>
+<li><p>登陆mysql ：</p>
+<p> <code>mysql -u root –p</code> </p>
+<ul>
+<li>复制root的初始密码</li>
+</ul>
+<p>（MYSQL下执行）<code>SET PASSWORD=PASSWORD(&#39;123456&#39;);</code></p>
+<ul>
+<li><p>创建HIVE用户，HIVE数据库</p>
+<p><code>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</code></p>
+<p><code>use mysql;</code></p>
+<p><code>grant all privileges on *.* to hive@&quot;%&quot; identified by &quot;hive&quot; with grant option;</code></p>
+<p><code>flush privileges;</code></p>
+<p>最好添加如下代码（否则可能会有乱码产生）：</p>
+<p><code>alter database hive CHARACTER SET latin1</code></p>
+</li>
+</ul>
+</li>
+<li><p>（LINUX下执行）开启开机启动：</p>
+<p><code>chkconfig mysql on</code></p>
+</li>
+<li><p>（LINUX下执行）拷贝mysql驱动包到 hive/lib目录下面,否则hive不能连接上mysql：</p>
+<p><code>cp mysql-connector-java-5.1.34-bin.jar /opt/hive/lib</code></p>
+</li>
+</ol>
+<h2 id="五：解决冲突包"><a href="#五：解决冲突包" class="headerlink" title="五：解决冲突包"></a>五：解决冲突包</h2><p>查看<em>hadoop目录/share/hadoop/yarn/lib</em>和<em>hive目录/lib</em>，检查jlinexxxx.jar 的版本，将低版本的替换为另一边高版本的。</p>
+<p>例如：/opt/Hadoop/share/Hadoop/yarn/lib下的jline为jline 2.xx，而/opt/hive/lib/jiline为jline 0.xxx版本，则将</p>
+<p>/opt/Hadoop/share/Hadoop/yarn/lib下的jline 2.xx包复制到/opt/hive/lib/下面，并且删除/opt/hive/lib/jline 0.xxx包。</p>
+<p><code>ls /opt/hadoop/share/hadoop/yarn/lib</code> </p>
+<p><code>ls /opt/hive/lib/</code> </p>
+<h2 id="六：-修改配置文件"><a href="#六：-修改配置文件" class="headerlink" title="六： 修改配置文件"></a>六： 修改配置文件</h2><p>进入到hive的配置文件目录下，找到hive-default.xml.template，cp为hive-default.xml</p>
+<p><code>cd /opt/hive/conf/</code></p>
+<p><code>cp hive-default.xml.template hive-default.xml</code></p>
+<p>另创建hive-site.xml并添加参数</p>
+<p><code>vi hive-site.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0"?&gt;</div><div class="line"></div><div class="line">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>location of default database for the warehouse<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.querylog.location<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hivelog<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">      Location of Hive run time structured log file</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive-$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Scratch space for Hive jobs<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://monsterxls:3306/hive?createDatabaseIfNotExist=true&amp; useUnicode=true&amp;characterEncoding=utf-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>复制 hive-env.sh.template文件为 hive-env.sh</p>
+<p><code>cp hive-env.sh.template hive-env.sh</code></p>
+<p>主要修改以下三行</p>
+<p><code>vi hive-env.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HADOOP_HOME=/opt/hadoop</div><div class="line"></div><div class="line">export HIVE_CONF_DIR=/opt/hive/conf</div><div class="line"></div><div class="line">export HIVE_AUX_JARS_PATH=/opt/hive/lib</div></pre></td></tr></table></figure>
+<h2 id="七：-Hive启动"><a href="#七：-Hive启动" class="headerlink" title="七： Hive启动"></a>七： Hive启动</h2><ol>
+<li><p>启动命令如下</p>
+<p><code>hive --service metastore &amp;</code></p>
+</li>
+<li><p>查看启动后，进程是否存在</p>
+<p><code>jps</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">10288 RunJar  #多了一个进程</div><div class="line"></div><div class="line">9365 NameNode</div><div class="line"></div><div class="line">9670 SecondaryNameNode</div><div class="line"></div><div class="line">11096 Jps</div><div class="line"></div><div class="line">9944 NodeManager</div><div class="line"></div><div class="line">9838 ResourceManager</div><div class="line"></div><div class="line">9471 DataNode</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="八：Hive服务器端访问"><a href="#八：Hive服务器端访问" class="headerlink" title="八：Hive服务器端访问"></a>八：Hive服务器端访问</h2><p>直接在命令控制台输入：</p>
+<p><code>hive</code> </p>
+<p>即可进入hive的控制台界面</p>
+<p>进行一些简单的操作查看hive是否安装成功：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">hive&gt; show databases;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">default</div><div class="line"></div><div class="line">Time taken: <span class="number">1.332</span> seconds, Fetched: <span class="number">2</span> row(s)</div><div class="line"></div><div class="line">hive&gt; use default;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.037</span> seconds</div><div class="line"></div><div class="line">hive&gt; create table test1(id int);</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.572</span> seconds</div><div class="line"></div><div class="line">hive&gt; show tables;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">test1</div><div class="line"></div><div class="line">Time taken: <span class="number">0.057</span> seconds, Fetched: <span class="number">3</span> row(s)</div><div class="line"></div><div class="line">hive&gt;</div></pre></td></tr></table></figure>
+<p>创建表 testload  字段包含 id1,id2,id3，以逗号分割：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; CREATE TABLE testload (id1 STRING,id2 STRING,id3 STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;,&apos;;</div></pre></td></tr></table></figure>
+<p> 使用 Hiveload进入testload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; LOAD DATA LOCAL INPATH &apos;目标文件&apos; OVERWRITE INTO TABLE  testload;</div></pre></td></tr></table></figure>
+<p>测试能否执行mapreduce任务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; SELECT count(*) FROM testload;</div></pre></td></tr></table></figure>
+<h2 id="结束语："><a href="#结束语：" class="headerlink" title="结束语："></a>结束语：</h2><ol>
+<li>安装集群需要耐心以及细心，否则前面错一步后面会很难找到错误的来源。</li>
+<li>出现错误请看日志，一般都会在日志中找到问题的原因。</li>
+</ol>
+<p>GOOD LUCK!!</p>
 
     
 
@@ -444,8 +562,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/26/zookeeper集群搭建/"
-        data-title="zookeeper集群搭建">
+        data-url="https://stanxia.github.io/2017/02/15/Hadoop原生集群添加hive组件/"
+        data-title="Hadoop原生集群添加hive组件">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -461,13 +579,21 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/02/15/Kafka文件存储机制及partition和offset/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/25/Hadoop原生集群添加hive组件/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/15/MAC应用无法打开或文件损坏的处理方法/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -573,7 +699,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据问题/">大数据问题<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">7</span></a>
+                <a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据问题/">大数据问题<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">8</span></a>
             </ul>
         </li>
     
