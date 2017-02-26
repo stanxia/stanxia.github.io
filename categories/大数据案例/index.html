@@ -10,7 +10,7 @@
     
     <title>
         
-            yarn三种调度规则 | 
+            分类: 大数据案例 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="yarn三种调度规则 | 小世界，大梦想">
+    <meta property="og:title" content="分类: 大数据案例 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -195,294 +195,93 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
+    
+    <div class="locate-thumbnail-symbol"></div>
 
     
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#yarn三种调度机制"><span class="post-toc-number">1.</span> <span class="post-toc-text">yarn三种调度机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FIFO-Scheduler"><span class="post-toc-number">2.</span> <span class="post-toc-text">FIFO Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#缺点："><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">缺点：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Capacity-Scheduler"><span class="post-toc-number">3.</span> <span class="post-toc-text">Capacity Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#队列设置"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">队列设置</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fair-Scheduler"><span class="post-toc-number">4.</span> <span class="post-toc-text">Fair Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#开启Fair-Scheduler"><span class="post-toc-number">4.0.0.1.</span> <span class="post-toc-text">开启Fair Scheduler</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#队列设置-1"><span class="post-toc-number">4.0.0.2.</span> <span class="post-toc-text">队列设置</span></a></li></ol></li></ol></li></ol></li></ol>
-
-        <!--
-        <li class="mdl-menu__item">
-            Some Action
-        </li>
-        -->
-    </ul>
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
     
-            <p class="article-headline-p">
-                yarn三种调度规则
-            </p>
-        </div>
 
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>夏</strong>
-        <span>2月 16, 2017</span>
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/">经典大数据架构案例：酷狗音乐的大数据平台重构</a></p>
     </div>
 
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">devices other</i>
-            <span class="visuallyhidden">devices other</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0ElEQVR42u3aS25jMQwEQN//0jPbADMxukkHsaV6qyB5H5U2DJt6/LnyemBjY2NjY2NjY2O/JfsRX1/v/+4N//lYef93b/h3DfmasbGxsW9gJx9+/snkqedve75NmzVjY2Nj38NOitaMnWxHUq5ma8bGxsbGfr642Qa1zQ82NjY29s8VsLw4JW9ogypsbGxs7FlA0y40HwO86k5sbGzs29izQe/v/vxr821sbGzsN2O/qti0rcWsCVmtGRsbG/tQdhL958F9GwklT7Ux1vDwJTY2NvbR7FnRSgYGM9Jw5ICNjY19NPu1ZWwWVCVbMAu8sLGxsbHbpiV5z37AXLc02NjY2Iey84Dmp0cCecPzvGmJChg2Njb2Qez9kcd2eLBvP2aDYWxsbOxT2fmC8hFvHvFvRgL51mBjY2PfwN78uz+LjZL3zza0CJWwsbGxj2C3vNnSk7akvbP+CjY2Nvah7DaaaaP/9q/5QZy8CcHGxsa+gb0vXasR7PpgZbQSbGxs7KPZs4akHc1GIX6w0S84Ro+NjY19EDt/RQuejY3zZ1etCDY2NvbR7Daan5WcFp8HUsMCho2Njf2x7LyFaEezefQzO+LZRk7Y2NjY97DbT7ahTzvKTVb44jOn2NjY2B/InhWnBD8bJPzIEBobGxv7UHZbTvbNQxJatRuxGg9gY2NjH8RuMcnYYDNa2Dw1nIpgY2Njfyw7L2abcW/+mzzqSkoXNjY29j3sWeyejwdm5edRXsVJJWxsbOwj2O2VLKgd324Co+Rt2NjY2GezN4Wh3YJZODUbIWNjY2Pfxt4c4plFPHmctB9OYGNjY9/DzotWEhXl8VDb6gxDK2xsbGzsuOBF5WQ0vi3GutjY2NjYQXBTtAFludoUTmxsbOyb2bPyk5eoWcA0+y42Njb2bex20Ds7uLMvh8nAoChg2NjY2Eew77mwsbGxsbGxsbGx3+b6C7jh2LsnKNNDAAAAAElFTkSuQmCC">
-        </ul>
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/yarn/">yarn</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    <!-- Leancloud Views -->
-        <a class="post_share-link" href="#">
-            <li class="mdl-menu__item">
-                <span id="/2017/02/16/yarn三种调度规则/" class="leancloud-views_num" data-flag-title="yarn三种调度规则">
-     &nbsp;浏览量
-</span>
-
-            </li>
-        </a>
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=yarn三种调度规则&url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=yarn三种调度规则&url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html&via=夏" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=yarn三种调度规则&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/16/yarn三种调度规则/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-</div>
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="yarn三种调度机制"><a href="#yarn三种调度机制" class="headerlink" title="yarn三种调度机制"></a>yarn三种调度机制</h2><ol>
-<li><p>FIFO Scheduler先进先出调度机制</p>
-</li>
-<li><p>Fair Scheduler公平调度机制</p>
-</li>
-<li><p>Capacity Scheduler容量机制</p>
-</li>
-</ol>
-<h2 id="FIFO-Scheduler"><a href="#FIFO-Scheduler" class="headerlink" title="FIFO Scheduler"></a>FIFO Scheduler</h2><p>按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。</p>
-<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。</p>
-<p>面对以上缺点，yarn提出了另两种策略，更加适合共享集群。</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsouzgzg1j20q80eqabe.jpg" alt="3"></p>
-<h2 id="Capacity-Scheduler"><a href="#Capacity-Scheduler" class="headerlink" title="Capacity Scheduler"></a>Capacity Scheduler</h2><p>定位：多人共享调度器。</p>
-<p>机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。</p>
-<p>特性：queue elasticity （弹性队列）根据实际情况分配资源</p>
-<p>Capacity Scheduler 的队列时支持层级关系的：</p>
-<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7b1tkj216m068mxf.jpg" alt="capacity1"></p>
-<p>相关配置如下：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7u5psj20vy13m44h.jpg" alt="capacity2"></p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouw6wsej20p60g8401.jpg" alt="1"></p>
-<h5 id="队列设置"><a href="#队列设置" class="headerlink" title="队列设置"></a>队列设置</h5><p>如果是mapreduce任务，通过 <code>mapreduce.job.queuename</code>来设置执行队列。</p>
-<h2 id="Fair-Scheduler"><a href="#Fair-Scheduler" class="headerlink" title="Fair Scheduler"></a>Fair Scheduler</h2><p>机制：为每一个任务均匀分配资源，一个任务就可以用整个集群资源，两个任务就平分集群资源，依次类推。</p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg" alt="2"></p>
-<h5 id="开启Fair-Scheduler"><a href="#开启Fair-Scheduler" class="headerlink" title="开启Fair Scheduler"></a>开启Fair Scheduler</h5><p>在<strong>yarn-site.xml</strong>中设置 <code>yarn.resourcemanager.scheduler.class</code>为<code>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</code> 。NOTE:CDH默认的就是Faire Scheduler ，CDH并不支持 Capacity Scheduler.</p>
-<h5 id="队列设置-1"><a href="#队列设置-1" class="headerlink" title="队列设置"></a>队列设置</h5><p>设置fair-scheduler.xml文件，可参考下图：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsortg5yjj215c0litcz.jpg" alt="fair"></p>
-
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/16/yarn三种调度规则/"
-        data-title="yarn三种调度规则">
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+             
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/" target="_self">继续阅读</a>
+        </span>
     </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-
-
-                
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
             </div>
+            <div>
+                <strong>夏</strong>
+                <span>2月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/大数据案例/">大数据案例</a>
+            </span>
 
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/02/20/flume1-7结合kafka0-9-0-1相关配置/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
+                </span>
+            
 
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/02/15/Kafka文件存储机制及partition和offset/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
         </div>
     </div>
+</div>
 
+        
+        
+    
+
+    
+
+    
+        <script>
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
+
+        locatePost = locatePost.next();
+    }
+</script>
+
+    
+</div>
 
 
                     

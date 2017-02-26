@@ -10,7 +10,7 @@
     
     <title>
         
-            yarn三种调度规则 | 
+            zookeeper集群搭建 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="yarn三种调度规则 | 小世界，大梦想">
+    <meta property="og:title" content="zookeeper集群搭建 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#yarn三种调度机制"><span class="post-toc-number">1.</span> <span class="post-toc-text">yarn三种调度机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FIFO-Scheduler"><span class="post-toc-number">2.</span> <span class="post-toc-text">FIFO Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#缺点："><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">缺点：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Capacity-Scheduler"><span class="post-toc-number">3.</span> <span class="post-toc-text">Capacity Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#队列设置"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">队列设置</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fair-Scheduler"><span class="post-toc-number">4.</span> <span class="post-toc-text">Fair Scheduler</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#开启Fair-Scheduler"><span class="post-toc-number">4.0.0.1.</span> <span class="post-toc-text">开启Fair Scheduler</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#队列设置-1"><span class="post-toc-number">4.0.0.2.</span> <span class="post-toc-text">队列设置</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、环境准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#服务器准备："><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">服务器准备：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#jdk环境："><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">jdk环境：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#下载zookeeper："><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">下载zookeeper：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、安装zookeeper"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、安装zookeeper</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建zookeeper-项目目录："><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">创建zookeeper 项目目录：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#解压："><span class="post-toc-number">2.0.0.2.</span> <span class="post-toc-text">解压：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、修改配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#修改zoo-cfg"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">修改zoo.cfg:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建myid文件："><span class="post-toc-number">3.0.0.2.</span> <span class="post-toc-text">创建myid文件：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、启动zookeeper"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、启动zookeeper</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#启动服务："><span class="post-toc-number">4.0.0.1.</span> <span class="post-toc-text">启动服务：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#检查服务器状态："><span class="post-toc-number">4.0.0.2.</span> <span class="post-toc-text">检查服务器状态：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注意："><span class="post-toc-number">5.0.0.1.</span> <span class="post-toc-text">注意：</span></a></li></ol></li></ol></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,11 +245,19 @@
                 
     <!-- Paradox Post Header -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
     
             <p class="article-headline-p">
-                yarn三种调度规则
+                zookeeper集群搭建
             </p>
         </div>
 
@@ -268,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 16, 2017</span>
+        <span>2月 26, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -289,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0ElEQVR42u3aS25jMQwEQN//0jPbADMxukkHsaV6qyB5H5U2DJt6/LnyemBjY2NjY2NjY2O/JfsRX1/v/+4N//lYef93b/h3DfmasbGxsW9gJx9+/snkqedve75NmzVjY2Nj38NOitaMnWxHUq5ma8bGxsbGfr642Qa1zQ82NjY29s8VsLw4JW9ogypsbGxs7FlA0y40HwO86k5sbGzs29izQe/v/vxr821sbGzsN2O/qti0rcWsCVmtGRsbG/tQdhL958F9GwklT7Ux1vDwJTY2NvbR7FnRSgYGM9Jw5ICNjY19NPu1ZWwWVCVbMAu8sLGxsbHbpiV5z37AXLc02NjY2Iey84Dmp0cCecPzvGmJChg2Njb2Qez9kcd2eLBvP2aDYWxsbOxT2fmC8hFvHvFvRgL51mBjY2PfwN78uz+LjZL3zza0CJWwsbGxj2C3vNnSk7akvbP+CjY2Nvah7DaaaaP/9q/5QZy8CcHGxsa+gb0vXasR7PpgZbQSbGxs7KPZs4akHc1GIX6w0S84Ro+NjY19EDt/RQuejY3zZ1etCDY2NvbR7Daan5WcFp8HUsMCho2Njf2x7LyFaEezefQzO+LZRk7Y2NjY97DbT7ahTzvKTVb44jOn2NjY2B/InhWnBD8bJPzIEBobGxv7UHZbTvbNQxJatRuxGg9gY2NjH8RuMcnYYDNa2Dw1nIpgY2Njfyw7L2abcW/+mzzqSkoXNjY29j3sWeyejwdm5edRXsVJJWxsbOwj2O2VLKgd324Co+Rt2NjY2GezN4Wh3YJZODUbIWNjY2Pfxt4c4plFPHmctB9OYGNjY9/DzotWEhXl8VDb6gxDK2xsbGzsuOBF5WQ0vi3GutjY2NjYQXBTtAFludoUTmxsbOyb2bPyk5eoWcA0+y42Njb2bex20Ds7uLMvh8nAoChg2NjY2Eew77mwsbGxsbGxsbGx3+b6C7jh2LsnKNNDAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aQW4jMQwEQP//0841h2Cmm7IRWyqdAsejYSnAcknq8TxyPbCxsbGxsbGxsbE/kv2I1+/vX+/wxyuD3a53XokZGxsb+wT2zT/9ZUDtDtf4ZLfojdjY2NgHsNukdb1DnnKun83feBMzNjY2NvYCsk2HsxiwsbGxsddbP0mDKYHlBQ82NjY2dtugaYOYhdjG8PZeGjY2NvbHs2eD3v/9+d/m29jY2Ngfxm5Xm6Jmh5hfBioix8bGxt6UnQ9W2yDaMUDehIrS1awCw8bGxv5Cdju+bUcCeVpqjyNPhNjY2NgnsFdGtgmy/WZ7iMnYABsbG3tXdnKBctbEnxU8eYpKrmxiY2Njn8CevbJNZm35MUts9aAXGxsbezt22+hZaQzlDan8O/V8GxsbG3sjdjvczX+73hK6/rwYFWNjY2Nvys4b+nkbqGjZj1Lm9bNFLw0bGxt7I3abWmaBtgOJpKTJjxsbGxv7BHb0cHnVMm8AtQ2j+nNsbGzsTdlJGsjT0nqKesarvR6KjY2NvSs7obZt+vbz/BLP0jgBGxsbe1N2m8bWj6ZNey8rhLCxsbE3Za+0jR7xap9dHydgY2Njn8N+xwg2HzO0B5oPNrCxsbFPY6+XGe0BJTvnaXJYgWFjY2Nvwc5TyzomP7jZUzcJDxsbG3trdv7f+pXm0ewQ29jqKzvY2NjYX86eNdxb9krbqG1FYWNjY2O3pcX6lZ1ZWsrB2NjY2Huz22HqzdajyzqvKlFu9sHGxsbelN2u9ZZT23haaSRhY2Njn8CepYc89HY0O2tOYWNjY2MnSastOWblyqy1lBRL2NjY2CewZy2hPKUlvHZ0URQ/2NjY2NhlELMhRFu65KNfbGxsbOzZqCC5alOUE6Pkh42NjX0OO28qzYa+s6ZSnkpvosXGxsbemj272ngd4srnedrL/xjY2NjYu7LPWdjY2NjY2NjY2Ngfs34A51kLbcan6jAAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -301,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/yarn/">yarn</a>
+        <a class="post_tag-link" href="/tags/zookeeper/">zookeeper</a>
     </ul>
     
 
@@ -315,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/16/yarn三种调度规则/" class="leancloud-views_num" data-flag-title="yarn三种调度规则">
+                <span id="/2017/02/26/zookeeper集群搭建/" class="leancloud-views_num" data-flag-title="zookeeper集群搭建">
      &nbsp;浏览量
 </span>
 
@@ -327,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=yarn三种调度规则&url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=zookeeper集群搭建&url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -336,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=yarn三种调度规则&url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=zookeeper集群搭建&url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -345,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -354,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/16/yarn三种调度规则/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/26/zookeeper集群搭建/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -366,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=yarn三种调度规则&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/16/yarn三种调度规则/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=zookeeper集群搭建&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/26/zookeeper集群搭建/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -384,32 +392,29 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="yarn三种调度机制"><a href="#yarn三种调度机制" class="headerlink" title="yarn三种调度机制"></a>yarn三种调度机制</h2><ol>
-<li><p>FIFO Scheduler先进先出调度机制</p>
-</li>
-<li><p>Fair Scheduler公平调度机制</p>
-</li>
-<li><p>Capacity Scheduler容量机制</p>
-</li>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h5 id="服务器准备："><a href="#服务器准备：" class="headerlink" title="服务器准备："></a>服务器准备：</h5><p>Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。</p>
+<h5 id="jdk环境："><a href="#jdk环境：" class="headerlink" title="jdk环境："></a>jdk环境：</h5><p>zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。</p>
+<h5 id="下载zookeeper："><a href="#下载zookeeper：" class="headerlink" title="下载zookeeper："></a>下载zookeeper：</h5><p><a href="http://www.apache.org/dyn/closer.cgi/zookeeper/" target="_blank" rel="external">点我下载zookeeper</a></p>
+<p>或者直接在服务器上面下载：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</div></pre></td></tr></table></figure>
+<h2 id="二、安装zookeeper"><a href="#二、安装zookeeper" class="headerlink" title="二、安装zookeeper"></a>二、安装zookeeper</h2><p>首先确定好zookeeper的目录结构，避免在项目过的时候找不到所需的项目。</p>
+<p>在这里博主统一把所有组件都安装在/opt下的。</p>
+<h5 id="创建zookeeper-项目目录："><a href="#创建zookeeper-项目目录：" class="headerlink" title="创建zookeeper 项目目录："></a>创建zookeeper 项目目录：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -r /opt/zookeeper  <span class="comment">#创建zookeeper项目目录</span></div><div class="line">mkdir -r /opt/zookeeper/zkdata <span class="comment">#存放快照日志</span></div><div class="line">mkdir -r /opt/zookeeper/zkdatalog <span class="comment">#存放事务日志</span></div></pre></td></tr></table></figure>
+<h5 id="解压："><a href="#解压：" class="headerlink" title="解压："></a>解压：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf zookeeper-3.4.6.tar.gz -C /opt/zookeeper  <span class="comment">#解压到/opt/zookeeper下</span></div><div class="line">mv zookeeper-3.4.6 zookeeper <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
+<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><p>zookeeper的相关配置都在zoo.cfg文件中。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/conf/ <span class="comment">#进入conf目录</span></div><div class="line">ll <span class="comment">#查看配置文件</span></div><div class="line">cp zoo_sample.cfg zoo.cfg <span class="comment">#复制并更名为zoo.cfg，zookeeper指定的命名规范为zoo.cfg</span></div></pre></td></tr></table></figure>
+<h5 id="修改zoo-cfg"><a href="#修改zoo-cfg" class="headerlink" title="修改zoo.cfg:"></a>修改zoo.cfg:</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">vi zoo.cfg <span class="comment">#设置如下属性：</span></div><div class="line">tickTime=2000 <span class="comment">#用于配置zookeeper中的最小时间单元的长度。默认为3000ms，很多运行时的时间间隔都是tickTime的倍数。例如：zookeeper中会话的最小超时时间默认为2*tickTime.</span></div><div class="line">initLimit=10 <span class="comment">#默认为10，表示参数tickTime的10倍。用于配置Leader服务器等待Follower启动并完成数据同步的时间。Leader允许Follower在initLimit时间内与Leader完成连接并数据同步。</span></div><div class="line">syncLimit=5 <span class="comment">#默认5，表示参数tickTime的5倍。用于配置Leader与Follower之间心跳连接的最长延时时间。如果Leader在syncLimit时间内无法获取到Follower的心跳检测相应，则会认为该Follower已经脱离了和自己的同步。</span></div><div class="line">dataDir=/opt/zookeeper/zkdata <span class="comment">#无默认值，必须配置。用于配置存放快照文件的目录。如果没有配置参数dataLogDir属性，那么会默认把日志文件存在该目录下。所以最好设置dataLogDir参数。</span></div><div class="line">dataLogDir=/opt/zookeeper/zkdatalog <span class="comment">#zookeeper存放日志的目录。</span></div><div class="line">clientPort=2181  <span class="comment">#必须配置。用于配置该服务器对外的服务端口。客户端会通过该服务端口语zookeeper服务器创建连接，一般设置为2181。每台服务器都可以随意设置该端口号，同个集群中的每个服务器也可以设置不同的端口号。</span></div><div class="line"><span class="comment">#server.id=host:port:port 无默认值。用于配置集群中的服务器列表。id为ServerID,与myid文件中的保持一致，用于辨识这是哪一台服务器，所以必须要唯一。第一个端口用于指定Follower与Leader之间通信和数据同步的端口。第二个端口专门用于Leader选举的投票端口。</span></div><div class="line">server.1=192.168.7.100:12888:13888 </div><div class="line">server.2=192.168.7.101:12888:13888</div><div class="line">server.3=192.168.7.107:12888:13888</div></pre></td></tr></table></figure>
+<h5 id="创建myid文件："><a href="#创建myid文件：" class="headerlink" title="创建myid文件："></a>创建myid文件：</h5><p>myid文件用于存放当前服务器的ServerID，即当前服务器的唯一标识，必须唯一。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"ServerId"</span>&gt;&gt;/opt/zookeeper/zkdata/myid <span class="comment">#存放在zkdata下，ServerID必须与zoo.cfg中的id保持一致。</span></div></pre></td></tr></table></figure>
+<h2 id="四、启动zookeeper"><a href="#四、启动zookeeper" class="headerlink" title="四、启动zookeeper"></a>四、启动zookeeper</h2><h5 id="启动服务："><a href="#启动服务：" class="headerlink" title="启动服务："></a>启动服务：</h5><p>进入到zookeeper/bin目录下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/bin/ <span class="comment">#进入zookeeper/bin目录下</span></div><div class="line">./zkServer.sh start <span class="comment">#启动zookeeper服务，集群所有的服务器都需要开启</span></div></pre></td></tr></table></figure>
+<h5 id="检查服务器状态："><a href="#检查服务器状态：" class="headerlink" title="检查服务器状态："></a>检查服务器状态：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./zkServer.sh status <span class="comment">#查看zookeeper服务器状态</span></div></pre></td></tr></table></figure>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
+<li>注意创建zkdata与zkdatalog文件夹用于存放数据与日志。如果没有设置zkdatalog，zookeeper会默认把日志都存放在zkdata中，但是这样会严重影响zookeeper的性能。作为性能调优的地方，最好将zkdatalog设置在单独的磁盘中。</li>
+<li>注意各个端口的设置，如果不使用默认的端口，尽量设置大端口号，以免端口冲突。TCP能设置的最大端口号：65535</li>
+<li>注意设置ServerID的时候，一定要保证唯一，否则将不能识别该服务器。</li>
 </ol>
-<h2 id="FIFO-Scheduler"><a href="#FIFO-Scheduler" class="headerlink" title="FIFO Scheduler"></a>FIFO Scheduler</h2><p>按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。</p>
-<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。</p>
-<p>面对以上缺点，yarn提出了另两种策略，更加适合共享集群。</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsouzgzg1j20q80eqabe.jpg" alt="3"></p>
-<h2 id="Capacity-Scheduler"><a href="#Capacity-Scheduler" class="headerlink" title="Capacity Scheduler"></a>Capacity Scheduler</h2><p>定位：多人共享调度器。</p>
-<p>机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。</p>
-<p>特性：queue elasticity （弹性队列）根据实际情况分配资源</p>
-<p>Capacity Scheduler 的队列时支持层级关系的：</p>
-<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7b1tkj216m068mxf.jpg" alt="capacity1"></p>
-<p>相关配置如下：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7u5psj20vy13m44h.jpg" alt="capacity2"></p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouw6wsej20p60g8401.jpg" alt="1"></p>
-<h5 id="队列设置"><a href="#队列设置" class="headerlink" title="队列设置"></a>队列设置</h5><p>如果是mapreduce任务，通过 <code>mapreduce.job.queuename</code>来设置执行队列。</p>
-<h2 id="Fair-Scheduler"><a href="#Fair-Scheduler" class="headerlink" title="Fair Scheduler"></a>Fair Scheduler</h2><p>机制：为每一个任务均匀分配资源，一个任务就可以用整个集群资源，两个任务就平分集群资源，依次类推。</p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg" alt="2"></p>
-<h5 id="开启Fair-Scheduler"><a href="#开启Fair-Scheduler" class="headerlink" title="开启Fair Scheduler"></a>开启Fair Scheduler</h5><p>在<strong>yarn-site.xml</strong>中设置 <code>yarn.resourcemanager.scheduler.class</code>为<code>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</code> 。NOTE:CDH默认的就是Faire Scheduler ，CDH并不支持 Capacity Scheduler.</p>
-<h5 id="队列设置-1"><a href="#队列设置-1" class="headerlink" title="队列设置"></a>队列设置</h5><p>设置fair-scheduler.xml文件，可参考下图：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsortg5yjj215c0litcz.jpg" alt="fair"></p>
+<p>Good Luck!</p>
 
     
 
@@ -439,8 +444,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/16/yarn三种调度规则/"
-        data-title="yarn三种调度规则">
+        data-url="https://stanxia.github.io/2017/02/26/zookeeper集群搭建/"
+        data-title="zookeeper集群搭建">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -456,21 +461,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/20/flume1-7结合kafka0-9-0-1相关配置/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/15/Kafka文件存储机制及partition和offset/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/25/Hadoop原生集群添加hive组件/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
