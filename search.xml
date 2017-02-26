@@ -10,9 +10,8 @@
 <li>准备MYSQL JDBC驱动</li>
 <li>本机已经安装了JDK</li>
 <li>基于自己已有的HADOOP集群进行操作</li>
+<li>在开启HIve之前，开启HDFS + YARN+ntpd时间同步</li>
 </ol>
-<p>安装前提： Hadoop集群启动，包括 HDFS与YARN  ，并且已经时间同步成功</p>
-<p>开启HDFS + YARN+ntpd时间同步</p>
 <h2 id="二：HIVE下载"><a href="#二：HIVE下载" class="headerlink" title="二：HIVE下载"></a>二：HIVE下载</h2><ol>
 <li>HIVE的安装包下载</li>
 </ol>
@@ -932,15 +931,24 @@
       <url>https://stanxia.github.io/2017/02/11/hadoop%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="一：解压hadoop-tar-gz和jdk安装包"><a href="#一：解压hadoop-tar-gz和jdk安装包" class="headerlink" title="一：解压hadoop.tar.gz和jdk安装包"></a>一：解压hadoop.tar.gz和jdk安装包</h2><ol>
 <li><p>将hadoop和jdk解压在/opt目录下面</p>
-<p><code>tar -zxvf jdk1.8.gz -C /opt/</code></p>
-<p><code>`tar -zxvf hadoop-2.6.0.tar.gz -C /opt/</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf jdk1.8.gz -C /opt/  <span class="comment">#解压jdk到/opt下</span></div><div class="line">tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ <span class="comment">#解压hadoop到/opt</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>在/opt目录下面修改 Hadoop和jdk 名字</p>
-<p><code>mv hadoop-2.6.0 hadoop</code></p>
-<p><code>mv jdk1.8 jdk</code></p>
+<li><p>在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv hadoop-2.6.0 hadoop <span class="comment">#hadoop文件夹重命名</span></div><div class="line">mv jdk1.8 jdk <span class="comment">#jdk文件夹重命名</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="二：修改配置文件："><a href="#二：修改配置文件：" class="headerlink" title="二：修改配置文件："></a>二：修改配置文件：</h2><ol>
+<h2 id="二：设置SSH互信："><a href="#二：设置SSH互信：" class="headerlink" title="二：设置SSH互信："></a>二：设置SSH互信：</h2><ol>
+<li><p>在每台服务器上面设置SSH无密码登录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -p <span class="string">''</span> <span class="comment">#-t rsa 表示通过rsa 算法处理 ；-p '' 设置密码为‘’ 即为空</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝每台服务器上面的 idrsa.pub ：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~ <span class="comment">#到当前用户目录</span></div><div class="line"><span class="built_in">cd</span> .ssh <span class="comment">#到存放idrsa.pub 的目录</span></div><div class="line">scp idrsa.pub hadoop@master:/home/hadoop/.ssh/ <span class="comment">#所有服务器上面的idrsa.pub都传给master</span></div><div class="line">touch authorized_keys <span class="comment">#matsr新建authorized_keys文件，存放所有服务器的idrsa.pub公匙</span></div><div class="line">scp authorized_keys hadoop@slave1:/home/hadoop/.ssh/ <span class="comment">#将authorized_keys复制给集群中的所有服务器</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>试试效果：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh slave1 <span class="comment">#如果不需要输密码，则证明配置成功；若配置失败，再进行一次第二步操作</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="三：修改配置文件："><a href="#三：修改配置文件：" class="headerlink" title="三：修改配置文件："></a>三：修改配置文件：</h2><ol>
 <li><p>修改/etc/profile配置java hadoop环境变量</p>
 <p><code>vi /etc/profile</code></p>
 <p>添加如下代码：</p>
@@ -982,10 +990,12 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.default.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://monsterxls:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>配置hadoop-env.sh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/opt/jdk1.8</div></pre></td></tr></table></figure>
+<p><code>export JAVA_HOME=/opt/jdk1.8</code></p>
 </li>
+</ol>
+<ol>
 <li><p>配置yarn-env.sh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export HADOOP_YARN_USER=/opt/hadoop</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HADOOP_YARN_USER=/opt/hadoop</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="三：总结"><a href="#三：总结" class="headerlink" title="三：总结"></a>三：总结</h2><p>安装集群要细心，理解着意思去安装，特别是配置文件，想想为什么要这么设置，出了问题多看看配置文件，检查是否有误设置的地方。</p>
