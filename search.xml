@@ -12,7 +12,7 @@
 <p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg" alt="1"></p>
 <p>看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：</p>
-<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3iwyrej21ca0jqjvx.jpg" alt="2"></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5amqp9jcj21ak0hu425.jpg" alt="2"></p>
 <p>Apply==&gt;Ok==&gt;运行试试！</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个问题的解决方案很奇怪，以后明白了再回来说明下。</p>
 <p>Good Luck!</p>
