@@ -4,6 +4,63 @@
   
     
     <entry>
+      <title><![CDATA[spark集群搭建]]></title>
+      <url>https://stanxia.github.io/2017/02/27/spark%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h2><ol>
+<li><p>需要jdk</p>
+</li>
+<li><p>需要hadoop</p>
+</li>
+<li><p>下载spark</p>
+<p><a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">点我下载spark</a></p>
+</li>
+</ol>
+<h2 id="安装spark"><a href="#安装spark" class="headerlink" title="安装spark"></a>安装spark</h2><ol>
+<li><p>安装spark</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ <span class="comment">#解压到/opt/</span></div><div class="line">mv spark-1.6.0-bin-hadoop2.6 spark <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量</p>
+<p><code>vi /etc/profiel #配置环境变量</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> SPARK_HOME=/opt/spark</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​      <code>source /etc/profile</code>  配置生效。</p>
+<ol>
+<li><p>配置spark-env.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cp spark-env.sh.template spark-env.sh </div><div class="line">vi spark-env.sh <span class="comment">#修改spark-env.sh</span></div><div class="line"><span class="comment">#添加如下配置：</span></div><div class="line"><span class="built_in">export</span> JAVA_HOME=/opt/jdk1.8/</div><div class="line"><span class="built_in">export</span> SCALA_HOME=/opt/scala</div><div class="line"><span class="built_in">export</span> SPARK_MASTER_IP=master</div><div class="line"><span class="built_in">export</span> SPARK_WORKER_MEMORY=4G <span class="comment">#worker内存 可随意设置</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置slaves文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/spark/conf/ </div><div class="line">cp slaves.template slaves</div><div class="line">vi slaves</div><div class="line"><span class="comment">#修改slaves,添加集群中的worker节点</span></div><div class="line">slave1</div><div class="line">slave2</div></pre></td></tr></table></figure>
+</li>
+<li><p>复制spark文件夹到集群中的所有节点</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /opt/spark hadoop@slave1:/opt/ <span class="comment">#复制到其他节点</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置所有节点上的spark环境变量</p>
+</li>
+</ol>
+<h2 id="启动运行"><a href="#启动运行" class="headerlink" title="启动运行"></a>启动运行</h2><ol>
+<li><p>在启动spark之前，<strong>先开启hadoop服务</strong></p>
+</li>
+<li><p>启动脚本都放在${SPARK_HOME}/sbin/下面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/spark/sbin/start-all.sh <span class="comment">#开启spark服务</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ol>
+<li><p>进入spark操作界面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spark-shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>跑一个spark自带任务看看</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$SPARK_HOME</span>/bin/run-example SparkPi</div></pre></td></tr></table></figure>
+</li>
+<li><p>检查页面：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ip:8080</div><div class="line">ip:4040 <span class="comment">#需要进入到spark环境才会有这个页面</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[ IntelliJ IDEA 破解之道（尽量还是支持正版。。）]]></title>
       <url>https://stanxia.github.io/2017/02/27/IntelliJ-IDEA-%E7%A0%B4%E8%A7%A3%E4%B9%8B%E9%81%93%EF%BC%88%E5%B0%BD%E9%87%8F%E8%BF%98%E6%98%AF%E6%94%AF%E6%8C%81%E6%AD%A3%E7%89%88%E3%80%82%E3%80%82%EF%BC%89/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="话说"><a href="#话说" class="headerlink" title="话说"></a>话说</h2><p>IntelliJ IDEA这东西做的确实不错，但是对于一般人来说可能是有点不舍得花钱的，有钱还是建议买正版，这里也给出一些皮姐的方式。。。：</p>

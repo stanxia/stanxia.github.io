@@ -10,7 +10,7 @@
     
     <title>
         
-            标签: HBase | 
+            spark集群搭建 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: HBase | 小世界，大梦想">
+    <meta property="og:title" content="spark集群搭建 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -195,93 +195,319 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
     
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前置环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">前置环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装spark"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装spark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动运行"><span class="post-toc-number">3.</span> <span class="post-toc-text">启动运行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/22/HBase1-3新版本-新特性预览/">HBase1.3新版本 新特性预览</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/22/HBase1-3新版本-新特性预览/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 22, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/大数据/">大数据</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
-    }
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                spark集群搭建
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>夏</strong>
+        <span>2月 27, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0ElEQVR42u3aUW4jIRAEUN//0psDrMaposeRBx5fVmwBj3y06OL178jxwsbGxsbGxsbGxv5K9ise0dT//fJqnvefr+aZ7BkbGxt7b/YEk2z3Ctke1mjP2NjY2Aew82KTI682lKyVHFwxDzY2NjZ2WTzyw8oPBRsbGxv70wUsv8Ykv0zmxMbGxsZut752kVgD56t8vJeGjY2N/fXsPDT9ns9/mm9jY2NjfzG7HXnTZy2mTcLjxZ1jY2Njb8rOC8NaA2htrfZYo+ABGxsbe1P2vPXzufLTPuX5Zf/Y2NjYW7OvJkr+koe7kyZRvs+6qYSNjY29Bbuduj24ZJX8keXiWtjY2Nibsu+6hOShQn4EbTupzrexsbGxt2C/x7cFY63MtIfSBsbY2NjY2JNv29I4KVq/FFFsbGzsY9hJWydp0Oeh7Put1zHAWr6NjY2N/Vh2W6LuLS35wa0968HGxsY+jd1uN28kTZpQ+ZyLBQwbGxv74ey1qfNY94a2fvwvqYNebGxs7E3Zd7WB1jY3KVrF40tsbGzs7dhtDNCGxJOHlW0LbJRvY2NjYz+cvXblaNv37aOc9gJTXEWwsbGxt2DnT3AmAUBS6u5tIdWpCDY2NvZj2ZNS1JaQeZQ7ioSxsbGxN2WvNd+TI5tcOdqHm3VTCRsbG3s79rw9NImE87ZRXt6wsbGxT2NPkG0YnB93EhUUQTI2Njb2Aey7rhx3fZtcY/JQARsbG/tMdhvxJheGe2HFI1FsbGzsTdntyK8E7TWmvczUTTFsbGzsTdltYXi/ZMtoryL50WNjY2Ofxl5bMjmC/HDzPeTrYmNjY5/GboPVNh5OMK+lEUUR2NjY2Nhxuyd/KDkJA9r4GRsbGxu7LUuLcez4YdDoyQ42Njb2w9mThk5bWvKmUnv5qQsYNjY29hbstuSs/WZSAteKJTY2NvYJ7HMGNjY2NjY2NjY29teMH9OlIIJBFppOAAAAAElFTkSuQmCC">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/spark/">spark</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/02/27/spark集群搭建/" class="leancloud-views_num" data-flag-title="spark集群搭建">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=spark集群搭建&url=https://stanxia.github.io//2017/02/27/spark集群搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=spark集群搭建&url=https://stanxia.github.io//2017/02/27/spark集群搭建/index.html&via=夏" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/27/spark集群搭建/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/27/spark集群搭建/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=spark集群搭建&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/27/spark集群搭建/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h2><ol>
+<li><p>需要jdk</p>
+</li>
+<li><p>需要hadoop</p>
+</li>
+<li><p>下载spark</p>
+<p><a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">点我下载spark</a></p>
+</li>
+</ol>
+<h2 id="安装spark"><a href="#安装spark" class="headerlink" title="安装spark"></a>安装spark</h2><ol>
+<li><p>安装spark</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ <span class="comment">#解压到/opt/</span></div><div class="line">mv spark-1.6.0-bin-hadoop2.6 spark <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量</p>
+<p><code>vi /etc/profiel #配置环境变量</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> SPARK_HOME=/opt/spark</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​      <code>source /etc/profile</code>  配置生效。</p>
+<ol>
+<li><p>配置spark-env.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cp spark-env.sh.template spark-env.sh </div><div class="line">vi spark-env.sh <span class="comment">#修改spark-env.sh</span></div><div class="line"><span class="comment">#添加如下配置：</span></div><div class="line"><span class="built_in">export</span> JAVA_HOME=/opt/jdk1.8/</div><div class="line"><span class="built_in">export</span> SCALA_HOME=/opt/scala</div><div class="line"><span class="built_in">export</span> SPARK_MASTER_IP=master</div><div class="line"><span class="built_in">export</span> SPARK_WORKER_MEMORY=4G <span class="comment">#worker内存 可随意设置</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置slaves文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/spark/conf/ </div><div class="line">cp slaves.template slaves</div><div class="line">vi slaves</div><div class="line"><span class="comment">#修改slaves,添加集群中的worker节点</span></div><div class="line">slave1</div><div class="line">slave2</div></pre></td></tr></table></figure>
+</li>
+<li><p>复制spark文件夹到集群中的所有节点</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /opt/spark hadoop@slave1:/opt/ <span class="comment">#复制到其他节点</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置所有节点上的spark环境变量</p>
+</li>
+</ol>
+<h2 id="启动运行"><a href="#启动运行" class="headerlink" title="启动运行"></a>启动运行</h2><ol>
+<li><p>在启动spark之前，<strong>先开启hadoop服务</strong></p>
+</li>
+<li><p>启动脚本都放在${SPARK_HOME}/sbin/下面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/spark/sbin/start-all.sh <span class="comment">#开启spark服务</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ol>
+<li><p>进入spark操作界面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spark-shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>跑一个spark自带任务看看</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$SPARK_HOME</span>/bin/run-example SparkPi</div></pre></td></tr></table></figure>
+</li>
+<li><p>检查页面：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ip:8080</div><div class="line">ip:4040 <span class="comment">#需要进入到spark环境才会有这个页面</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Good Luck!</p>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key=""
+        data-url="https://stanxia.github.io/2017/02/27/spark集群搭建/"
+        data-title="spark集群搭建">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/27/IntelliJ-IDEA-破解之道（尽量还是支持正版。。）/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -477,6 +703,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
