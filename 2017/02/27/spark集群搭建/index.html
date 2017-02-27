@@ -406,7 +406,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ <span class="comment">#解压到/opt/</span></div><div class="line">mv spark-1.6.0-bin-hadoop2.6 spark <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>配置环境变量</p>
-<p><code>vi /etc/profiel #配置环境变量</code></p>
+<p><code>vi /etc/profile #配置环境变量</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> SPARK_HOME=/opt/spark</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
 </li>
 </ol>
