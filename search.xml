@@ -104,9 +104,7 @@
 <li><h5 id="HashMap与HashTable的区别"><a href="#HashMap与HashTable的区别" class="headerlink" title="HashMap与HashTable的区别"></a>HashMap与HashTable的区别</h5><p>先说共同点：</p>
 <p>都是Map的实现类。都没有自带排序。</p>
 <p>区别如下表：</p>
-<p>​</p>
-<p>|    HashMap    | 支持null为key和value |  不是synchronized  |  线程不安全   |  fail-safe迭代器  |   速度快    |<br>| :———–: | :————–: | :————–: | :——: | :————: | :——: |<br>| <strong>HashTable</strong> |   <strong>不支持null</strong>    | <strong>synchronized</strong> | <strong>线程安全</strong> | <strong>Enumerator</strong> | <strong>相对较慢</strong> |</p>
-<p>​</p>
+<p>|           | 是否支持null         | 是否synchronized | 是否安全  | 迭代器          |<br>| ——— | —————- | ————– | —– | ———— |<br>| HashMap   | 支持null为key和value | 不是synchronized | 线程不安全 | fail-safe迭代器 |<br>| HashTable | 不支持null          | synchronized   | 线程安全  | Enumerator   |</p>
 <p>如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap<k,v>())</k,v></p>
 <p>如果在单线程的情况下，建议使用HashMap,性能会更高。</p>
 <p>如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.</p>
@@ -114,11 +112,8 @@
 <p><strong>Note:</strong>ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。</p>
 </li>
 <li><p>方法修饰符的作用域：</p>
-<p>​</p>
 <p>|           |  类   |  包   | 同包子类 | 不同包子类 |<br>| :——-: | :–: | :–: | :–: | :—: |<br>|  public   |  +   |  +   |  +   |   +   |<br>| protected |  +   |  +   |  +   |   +   |<br>|   无修饰符    |  +   |  +   |  +   |   o   |<br>|  private  |  +   |  o   |  o   |   o   |</p>
-<p>+：支持  o：不支持</p>
-</li>
-<li><p>​</p>
+<p>+：支持  o：不支持​</p>
 </li>
 </ol>
 ]]></content>
