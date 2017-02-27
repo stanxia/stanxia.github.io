@@ -10,7 +10,7 @@
     
     <title>
         
-            ssh互信 | 
+            Spark 包冲突error class javax.servlet.FilterRegistration | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="ssh互信 | 小世界，大梦想">
+    <meta property="og:title" content="Spark 包冲突error class javax.servlet.FilterRegistration | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -257,7 +257,7 @@
         
     
             <p class="article-headline-p">
-                ssh互信
+                Spark 包冲突error class javax.servlet.FilterRegistration
             </p>
         </div>
 
@@ -276,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 11, 2017</span>
+        <span>2月 27, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACbUlEQVR42u3aQW7DMAwEwPz/0+0DAjtLUlLdYHwKAkfW+EApK75+vvp64eHh4eHh4eHhPYz3iq/L4d7ueb8/GTP/1Ydx8PDw8I7wPpTai3uS6SaY5HM+Nzw8PLyTvKsJ3X++un9Oqs4NDw8P7/m8HqZQ4vHw8PC+iFeNHu5fRDIyHh4e3jN5Scm+n3QSTFRHPpq14OHh4cW8/JDp/Oej53t4eHh4Aa/c0hQU/XmQsazpCg8PD28DLy/EedyQLzzV1oSoCQwPDw9vMy9pkDoz0XzJKcS4eHh4eBt499Fq78FJaJt/U21EwMPDwzvDq4YCk+ih12Qwah3Aw8PDW8rLH1Mt4tXWq17zwSiMwMPDw2vxckA1VM0bAnob7mZnBB4eHt5SXv7nv9cyNYkzCpExHh4e3hFeslGeFP3qMtPbyuPh4eGd5PUeXG20ygPiSSCCh4eHt5tXKLjFV5CHxdXA4sM4eHh4eEd4eSA7iWWrr7U3Mh4eHt4ZXuF4KW6xqi4tqzboeHh4eLt51aOpyRY8XxjyOeDh4eH9FW/VA1YFFslWu5lS4+Hh4S3iVSeX3zMJHXobazw8PLyTvF45bjaVFg+38iUKDw8P7yQvXyTyI7Reo0C+5Iy21Hh4eHjjfs78mL/airpq2528bjw8PLzdvHk5nreuJtvxZtMVHh4e3jZeUtZ7ryM5MJvEuIV/DHh4eHgbeHmEmjdL5b+qLjN4eHh4/4u3dts9j33x8PDwns9bHB+MFwM8PDy8v+IlYUS1yeC+9OcRxqEYFw8PD2/DAVjv+L/aOFVtJsDDw8M7yfu+Cw8PDw8PDw8P7wHXL4EQH+tW3f76AAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEK0lEQVR42u3aS27bQBAFQN3/0sk2gCH5vW7KEcc1q0CSSU4xQH+mH3+sYD0QYMKECRMmTBYmTJgwfTzTI17P/urr59/c/p/fPPv9s988e6rXTzLcIyZMmDBhOogp39hsM5uVP0P+SXQdTJgwYcJ0HFPyiMmjt+H/2tSkTQ4wYcKECROmnyk+E7jXhXcChwkTJkyYMLUJQbKB14F8Vvom18SECRMmTJg25WtSjrZlc/48r9OC/9wLx4QJEyZMH8Y0C8z3+vePzjdhwoQJE6aPYWpXmxDkh47t9tryu94pJkyYMGE6gql9rKTB2hLnpWw7xLO6FyZMmDBhOoipDeGz8Nw2cPMUJH9h+bNhwoQJE6YzmDZhe1aU7ovq/JXMEghMmDBhwnQq02wop93SZuAmD/M5a90Lx4QJEyZMN2Tat3pngz6bpm2eZORNakyYMGHCdB7TbMAlQZm1VvPwv/k24caECRMmTGcwzRqmCVze/J0F7zxRmBXAmDBhwoTpDKY8rCYhdjMM1B5b7tGLJi8mTJgwYTqIKdlM/uizxKItuduUIvqPggkTJkyYjmBqDyNnR4N5y3izsbaJ/M2+MGHChAnTEUyb4Zt2S3kCkW94NgAUXRkTJkyYMB3BtCl3NwefeeqQH47ORmmHeRMmTJgwYboJ02O08kRhs1qszcuL8iZMmDBhwnRDpvqQr2ywttfJx4DyQZ8ZHyZMmDBhOoOpLVDbY8LkCvm3bUGbN5qLXjgmTJgwYboV0yb07pu2xRhNXPQmn6/yJkyYMGHCdEOm/MAvOTJsx3TaVuy+yZukOJgwYcKE6SSm/e3boJ5/shn9Sfby9FtMmDBhwnQEUxQay4RgFuDbUrzlzlMZTJgwYcJ0ElN+4PcaYlZ2zjiuSjIuaPJiwoQJE6abMOUHnPnYzSwJSMrUdwzrYMKECROmU5nakvV9ZO11rm3vYsKECROmU5lm4XlWiM6K2NnoTzucVDd5MWHChAnTrZjaw8XZYWS7gQS6LZIxYcKECdNvY8qL0k3RO2vazl7n7FVhwoQJE6azma4a1klCdcKdo2/uUvfCMWHChAnTDZna48A2xO6btvtD0NmxKCZMmDBhOolp1pCdhf9NaT37zXCnmDBhwoTpCKbLDv/WfC3NrGC+rBeOCRMmTJhuwtSuvJS9dtyn2F7wOqNmMSZMmDBhOoLpEa+8wbppsyYcs5K4vRcmTJgwYTqJaf9Y0Y2TQ8SgVM4/3yQcmDBhwoTpPKZZQG1D8iyQt+3mzbNhwoQJEyZMSeCflaP5NfO/TYjfkhBgwoQJE6abM7VN4bzQ3ZfH+ZjR2xMCTJgwYcL0MUxJc7YNuu0x56xZnLye+i6YMGHChOkgprYlmqcLmyPGtvBOjjxXTV5MmDBhwnRDJitKCCxMmDBhwoQJk4UJE6ZPWX8Bn4bsPDayzmYAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -309,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/hadoop/">hadoop</a>
+        <a class="post_tag-link" href="/tags/spark/">spark</a>
     </ul>
     
 
@@ -323,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/11/ssh互信/" class="leancloud-views_num" data-flag-title="ssh互信">
+                <span id="/2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/" class="leancloud-views_num" data-flag-title="Spark 包冲突error class javax.servlet.FilterRegistration">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ssh互信&url=https://stanxia.github.io//2017/02/11/ssh互信/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spark 包冲突error class javax.servlet.FilterRegistration&url=https://stanxia.github.io//2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=ssh互信&url=https://stanxia.github.io//2017/02/11/ssh互信/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spark 包冲突error class javax.servlet.FilterRegistration&url=https://stanxia.github.io//2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/11/ssh互信/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/11/ssh互信/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=ssh互信&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/11/ssh互信/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=Spark 包冲突error class javax.servlet.FilterRegistration&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,11 +392,16 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><p>1.ssh-keygen -t rsa -P ‘’<br>-t  rsa表示通过rsa算法<br>-P表示设置密码</p>
-<p>cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥</p>
-<p> 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop </p>
-<p>2.跨机器传输：<br>scp 文件 hadoop@hadoop1:/目标路径</p>
-<p>scp idrsa.pub hadoop@hadoop1:/home/hadoop/<br>文件夹为：scp -r …</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在idea上运行spark程序时，出现以下信息：</p>
+<p>Spark error class “javax.servlet.FilterRegistration”‘s signer information does not match signer information of other classes in the same package</p>
+<p>如图：</p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg" alt="1"></p>
+<p>看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3iwyrej21ca0jqjvx.jpg" alt="2"></p>
+<p>Apply==&gt;Ok==&gt;运行试试！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个问题的解决方案很奇怪，以后明白了再回来说明下。</p>
+<p>Good Luck!</p>
 
     
 
@@ -426,8 +431,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/11/ssh互信/"
-        data-title="ssh互信">
+        data-url="https://stanxia.github.io/2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/"
+        data-title="Spark 包冲突error class javax.servlet.FilterRegistration">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -443,21 +448,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/11/hadoop原生集群搭建/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/26/CAD破解/" id="post_nav-older" class="next-content">
+        <a href="/2017/02/27/spark集群搭建/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

@@ -4,6 +4,22 @@
   
     
     <entry>
+      <title><![CDATA[Spark 包冲突error class javax.servlet.FilterRegistration]]></title>
+      <url>https://stanxia.github.io/2017/02/27/Spark-%E5%8C%85%E5%86%B2%E7%AA%81error-class-javax-servlet-FilterRegistration/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在idea上运行spark程序时，出现以下信息：</p>
+<p>Spark error class “javax.servlet.FilterRegistration”‘s signer information does not match signer information of other classes in the same package</p>
+<p>如图：</p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg" alt="1"></p>
+<p>看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3iwyrej21ca0jqjvx.jpg" alt="2"></p>
+<p>Apply==&gt;Ok==&gt;运行试试！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个问题的解决方案很奇怪，以后明白了再回来说明下。</p>
+<p>Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[spark集群搭建]]></title>
       <url>https://stanxia.github.io/2017/02/27/spark%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h2><ol>
@@ -94,6 +110,11 @@
 <p>如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.</p>
 <p>总体而言，HashMap提供的api更丰富，因而还是建议首先考虑HashMap.</p>
 <p><strong>Note:</strong>ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。</p>
+</li>
+<li><p>方法修饰符的作用域：</p>
+<p>|           |  类   |  包   | 同包子类 | 不同包子类 |<br>| :——-: | :–: | :–: | :–: | :—: |<br>|  public   |  +   |  +   |  +   |   +   |<br>| protected |  +   |  +   |  +   |   +   |<br>|   无修饰符    |  +   |  +   |  +   |   o   |<br>|  private  |  +   |  o   |  o   |   o   |</p>
+<p>+：支持</p>
+<p>o：不支持</p>
 </li>
 <li><p>​</p>
 </li>
