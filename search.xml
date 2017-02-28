@@ -4,6 +4,16 @@
   
     
     <entry>
+      <title><![CDATA[IDE关闭Spark执行日志]]></title>
+      <url>https://stanxia.github.io/2017/02/28/IDE%E5%85%B3%E9%97%ADSpark%E6%89%A7%E8%A1%8C%E6%97%A5%E5%BF%97/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>用IDE执行spark任务会出现很多的日志信息，当我们不需要看这些日志信息的时候该怎么整，如何优雅的搞掉这些日志，看看下面的，或许对你有帮助。</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>添加以下代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.log4j.&#123;<span class="type">Level</span>, <span class="type">Logger</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">//设置spark的日志级别为 warn，才会打印日志</span></div><div class="line"> <span class="type">Logger</span>.getLogger(<span class="string">"org.apache.spark"</span>).setLevel(<span class="type">Level</span>.<span class="type">WARN</span>)</div><div class="line"><span class="comment">//直接关闭 jetty日志  </span></div><div class="line"> <span class="type">Logger</span>.getLogger(<span class="string">"org.eclipse.jetty.server"</span>).setLevel(<span class="type">Level</span>.<span class="type">OFF</span>)</div><div class="line"><span class="comment">//直接关闭 spark的运行日志</span></div><div class="line"> <span class="type">SparkContext</span>().setLogLevel(<span class="string">"OFF"</span>)</div></pre></td></tr></table></figure>
+<p> Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark 包冲突error class javax.servlet.FilterRegistration]]></title>
       <url>https://stanxia.github.io/2017/02/27/Spark-%E5%8C%85%E5%86%B2%E7%AA%81error-class-javax-servlet-FilterRegistration/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在idea上运行spark程序时，出现以下信息：</p>
@@ -96,14 +106,13 @@
     </entry>
     
     <entry>
-      <title><![CDATA[java面试题集锦]]></title>
-      <url>https://stanxia.github.io/2017/02/26/java%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6/</url>
+      <title><![CDATA[面试题集锦]]></title>
+      <url>https://stanxia.github.io/2017/02/26/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>平时看到一些面试题就记录在这里，没吃过猪肉，也要多见见猪跑。</p>
 <p>持续更新。。。</p>
 <h2 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h2><ol>
 <li><h5 id="HashMap与HashTable的区别"><a href="#HashMap与HashTable的区别" class="headerlink" title="HashMap与HashTable的区别"></a>HashMap与HashTable的区别</h5><p>先说共同点：</p>
 <p>都是Map的实现类。都没有自带排序。</p>
-<p>区别如下表：</p>
 <p>|           | 是否支持null         | 是否synchronized | 是否安全  | 迭代器          |<br>| ——— | —————- | ————– | —– | ———— |<br>| HashMap   | 支持null为key和value | 不是synchronized | 线程不安全 | fail-safe迭代器 |<br>| HashTable | 不支持null          | synchronized   | 线程安全  | Enumerator   |</p>
 <p>如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap<k,v>())</k,v></p>
 <p>如果在单线程的情况下，建议使用HashMap,性能会更高。</p>
