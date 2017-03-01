@@ -110,7 +110,13 @@
       <url>https://stanxia.github.io/2017/02/26/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>平时看到一些面试题就记录在这里，没吃过猪肉，也要多见见猪跑。</p>
 <p>持续更新。。。</p>
-<h2 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h2><table>
+<h2 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h2><h3 id="1-HashMap与HashTable的区别"><a href="#1-HashMap与HashTable的区别" class="headerlink" title="1. HashMap与HashTable的区别"></a>1. HashMap与HashTable的区别</h3><p>先说共同点：</p>
+<p>都是Map的实现类。都没有自带排序。如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap<k,v>())</k,v></p>
+<p>如果在单线程的情况下，建议使用HashMap,性能会更高。</p>
+<p>如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.</p>
+<p>总体而言，HashMap提供的api更丰富，因而还是建议首先考虑HashMap.</p>
+<p><strong>Note:</strong>ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。</p>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -137,20 +143,23 @@
 </tr>
 </tbody>
 </table>
-<ol>
-<li><h5 id="HashMap与HashTable的区别"><a href="#HashMap与HashTable的区别" class="headerlink" title="HashMap与HashTable的区别"></a>HashMap与HashTable的区别</h5><p>先说共同点：</p>
-<p>都是Map的实现类。都没有自带排序。如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap<k,v>())</k,v></p>
-<p>如果在单线程的情况下，建议使用HashMap,性能会更高。</p>
-<p>如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.</p>
-<p>总体而言，HashMap提供的api更丰富，因而还是建议首先考虑HashMap.</p>
-<p><strong>Note:</strong>ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。</p>
-</li>
-<li><p>方法修饰符的作用域：</p>
-<p>|           |  类   |  包   | 同包子类 | 不同包子类 |<br>| :——-: | :–: | :–: | :–: | :—: |<br>|  public   |  +   |  +   |  +   |   +   |<br>| protected |  +   |  +   |  +   |   +   |<br>|   无修饰符    |  +   |  +   |  +   |   o   |<br>|  private  |  +   |  o   |  o   |   o   |</p>
-<p>+：支持  o：不支持​</p>
-</li>
-</ol>
-]]></content>
+<h3 id="2-1000桶酒中寻找一桶毒酒算法"><a href="#2-1000桶酒中寻找一桶毒酒算法" class="headerlink" title="2. 1000桶酒中寻找一桶毒酒算法"></a>2. 1000桶酒中寻找一桶毒酒算法</h3><p>题目：</p>
+<p>有1000桶酒，其中1桶有毒。而一旦吃了，毒性会在1周后发作。现在我们用小老鼠做实验，要在1周后找出那桶毒酒，问最少需要多少老鼠，如何检测（老鼠的使用量越少越好，注意，毒性1周后才会发作，而且一周后必须出结果，所以时间紧迫） </p>
+<p>思路： </p>
+<p>为何需要老鼠做实验，显然是根据老鼠的死活来判断酒的毒性，每一只老鼠只有2种状态，死和活，n只老鼠就是这n个死或活的状态，应该由此敏感的联想到二进制，隐约去感知1000这个数量与n的关系，2^n能表示多少的信息量呢？2^10=1024，想到这里我们可以试着去用10个老鼠去做一下实验。 </p>
+<p>步骤： </p>
+<p>把1000桶酒分别以10位二进制数标号，从0000000001至1111101000，从这1000个二进制数中寻找毒酒，毒酒也一定是0和1的某种组合，所以问题转化为如何得出这个组合的每一位都是多少，我们先思考如何得出第一位（从右到左）是0还是1，结论是只要把所有第一位是1的酒给一只老鼠喝，如果这只老鼠最终死了，可知毒酒的第一位一定是1，如果这只老鼠还活着，可知毒酒第一位一定是0.依次类推，我们使用10只老鼠便可判断毒酒的每一位是多少。从而得到毒酒的二进制数，转化成10进制便只是第几桶。</p>
+<p>即10只老鼠按以下编码：</p>
+<p>第一只 00000 00001</p>
+<p>第二只 00000 00010</p>
+<p>第三只 00000 00100</p>
+<p>第四只 00000 01000</p>
+<p>…</p>
+<p>第十只 10000 00000</p>
+<p>每只老鼠只喝其编码与酒编码做位与运算非0的酒。如果毒酒的编码在某一位为1，则监控该位的老鼠必喝，结果为1. </p>
+<p>即把10只老鼠的结果，按位填入一个10位二进制数中，其结果即为毒酒编号。</p>
+<p>例如：编号为10001 00011的酒是毒酒。则对应的只有第一只，第二只，第六只，第十只死亡。其对应位数置1，即为10001 00011</p>
+<h3 id="3-用2个栈实现队列？"><a href="#3-用2个栈实现队列？" class="headerlink" title="3. 用2个栈实现队列？"></a>3. 用2个栈实现队列？</h3>]]></content>
     </entry>
     
     <entry>
