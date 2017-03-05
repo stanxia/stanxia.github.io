@@ -10,7 +10,7 @@
     
     <title>
         
-            这个杀手不太冷 | 
+            Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39; | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="这个杀手不太冷 | 小世界，大梦想">
+    <meta property="og:title" content="Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39; | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,11 +245,19 @@
                 
     <!-- Paradox Post Header -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://s6.sinaimg.cn/middle/7026251dhbd0f61578d05&690)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
     
             <p class="article-headline-p">
-                这个杀手不太冷
+                Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker'
             </p>
         </div>
 
@@ -268,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>1月 17, 2017</span>
+        <span>3月 02, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -289,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACzklEQVR42u3ay24bMRAEQP3/TzvXAIGJbs7Kkcnak6DHLouX1szw9XXl9cLGxsbGxsbGxsb+SPYrvv7+/vr1tw/+527r366fla8ZGxsb+wZ2styEsd6s9fvJnSdrxsbGxr6BPQmt9dInEZX8ar1mbGxsbOz28fMowsbGxsZ+Nzv/dO8ObXBiY2NjY+cNmrxN/9Q9P6KXho2Njf3x7GcHvT/z+uPm29jY2Nj/iT25kgKjLTnacC1Wi42NjX0o+6lmffJpXqjsbcqol4aNjY39a9nrW0yKhHaQ0B6ybxtb2NjY2Dewk+Pv+RH5NsD2grDYYmxsbOxD2XlsrMHvaypNqNjY2Ng3sJOGzuQgZrvFbVFUfAcbGxv7aPYDRxvjhtG81NmLMWxsbOxT2XuhsjdImG9BPiTAxsbGvofdNoDyAW3y6bzsKZpi2NjY2Jex2/Z9Ek7J6LddQ1EsYWNjYx/KzmOgDYy9tlQSeO2oABsbG/sGdr7EtqH/1D3XG1QPerGxsbGPYyeLzpH5cudjhmKjsbGxsY9m53/rJ4OBpGGUr+GBIzvY2NjYR7DbsWt+uGfSqNobIdRTEWxsbOwj2HmoFO2brdb/XonyQCmCjY2NfRx7XjwkoTiPpdHhS2xsbOzj2G147LWWJi3++TFNbGxs7FPZ+R/6vaXvHanMt34zwLCxsbEPYucBliw9H9yu79+2pbCxsbFvZs+Dqr2+yuupI5jY2NjYp7LbtlFCSkqO+ujkeA3Y2NjYp7LfESft8LgdUeStKGxsbOwb2JNg2Cs5kuFBvnFJOwkbGxv7BnYeWu1IOC91Js+KohcbGxv7AnYbJ5P4yWOvHTnUAYaNjY19JbsuA7Y2Yt6uwsbGxsaef6cdHrfIoqTBxsbGvoCdN5UmLfv5kZ2HAwwbGxv7CPb8YGUbP3sDgL2RAzY2NvbZ7HsubGxsbGxsbGxs7I+5/gCzWT9xmzxSHwAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAE10lEQVR42u3aUXKcMBAE0L3/pZ0DuGC7Z0S8iZ++XIQF9EgVox69vozFeCHAhw8fPgMfPnz4DHz4/hG+VzwuL3fxr99/e3UkudrVFerJXzxPPnd8+PDhw4dvz5ffMj/n6sg9YkKcQLT3LeaFDx8+fPjwHeJrp9cWIgnT/eSTa+ZFTzt3fPjw4cOH76f42kV4XuLkIUK++J89OT58+PDhw/dpfC1xsphvX0AeEMxCB3z48OHDh+85vvw2+zi+LU2SJ2yjhB/odeDDhw8fPnxl6fD//f1X9/fhw4cPH75fz9eOdmG/KSBm0f/TAx8+fPjw4dvwtc3mGe6+gGhD//u7bOaLDx8+fPjwPcGXBOLJo+cceWP7GEQZ7uPDhw8fPnx7vvbSOXR7tT3o7O75S8KHDx8+fPhO8bWbxvLFeb7sT1D2G9FmDQN8+PDhw4fvFN8m5m6jgVnTPUdsj7QzxYcPHz58+PZ8eeHyKkceN7SFTt5UaMujqJTBhw8fPnz4FnyzBvZsMd+G8vn08ihhFo7gw4cPHz58T/NFW7XKxfZseZ+/ktlGtHyO+PDhw4cP355vNoHZ8n525r6QmoUal6D48OHDhw/fA3yzBXa92Wv9wmZhfX4OPnz48OHDd5bvbJHRHn9ii9sTrw0fPnz48OE7xXe2BGkb3rO2er68n7UZ6rAeHz58+PDhK9vkm0fcXCHfWDZ7hTPuN6D48OHDhw/fmi9foueL8PqxypBi3zZo2wD48OHDhw/fni8Jr9tSYBYNtFNqt6y1cEVYjw8fPnz48C36vG1MP4vs99vI8qhi1n4oChd8+PDhw4fv0Jp31sDeb3FrS6LNM+R/48OHDx8+fHu+9kO+LzhmRVJbEuXFTd0MwIcPHz58+BZ8eUEwKw6ei+zzJnp7/Tf3xYcPHz58+BZ8yYe8BU0o881kswigDeuLcgofPnz48OFb8LWf9vwR22g+OdKWJm37IXpCfPjw4cOHb8E3C+vzD39eWMzOPNtOiFoL+PDhw4cP34JvU4LkQUBbrJxq2w/j+LbXgQ8fPnz48C3a5HmJsC9x2qC/pc8DiK944MOHDx8+fBu+dmvarCk+K4Dy5ncbB7To+PDhw4cP3ym+tiDIjydntov5BCIhm21Zw4cPHz58+E7xbSa5iQNm02s3oiUBRD5HfPjw4cOHb8O3WVqfKhfy6W3a5JsZ4cOHDx8+fKf42k/+ZrNXWzQkzzlrDKzKJnz48OHDh2/N1y7I74+3Del8S1x7zn77Wh3W48OHDx8+fKM2+SxYv0eZlSZtYz55te3Ahw8fPnz4nuBLPvY566bh3cYWm5Z/HeLjw4cPHz58C74EbhbB59FAUTTEL2xfxERhPT58+PDhw1fytaON8jdt73oxPzpS/xfBhw8fPnz4FnzDwHoUGeRL+va3Oeus5YAPHz58+PCd5duE3e2EN4XLjGBTuERhPT58+PDhwzfim21HS8L0/Fd5dN423fPGwJsr4MOHDx8+fB/Gt7l+2yTIn6RtyRe7DPDhw4cPH76H+Ta3nzXOz8YBSfxx+WLw4cOHDx++Q3xtEbBpfs9ewCwmyBvqq8IFHz58+PDhi/lmcXkypdmv2o1ueVSRlEdvngQfPnz48OFb8Bl1QYYAHz58+Ax8+PDhM/Dh+9zxB4m3JzQKeDOOAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -301,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/电影/">电影</a>
+        <a class="post_tag-link" href="/tags/spark/">spark</a>
     </ul>
     
 
@@ -315,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/01/17/这个杀手不太冷/" class="leancloud-views_num" data-flag-title="这个杀手不太冷">
+                <span id="/2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/" class="leancloud-views_num" data-flag-title="Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39;">
      &nbsp;浏览量
 </span>
 
@@ -327,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=这个杀手不太冷&url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39;&url=https://stanxia.github.io//2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -336,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=这个杀手不太冷&url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39;&url=https://stanxia.github.io//2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -345,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -354,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -366,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=这个杀手不太冷&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/01/17/这个杀手不太冷/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39;&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -384,7 +392,10 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><iframe src="https://www.bilibili.com/html/html5player.html?aid=3209983&cid=5061993" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>Spark Streaming 连接kafka报错：kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>Spark Streaming默认使用的是Kafka 0.8.2.1，将kafka的版本改为0.8.2.1</p>
+<p>Good Luck!</p>
+
     
 
     
@@ -413,8 +424,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/01/17/这个杀手不太冷/"
-        data-title="这个杀手不太冷">
+        data-url="https://stanxia.github.io/2017/03/02/Spark-Streaming-报错-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/"
+        data-title="Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker&#39;">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -430,21 +441,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/01/18/chrome离线恐龙快跑游戏/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/16/海贼王856“少骗人了”/" id="post_nav-older" class="next-content">
+        <a href="/2017/03/02/spark-stream-and/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

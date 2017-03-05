@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[Spark Streaming 报错:kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker']]></title>
+      <url>https://stanxia.github.io/2017/03/02/Spark-Streaming-%E6%8A%A5%E9%94%99-kafka-cluster-BrokerEndPoint-cannot-be-cast-to-kafka-cluster-Broker/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>Spark Streaming 连接kafka报错：kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>Spark Streaming默认使用的是Kafka 0.8.2.1，将kafka的版本改为0.8.2.1</p>
+<p>Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[spark stream无法收取到kafka生产者的消息]]></title>
       <url>https://stanxia.github.io/2017/03/02/spark-stream-and/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>spark stream无法收取到kafka发过来的消息</p>
