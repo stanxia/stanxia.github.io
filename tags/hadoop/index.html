@@ -219,7 +219,9 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.如果存在jdk：卸载方式：rpm -...
+             1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
+2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
+3.配置hostnamevi ...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -280,7 +282,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             
+             一：解压hadoop.tar.gz和jdk...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -341,7 +343,9 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.ssh-keygen -t rsa -P ‘...
+             1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
+cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
+ 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到h...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -509,9 +513,9 @@
     <!-- Pages  -->
   	
         <li>
-            <a href="/aboutme/" title="我是谁">
+            <a href="/aboutme/" title="我">
                 
-                我是谁
+                我
             </a>
         </li>
   	
@@ -523,9 +527,23 @@
         </li>
   	
         <li>
-            <a href="/guestbook/" title="朋友你来啦">
+            <a href="/guestbook/" title="会客厅">
                 
-                朋友你来啦
+                会客厅
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/links" title="图书馆">
+                
+                图书馆
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/gallery" title="相册">
+                
+                相册
             </a>
         </li>
   	
