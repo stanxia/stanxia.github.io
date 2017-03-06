@@ -4,15 +4,53 @@
   
     
     <entry>
+      <title><![CDATA[Alibaba代码规范]]></title>
+      <url>https://stanxia.github.io/2017/03/07/Alibaba%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id=""><a href="#" class="headerlink" title=""></a><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrez7aj20m10v6wid.jpg" alt="1"></h1><p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrozi5j20m10v60xm.jpg" alt="2"></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrxvhzj20m10v6dmk.jpg" alt="3"></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnls4woqj20m10v6wjg.jpg" alt="4"></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlsevkgj20m10v6n3c.jpg" alt="5"></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlso65nj20m10v6af9.jpg" alt="6"></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnlt2v04j20m10v6wji.jpg" alt="7"></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlteijwj20m10v6jv6.jpg" alt="8"></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnltobz1j20m10v6jxd.jpg" alt="9"></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnmp0dsgj20m10v6n31.jpg" alt="10"></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpcafoj20m10v60wt.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpkfj4j20m10v6act.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpsz1gj20m10v67a9.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmq29kaj20m10v6jvc.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnmqc2z2j20m10v6tei.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmquwirj20m10v6dme.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnmr8hefj20m10v6gr3.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnmrgurmj20m10v60xo.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnn3j1roj20m10v6grf.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn3tks7j20m10v60zs.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn424u1j20m10v6wgi.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn4gxacj20m10v6gra.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn51icgj20m10v6gsi.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5ccrej20m10v6jx5.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5o68dj20m10v6grd.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5wzwdj20m10v641o.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn6fm1wj20m10v6n3f.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnicr5kj20m10v6tbr.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnjg99vj20m10v6q94.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnkcow3j20m10v67av.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnnkzpc6j20m10v679k.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnllrwnj20m10v6wl6.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnm019vj20m10v6dkg.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnm9rsrj20m10v6djm.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnml164j20m10v6tdv.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnnmulirj20m10v6jvt.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnxpv60j20m10v6q7b.jpg" alt=""></p>
+<p>Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[hadoop手动合并小文件]]></title>
       <url>https://stanxia.github.io/2017/03/06/hadoop%E6%89%8B%E5%8A%A8%E5%90%88%E5%B9%B6%E5%B0%8F%E6%96%87%E4%BB%B6/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>下载主要jar包：<a href="https://pan.baidu.com/s/1eSqWp9o" target="_blank" rel="external">filecrush-2.0-SNAPSHOT.jar</a>密码: x9mh</p>
-<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>Hadoop jar filecrush-2.0-SNAPSHOT.jar crush.Crush \</p>
-<p>-Ddfs.block.size=134217728 \</p>
-<p>–input-format=text  \</p>
-<p>–output-format=text \</p>
-<p>–compress=none \</p>
-<p>/要合并的目录 /合并到哪里去 时间戳(20170221175612)</p>
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Hadoop jar filecrush-2.0-SNAPSHOT.jar crush.Crush \</div><div class="line"></div><div class="line">-Ddfs.block.size=134217728 \</div><div class="line"></div><div class="line">--input-format=text  \</div><div class="line"></div><div class="line">--output-format=text \</div><div class="line"></div><div class="line">--compress=none \</div><div class="line"></div><div class="line">/要合并的目录 /合并到哪里去 时间戳(20170221175612)</div></pre></td></tr></table></figure>
 <p>Good Luck!</p>
 ]]></content>
     </entry>
@@ -241,7 +279,71 @@
 <p>每只老鼠只喝其编码与酒编码做位与运算非0的酒。如果毒酒的编码在某一位为1，则监控该位的老鼠必喝，结果为1. </p>
 <p>即把10只老鼠的结果，按位填入一个10位二进制数中，其结果即为毒酒编号。</p>
 <p>例如：编号为10001 00011的酒是毒酒。则对应的只有第一只，第二只，第六只，第十只死亡。其对应位数置1，即为10001 00011</p>
-<h3 id="3-用2个栈实现队列？"><a href="#3-用2个栈实现队列？" class="headerlink" title="3. 用2个栈实现队列？"></a>3. 用2个栈实现队列？</h3>]]></content>
+<h3 id="3-下面与Zookeeper类似的框架是？"><a href="#3-下面与Zookeeper类似的框架是？" class="headerlink" title="3. 下面与Zookeeper类似的框架是？"></a>3. 下面与Zookeeper类似的框架是？</h3><p>A Protobuf</p>
+<p>B Java</p>
+<p>C Kafka</p>
+<p>（Kafka是一个高吞吐量分布式消息系统。linkedin开源的kafka。 Kafka就跟这个名字一样，设计非常独特。首先，kafka的开发者们认为不需要在内存里缓存什么数据，操作系统的文件缓存已经足够完善和强大，只要你不搞随机写，顺序读写的性能是非常高效的。kafka的数据只会顺序append，数据的删除策略是累积到一定程度或者超过一定时间再删除。Kafka另一个独特的地方是将消费者信息保存在客户端而不是MQ服务器，这样服务器就不用记录消息的投递过程，每个客户端都自己知道自己下一次应该从什么地方什么位置读取消息，消息的投递过程也是采用客户端主动pull的模型，这样大大减轻了服务器的负担。Kafka还强调减少数据的序列化和拷贝开销，它会将一些消息组织成Message Set做批量存储和发送，并且客户端在pull数据的时候，尽量以zero-copy的方式传输，利用sendfile（对应java里的 FileChannel.transferTo/transferFrom）这样的高级IO函数来减少拷贝开销。可见，kafka是一个精心设计，特定于某些应用的MQ系统，这种偏向特定领域的MQ系统我估计会越来越多，垂直化的产品策略值的考虑）</p>
+<p><del><strong>D Chubby</strong></del></p>
+<p>（MapReduce 很多人已经知道了，但关于Chubyy似乎熟悉它的就非常有限，这倒是不奇怪，因为MapReduce是一个针对开发人员的 ProgrammingModel，自然会有很多人去学习它，而Chubby更多的是一种为了实现MapReduce或者Bigtable而构建的内部的 工具，对于开发人员来说基本上是透明的。</p>
+<p>Chubby首先是一个分布式的文件系统。Chubby能够提供机制使得client可以在Chubby service上创建文件和执行一些文件的基本操作。说它是分布式的文件系统，是因为一个Chubby cell是一个分布式的系统，一般包含了5台机器，整个文件系统是部署在这5台机器上的。<br>但是，从更高一点的语义层面上，Chubby是一个 lock service，一个针对松耦合的分布式系统的lock service。所谓lock service，就是这个service能够提供开发人员经常用的“锁”，“解锁”功能。通过Chubby，一个分布式系统中的上千个client都能够 对于某项资源进行“加锁”，“解锁”。<br>那么，Chubby是怎样实现这样的“锁”功能的？就是通过文件。Chubby中的“锁”就是文件，在上例 中，创建文件其实就是进行“加锁”操作，创建文件成功的那个server其实就是抢占到了“锁”。用户通过打开、关闭和读取文件，获取共享锁或者独占锁； 并且通过通信机制，向用户发送更新信息。<br>综上所述，Chubby是一个lock service，通过这个lock service可以解决分布式中的一致性问题，而这个lock service的实现是一个分布式的文件系统。）</p>
+<h3 id="4-LSM含义是？"><a href="#4-LSM含义是？" class="headerlink" title="4.  LSM含义是？"></a>4.  LSM含义是？</h3><p><del><strong>A 日志结构合并树（Log-Structured Merge Tree）</strong></del></p>
+<p>B 二叉树</p>
+<p>C 平衡二叉树</p>
+<p>D 长平衡二叉树</p>
+<h3 id="5-下面对LSM结构描述正确的是？"><a href="#5-下面对LSM结构描述正确的是？" class="headerlink" title="5. 下面对LSM结构描述正确的是？"></a>5. 下面对LSM结构描述正确的是？</h3><p><strong><del>A 顺序存储</del></strong></p>
+<p>B 直接写硬盘</p>
+<p><strong><del>C 需要将数据Flush到磁盘</del></strong></p>
+<p>D 是一种搜索平衡树</p>
+<h3 id="6-LSM更能保证哪种操作的性能？"><a href="#6-LSM更能保证哪种操作的性能？" class="headerlink" title="6. LSM更能保证哪种操作的性能？"></a>6. LSM更能保证哪种操作的性能？</h3><p>A 读</p>
+<p><strong><del>B 写</del></strong></p>
+<p>C 随机读</p>
+<p>D 合并</p>
+<h3 id="7-LSM的读操作和写操作是独立的？"><a href="#7-LSM的读操作和写操作是独立的？" class="headerlink" title="7.  LSM的读操作和写操作是独立的？"></a>7.  LSM的读操作和写操作是独立的？</h3><p><strong><del>A 是。</del></strong></p>
+<p>B 否。</p>
+<p>C LSM并不区分读和写</p>
+<p>D LSM中读写是同一种操作</p>
+<h3 id="8-LSM结构的数据首先存储在（）。"><a href="#8-LSM结构的数据首先存储在（）。" class="headerlink" title="8.  LSM结构的数据首先存储在（）。"></a>8.  LSM结构的数据首先存储在（）。</h3><p>A 硬盘上</p>
+<p><strong><del>B 内存中</del></strong></p>
+<p>C 磁盘阵列中</p>
+<p>D 闪存中</p>
+<h3 id="9-HFile数据格式中的Data字段用于（）。"><a href="#9-HFile数据格式中的Data字段用于（）。" class="headerlink" title="9. HFile数据格式中的Data字段用于（）。"></a>9. HFile数据格式中的Data字段用于（）。</h3><p><strong><del>A 存储实际的KeyValue数据</del></strong></p>
+<p>B 存储数据的起点</p>
+<p>C 指定字段的长度</p>
+<p>D 存储数据块的起点</p>
+<h3 id="10-HFile数据格式中的MetaIndex字段用于（）。"><a href="#10-HFile数据格式中的MetaIndex字段用于（）。" class="headerlink" title="10.HFile数据格式中的MetaIndex字段用于（）。"></a>10.HFile数据格式中的MetaIndex字段用于（）。</h3><p>A Meta块的长度</p>
+<p>B Meta块的结束点</p>
+<p>C Meta块数据内容</p>
+<p><strong><del>D Meta块的起始点</del></strong></p>
+<h3 id="11-HFile数据格式中的Magic字段用于（）。"><a href="#11-HFile数据格式中的Magic字段用于（）。" class="headerlink" title="11. HFile数据格式中的Magic字段用于（）。"></a>11. HFile数据格式中的Magic字段用于（）。</h3><p><strong><del>A 存储随机数，防止数据损坏</del></strong></p>
+<p>B 存储数据的起点</p>
+<p>C 存储数据块的起点</p>
+<p>D 指定字段的长度</p>
+<h3 id="12-HFile数据格式中的KeyValue数据格式，下列选项描述正确的是（）。"><a href="#12-HFile数据格式中的KeyValue数据格式，下列选项描述正确的是（）。" class="headerlink" title="12. HFile数据格式中的KeyValue数据格式，下列选项描述正确的是（）。"></a>12. HFile数据格式中的KeyValue数据格式，下列选项描述正确的是（）。</h3><p><strong><del>A 是byte[]数组</del></strong></p>
+<p>B 没有固定的结构</p>
+<p>C 数据的大小是定长的</p>
+<p><strong><del>D 有固定的结构</del></strong></p>
+<h3 id="13-HFile数据格式中的KeyValue数据格式中Value部分是（）。"><a href="#13-HFile数据格式中的KeyValue数据格式中Value部分是（）。" class="headerlink" title="13. HFile数据格式中的KeyValue数据格式中Value部分是（）。"></a>13. HFile数据格式中的KeyValue数据格式中Value部分是（）。</h3><p>A 拥有复杂结构的字符串</p>
+<p>B 字符串</p>
+<p><strong><del>C 二进制数据</del></strong></p>
+<p>D 压缩数据</p>
+<h3 id="14-Rowkey设计的原则，下列哪些选项的描述是正确的？"><a href="#14-Rowkey设计的原则，下列哪些选项的描述是正确的？" class="headerlink" title="14. Rowkey设计的原则，下列哪些选项的描述是正确的？"></a>14. Rowkey设计的原则，下列哪些选项的描述是正确的？</h3><p><strong><del>A 尽量保证越短越好</del></strong></p>
+<p><strong><del>B 可以使用汉字</del></strong></p>
+<p><strong><del>C 可以使用字符串</del></strong></p>
+<p>D 本身是无序的</p>
+<h3 id="15-HBase构建二级索引的实现方式有哪些？"><a href="#15-HBase构建二级索引的实现方式有哪些？" class="headerlink" title="15. HBase构建二级索引的实现方式有哪些？"></a>15. HBase构建二级索引的实现方式有哪些？</h3><p><strong><del>A MapReduce</del></strong></p>
+<p><strong><del>B Coprocessor</del></strong></p>
+<p>(HBase在0.92之后引入了协处理器(coprocessors)，实现一些激动人心的新特性：能够轻易建立二次索引、复杂过滤器(谓词下推)以及访问控制等)</p>
+<p>C Bloom Filter</p>
+<p>D Filter</p>
+<h3 id="16-关于HBase二级索引的描述，哪些是正确的？"><a href="#16-关于HBase二级索引的描述，哪些是正确的？" class="headerlink" title="16. 关于HBase二级索引的描述，哪些是正确的？"></a>16. 关于HBase二级索引的描述，哪些是正确的？</h3><p><strong><del>A 核心是倒排表</del></strong></p>
+<p><strong><del>B 二级索引概念是对应Rowkey这个“一级”索引</del></strong></p>
+<p>C 二级索引使用平衡二叉树</p>
+<p>D 二级索引使用LSM结构</p>
+<h3 id="17-下列关于Bloom-Filter的描述正确的是？"><a href="#17-下列关于Bloom-Filter的描述正确的是？" class="headerlink" title="17. 下列关于Bloom Filter的描述正确的是？"></a>17. 下列关于Bloom Filter的描述正确的是？</h3><p><strong><del>A 是一个很长的二进制向量和一系列随机映射函数</del></strong></p>
+<p>B 没有误算率</p>
+<p><strong><del>C 有一定的误算率</del></strong></p>
+<p>D 可以在Bloom Filter中删除元素</p>
+]]></content>
     </entry>
     
     <entry>
