@@ -420,10 +420,10 @@
 <p>该字符串一般会加上一组随机字符串 (Random string)，以防止玩家利用碰撞 (Collision) 解密字符串，但如使用超级电脑利用碰撞亦有可能从加上随机字符串的加密字符串中获取游戏结果。随机字符串的长度与碰撞的次数成正比关系，一般网上赌场使用的随机字符串是长于20字，有些网上赌场的随机字符串更长达500字，以增加解密难度。</p>
 <h4 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h4><p>MD5是输入不定长度信息，输出固定长度128-bits的算法。经过程序流程，生成四个32位数据，最后联合起来成为一个128-bits<a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97" target="_blank" rel="external">散列</a>。基本方式为，求余、取余、调整长度、与链接变量进行循环运算。得出结果。</p>
 <h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
-<li>压缩性：任意长度的数据，算出的MD5值长度都是固定的。</li>
+<li>压缩性：任意长度的数据，算出的MD5值长度都是固定的(32位)。</li>
 <li>容易计算：从原数据计算出MD5值很容易。</li>
 <li>抗修改性：对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别。</li>
-<li>强抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据（即伪造数据）是非常困难的（但也可以被碰撞破解）。</li>
+<li>强抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据（即伪造数据）是非常困难的（但也会被碰撞）。</li>
 </ol>
 <h4 id="bash中使用MD5"><a href="#bash中使用MD5" class="headerlink" title="bash中使用MD5"></a>bash中使用MD5</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">md5 <span class="_">-s</span> <span class="string">"需要md5加密的字符串"</span> <span class="comment">#md5加密字符串</span></div><div class="line">md5 文件 <span class="comment">#md5加密文件</span></div></pre></td></tr></table></figure>
 <h4 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h4><p>2009年<a href="https://zh.wikipedia.org/wiki/%E8%AC%9D%E6%BF%A4" target="_blank" rel="external">谢涛</a>和冯登国仅用了220.96的碰撞算法复杂度，破解了MD5的<a href="https://zh.wikipedia.org/w/index.php?title=%E7%A2%B0%E6%92%9E%E6%8A%B5%E6%8A%97&amp;action=edit&amp;redlink=1" target="_blank" rel="external">碰撞抵抗</a>，该攻击在普通计算机上运行只需要数秒钟。</p>
