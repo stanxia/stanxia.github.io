@@ -10,7 +10,7 @@
     
     <title>
         
-            HBase1.3新版本 新特性预览 | 
+            几种常见的加密方式 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="HBase1.3新版本 新特性预览 | 小世界，大梦想">
+    <meta property="og:title" content="几种常见的加密方式 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版本特性"><span class="post-toc-number">1.</span> <span class="post-toc-text">新版本特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新特性解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">新特性解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分层压缩"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">分层压缩</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用场景："><span class="post-toc-number">2.1.0.1.</span> <span class="post-toc-text">使用场景：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#解决痛点："><span class="post-toc-number">2.1.0.2.</span> <span class="post-toc-text">解决痛点：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多预写日志"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">多预写日志</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新特性"><span class="post-toc-number">2.2.0.1.</span> <span class="post-toc-text">新特性</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新的RPC调度器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">新的RPC调度器</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据加密-Data-encryption"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据加密(Data encryption)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见加密方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">常见加密方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Base64加密方式-可逆"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1  Base64加密方式(可逆)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是Base64"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">什么是Base64</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在bash中使用Base64"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">在bash中使用Base64:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Base64编码原理"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">Base64编码原理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Base64编码的说明"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">Base64编码的说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-散列函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2 散列函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#散列函数："><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">散列函数：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单向散列函数："><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">单向散列函数：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#哈希碰撞："><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">哈希碰撞：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#密码散列函数："><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">密码散列函数：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-碰撞（计算机科学）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3 碰撞（计算机科学）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#碰撞："><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">碰撞：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-MD5加密"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4 MD5加密</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MD5："><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">MD5：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#应用："><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">应用：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#算法："><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">算法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#特点："><span class="post-toc-number">2.4.4.</span> <span class="post-toc-text">特点：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#bash中使用MD5"><span class="post-toc-number">2.4.5.</span> <span class="post-toc-text">bash中使用MD5</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缺陷："><span class="post-toc-number">2.4.6.</span> <span class="post-toc-text">缺陷：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-盐-密码学"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5 盐(密码学)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加盐："><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">加盐：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为什么加盐："><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">为什么加盐：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现原理："><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">实现原理：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-钥匙串加密方式"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">6 钥匙串加密方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-对称加密算法"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">7 对称加密算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-RSA加密-非对称加密算法-Secruty-framework系统库"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">8 RSA加密(非对称加密算法)(Secruty.framework系统库)</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -257,7 +257,7 @@
         
     
             <p class="article-headline-p">
-                HBase1.3新版本 新特性预览
+                几种常见的加密方式
             </p>
         </div>
 
@@ -276,7 +276,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 22, 2017</span>
+        <span>3月 08, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +297,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aQVIDMQwEwPz/03ClClhGkhM2du8pRYjj9gEhjR8fRz4PbGxsbGxsbGxs7FuyH/Hzw0KXP//6bnW1779zvVqyZ2xsbOy92X/86Q94vQNKGNXVfj04bGxs7APYv33l9evkJwm4ACjuGRsbGxs7YfzRBgRlKS+K2NjY2NjPYydbnzQY2NjY2NjzodJ1ceqNpapl7B9madjY2Ni3Z+eh6X1evzTfxsbGxr4xu/rkYUASHkzC4/LOsbGxsTdl54Wh10IkYe31oSRXOaMDxcbGxt6a/YyIN9nuPCQoxA/Y2NjYm7Ini+bNRr7O5GgWDJWwsbGx35CdtxnVw5qM+JMjzuMEbGxs7NPYUTEYDJuq39uLeLGxsbHPYc8ZSQyQl7HeOtGesbGxsbdmTy7Z5J9NNnoNnkTR2NjY2Luye0OlfLgzaVSSkKDQJmFjY2Nvzc7H9En56UW2veueCRgbGxt7b3a+dPUgJpc1qxc6FwyVsLGxsd+WnV+vWRXH9g69d2TY2NjYJ7N7+Dw2nlymbEbF2NjY2Juyk3/xk2agWlSqgW41PI46MGxsbOwt2KtC1nnRWhVRYGNjY5/GrrYckwAgv3CTNyfNy5fY2NjYG7F7l2OaX7woVMjfxcbGxj6BnV/QqQ6M8ti4Wvx6l4qwsbGxd2U/gmfVhZ5njI0WxAPY2NjYW7CTctIrdfmmJ+OkqIHBxsbGPoydR7bzqznJTnoDKWxsbOwz2XNMPvrJh0qTZgkbGxt7b3b1qQ79q8Ftb6gU7QQbGxt7U3ZzQNNqBqrjpGo4sTjoxcbGxn4rdu/6ziSyTY51UsCwsbGxz2Q3hzXB1lcVs2pIgI2NjY09KWCTT+VNzksLGDY2NvZG7F5g0NturwRiY2Njn8nuhazVazfVmDYfPz0xHsDGxsa+Pbs3uEm2lQz084PrtUbY2NjYe7PPebCxsbGxsbGxsbFv83wCzCBTJT6fVrYAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3a207EMAwFwP3/n4ZXJLTtsd1CN5k+ob20GSNxiJ3X15bXCxsbGxsbGxsbG/uR7Fd8vfv8u7v9fOXdu78/k7+erxkbGxt7B/bJn/7DhR7D8iIewy5YMzY2NvYG7OPF5Y/Mv5VEVHLn4zVjY2NjY+cBMyliEmzY2NjY2Pexq5uHeXMKGxsbG7vXoLm2xX/fdggbGxt7N3Z10PuEn/9hvo2NjY39SPa1Vz70rcbPBWvDxsbGXpSdj2OrMZOEzfGzeo2qZi8NGxsb+8PZvQOOeZMoX+ikedTcgWFjY2Mvwa4OTfOwmQRS8sS8ZNjY2Nirsicj2HxTkT+lV9akcNjY2Nhrs3vNoGoszUvQ26JgY2Njr82+70B8od1TfDd/FjY2NvZu7ARWPXwzaQwlQ4WkcNjY2Ng7sCcx04ulJKIm5cPGxsbeh907WJMst7pVqB73qb6OjY2NvSp7sp3oNeurx3omvwZsbGzsHdiTbUl1NJtsWqohV2iNYWNjYy/KnvyLXz2OOVl6UvrC4UtsbGzsDdh3NPp7ByuTeBtNRbCxsbEXYld5vZFt8sRe+ZrjAWxsbOwPZ181ZJ0Mg/MrD7mTAMPGxsZeiN3bNuQRlW9p8gOdzZVjY2NjL82ehFNemt5Rm3yUe7I5wcbGxl6UnWMmZboq9kaDYWxsbOxF2fmxyF7Tp3rP/FvVDQk2Njb2quzCoLT6r/8dLf7igSFsbGzsHdjVdk+12XTBFmI8BsbGxsZem129eu2nXlmTYMtjFRsbG3tVdi8equExGTD0AhIbGxt7N/Z8oUk45YGUBFu1OYWNjY29A3vSyp+Mfqv3bJYDGxsbGzsYqeZxmI9sT2IpuBs2NjY2du+ozWR4nN/zjwIMGxsb+0PYeVMpX2h1idXPFAbP2NjY2EuzJ4PeXpspL3316E8hwLCxsbGXYO9zYWNjY2NjY2NjYz/m+gb1ICCCCWvGFwAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -309,7 +309,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/HBase/">HBase</a>
+        <a class="post_tag-link" href="/tags/加密/">加密</a>
     </ul>
     
 
@@ -323,7 +323,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/22/HBase1-3新版本-新特性预览/" class="leancloud-views_num" data-flag-title="HBase1.3新版本 新特性预览">
+                <span id="/2017/03/08/几种常见的加密方式/" class="leancloud-views_num" data-flag-title="几种常见的加密方式">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +335,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HBase1.3新版本 新特性预览&url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=几种常见的加密方式&url=https://stanxia.github.io//2017/03/08/几种常见的加密方式/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +344,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=HBase1.3新版本 新特性预览&url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=几种常见的加密方式&url=https://stanxia.github.io//2017/03/08/几种常见的加密方式/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +353,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/03/08/几种常见的加密方式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +362,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/03/08/几种常见的加密方式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +374,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=HBase1.3新版本 新特性预览&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/22/HBase1-3新版本-新特性预览/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=几种常见的加密方式&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/03/08/几种常见的加密方式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,18 +392,80 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="新版本特性"><a href="#新版本特性" class="headerlink" title="新版本特性"></a>新版本特性</h2><p>2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="数据加密-Data-encryption"><a href="#数据加密-Data-encryption" class="headerlink" title="数据加密(Data encryption)"></a>数据加密(Data encryption)</h2><p>数据加密，是一门历史悠久的技术，指通过<a href="http://baike.baidu.com/view/155969.htm" target="_blank" rel="external">加密算法</a>和加密<a href="http://baike.baidu.com/view/934.htm" target="_blank" rel="external">密钥</a>将明文转变为密文，而解密则是通过解密算法和解密密钥将密文恢复为明文。它的核心是密码学。</p>
+<p>数据加密目前仍是<a href="http://baike.baidu.com/view/1130583.htm" target="_blank" rel="external">计算机系统</a>对信息进行保护的一种最可靠的办法。它利用<a href="http://baike.baidu.com/view/391036.htm" target="_blank" rel="external">密码技术</a>对信息进行加密，实现<a href="http://baike.baidu.com/view/431307.htm" target="_blank" rel="external">信息隐蔽</a>，从而起到保护信息的安全的作用。 </p>
+<h2 id="常见加密方式"><a href="#常见加密方式" class="headerlink" title="常见加密方式"></a>常见加密方式</h2><h3 id="1-Base64加密方式-可逆"><a href="#1-Base64加密方式-可逆" class="headerlink" title="1  Base64加密方式(可逆)"></a>1  Base64加密方式(可逆)</h3><h4 id="什么是Base64"><a href="#什么是Base64" class="headerlink" title="什么是Base64"></a><strong>什么是Base64</strong></h4><p>Base64编码可以成为密码学的基石。可以将任意的二进制数据进行Base64编码。所有的数据都能被编码为并只用65个字符就能表示的文本文件。（ 65字符：A~Z a~z 0~9 + / = ）等号“=”用来作为后缀用途。编码后的数据~=编码前数据的4/3，会大1/3左右。</p>
+<h4 id="在bash中使用Base64"><a href="#在bash中使用Base64" class="headerlink" title="在bash中使用Base64:"></a><strong>在bash中使用Base64:</strong></h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">base64 需要加密的文件 -o 加密后的文件 <span class="comment">#加密过程</span></div><div class="line">base64 加密后的文件 -o 解密后的文件 -D <span class="comment">#解密过程</span></div></pre></td></tr></table></figure>
+<h4 id="Base64编码原理"><a href="#Base64编码原理" class="headerlink" title="Base64编码原理"></a><strong>Base64编码原理</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">a.将所有字符转化为ASCII码； </div><div class="line"></div><div class="line">b.将ASCII码转化为8位二进制； </div><div class="line"></div><div class="line">c.将二进制3个归成一组(不足3个在后边补0)共24位，再拆分成4组，每组6位； </div><div class="line"></div><div class="line">d.统一在6位二进制前补两个0凑足8位； </div><div class="line"></div><div class="line">e.将补0后的二进制转为十进制； </div><div class="line"></div><div class="line">f.从Base64编码表获取十进制对应的Base64编码；</div></pre></td></tr></table></figure>
+<h4 id="Base64编码的说明"><a href="#Base64编码的说明" class="headerlink" title="Base64编码的说明"></a><strong>Base64编码的说明</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">a.转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。 </div><div class="line"></div><div class="line">b.数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择查表选择对应的字符作为编码后的输出。 </div><div class="line"></div><div class="line">c.不断进行，直到全部输入数据转换完成。 </div><div class="line"></div><div class="line">d.如果最后剩下两个输入数据，在编码结果后加1个“=”； </div><div class="line"></div><div class="line">e.如果最后剩下一个输入数据，编码结果后加2个“=”； </div><div class="line"></div><div class="line">f.如果没有剩下任何数据，就什么都不要加，这样才可以保证资料还原的正确性。</div></pre></td></tr></table></figure>
+<h3 id="2-散列函数"><a href="#2-散列函数" class="headerlink" title="2 散列函数"></a>2 散列函数</h3><h4 id="散列函数："><a href="#散列函数：" class="headerlink" title="散列函数："></a>散列函数：</h4><p><strong>散列函数</strong>（或<strong>散列算法</strong>，又称<strong>哈希函数</strong>，英语：Hash Function）是一种从任何一种数据中创建小的数字“指纹”的方法。散列函数把消息或数据压缩成摘要，使得数据量变小，将数据的格式固定下来。该<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0" target="_blank" rel="external">函数</a>将数据打乱混合，重新创建一个叫做<strong>散列值</strong>（hash values，hash codes，hash sums，或hashes）的指纹。散列值通常用一个短的随机字母和数字组成的字符串来代表。好的散列函数在输入域中很少出现<a href="https://zh.wikipedia.org/w/index.php?title=%E6%95%A3%E5%88%97%E5%86%B2%E7%AA%81&amp;action=edit&amp;redlink=1" target="_blank" rel="external">散列冲突</a>。在<a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E8%A1%A8" target="_blank" rel="external">散列表</a>和<a href="https://zh.wikipedia.org/w/index.php?title=%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86&amp;action=edit&amp;redlink=1" target="_blank" rel="external">数据处理</a>中，不抑制冲突来区别数据，会使得<a href="https://zh.wikipedia.org/w/index.php?title=%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%B0%E5%BD%95&amp;action=edit&amp;redlink=1" target="_blank" rel="external">数据库记录</a>更难找到。</p>
+<h4 id="单向散列函数："><a href="#单向散列函数：" class="headerlink" title="单向散列函数："></a>单向散列函数：</h4><p>如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有<a href="https://zh.wikipedia.org/wiki/%E7%A1%AE%E5%AE%9A%E6%80%A7" target="_blank" rel="external">确定性</a>的结果，具有这种性质的散列函数称为单向散列函数。</p>
+<h4 id="哈希碰撞："><a href="#哈希碰撞：" class="headerlink" title="哈希碰撞："></a>哈希碰撞：</h4><p>另一方面，散列函数的输入和输出不是唯一对应关系的，如果两个散列值相同，两个输入值很可能是相同的，但也可能不同，这种情况称为“哈希碰撞”，这通常是两个不同长度的输入值，刻意计算出相同的输出值。</p>
+<h4 id="密码散列函数："><a href="#密码散列函数：" class="headerlink" title="密码散列函数："></a>密码散列函数：</h4><p><strong>密码散列函数</strong>（英语：Cryptographic hash function），又译为<strong>加密散列函数</strong>、<strong>密码散列函数</strong>、<strong>加密散列函数</strong>，是<a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8" target="_blank" rel="external">散列函数</a>的一种。它被认为是一种<a href="https://zh.wikipedia.org/wiki/%E5%96%AE%E5%90%91%E5%87%BD%E6%95%B8" target="_blank" rel="external">单向函数</a>，也就是说极其难以由散列函数输出的结果，回推输入的数据是什么。这样的单向函数被称为“现代密码学的驮马”。<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8#cite_note-1" target="_blank" rel="external">[1]</a>这种散列函数的输入数据，通常被称为<strong>消息</strong>（message），而它的输出结果，经常被称为<strong>消息摘要</strong>（message digest）或<strong>摘要</strong>（digest）。</p>
+<p>一个理想的密码散列函数应该有四个主要的特性：</p>
 <ul>
-<li>支持分层数据的压缩</li>
-<li>多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等</li>
+<li>对于任何一个给定的消息，它都很容易就能运算出散列数值</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E6%80%A7%E7%90%86%E8%AB%96" target="_blank" rel="external">难以</a>由一个已知的散列数值，去推算出原始的消息</li>
+<li>在不更动散列数值的前提下，修改消息内容是不可行的</li>
+<li>对于两个不同的消息，它不能给与相同的散列数值</li>
 </ul>
-<h2 id="新特性解析"><a href="#新特性解析" class="headerlink" title="新特性解析"></a>新特性解析</h2><h3 id="分层压缩"><a href="#分层压缩" class="headerlink" title="分层压缩"></a>分层压缩</h3><h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><p>数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。</p>
-<h5 id="解决痛点："><a href="#解决痛点：" class="headerlink" title="解决痛点："></a>解决痛点：</h5><p>使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。</p>
-<h3 id="多预写日志"><a href="#多预写日志" class="headerlink" title="多预写日志"></a>多预写日志</h3><p>每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。</p>
-<h5 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h5><p>改进后的 <strong>多预写日志(WAL)</strong> 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志 提供了三个区域分组策略来分配 预写日志：每个区域的 预写日志都有 一个身份 标识，轮询调度算法 保证 每个区域映射的预写日志 都有其边界，区域中 不同 命名空间 的表 被映射到 不同的 预写日志 中。</p>
-<p>性能测试报告 显示：<strong>预写日志 在纯SATA 磁盘中的运行平均延时 减少了 20% ；在SATA-SSD磁盘中运行延时 减少了 40%</strong>。</p>
-<h3 id="新的RPC调度器"><a href="#新的RPC调度器" class="headerlink" title="新的RPC调度器"></a>新的RPC调度器</h3><p>新的RPC调度器基于 <strong>CoDel算法</strong> ，用于阻止 可用IO无法满足过高清秋频率引起的 长连接队列。</p>
-<p>CoDel算法 用可控的延迟 来管理 活动队列，他根据 定义好的 <strong>阈值</strong> 来裁决队列中的<strong>最小延迟</strong>。一旦最小延迟超过阈值，该链接便会 被丢弃以便处理其他更有力的 最小延迟。</p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fdfvfa72vwj20hs0cwq4m.jpg" alt=""></p>
+<p>一个工作中的密码散列函数 (特定的, <a href="https://zh.wikipedia.org/wiki/SHA-1" target="_blank" rel="external">SHA-1</a>)。注意，源输入再微小的变化（“over”这个词）也会使所产生的输出发生急剧变化，通过所谓的<a href="https://zh.wikipedia.org/wiki/%E9%9B%AA%E5%B4%A9%E6%95%88%E5%BA%94_(%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="external">雪崩效应</a>)的原理。</p>
+<h3 id="3-碰撞（计算机科学）"><a href="#3-碰撞（计算机科学）" class="headerlink" title="3 碰撞（计算机科学）"></a>3 碰撞（计算机科学）</h3><h4 id="碰撞："><a href="#碰撞：" class="headerlink" title="碰撞："></a>碰撞：</h4><p>在计算机科学中，碰撞或冲突是指两个不同的元素具有相同的<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E5%80%BC" target="_blank" rel="external">哈希值</a>，<a href="https://zh.wikipedia.org/wiki/%E6%A0%A1%E9%AA%8C%E5%92%8C" target="_blank" rel="external">校验和</a>，数字指纹时发生的情况。当数据量足够多（例如将所有可能的人名和计算机文件名映射到一段字符上）时，碰撞是不可避免的。这仅仅是<a href="https://zh.wikipedia.org/wiki/%E9%B4%BF%E5%B7%A2%E5%8E%9F%E7%90%86" target="_blank" rel="external">鸽巢原理</a>的一个实例。</p>
+<h3 id="4-MD5加密"><a href="#4-MD5加密" class="headerlink" title="4 MD5加密"></a>4 MD5加密</h3><h4 id="MD5："><a href="#MD5：" class="headerlink" title="MD5："></a>MD5：</h4><p><strong>MD5消息摘要算法</strong>（英语：MD5 Message-Digest Algorithm），一种被广泛使用的<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8" target="_blank" rel="external">密码散列函数</a>，可以产生出一个128位（16<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82" target="_blank" rel="external">字节</a>）的散列值（hash value），用于确保信息传输完整一致。MD5由<a href="https://zh.wikipedia.org/wiki/%E7%BD%97%E7%BA%B3%E5%BE%B7%C2%B7%E6%9D%8E%E7%BB%B4%E6%96%AF%E7%89%B9" target="_blank" rel="external">罗纳德·李维斯特</a>设计，于1992年公开，用以替换<a href="https://zh.wikipedia.org/wiki/MD4" target="_blank" rel="external">MD4</a>算法。这套算法的程序在 <a href="https://tools.ietf.org/html/rfc1321" target="_blank" rel="external">RFC 1321</a> 中被加以规范。</p>
+<p>1996年后被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如<a href="https://zh.wikipedia.org/wiki/SHA-1" target="_blank" rel="external">SHA-1</a>。2004年，证实MD5算法无法防止碰撞，因此无法适用于安全性认证，如<a href="https://zh.wikipedia.org/wiki/SSL" target="_blank" rel="external">SSL</a><a href="https://zh.wikipedia.org/wiki/%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E8%AA%8D%E8%AD%89" target="_blank" rel="external">公开密钥认证</a>或是<a href="https://zh.wikipedia.org/wiki/%E6%95%B8%E4%BD%8D%E7%B0%BD%E7%AB%A0" target="_blank" rel="external">数字签名</a>等用途。</p>
+<h4 id="应用："><a href="#应用：" class="headerlink" title="应用："></a>应用：</h4><p>MD5已经广泛使用在为文件传输提供一定的可靠性方面。例如，服务器预先提供一个MD5校验和，用户下载完文件以后，用MD5算法计算下载文件的MD5校验和，然后通过检查这两个校验和是否一致，就能判断下载的文件是否出错。如在一些<a href="https://zh.wikipedia.org/wiki/BitTorrent" target="_blank" rel="external">BitTorrent</a>下载中，软件将通过计算MD5检验下载到的文件片段的完整性。</p>
+<p>MD5亦有应用于部分网上赌场以保证赌博的公平性，原理是系统先在玩家下注前已生成该局的结果，将该结果的字符串配合一组随机字符串利用MD5 加密，将该加密字符串于玩家下注前便显示给玩家，再在结果开出后将未加密的字符串显示给玩家，玩家便可利用MD5工具加密验证该字符串是否吻合。</p>
+<p>例子: 在玩家下注骰宝前，赌场便先决定该局结果，假设生成的随机结果为4、5、 6大，赌场便会先利用MD5 加密“4, 5, 6”此字符串并于玩家下注前告诉玩家；由于赌场是无法预计玩家会下什么注，所以便能确保赌场不能作弊；当玩家下注完毕后，赌场便告诉玩家该原始字符串，即“4, 5, 6”，玩家便可利用MD5工具加密该字符串是否与下注前的加密字符串吻合。</p>
+<p>该字符串一般会加上一组随机字符串 (Random string)，以防止玩家利用碰撞 (Collision) 解密字符串，但如使用超级电脑利用碰撞亦有可能从加上随机字符串的加密字符串中获取游戏结果。随机字符串的长度与碰撞的次数成正比关系，一般网上赌场使用的随机字符串是长于20字，有些网上赌场的随机字符串更长达500字，以增加解密难度。</p>
+<h4 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h4><p>MD5是输入不定长度信息，输出固定长度128-bits的算法。经过程序流程，生成四个32位数据，最后联合起来成为一个128-bits<a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97" target="_blank" rel="external">散列</a>。基本方式为，求余、取余、调整长度、与链接变量进行循环运算。得出结果。</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>压缩性：任意长度的数据，算出的MD5值长度都是固定的。</li>
+<li>容易计算：从原数据计算出MD5值很容易。</li>
+<li>抗修改性：对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别。</li>
+<li>强抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据（即伪造数据）是非常困难的（但也可以被碰撞破解）。</li>
+</ol>
+<h4 id="bash中使用MD5"><a href="#bash中使用MD5" class="headerlink" title="bash中使用MD5"></a>bash中使用MD5</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">md5 <span class="_">-s</span> <span class="string">"需要md5加密的字符串"</span> <span class="comment">#md5加密字符串</span></div><div class="line">md5 文件 <span class="comment">#md5加密文件</span></div></pre></td></tr></table></figure>
+<h4 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h4><p>2009年<a href="https://zh.wikipedia.org/wiki/%E8%AC%9D%E6%BF%A4" target="_blank" rel="external">谢涛</a>和冯登国仅用了220.96的碰撞算法复杂度，破解了MD5的<a href="https://zh.wikipedia.org/w/index.php?title=%E7%A2%B0%E6%92%9E%E6%8A%B5%E6%8A%97&amp;action=edit&amp;redlink=1" target="_blank" rel="external">碰撞抵抗</a>，该攻击在普通计算机上运行只需要数秒钟。</p>
+<h3 id="5-盐-密码学"><a href="#5-盐-密码学" class="headerlink" title="5 盐(密码学)"></a>5 盐(密码学)</h3><h4 id="加盐："><a href="#加盐：" class="headerlink" title="加盐："></a>加盐：</h4><p><strong>盐</strong>（Salt），在<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6" target="_blank" rel="external">密码学</a>中，是指通过在密码任意固定位置插入特定的字符串，让散列后的结果和使用原始密码的散列结果不相符，这种过程称之为“加盐”。</p>
+<h4 id="为什么加盐："><a href="#为什么加盐：" class="headerlink" title="为什么加盐："></a>为什么加盐：</h4><p>通常情况下，当字段经过散列处理（如<a href="https://zh.wikipedia.org/wiki/MD5" target="_blank" rel="external">MD5</a>），会生成一段散列值，而散列后的值一般是无法通过特定算法得到原始字段的。但是某些情况，比如一个大型的<a href="https://zh.wikipedia.org/wiki/%E5%BD%A9%E8%99%B9%E8%A1%A8" target="_blank" rel="external">彩虹表</a>，通过在表中搜索该MD5值，很有可能在极短的时间内找到该散列值对应的真实字段内容。</p>
+<p>加盐后的散列值，可以极大的降低由于用户数据被盗而带来的密码泄漏风险，即使通过彩虹表寻找到了散列后的数值所对应的原始内容，但是由于经过了加盐，插入的字符串扰乱了真正的密码，使得获得真实密码的概率大大降低。</p>
+<h4 id="实现原理："><a href="#实现原理：" class="headerlink" title="实现原理："></a>实现原理：</h4><p>加盐的实现过程通常是在需要散列的字段的特定位置增加特定的字符，打乱原始的字符串，使其生成的散列结果产生变化。比如，用户使用了一个密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x7faqgjw</div></pre></td></tr></table></figure>
+<p>经过MD5散列后，可以得出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">455e0e5c2bc109deae749e7ce0cdd397</div></pre></td></tr></table></figure>
+<p>但是由于用户密码位数不足，短密码的散列结果很容易被<a href="https://zh.wikipedia.org/wiki/%E5%BD%A9%E8%99%B9%E8%A1%A8" target="_blank" rel="external">彩虹表</a>破解，因此，在用户的密码末尾添加特定字符串（括号内的字体为加盐的字段）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x7faqgjw(abcdefghijklmnopqrstuvwxyz)</div></pre></td></tr></table></figure>
+<p>因此，加盐后的密码位数更长了，散列的结果也发生了变化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4a1690d5eb6c126ef68606dda68c2f79</div></pre></td></tr></table></figure>
+<p>以上就是加盐过程的简单描述，在实际使用过程中，还需要通过特定位数插入、倒序或多种方法对原始密码进行固定的加盐处理，使得散列的结果更加不容易被破解或轻易得到原始密码，比如（括号内的字体为加盐字符串）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x7(a)fa(b)qg(c)jw</div></pre></td></tr></table></figure>
+<h3 id="6-钥匙串加密方式"><a href="#6-钥匙串加密方式" class="headerlink" title="6 钥匙串加密方式"></a>6 钥匙串加密方式</h3><p>iCloud钥匙串,苹果给我们提供的密码保存的解决方案,iOS7之后有的</p>
+<p>存沙盒：</p>
+<p>1、如果手机越狱，密码容易被窃取。</p>
+<p>2、当软件更新时，沙盒里的内容是不被删除的。但是，如果将软件卸载后重装，沙盒里的数据就没有了。</p>
+<p>3、每个APP的沙盒是相对独立的，密码无法共用。</p>
+<p>存钥匙串里：</p>
+<p>1、苹果提供的安全方案，rsa加密，相对安全。</p>
+<p>2、无论软件更新或删除，密码都存在，都可以自动登录。</p>
+<p>3、同一公司的APP密码是可以共用的。</p>
+<h3 id="7-对称加密算法"><a href="#7-对称加密算法" class="headerlink" title="7 对称加密算法"></a>7 对称加密算法</h3><p>优点：算法公开、计算量小、加密速度快、加密效率高、可逆</p>
+<p>缺点：双方使用相同钥匙，安全性得不到保证</p>
+<p>现状：对称加密的速度比公钥加密快很多，在很多场合都需要对称加密，</p>
+<p>算法: 在对称加密算法中常用的算法有：<a href="http://baike.baidu.com/view/7510.htm" target="_blank" rel="external">DES</a>、<a href="http://baike.baidu.com/view/350958.htm" target="_blank" rel="external">3DES</a>、TDEA、<a href="http://baike.baidu.com/view/2208941.htm" target="_blank" rel="external">Blowfish</a>、RC2、RC4、<a href="http://baike.baidu.com/view/734720.htm" target="_blank" rel="external">RC5</a>、<a href="http://baike.baidu.com/view/92629.htm" target="_blank" rel="external">IDEA</a>、SKIPJACK、AES等。不同算法的实现机制不同，可参考对应算法的详细资料</p>
+<p>相较于DES和3DES算法而言，AES算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准</p>
+<p>nECB ：电子代码本，就是说每个块都是独立加密的</p>
+<p>nCBC ：密码块链，使用一个密钥和一个初始化向量 (IV)对数据执行加密转换</p>
+<p>ECB和CBC区别：CBC更加复杂更加安全，里面加入了8位的向量（8个0的话结果等于ECB）。在明文里面改一个字母，ECB密文对应的那一行会改变，CBC密文从那一行往后都会改变。</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fdfu3mtjaxj212i0fuaeb.jpg" alt=""></p>
+<h3 id="8-RSA加密-非对称加密算法-Secruty-framework系统库"><a href="#8-RSA加密-非对称加密算法-Secruty-framework系统库" class="headerlink" title="8 RSA加密(非对称加密算法)(Secruty.framework系统库)"></a>8 RSA加密(非对称加密算法)(Secruty.framework系统库)</h3><p>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）</p>
+<p>非对称加密中使用的主要算法有：<a href="http://baike.baidu.com/view/7520.htm" target="_blank" rel="external">RSA</a>、<a href="http://baike.baidu.com/view/2154827.htm" target="_blank" rel="external">Elgamal</a>、背包算法、Rabin、D-H、<a href="http://baike.baidu.com/view/46554.htm" target="_blank" rel="external">ECC</a>（椭圆曲线加密算法）等。</p>
+<p>公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密</p>
+<p>特点：</p>
+<p>非对称密码体制的特点：算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快</p>
+<p>对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了</p>
+<p>但是RSA加密算法效率较差，对大型数据加密时间很长，一般用于小数据。</p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fdfu3n2tsgj214g0f8gqi.jpg" alt=""></p>
 
     
 
@@ -433,8 +495,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/22/HBase1-3新版本-新特性预览/"
-        data-title="HBase1.3新版本 新特性预览">
+        data-url="https://stanxia.github.io/2017/03/08/几种常见的加密方式/"
+        data-title="几种常见的加密方式">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -450,21 +512,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/23/Hive与Impala/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/21/IntelliJ-Idea编译报错：javacTask-源发行版-1-7-需要目标发行版-1-7/" id="post_nav-older" class="next-content">
+        <a href="/2017/03/07/Alibaba代码规范/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
