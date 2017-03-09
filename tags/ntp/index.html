@@ -220,6 +220,12 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题1ntp同步时间过长
+解决方案修改 /etc/ntp.conf
+主节点配置：
+12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
+从节点配置：
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) iburst
+问题2ntp时间同步之后，显示非中国时区
 
         
         &nbsp;&nbsp;&nbsp;

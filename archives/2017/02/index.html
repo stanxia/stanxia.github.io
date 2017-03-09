@@ -220,7 +220,8 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              引言用IDE执行spark任务会出现很多的日志信息，当我们不需要看这些日志信息的时候该怎么整，如何优雅的搞掉这些日志，看看下面的，或许对你有帮助。
-
+内容添加以下代码：
+123456789import org.apache.log4j.&#123;Level, Logger&#125;//设置spark的日志级别为 warn，才会打印日志 Logger.getLogger("org.apache.spark").se...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -282,7 +283,16 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题描述在idea上运行spark程序时，出现以下信息：
-Spark error class “javax.servlet.Filt...
+Spark error class “javax.servlet.FilterRegistration”‘s signer information does not match signer information of other classes in the same package
+如图：
+
+看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。
+解决方案右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：
+
+Apply==&gt;Ok==&gt;运行试试！
+总结这个问题的解决方案很奇怪，以后明白了再回来说明下。
+Good Luck!
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -348,7 +358,17 @@ Spark error class “javax.servlet.Filt...
 
 需要hadoop
 
-下载spark...
+下载spark
+点我下载spark
+
+
+安装spark
+安装spark
+12tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ #解压到/opt/mv spark-1.6.0-bin-hadoop2.6 spark #重命名
+
+配置环境变量
+vi /etc/profile #配置环境变量
+12
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -410,6 +430,18 @@ Spark error class “javax.servlet.Filt...
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              话说IntelliJ IDEA这东西做的确实不错，但是对于一般人来说可能是有点不舍得花钱的，有钱还是建议买正版，这里也给出一些皮姐的方式。。。：
+
+适用于 IntelliJ IDEA (v2016.3.4)
+开始安装
+选择License server
+将这个网址添加进去： http://jetbrains.tech 
+确认
+试试行不行
+如果是IntelliJ IDEA v15.0.2 
+使用http://idea.lanyus.com，如果不行，可换为http://nfsgkyi.nrqw46lvomxgg33n.dresk.ru
+
+ 一手资料消息来源
+Good Luck!
 
         
         &nbsp;&nbsp;&nbsp;
@@ -473,7 +505,33 @@ Spark error class “javax.servlet.Filt...
         
              引言平时看到一些面试题就记录在这里，没吃过猪肉，也要多见见猪跑。
 持续更新。。。
+主体1. HashMap与HashTable的区别先说共同点：
+都是Map的实现类。都没有自带排序。如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap())
+如果在单线程的情况下，建议使用HashMap,性能会更高。
+如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.
+总体而言，HashMap提供的api更丰富，因而还是建议首先考虑HashMap.
+Note:ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。
 
+
+
+
+是否支持null
+是否synchronized
+是否安全
+迭代器
+
+
+
+
+HashMap
+支持null为key和value
+不是synchronized
+线程不安全
+fail-safe迭代器
+
+
+HashTable
+不支持null...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -534,7 +592,13 @@ Spark error class “javax.servlet.Filt...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题详情：在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job 
+             问题详情：在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job  1456252725626  0001的位置。
+问题原因：遇到了问题，首先从哪里找？当发现问题的时候，首先去查看相应的日志，查找问题产生的原因，对症下药。
+在hadoop2.6以及以上版本中，mapreduce任务都是交给yarn资源管理器 管理的，所以首先去 查看 yarn-hadoop-nodemanager-slave01.log 日志。
+终端输入：
+cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
+如果显示如下信息：
+1INFO org.apache.hadoop.ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8031. Already tried 4 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -595,7 +659,11 @@ Spark error class “javax.servlet.Filt...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             HiveQl执行过程：==》驱动模块==》编译器进行编译  Antlr==》优化器进行优...
+             HiveQl执行过程：==》驱动模块==》编译器进行编译  Antlr==》优化器进行优化==》执行器执行（执行map reduce任务）   全表扫描* 不会执行 map reduce 任务
+HiveQL查询的 MapReduce 作业转化流程：==》用户输入sql==》抽象语法树 AST Tree==》查询块 QueryBlock==》逻辑查询计划  OperatorTree==》重写逻辑查询计划==》物理计划==》选择最优的优化查询策略==》输出
+
+Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala适合实时的sql查询2.Hive依赖于MapReduce，执行计划组合成管道形的MapReduce任务模式；Impala执行计划表现为一颗完整的执行计划树3.Hive在查询过程中，内存不够用时会使用外存；Impala在内存不够用时，不会使用外存，所有Impala在查询的时候会存在一定的限制
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -659,7 +727,12 @@ Spark error class “javax.servlet.Filt...
              新版本特性2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：
 
 支持分层数据的压缩
-...
+多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等
+
+新特性解析分层压缩使用场景：数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。
+解决痛点：使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。
+多预写日志每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。
+新特性改进后的 多预写日志(WAL) 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -720,7 +793,11 @@ Spark error class “javax.servlet.Filt...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题一：java compiler error
+             问题一：java compiler error运行java程序时，编译报错：java compiler error，如下图所示：
+
+解决办法打开idea设置=&gt;&gt;Build,Execution,Deployment=&gt;&gt;Compiler=&gt;&gt;Java Compiler=&gt;&gt;左边框Pre-module bytecode version =&gt;&gt;找到程序所在的模块=&gt;&gt;Target Bytecode version 选择提示中的需要目标发行版本=&gt;&gt;Apply=&gt;&gt;ok,如下图所示：
+
+问题二：Usage of API documented as  @since 1.6/1.7/…当使用了一些api...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -781,7 +858,16 @@ Spark error class “javax.servlet.Filt...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的...
+             前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
+眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术支柱，感到很欣慰。
+从重构原因，技术架构，踩过的坑，后续持续改进四个方面来描述酷狗音乐大数据平台重构的过程，在此抛砖引玉，这次的内容与6月份在高可用架构群分享的大数据技术实践的有点不同，技术架构做了些调整。
+其实大数据平台是一个庞大的系统工程，整个建设周期很长，涉及的生态链很长(包括：数据采集、接入，清洗、存储计算、数据挖掘，可视化等环节，每个环节都可以当做一个复杂的系统来建设)，风险也很大。
+一、重构原因在讲重构原因前，先介绍下原有的大数据平台架构，如下图：
+
+从上图可知，主要基于Hadoop1.x+hive做离线计算(T+1)，基于大数据平台的数据采集、数据接入、数据清洗、作业调度、平台监控几个环节存在的一些问题来列举下。
+数据采集：
+
+数据收集接口众多，且数据格式混乱，基本每个业务都有自己的上报接口...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -843,7 +929,8 @@ Spark error class “javax.servlet.Filt...
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              简介利用flume1.7抓取数据，传入到kafka
-
+配置文件设置在flume/conf/新建一个 kafka.conf,修改该文件,相关配置如下：
+12345678910111213141516171819202122232425
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -905,7 +992,19 @@ Spark error class “javax.servlet.Filt...
              yarn三种调度机制
 FIFO Scheduler先进先出调度机制
 
+Fair Scheduler公平调度机制
 
+Capacity Scheduler容量机制
+
+
+FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
+缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
+面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
+
+Capacity Scheduler定位：多人共享调度器。
+机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。
+特性：queue elasticity （弹性队列）根据实际情况分配资源
+...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -966,7 +1065,25 @@ FIFO Scheduler先进先出调度机制
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代...
+             初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
+Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。
+为什么用kafka一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。
+下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。
+kafka名词解释
+
+
+名词
+解释
+
+
+
+
+broker
+消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。
+
+
+topic
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1030,7 +1147,30 @@ FIFO Scheduler先进先出调度机制
              一：前提
 准备MYSQL JDBC驱动
 本机已经安装了JDK
-基于自己已有的HADOOP集群进行操作...
+基于自己已有的HADOOP集群进行操作
+在开启HIve之前，开启HDFS + YARN+ntpd时间同步
+
+二：HIVE下载
+HIVE的安装包下载
+
+wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
+
+然后解压
+
+tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/
+cd /opt/
+mv apache-hive-1.2.1-bin hive
+
+配置环境变量
+
+vi /etc/profile
+添加以下内容：
+HIVE_HOME=/opt/hive
+export PATH=$PATH:$HIVE_HOME/bin
+文件生效：
+source /etc/profile
+最好 ROOT用户与 HADOOP用户都执行一次
+三：安...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1090,6 +1230,13 @@ FIFO Scheduler先进先出调度机制
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”
+
+原因在MAC下安装一些软件时提示”来自身份不明开发者”，其实这是MAC新系统启用了新的安全机制。默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。换句话说就是 MAC 系统默认只能安装靠谱渠道（有苹果审核的 Mac App Store）下载的软件或被认可的人开发的软件。
+这当然是为了用户不会稀里糊涂安装流氓软件中招，但没有开发者签名的 “老实软件” 也受影响了，安装就会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”。
+解决方案
+最简单的方式：按住Control后，再次点击软件图标，即可。
+
+修改系统配置：系统偏好设置… -&gt; 安全性与隐私… -&gt;通用… -&gt;选择任何来源。
 
         
         &nbsp;&nbsp;&nbsp;
@@ -1152,6 +1299,12 @@ FIFO Scheduler先进先出调度机制
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题1ntp同步时间过长
+解决方案修改 /etc/ntp.conf
+主节点配置：
+12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
+从节点配置：
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) iburst
+问题2ntp时间同步之后，显示非中国时区
 
         
         &nbsp;&nbsp;&nbsp;
@@ -1212,6 +1365,8 @@ FIFO Scheduler先进先出调度机制
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题启动zookeeper时，出现以下异常信息：
+
+解决方案修改 ／zookeeper/conf/zoo.cfg文件修改服务器id和ip映射时注意格式为：12vi /zookeeper/conf/zoo.cfgserver.1=host:port:port或者host:port或者host:port:port:type
 
         
         &nbsp;&nbsp;&nbsp;
@@ -1274,6 +1429,39 @@ FIFO Scheduler先进先出调度机制
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              server.properties参数说明
+
+
+参数
+说明
+
+
+
+
+broker.id=0
+每一个broker在集群中的唯一表示，要求是正数。当该服务器的IP地址发生改变时，broker.id没有变化，则不会影响consumers的消息情况
+
+
+log.dirs=/data/kafka-logs
+kafka数据的存放地址，多个地址的话用逗号分割,多个目录分布在不同磁盘上可以提高读写性能  /data/kafka-logs-1，/data/kafka-logs-2
+
+
+port =9092
+broker server服务端口
+
+
+message.max.bytes =6525000
+表示消息体的最大大小，单位是字节
+
+
+num.network.threads =4
+broker处理消息的最大线程数，一般情况下数量为cpu核数
+
+
+num.io.threads =8
+broker处理磁盘IO的线程数，数值为cpu核数2倍
+
+
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1337,7 +1525,16 @@ FIFO Scheduler先进先出调度机制
              一、安装环境
 多台Linux服务器
 
-已经安装好zookeeper的集群（安装zook...
+已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）
+
+下载kafka
+点击选择需要下载的kafka版本
+或者直接在服务器上面下载：
+1wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz
+
+
+二、安装kafka创建项目目录：创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。
+12
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1402,7 +1599,17 @@ FIFO Scheduler先进先出调度机制
 查看表结构：desc tablename;
 查看详细表结构：desc formatted tablename;
 创建表：
-CREATE ...
+CREATE TABLE IF NOT EXISTS   xls.bank_xls(name STRING,cost INT)PARTITIONED BY (date STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘ ‘;
+创建一张和目标表结构一样的表CREATE TABLE IF NOT EXISTS xls.bank_xls LIKE wy.bank_wy;
+删除表：DROP TABLE IF EXISTS xls.bank_xls;
+清空表数据，但不删除表：TRUNCATE TABLE xls.bank_xlsx;
+导入本地数据到hive表中：LOAD DATA INPATH ‘/tmp/xls/20170103_customer_tx.txt’ OVERWRITE INTO TABLE xls.bank_xls PARTITION (date=to_date(‘20170103’));
+查看表中的内容：SLELCT * FROM xls.bank_xls;
+SELECT name,sum(cost) FROM xls.bank_xls WHERE date=’20170105’ GROUP BY name;
+hdfs dfs -ls /user/hive/warehouse/xls.db/bank_xls
+hadoop jar /root/makebankrecord.jar MakeBankRecord
+hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
+文件监听器
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1463,7 +1670,12 @@ CREATE ...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一、环境准备
+             一、环境准备服务器准备：Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。
+jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。
+下载zookeeper：点我下载zookeeper
+或者直接在服务器上面下载：
+1wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1526,7 +1738,23 @@ CREATE ...
         
              1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
 2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
-3.配置hostnamevi ...
+3.配置hostnamevi /etc/sysconfig/networkNETWORKING=yesHOSTNAME=master
+4.vi /etc/hostname
+#删除文件内容  ,然后输入master
+5.修改host映射vi /etc/hosts
+10.211.55.9 master
+#ipDress1为master服务器的IP地址
+6.selinux 关闭vi /etc/sysconfig/selinuxSELINUX=disable
+7.重启reboot
+8.更改防火墙systemctl stop firewalldsystemctl disable firewalldsystemctl status firewalld
+9.安装时间同步服务yum -y install ntpvi /etc/ntp.conf
+#注释掉所有的server..* 的指向 ，新添加一条可连接的ntp服务器server ntp.sjtu.edu.cn iburst
+#启动时间同步服务service ntpd start 
+#执行命令ntpdate -u 1.asia.pool.ntp.org
+#重启时间同步服务service ntpd restart
+10.ssh无密码登陆配置ssh-keygen -t rsa #一直使用默认
+11.安装mysql
+#查看mysql是否意境安装：rpm -qa | grep mariadb 
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1587,7 +1815,12 @@ CREATE ...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：解压hadoop.tar.gz和jdk...
+             一：解压hadoop.tar.gz和jdk安装包
+将hadoop和jdk解压在/opt目录下面
+12tar -zxvf jdk1.8.gz -C /opt/  #解压jdk到/opt下tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ #解压hadoop到/opt
+
+在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）
+12mv hadoop-2.6.0 hadoop #hadoop文件夹重命名mv jdk1.8 jdk #jdk文件夹重命名
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -1650,7 +1883,10 @@ CREATE ...
         
              1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
 cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到h...
+ 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
+2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
+scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
+
         
         &nbsp;&nbsp;&nbsp;
         <span>

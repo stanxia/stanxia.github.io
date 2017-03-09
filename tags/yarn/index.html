@@ -220,7 +220,19 @@
              yarn三种调度机制
 FIFO Scheduler先进先出调度机制
 
+Fair Scheduler公平调度机制
 
+Capacity Scheduler容量机制
+
+
+FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
+缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
+面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
+
+Capacity Scheduler定位：多人共享调度器。
+机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。
+特性：queue elasticity （弹性队列）根据实际情况分配资源
+...
         
         &nbsp;&nbsp;&nbsp;
         <span>

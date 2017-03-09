@@ -219,7 +219,13 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么j...
+             什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。
+jvm的组成部分
+Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。（注意：并不会加载所有的.class文件，而是只加载符合class规范的文件。可阅读中的第四章”The Class File Format”）
+
+Execution Engine 执行引擎也叫做解释器(Interpreter)，负责解释命令，提交操作系统执行。
+
+Native Interface 本地接口本地接口的作用是融合不同的语言为java所用。
         
         &nbsp;&nbsp;&nbsp;
         <span>

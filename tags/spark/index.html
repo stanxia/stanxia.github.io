@@ -219,7 +219,10 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题Spark Streaming 连接kafka报错：kafka.cluster.BrokerEndPoint cannot be cast to kafk...
+             问题Spark Streaming 连接kafka报错：kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker
+解决方案Spark Streaming默认使用的是Kafka 0.8.2.1，将kafka的版本改为0.8.2.1
+Good Luck!
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -281,6 +284,10 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题spark stream无法收取到kafka发过来的消息
+解决方案找到集群中 kafka的server.properties，修改如下：
+vi server.properties
+12listeners=PLAINTEXT://slave2xls:9092    #改为本主机的ip：portport=9092
+
 
         
         &nbsp;&nbsp;&nbsp;
@@ -343,7 +350,8 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              引言用IDE执行spark任务会出现很多的日志信息，当我们不需要看这些日志信息的时候该怎么整，如何优雅的搞掉这些日志，看看下面的，或许对你有帮助。
-
+内容添加以下代码：
+123456789import org.apache.log4j.&#123;Level, Logger&#125;//设置spark的日志级别为 warn，才会打印日志 Logger.getLogger("org.apache.spark").se...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -405,7 +413,16 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题描述在idea上运行spark程序时，出现以下信息：
-Spark error class “javax.servlet.Filt...
+Spark error class “javax.servlet.FilterRegistration”‘s signer information does not match signer information of other classes in the same package
+如图：
+
+看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。
+解决方案右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：
+
+Apply==&gt;Ok==&gt;运行试试！
+总结这个问题的解决方案很奇怪，以后明白了再回来说明下。
+Good Luck!
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -471,7 +488,17 @@ Spark error class “javax.servlet.Filt...
 
 需要hadoop
 
-下载spark...
+下载spark
+点我下载spark
+
+
+安装spark
+安装spark
+12tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ #解压到/opt/mv spark-1.6.0-bin-hadoop2.6 spark #重命名
+
+配置环境变量
+vi /etc/profile #配置环境变量
+12
         
         &nbsp;&nbsp;&nbsp;
         <span>

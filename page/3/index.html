@@ -217,6 +217,13 @@
         
              问题下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”
 
+原因在MAC下安装一些软件时提示”来自身份不明开发者”，其实这是MAC新系统启用了新的安全机制。默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。换句话说就是 MAC 系统默认只能安装靠谱渠道（有苹果审核的 Mac App Store）下载的软件或被认可的人开发的软件。
+这当然是为了用户不会稀里糊涂安装流氓软件中招，但没有开发者签名的 “老实软件” 也受影响了，安装就会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”。
+解决方案
+最简单的方式：按住Control后，再次点击软件图标，即可。
+
+修改系统配置：系统偏好设置… -&gt; 安全性与隐私… -&gt;通用… -&gt;选择任何来源。
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -278,6 +285,12 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题1ntp同步时间过长
+解决方案修改 /etc/ntp.conf
+主节点配置：
+12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
+从节点配置：
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) iburst
+问题2ntp时间同步之后，显示非中国时区
 
         
         &nbsp;&nbsp;&nbsp;
@@ -338,6 +351,8 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              问题启动zookeeper时，出现以下异常信息：
+
+解决方案修改 ／zookeeper/conf/zoo.cfg文件修改服务器id和ip映射时注意格式为：12vi /zookeeper/conf/zoo.cfgserver.1=host:port:port或者host:port或者host:port:port:type
 
         
         &nbsp;&nbsp;&nbsp;
@@ -400,6 +415,39 @@
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
              server.properties参数说明
+
+
+参数
+说明
+
+
+
+
+broker.id=0
+每一个broker在集群中的唯一表示，要求是正数。当该服务器的IP地址发生改变时，broker.id没有变化，则不会影响consumers的消息情况
+
+
+log.dirs=/data/kafka-logs
+kafka数据的存放地址，多个地址的话用逗号分割,多个目录分布在不同磁盘上可以提高读写性能  /data/kafka-logs-1，/data/kafka-logs-2
+
+
+port =9092
+broker server服务端口
+
+
+message.max.bytes =6525000
+表示消息体的最大大小，单位是字节
+
+
+num.network.threads =4
+broker处理消息的最大线程数，一般情况下数量为cpu核数
+
+
+num.io.threads =8
+broker处理磁盘IO的线程数，数值为cpu核数2倍
+
+
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -463,7 +511,16 @@
              一、安装环境
 多台Linux服务器
 
-已经安装好zookeeper的集群（安装zook...
+已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）
+
+下载kafka
+点击选择需要下载的kafka版本
+或者直接在服务器上面下载：
+1wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz
+
+
+二、安装kafka创建项目目录：创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。
+12
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -528,7 +585,17 @@
 查看表结构：desc tablename;
 查看详细表结构：desc formatted tablename;
 创建表：
-CREATE ...
+CREATE TABLE IF NOT EXISTS   xls.bank_xls(name STRING,cost INT)PARTITIONED BY (date STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘ ‘;
+创建一张和目标表结构一样的表CREATE TABLE IF NOT EXISTS xls.bank_xls LIKE wy.bank_wy;
+删除表：DROP TABLE IF EXISTS xls.bank_xls;
+清空表数据，但不删除表：TRUNCATE TABLE xls.bank_xlsx;
+导入本地数据到hive表中：LOAD DATA INPATH ‘/tmp/xls/20170103_customer_tx.txt’ OVERWRITE INTO TABLE xls.bank_xls PARTITION (date=to_date(‘20170103’));
+查看表中的内容：SLELCT * FROM xls.bank_xls;
+SELECT name,sum(cost) FROM xls.bank_xls WHERE date=’20170105’ GROUP BY name;
+hdfs dfs -ls /user/hive/warehouse/xls.db/bank_xls
+hadoop jar /root/makebankrecord.jar MakeBankRecord
+hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
+文件监听器
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -589,7 +656,12 @@ CREATE ...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一、环境准备
+             一、环境准备服务器准备：Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。
+jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。
+下载zookeeper：点我下载zookeeper
+或者直接在服务器上面下载：
+1wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -652,7 +724,23 @@ CREATE ...
         
              1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
 2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
-3.配置hostnamevi ...
+3.配置hostnamevi /etc/sysconfig/networkNETWORKING=yesHOSTNAME=master
+4.vi /etc/hostname
+#删除文件内容  ,然后输入master
+5.修改host映射vi /etc/hosts
+10.211.55.9 master
+#ipDress1为master服务器的IP地址
+6.selinux 关闭vi /etc/sysconfig/selinuxSELINUX=disable
+7.重启reboot
+8.更改防火墙systemctl stop firewalldsystemctl disable firewalldsystemctl status firewalld
+9.安装时间同步服务yum -y install ntpvi /etc/ntp.conf
+#注释掉所有的server..* 的指向 ，新添加一条可连接的ntp服务器server ntp.sjtu.edu.cn iburst
+#启动时间同步服务service ntpd start 
+#执行命令ntpdate -u 1.asia.pool.ntp.org
+#重启时间同步服务service ntpd restart
+10.ssh无密码登陆配置ssh-keygen -t rsa #一直使用默认
+11.安装mysql
+#查看mysql是否意境安装：rpm -qa | grep mariadb 
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -713,7 +801,12 @@ CREATE ...
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：解压hadoop.tar.gz和jdk...
+             一：解压hadoop.tar.gz和jdk安装包
+将hadoop和jdk解压在/opt目录下面
+12tar -zxvf jdk1.8.gz -C /opt/  #解压jdk到/opt下tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ #解压hadoop到/opt
+
+在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）
+12mv hadoop-2.6.0 hadoop #hadoop文件夹重命名mv jdk1.8 jdk #jdk文件夹重命名
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -776,7 +869,10 @@ CREATE ...
         
              1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
 cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到h...
+ 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
+2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
+scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
+
         
         &nbsp;&nbsp;&nbsp;
         <span>

@@ -219,6 +219,8 @@
         
              问题启动zookeeper时，出现以下异常信息：
 
+解决方案修改 ／zookeeper/conf/zoo.cfg文件修改服务器id和ip映射时注意格式为：12vi /zookeeper/conf/zoo.cfgserver.1=host:port:port或者host:port或者host:port:port:type
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -279,7 +281,12 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一、环境准备
+             一、环境准备服务器准备：Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。
+jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。
+下载zookeeper：点我下载zookeeper
+或者直接在服务器上面下载：
+1wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
