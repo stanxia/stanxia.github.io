@@ -10,7 +10,7 @@
     
     <title>
         
-            标签: 代码规范 | 
+            归档: 2017/9 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: 代码规范 | 小世界，大梦想">
+    <meta property="og:title" content="归档: 2017/9 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -207,29 +207,49 @@
     <!-- Post Thumbnail -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdhxnwnqgmj211h0s4af4.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdhxdv455gj210410443h.jpg)">
     
 
         <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/03/07/Alibaba代码规范/">Alibaba代码规范</a></p>
+        <p class="article-headline-p"><a href="/2017/09/26/面试题集锦/">面试题集锦</a></p>
     </div>
 
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             
+             引言平时看到一些面试题就记录在这里，没吃过猪肉，也要多见见猪跑。
+持续更新。。。
+算法1. HashMap与HashTable的区别先说共同点：
+都是Map的实现类。都没有自带排序。如果在多线程的情况下使用HashMap，需要使用Collections.SynchronizeMap(new HashMap())
+如果在单线程的情况下，建议使用HashMap,性能会更高。
+如果在多线程的情况下，也可以使用上述方法将HashMap实现线程安全，从而使用HashMap.
+总体而言，HashMap提供的api更丰富，因而还是建议首先考虑HashMap.
+Note:ConcurrentHashMap是良好的HashTable的替代品，实现了更好的拓展。也可以考虑使用。
 
 
 
 
+是否支持null
+是否synchronized
+是否安全
+迭代器
 
 
 
 
+HashMap
+支持null为key和value
+不是synchronized
+线程不安全
+fail-safe迭代器
+
+
+HashTable
+不支持null...
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/2017/03/07/Alibaba代码规范/" target="_self">继续阅读</a>
+            <a href="/2017/09/26/面试题集锦/" target="_self">继续阅读</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -241,13 +261,13 @@
             </div>
             <div>
                 <strong>夏</strong>
-                <span>3月 07, 2017</span>
+                <span>9月 26, 2017</span>
             </div>
         </div>
         <div id="post_entry-right-info">
             <!-- Category -->
             <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/java/">java</a>
+                <a class="post_category-link" href="/categories/面试题/">面试题</a>
             </span>
 
             
@@ -497,6 +517,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
