@@ -217,22 +217,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             yarn三种调度机制
-FIFO Scheduler先进先出调度机制
-
-Fair Scheduler公平调度机制
-
-Capacity Scheduler容量机制
-
-
-FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
-缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
-面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
-
-Capacity Scheduler定位：多人共享调度器。
-机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。
-特性：queue elasticity （弹性队列）根据实际情况分配资源
-...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -374,7 +359,7 @@ Capacity Scheduler定位：多人共享调度器。
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -388,7 +373,7 @@ Capacity Scheduler定位：多人共享调度器。
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -439,7 +424,7 @@ Capacity Scheduler定位：多人共享调度器。
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

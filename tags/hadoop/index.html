@@ -207,6 +207,65 @@
     <!-- Post Thumbnail -->
     
         <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdkh5o6xr6j21b80zwjzz.jpg)">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/03/12/hadoop集群动态添加删除节点/">hadoop集群动态添加删除节点</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+             
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/03/12/hadoop集群动态添加删除节点/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
+            </div>
+            <div>
+                <strong>夏</strong>
+                <span>3月 12, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/大数据/">大数据</a>
+            </span>
+
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
+                </span>
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+    
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdhy1vjo7gj21460eaq4z.jpg)">
     
 
@@ -217,8 +276,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前提下载主要jar包：filecrush-2.0-SNAPSHOT.jar密码: x9mh
-执行1234567891011Hadoop jar filecrush-2.0-SNAPSHOT.jar crush.Crush \-Ddfs.block.size=134217728 \--input-format=text  \--output-format=text \
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -279,25 +337,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
-2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
-3.配置hostnamevi /etc/sysconfig/networkNETWORKING=yesHOSTNAME=master
-4.vi /etc/hostname
-#删除文件内容  ,然后输入master
-5.修改host映射vi /etc/hosts
-10.211.55.9 master
-#ipDress1为master服务器的IP地址
-6.selinux 关闭vi /etc/sysconfig/selinuxSELINUX=disable
-7.重启reboot
-8.更改防火墙systemctl stop firewalldsystemctl disable firewalldsystemctl status firewalld
-9.安装时间同步服务yum -y install ntpvi /etc/ntp.conf
-#注释掉所有的server..* 的指向 ，新添加一条可连接的ntp服务器server ntp.sjtu.edu.cn iburst
-#启动时间同步服务service ntpd start 
-#执行命令ntpdate -u 1.asia.pool.ntp.org
-#重启时间同步服务service ntpd restart
-10.ssh无密码登陆配置ssh-keygen -t rsa #一直使用默认
-11.安装mysql
-#查看mysql是否意境安装：rpm -qa | grep mariadb 
+             1.如果存在jdk：卸载方式：rpm -...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -358,12 +398,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：解压hadoop.tar.gz和jdk安装包
-将hadoop和jdk解压在/opt目录下面
-12tar -zxvf jdk1.8.gz -C /opt/  #解压jdk到/opt下tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ #解压hadoop到/opt
-
-在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）
-12mv hadoop-2.6.0 hadoop #hadoop文件夹重命名mv jdk1.8 jdk #jdk文件夹重命名
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -424,12 +459,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
-cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
-
+             1.ssh-keygen -t rsa -P ‘...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -571,7 +601,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -585,7 +615,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -636,7 +666,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

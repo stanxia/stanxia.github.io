@@ -10,7 +10,7 @@
     
     <title>
         
-            hadoop原生集群搭建 | 
+            hadoop集群动态添加删除节点 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="hadoop原生集群搭建 | 小世界，大梦想">
+    <meta property="og:title" content="hadoop集群动态添加删除节点 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一：解压hadoop-tar-gz和jdk安装包"><span class="post-toc-number">1.</span> <span class="post-toc-text">一：解压hadoop.tar.gz和jdk安装包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二：设置SSH互信："><span class="post-toc-number">2.</span> <span class="post-toc-text">二：设置SSH互信：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三：修改配置文件："><span class="post-toc-number">3.</span> <span class="post-toc-text">三：修改配置文件：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三：总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">三：总结</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态添加节点"><span class="post-toc-number">1.</span> <span class="post-toc-text">动态添加节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加DataNode"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">添加DataNode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加NodeManager"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">添加NodeManager</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态删除节点"><span class="post-toc-number">2.</span> <span class="post-toc-text">动态删除节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">步骤</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,19 +245,11 @@
                 
     <!-- Paradox Post Header -->
     
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
-        
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdkh5o6xr6j21b80zwjzz.jpg)">
     
             <p class="article-headline-p">
-                hadoop原生集群搭建
+                hadoop集群动态添加删除节点
             </p>
         </div>
 
@@ -276,7 +268,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 11, 2017</span>
+        <span>3月 12, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +289,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3klEQVR42u3aS27jMBAFQN//0pltgMDKe2x5YpOllWApNItedPrz+DryemBjY2NjY2NjY2O/JfsRXz/f//5Jstov27p8P/+WpytgY2Njb81ONvSMnRzH9Sf5Ua7tGRsbG/scdrKJZ3/Vhrd20zfsGRsbGxv78j5Pb/JU5Hp9bGxsbOx5AMsDUg7L0x5sbGxs7FGBJg5drzjQP6ilYWNjY789u230vsP9H/S3sbGxsd+S3V75KE8SopKWw10XNjY29q7spE07af1eg/M2cPvti7U0bGxs7A9kJ+BJ4X7taXJ89cFhY2NjH8y+Rubl/teVsZIEBhsbG3tv9l0haq3cv9YqrgeGsLGxsQ9gtyWbNgjl4ziTdRYbvdjY2NjbsdvBx2SMcnJAOb4oKmFjY2NvxF4r8SwWd8r32+D69E1sbGzsTdn5FtcGetr1r1eOUo52UgkbGxt7C/a9AWytGTAvLRWNXmxsbOyN2HnAyBsGk3JV3iRODgUbGxv7NHYe2PK2wWTcp/15fnmKjY2NvSl7gpkP36ylJWsBGBsbG3tvdgvLw9V8EDNpTkQhGRsbG3tTdrJEG3LuKvSvNYwX2wPY2NjYH85e20Q7ptM2BibUKIBhY2NjH8NuDyUPfskhtonNbQEMGxsb+0PYScFoPiI5OYK15nFdS8PGxsb+WHa+UP5Ovum8JdAmQtjY2NinsdcarnlKUDdly2Zw9FNhY2Njb8rOl2vDWzso2Q5x1sOd2NjY2Juy84brK8DzkFYUs7CxsbEPYM/L8fm4ZFEMGqdJ2NjY2Huz5//it+FwrQiV32NjY2OfyZ40X5ME466nSdIyqqVhY2Njfzh7rYTUtl3zcNged1FUwsbGxj6YPSnotyWqpKnwnwIYNjY29nbs67CUHFYe/G4rcmFjY2MfwE5SgmSLSWjJk5CkmYGNjY2NPS/Z3DWa0/LydgI2Njb2ruxzLmxsbGxsbGxsbOy3uf4Bn0DYuw2/NvsAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACxElEQVR42u3aO1bEMBAEwL3/pSElwXRrvGCkUrQPvLJKBMN8Xh9Hrhc2NjY2NjY2Njb2I9mveP2w6TfP5Ht+/Uny2/bM2NjY2Huz10jXR8wvLjn69aVEp8LGxsY+gL32yvy4a5dyTSrei42NjY0df853ToIZNjY2NvY72G2JJy8/PTqAYWNjYz+enb8mP0oSqNpg9ge1NGxsbOzHs/Mg9JzPv9rfxsbGxn4wu11JWpIkLW3T92O8sLGxsXdl54Hhh3/0x4Wk6++unRMbGxv7BPak4N62afPftgE1ag9jY2Njb81uizjzMNYmLWvFJmxsbOwT2O1YZBJy1kYt26up/yTY2NjYm7KTos+8TJ8XqpI2c/4MNjY29gnsuxoA199qA+HaM9jY2Ngns/Pw0yYVk3L/XQkPNjY29mnspMTTJhg5eO29NwQwbGxs7H/Lbhu0k+fvouYNDGxsbOwT2K9gzVOUefhp98fGxsY+hz0p8SetgnZws20YF0kRNjY29qbs/Cj5WOTocONBzG8t2NjY2Juy84O2zdq1RkI7WFkkTtjY2NibspNxxuvn1zBtujJpDGBjY2PvzW5DSNFYLVOF/FttuQobGxt7b3Z+9DwIraUNNaP8k2BjY2Pvzc6btWut3LYlkBezivFNbGxs7APYkyvIg9a8bNReDTY2NvYJ7HwUpg17+Q75pSyGW2xsbOwD2PNkoN0hv+K1AhY2Njb2aey8QP+O8JO0ctsBIGxsbOwT2O2apwdr5aFJ2oONjY29N7sNEmtlo/kgZv65iNvY2NjYG7HboJU3fZOLWLvWGwIYNjY29nbsyWDNWgBrm8p5YoONjY2Nfde4TDt8+Y4dsLGxsbGTINGGonznSXsYGxsb+zR23mT9nUGfm9+OjY2NvTV7UrjJG8MTTJ5+vKW/jY2Njf1g9jkLGxsbGxsbGxsb+zHrE3NZchRB0fc5AAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -323,7 +315,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/11/hadoop原生集群搭建/" class="leancloud-views_num" data-flag-title="hadoop原生集群搭建">
+                <span id="/2017/03/12/hadoop集群动态添加删除节点/" class="leancloud-views_num" data-flag-title="hadoop集群动态添加删除节点">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +327,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=hadoop原生集群搭建&url=https://stanxia.github.io//2017/02/11/hadoop原生集群搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=hadoop集群动态添加删除节点&url=https://stanxia.github.io//2017/03/12/hadoop集群动态添加删除节点/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +336,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=hadoop原生集群搭建&url=https://stanxia.github.io//2017/02/11/hadoop原生集群搭建/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=hadoop集群动态添加删除节点&url=https://stanxia.github.io//2017/03/12/hadoop集群动态添加删除节点/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +345,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/11/hadoop原生集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/03/12/hadoop集群动态添加删除节点/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +354,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/11/hadoop原生集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/03/12/hadoop集群动态添加删除节点/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +366,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=hadoop原生集群搭建&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/11/hadoop原生集群搭建/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=hadoop集群动态添加删除节点&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/03/12/hadoop集群动态添加删除节点/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,77 +384,74 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一：解压hadoop-tar-gz和jdk安装包"><a href="#一：解压hadoop-tar-gz和jdk安装包" class="headerlink" title="一：解压hadoop.tar.gz和jdk安装包"></a>一：解压hadoop.tar.gz和jdk安装包</h2><ol>
-<li><p>将hadoop和jdk解压在/opt目录下面</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf jdk1.8.gz -C /opt/  <span class="comment">#解压jdk到/opt下</span></div><div class="line">tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ <span class="comment">#解压hadoop到/opt</span></div></pre></td></tr></table></figure>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="动态添加节点"><a href="#动态添加节点" class="headerlink" title="动态添加节点"></a>动态添加节点</h2><h3 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h3><ol>
+<li><p>准备新节点的操作系统，安装好需要的软件</p>
 </li>
-<li><p>在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv hadoop-2.6.0 hadoop <span class="comment">#hadoop文件夹重命名</span></div><div class="line">mv jdk1.8 jdk <span class="comment">#jdk文件夹重命名</span></div></pre></td></tr></table></figure>
+<li><p>将hadoop的配置文件scp到新的节点上(复制hadoop目录的时候在新节点上清理下hadoop目录下的日志文件或者数据文件)</p>
 </li>
-</ol>
-<h2 id="二：设置SSH互信："><a href="#二：设置SSH互信：" class="headerlink" title="二：设置SSH互信："></a>二：设置SSH互信：</h2><ol>
-<li><p>在每台服务器上面设置SSH无密码登录：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -p <span class="string">''</span> <span class="comment">#-t rsa 表示通过rsa 算法处理 ；-p '' 设置密码为‘’ 即为空</span></div></pre></td></tr></table></figure>
+<li><p>实现ssh无密码登录（ssh-copy-id命令实现，可以免去cp *.pub文件后的权限修改）</p>
 </li>
-<li><p>拷贝每台服务器上面的 idrsa.pub ：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~ <span class="comment">#到当前用户目录</span></div><div class="line"><span class="built_in">cd</span> .ssh <span class="comment">#到存放idrsa.pub 的目录</span></div><div class="line">scp idrsa.pub hadoop@master:/home/hadoop/.ssh/ <span class="comment">#所有服务器上面的idrsa.pub都传给master</span></div><div class="line">touch authorized_keys <span class="comment">#matsr新建authorized_keys文件，存放所有服务器的idrsa.pub公匙</span></div><div class="line">scp authorized_keys hadoop@slave1:/home/hadoop/.ssh/ <span class="comment">#将authorized_keys复制给集群中的所有服务器</span></div></pre></td></tr></table></figure>
+<li><p>修改系统hostname（通过hostname和/etc/sysconfig/network进行修改）</p>
 </li>
-<li><p>试试效果：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh slave1 <span class="comment">#如果不需要输密码，则证明配置成功；若配置失败，再进行一次第二步操作</span></div></pre></td></tr></table></figure>
+<li><p>修改hosts文件，将集群所有节点hosts配置进去（集群所有节点保持hosts文件统一）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/hosts <span class="comment">#追加新添加的节点</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>修改主节点slave文件，添加新增节点的ip信息（集群重启时使用）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi <span class="variable">$HADOOP_HOME</span>/etc/hadoop/slaves <span class="comment">#追加新添加的节点</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="三：修改配置文件："><a href="#三：修改配置文件：" class="headerlink" title="三：修改配置文件："></a>三：修改配置文件：</h2><ol>
-<li><p>修改/etc/profile配置java hadoop环境变量</p>
-<p><code>vi /etc/profile</code></p>
-<p>添加如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/opt/jdk1.8</div><div class="line">export HADOOP_HOME=/opt/hadoop</div><div class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin</div></pre></td></tr></table></figure>
+<h3 id="添加DataNode"><a href="#添加DataNode" class="headerlink" title="添加DataNode"></a>添加DataNode</h3><ol>
+<li><p>在新增的节点上，运行sbin/hadoop-daemon.sh start datanode即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$HADOOP_HOME</span>/sbin/hadoop-daemon.sh start datanode</div></pre></td></tr></table></figure>
 </li>
-<li><p>配置/etc/hostname（重启生效）</p>
-<p><code>vi /etc/hostname</code></p>
-<p>添加该机的服务器名（例如namenode所在的服务器就写 master）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">master</div></pre></td></tr></table></figure>
+<li><p>刷新</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfsadmin -refreshNodes</div></pre></td></tr></table></figure>
 </li>
-<li><p>配置 /etc/hosts（重启生效）</p>
-<p><code>vi /etc/hosts</code></p>
-<p>配置集群所有服务器的IP与hostname映射关系：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">192.168.1.121 master</div><div class="line">192.168.1.122 slave1</div><div class="line">192.168.1.123 slave2</div></pre></td></tr></table></figure>
+<li><p>然后在namenode通过hdfs dfsadmin -report查看集群情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfsadmin -report</div></pre></td></tr></table></figure>
 </li>
-<li><p>配置/etc/sysconfig/network</p>
-<p><code>vi /etc/sysconfig/network</code></p>
-<p>添加如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NETWORKING=yes</div><div class="line">HOSTNAME=master</div></pre></td></tr></table></figure>
+<li><p>最后还需要对hdfs负载设置均衡，因为默认的数据传输带宽比较低，可以设置为64M，即hdfs dfsadmin -setBalancerBandwidth 67108864即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfsadmin -setBalancerBandwidth 67108864 <span class="comment">#设置带宽为 64M/S</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>关闭防火墙(必须关闭防火墙，否则会出现很多问题)</p>
-<p>直接在命令行执行以下代码：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">systemctl stop firewalld <span class="comment">#关闭防火墙</span></div><div class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">#防火墙下线</span></div><div class="line">systemctl status firewalld <span class="comment">#查看防火墙状态（dead为已关闭）</span></div></pre></td></tr></table></figure>
+<li><p>默认balancer的threshold为10%，即各个节点与集群总的存储使用率相差不超过10%，我们可将其设置为5%</p>
 </li>
-<li><p>添加hadoop用户</p>
-<p>root用户执行以下代码：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">adduser hadoop <span class="comment">#添加hadoop用户</span></div><div class="line">passwd hadoop <span class="comment">#修改密码</span></div><div class="line">usermod -g root hadoop <span class="comment">#将hadoop用户放在root组</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>配置yarn-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>配置mapred-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>monsterxls:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>配置hdfs-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.ipc.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>0.0.0.0:50020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>0.0.0.0:50075<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>配置core-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.default.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://monsterxls:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>配置hadoop-env.sh</p>
-<p><code>export JAVA_HOME=/opt/jdk1.8</code></p>
+<li><p>然后启动Balancer，sbin/start-balancer.sh -threshold 5，等待集群自均衡完成即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$HADOOP_HOME</span>/sbin/start-balancer.sh -threshold 5</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol>
-<li><p>配置yarn-env.sh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export HADOOP_YARN_USER=/opt/hadoop</div></pre></td></tr></table></figure>
+<h3 id="添加NodeManager"><a href="#添加NodeManager" class="headerlink" title="添加NodeManager"></a>添加NodeManager</h3><ol>
+<li><p>在新增节点，运行sbin/yarn-daemon.sh start nodemanager即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$HADOOP_HOME</span>/sbin/yarn-daemon.sh start nodemanager</div></pre></td></tr></table></figure>
+</li>
+<li><p>刷新</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn rmadmin -refreshNodes</div></pre></td></tr></table></figure>
+</li>
+<li><p>在ResourceManager，通过yarn node -list查看集群情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn node -list</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="三：总结"><a href="#三：总结" class="headerlink" title="三：总结"></a>三：总结</h2><p>安装集群要细心，理解着意思去安装，特别是配置文件，想想为什么要这么设置，出了问题多看看配置文件，检查是否有误设置的地方。</p>
-<p>Good Luck!</p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>随时时间推移，各个datanode上的块分布来越来越不均衡，这将降低MR的本地性，导致部分datanode相对更加繁忙。<br>balancer是一个hadoop守护进程，它将块从忙碌的datanode移动相对空闲的datanode，同时坚持块复本放置策略，将复本分散到不同的机器、机架。<br>balancer会促使每个datanode的使用率与整个集群的使用率接近，这个“接近”是通过-threashold参数指定的，默认是10%。（本案例改为5%）<br>不同节点之间复制数据的带宽是受限的，默认是1MB/s，可以通过hdfs-site.xml文件中的dfs.balance.bandwithPerSec属性指定（单位是字节）。（本案例改为64MB/S)</p>
+<p><font color="red"><em>建议定期执行均衡器，如每天或者每周。</em></font></p>
+
+<h2 id="动态删除节点"><a href="#动态删除节点" class="headerlink" title="动态删除节点"></a>动态删除节点</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>修改Master节点的hdfs-site.xml，增加dfs.hosts.exclude(排除,文本文件)参数</p>
+</li>
+<li><p>修改Master节点的yarn-site.xml，增加yarn.resourcemanager.nodes.exclude-path参数</p>
+</li>
+<li><p>修改Master节点的mapred-site.xml，增加mapreduce.jobtracker.hosts.exclude.filename</p>
+</li>
+<li><p>新建excludes文件，添加需删除的主机名</p>
+</li>
+<li><p>修改Master节点slaves文件，删除该节点，复制因子等..</p>
+</li>
+<li><p>刷新:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yarn rmadmin  -refreshNodes</div><div class="line">hdfs dfsadmin -refreshNodes</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看状态</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfsadmin -report</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
 
     
 
@@ -492,8 +481,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/11/hadoop原生集群搭建/"
-        data-title="hadoop原生集群搭建">
+        data-url="https://stanxia.github.io/2017/03/12/hadoop集群动态添加删除节点/"
+        data-title="hadoop集群动态添加删除节点">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -509,7 +498,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/02/11/cdh集群搭建/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/09/26/面试题集锦/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -523,7 +512,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/11/ssh互信/" id="post_nav-older" class="next-content">
+        <a href="/2017/03/08/几种常见的加密方式/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

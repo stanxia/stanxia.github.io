@@ -219,16 +219,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术支柱，感到很欣慰。
-从重构原因，技术架构，踩过的坑，后续持续改进四个方面来描述酷狗音乐大数据平台重构的过程，在此抛砖引玉，这次的内容与6月份在高可用架构群分享的大数据技术实践的有点不同，技术架构做了些调整。
-其实大数据平台是一个庞大的系统工程，整个建设周期很长，涉及的生态链很长(包括：数据采集、接入，清洗、存储计算、数据挖掘，可视化等环节，每个环节都可以当做一个复杂的系统来建设)，风险也很大。
-一、重构原因在讲重构原因前，先介绍下原有的大数据平台架构，如下图：
-
-从上图可知，主要基于Hadoop1.x+hive做离线计算(T+1)，基于大数据平台的数据采集、数据接入、数据清洗、作业调度、平台监控几个环节存在的一些问题来列举下。
-数据采集：
-
-数据收集接口众多，且数据格式混乱，基本每个业务都有自己的上报接口...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -370,7 +361,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -384,7 +375,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -435,7 +426,7 @@
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

@@ -219,10 +219,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题Spark Streaming 连接kafka报错：kafka.cluster.BrokerEndPoint cannot be cast to kafka.cluster.Broker
-解决方案Spark Streaming默认使用的是Kafka 0.8.2.1，将kafka的版本改为0.8.2.1
-Good Luck!
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -283,12 +280,7 @@ Good Luck!
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题spark stream无法收取到kafka发过来的消息
-解决方案找到集群中 kafka的server.properties，修改如下：
-vi server.properties
-12listeners=PLAINTEXT://slave2xls:9092    #改为本主机的ip：portport=9092
-
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -349,17 +341,7 @@ vi server.properties
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题描述在idea上运行spark程序时，出现以下信息：
-Spark error class “javax.servlet.FilterRegistration”‘s signer information does not match signer information of other classes in the same package
-如图：
-
-看了一圈网上的答案，应该是包冲突，试过了各种方法，终于找到了一种看似很莫名其妙的答案，但却是非常有效。
-解决方案右键模块项目==&gt;Open Module Settings ==&gt; 选择Dependencies==&gt;找到javax.servlet:servlet-api:xx==&gt;移动到列表的最末端，如下图：
-
-Apply==&gt;Ok==&gt;运行试试！
-总结这个问题的解决方案很奇怪，以后明白了再回来说明下。
-Good Luck!
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -420,13 +402,7 @@ Good Luck!
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题详情：在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job  1456252725626  0001的位置。
-问题原因：遇到了问题，首先从哪里找？当发现问题的时候，首先去查看相应的日志，查找问题产生的原因，对症下药。
-在hadoop2.6以及以上版本中，mapreduce任务都是交给yarn资源管理器 管理的，所以首先去 查看 yarn-hadoop-nodemanager-slave01.log 日志。
-终端输入：
-cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
-如果显示如下信息：
-1INFO org.apache.hadoop.ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8031. Already tried 4 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -487,11 +463,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题一：java compiler error运行java程序时，编译报错：java compiler error，如下图所示：
-
-解决办法打开idea设置=&gt;&gt;Build,Execution,Deployment=&gt;&gt;Compiler=&gt;&gt;Java Compiler=&gt;&gt;左边框Pre-module bytecode version =&gt;&gt;找到程序所在的模块=&gt;&gt;Target Bytecode version 选择提示中的需要目标发行版本=&gt;&gt;Apply=&gt;&gt;ok,如下图所示：
-
-问题二：Usage of API documented as  @since 1.6/1.7/…当使用了一些api...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -550,10 +522,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题启动zookeeper时，出现以下异常信息：
-
-解决方案修改 ／zookeeper/conf/zoo.cfg文件修改服务器id和ip映射时注意格式为：12vi /zookeeper/conf/zoo.cfgserver.1=host:port:port或者host:port或者host:port:port:type
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -695,7 +664,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -709,7 +678,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -760,7 +729,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

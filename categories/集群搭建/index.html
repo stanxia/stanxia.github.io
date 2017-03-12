@@ -219,22 +219,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前置环境
-需要jdk
-
-需要hadoop
-
-下载spark
-点我下载spark
-
-
-安装spark
-安装spark
-12tar -zxvf spark-1.6.0-bin-hadoop2.6.tgz -C /opt/ #解压到/opt/mv spark-1.6.0-bin-hadoop2.6 spark #重命名
-
-配置环境变量
-vi /etc/profile #配置环境变量
-12
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -295,9 +280,7 @@ vi /etc/profile #配置环境变量
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             简介利用flume1.7抓取数据，传入到kafka
-配置文件设置在flume/conf/新建一个 kafka.conf,修改该文件,相关配置如下：
-12345678910111213141516171819202122232425
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -358,33 +341,7 @@ vi /etc/profile #配置环境变量
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：前提
-准备MYSQL JDBC驱动
-本机已经安装了JDK
-基于自己已有的HADOOP集群进行操作
-在开启HIve之前，开启HDFS + YARN+ntpd时间同步
-
-二：HIVE下载
-HIVE的安装包下载
-
-wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
-
-然后解压
-
-tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/
-cd /opt/
-mv apache-hive-1.2.1-bin hive
-
-配置环境变量
-
-vi /etc/profile
-添加以下内容：
-HIVE_HOME=/opt/hive
-export PATH=$PATH:$HIVE_HOME/bin
-文件生效：
-source /etc/profile
-最好 ROOT用户与 HADOOP用户都执行一次
-三：安...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -445,14 +402,7 @@ source /etc/profile
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题1ntp同步时间过长
-解决方案修改 /etc/ntp.conf
-主节点配置：
-12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
-从节点配置：
-12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) iburst
-问题2ntp时间同步之后，显示非中国时区
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -513,19 +463,7 @@ source /etc/profile
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一、安装环境
-多台Linux服务器
-
-已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）
-
-下载kafka
-点击选择需要下载的kafka版本
-或者直接在服务器上面下载：
-1wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz
-
-
-二、安装kafka创建项目目录：创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。
-12
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -586,12 +524,7 @@ source /etc/profile
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一、环境准备服务器准备：Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。
-jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。
-下载zookeeper：点我下载zookeeper
-或者直接在服务器上面下载：
-1wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -652,25 +585,7 @@ jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
-2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
-3.配置hostnamevi /etc/sysconfig/networkNETWORKING=yesHOSTNAME=master
-4.vi /etc/hostname
-#删除文件内容  ,然后输入master
-5.修改host映射vi /etc/hosts
-10.211.55.9 master
-#ipDress1为master服务器的IP地址
-6.selinux 关闭vi /etc/sysconfig/selinuxSELINUX=disable
-7.重启reboot
-8.更改防火墙systemctl stop firewalldsystemctl disable firewalldsystemctl status firewalld
-9.安装时间同步服务yum -y install ntpvi /etc/ntp.conf
-#注释掉所有的server..* 的指向 ，新添加一条可连接的ntp服务器server ntp.sjtu.edu.cn iburst
-#启动时间同步服务service ntpd start 
-#执行命令ntpdate -u 1.asia.pool.ntp.org
-#重启时间同步服务service ntpd restart
-10.ssh无密码登陆配置ssh-keygen -t rsa #一直使用默认
-11.安装mysql
-#查看mysql是否意境安装：rpm -qa | grep mariadb 
+             1.如果存在jdk：卸载方式：rpm -...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -731,12 +646,7 @@ jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：解压hadoop.tar.gz和jdk安装包
-将hadoop和jdk解压在/opt目录下面
-12tar -zxvf jdk1.8.gz -C /opt/  #解压jdk到/opt下tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ #解压hadoop到/opt
-
-在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）
-12mv hadoop-2.6.0 hadoop #hadoop文件夹重命名mv jdk1.8 jdk #jdk文件夹重命名
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -797,12 +707,7 @@ jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
-cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
-
+             1.ssh-keygen -t rsa -P ‘...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -944,7 +849,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -958,7 +863,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -1009,7 +914,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

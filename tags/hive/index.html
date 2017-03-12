@@ -219,11 +219,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             HiveQl执行过程：==》驱动模块==》编译器进行编译  Antlr==》优化器进行优化==》执行器执行（执行map reduce任务）   全表扫描* 不会执行 map reduce 任务
-HiveQL查询的 MapReduce 作业转化流程：==》用户输入sql==》抽象语法树 AST Tree==》查询块 QueryBlock==》逻辑查询计划  OperatorTree==》重写逻辑查询计划==》物理计划==》选择最优的优化查询策略==》输出
-
-Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala适合实时的sql查询2.Hive依赖于MapReduce，执行计划组合成管道形的MapReduce任务模式；Impala执行计划表现为一颗完整的执行计划树3.Hive在查询过程中，内存不够用时会使用外存；Impala在内存不够用时，不会使用外存，所有Impala在查询的时候会存在一定的限制
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -284,33 +280,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             一：前提
-准备MYSQL JDBC驱动
-本机已经安装了JDK
-基于自己已有的HADOOP集群进行操作
-在开启HIve之前，开启HDFS + YARN+ntpd时间同步
-
-二：HIVE下载
-HIVE的安装包下载
-
-wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
-
-然后解压
-
-tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/
-cd /opt/
-mv apache-hive-1.2.1-bin hive
-
-配置环境变量
-
-vi /etc/profile
-添加以下内容：
-HIVE_HOME=/opt/hive
-export PATH=$PATH:$HIVE_HOME/bin
-文件生效：
-source /etc/profile
-最好 ROOT用户与 HADOOP用户都执行一次
-三：安...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -371,21 +341,7 @@ source /etc/profile
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             在hive外部执行hive语句，可多条语句一起执行hive -e ‘’
-查看表结构：desc tablename;
-查看详细表结构：desc formatted tablename;
-创建表：
-CREATE TABLE IF NOT EXISTS   xls.bank_xls(name STRING,cost INT)PARTITIONED BY (date STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘ ‘;
-创建一张和目标表结构一样的表CREATE TABLE IF NOT EXISTS xls.bank_xls LIKE wy.bank_wy;
-删除表：DROP TABLE IF EXISTS xls.bank_xls;
-清空表数据，但不删除表：TRUNCATE TABLE xls.bank_xlsx;
-导入本地数据到hive表中：LOAD DATA INPATH ‘/tmp/xls/20170103_customer_tx.txt’ OVERWRITE INTO TABLE xls.bank_xls PARTITION (date=to_date(‘20170103’));
-查看表中的内容：SLELCT * FROM xls.bank_xls;
-SELECT name,sum(cost) FROM xls.bank_xls WHERE date=’20170105’ GROUP BY name;
-hdfs dfs -ls /user/hive/warehouse/xls.db/bank_xls
-hadoop jar /root/makebankrecord.jar MakeBankRecord
-hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
-文件监听器
+             在hive外部执行hive语句，可多条语句一起执...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -527,7 +483,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -541,7 +497,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -592,7 +548,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

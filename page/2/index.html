@@ -211,26 +211,74 @@
     
 
         <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/02/27/spark集群搭建/">spark集群搭建</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+             
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/02/27/spark集群搭建/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
+            </div>
+            <div>
+                <strong>夏</strong>
+                <span>2月 27, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/集群搭建/">集群搭建</a>
+            </span>
+
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
+                </span>
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+    
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
         <p class="article-headline-p"><a href="/2017/02/27/IntelliJ-IDEA-破解之道（尽量还是支持正版。。）/"> IntelliJ IDEA 破解之道（尽量还是支持正版。。）</a></p>
     </div>
 
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             话说IntelliJ IDEA这东西做的确实不错，但是对于一般人来说可能是有点不舍得花钱的，有钱还是建议买正版，这里也给出一些皮姐的方式。。。：
-
-适用于 IntelliJ IDEA (v2016.3.4)
-开始安装
-选择License server
-将这个网址添加进去： http://jetbrains.tech 
-确认
-试试行不行
-如果是IntelliJ IDEA v15.0.2 
-使用http://idea.lanyus.com，如果不行，可换为http://nfsgkyi.nrqw46lvomxgg33n.dresk.ru
-
- 一手资料消息来源
-Good Luck!
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -291,13 +339,7 @@ Good Luck!
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题详情：在运行hadoop MapReduce任务时，一直卡在INFO mapreduce.Job: Running job:job  1456252725626  0001的位置。
-问题原因：遇到了问题，首先从哪里找？当发现问题的时候，首先去查看相应的日志，查找问题产生的原因，对症下药。
-在hadoop2.6以及以上版本中，mapreduce任务都是交给yarn资源管理器 管理的，所以首先去 查看 yarn-hadoop-nodemanager-slave01.log 日志。
-终端输入：
-cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
-如果显示如下信息：
-1INFO org.apache.hadoop.ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8031. Already tried 4 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -358,11 +400,7 @@ cat hadoop所在目录/logs/yarn-hadoop-nodemanager-slave01.log
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             HiveQl执行过程：==》驱动模块==》编译器进行编译  Antlr==》优化器进行优化==》执行器执行（执行map reduce任务）   全表扫描* 不会执行 map reduce 任务
-HiveQL查询的 MapReduce 作业转化流程：==》用户输入sql==》抽象语法树 AST Tree==》查询块 QueryBlock==》逻辑查询计划  OperatorTree==》重写逻辑查询计划==》物理计划==》选择最优的优化查询策略==》输出
-
-Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala适合实时的sql查询2.Hive依赖于MapReduce，执行计划组合成管道形的MapReduce任务模式；Impala执行计划表现为一颗完整的执行计划树3.Hive在查询过程中，内存不够用时会使用外存；Impala在内存不够用时，不会使用外存，所有Impala在查询的时候会存在一定的限制
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -423,15 +461,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             新版本特性2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：
-
-支持分层数据的压缩
-多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等
-
-新特性解析分层压缩使用场景：数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。
-解决痛点：使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。
-多预写日志每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。
-新特性改进后的 多预写日志(WAL) 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -492,11 +522,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             问题一：java compiler error运行java程序时，编译报错：java compiler error，如下图所示：
-
-解决办法打开idea设置=&gt;&gt;Build,Execution,Deployment=&gt;&gt;Compiler=&gt;&gt;Java Compiler=&gt;&gt;左边框Pre-module bytecode version =&gt;&gt;找到程序所在的模块=&gt;&gt;Target Bytecode version 选择提示中的需要目标发行版本=&gt;&gt;Apply=&gt;&gt;ok,如下图所示：
-
-问题二：Usage of API documented as  @since 1.6/1.7/…当使用了一些api...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -557,16 +583,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术支柱，感到很欣慰。
-从重构原因，技术架构，踩过的坑，后续持续改进四个方面来描述酷狗音乐大数据平台重构的过程，在此抛砖引玉，这次的内容与6月份在高可用架构群分享的大数据技术实践的有点不同，技术架构做了些调整。
-其实大数据平台是一个庞大的系统工程，整个建设周期很长，涉及的生态链很长(包括：数据采集、接入，清洗、存储计算、数据挖掘，可视化等环节，每个环节都可以当做一个复杂的系统来建设)，风险也很大。
-一、重构原因在讲重构原因前，先介绍下原有的大数据平台架构，如下图：
-
-从上图可知，主要基于Hadoop1.x+hive做离线计算(T+1)，基于大数据平台的数据采集、数据接入、数据清洗、作业调度、平台监控几个环节存在的一些问题来列举下。
-数据采集：
-
-数据收集接口众多，且数据格式混乱，基本每个业务都有自己的上报接口...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -627,9 +644,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             简介利用flume1.7抓取数据，传入到kafka
-配置文件设置在flume/conf/新建一个 kafka.conf,修改该文件,相关配置如下：
-12345678910111213141516171819202122232425
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -688,22 +703,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             yarn三种调度机制
-FIFO Scheduler先进先出调度机制
-
-Fair Scheduler公平调度机制
-
-Capacity Scheduler容量机制
-
-
-FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
-缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
-面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
-
-Capacity Scheduler定位：多人共享调度器。
-机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。
-特性：queue elasticity （弹性队列）根据实际情况分配资源
-...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -764,25 +764,7 @@ Capacity Scheduler定位：多人共享调度器。
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
-Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。
-为什么用kafka一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。
-下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。
-kafka名词解释
-
-
-名词
-解释
-
-
-
-
-broker
-消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。
-
-
-topic
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -805,93 +787,6 @@ topic
             <!-- Category -->
             <span class="post_entry-category">
                 <a class="post_category-link" href="/categories/大数据/">大数据</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-    
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/15/Hadoop原生集群添加hive组件/">Hadoop原生集群添加hive组件</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             一：前提
-准备MYSQL JDBC驱动
-本机已经安装了JDK
-基于自己已有的HADOOP集群进行操作
-在开启HIve之前，开启HDFS + YARN+ntpd时间同步
-
-二：HIVE下载
-HIVE的安装包下载
-
-wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
-
-然后解压
-
-tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/
-cd /opt/
-mv apache-hive-1.2.1-bin hive
-
-配置环境变量
-
-vi /etc/profile
-添加以下内容：
-HIVE_HOME=/opt/hive
-export PATH=$PATH:$HIVE_HOME/bin
-文件生效：
-source /etc/profile
-最好 ROOT用户与 HADOOP用户都执行一次
-三：安...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/15/Hadoop原生集群添加hive组件/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 15, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/集群搭建/">集群搭建</a>
             </span>
 
             
@@ -1016,7 +911,7 @@ source /etc/profile
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -1030,7 +925,7 @@ source /etc/profile
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -1081,7 +976,7 @@ source /etc/profile
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>

@@ -207,6 +207,65 @@
     <!-- Post Thumbnail -->
     
         <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdkh5o6xr6j21b80zwjzz.jpg)">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/03/12/hadoop集群动态添加删除节点/">hadoop集群动态添加删除节点</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+             
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/03/12/hadoop集群动态添加删除节点/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
+            </div>
+            <div>
+                <strong>夏</strong>
+                <span>3月 12, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/大数据/">大数据</a>
+            </span>
+
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
+                </span>
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+    
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdhy1vjo7gj21460eaq4z.jpg)">
     
 
@@ -217,8 +276,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             前提下载主要jar包：filecrush-2.0-SNAPSHOT.jar密码: x9mh
-执行1234567891011Hadoop jar filecrush-2.0-SNAPSHOT.jar crush.Crush \-Ddfs.block.size=134217728 \--input-format=text  \--output-format=text \
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -279,9 +337,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             引言用IDE执行spark任务会出现很多的日志信息，当我们不需要看这些日志信息的时候该怎么整，如何优雅的搞掉这些日志，看看下面的，或许对你有帮助。
-内容添加以下代码：
-123456789import org.apache.log4j.&#123;Level, Logger&#125;//设置spark的日志级别为 warn，才会打印日志 Logger.getLogger("org.apache.spark").se...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -342,11 +398,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             HiveQl执行过程：==》驱动模块==》编译器进行编译  Antlr==》优化器进行优化==》执行器执行（执行map reduce任务）   全表扫描* 不会执行 map reduce 任务
-HiveQL查询的 MapReduce 作业转化流程：==》用户输入sql==》抽象语法树 AST Tree==》查询块 QueryBlock==》逻辑查询计划  OperatorTree==》重写逻辑查询计划==》物理计划==》选择最优的优化查询策略==》输出
-
-Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala适合实时的sql查询2.Hive依赖于MapReduce，执行计划组合成管道形的MapReduce任务模式；Impala执行计划表现为一颗完整的执行计划树3.Hive在查询过程中，内存不够用时会使用外存；Impala在内存不够用时，不会使用外存，所有Impala在查询的时候会存在一定的限制
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -407,15 +459,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             新版本特性2017年1月中旬 发布的 HBase 1.3.0版本，新版本特性如下：
-
-支持分层数据的压缩
-多方面的性能提升，如 多预写日志（WAL）一个新的RPC机制，避免大量IO峰值的磁盘刷新吞吐量控制器等
-
-新特性解析分层压缩使用场景：数据被铲除或更新的时候，通常要更频繁的扫描最新的数据，而旧数据则较少被扫描。
-解决痛点：使用这种分层压缩策略，可有轻松的记录文件的TTL(生存时间 time-to-live)；当将现有存储文件压缩到单个较大的存储文件中时，过期的记录将被删除。
-多预写日志每个region server都有一个预写日志(WAL)，该区域上的所有操作都要写入这个唯一的预写日志。
-新特性改进后的 多预写日志(WAL) 支持更高性能的写入操作，这使得复制速度更快而且同步写入的延迟更低。默认情况下，多预写日志...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -474,22 +518,7 @@ Impala与Hive的区别：1.Hive适合长时间的批处理查询分析；Impala�
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             yarn三种调度机制
-FIFO Scheduler先进先出调度机制
-
-Fair Scheduler公平调度机制
-
-Capacity Scheduler容量机制
-
-
-FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
-缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
-面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
-
-Capacity Scheduler定位：多人共享调度器。
-机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。
-特性：queue elasticity （弹性队列）根据实际情况分配资源
-...
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -550,25 +579,7 @@ Capacity Scheduler定位：多人共享调度器。
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
-Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。
-为什么用kafka一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。
-下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。
-kafka名词解释
-
-
-名词
-解释
-
-
-
-
-broker
-消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。
-
-
-topic
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -629,40 +640,7 @@ topic
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             server.properties参数说明
-
-
-参数
-说明
-
-
-
-
-broker.id=0
-每一个broker在集群中的唯一表示，要求是正数。当该服务器的IP地址发生改变时，broker.id没有变化，则不会影响consumers的消息情况
-
-
-log.dirs=/data/kafka-logs
-kafka数据的存放地址，多个地址的话用逗号分割,多个目录分布在不同磁盘上可以提高读写性能  /data/kafka-logs-1，/data/kafka-logs-2
-
-
-port =9092
-broker server服务端口
-
-
-message.max.bytes =6525000
-表示消息体的最大大小，单位是字节
-
-
-num.network.threads =4
-broker处理消息的最大线程数，一般情况下数量为cpu核数
-
-
-num.io.threads =8
-broker处理磁盘IO的线程数，数值为cpu核数2倍
-
-
-
+             
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -723,21 +701,7 @@ broker处理磁盘IO的线程数，数值为cpu核数2倍
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-             在hive外部执行hive语句，可多条语句一起执行hive -e ‘’
-查看表结构：desc tablename;
-查看详细表结构：desc formatted tablename;
-创建表：
-CREATE TABLE IF NOT EXISTS   xls.bank_xls(name STRING,cost INT)PARTITIONED BY (date STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘ ‘;
-创建一张和目标表结构一样的表CREATE TABLE IF NOT EXISTS xls.bank_xls LIKE wy.bank_wy;
-删除表：DROP TABLE IF EXISTS xls.bank_xls;
-清空表数据，但不删除表：TRUNCATE TABLE xls.bank_xlsx;
-导入本地数据到hive表中：LOAD DATA INPATH ‘/tmp/xls/20170103_customer_tx.txt’ OVERWRITE INTO TABLE xls.bank_xls PARTITION (date=to_date(‘20170103’));
-查看表中的内容：SLELCT * FROM xls.bank_xls;
-SELECT name,sum(cost) FROM xls.bank_xls WHERE date=’20170105’ GROUP BY name;
-hdfs dfs -ls /user/hive/warehouse/xls.db/bank_xls
-hadoop jar /root/makebankrecord.jar MakeBankRecord
-hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
-文件监听器
+             在hive外部执行hive语句，可多条语句一起执...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -879,7 +843,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -893,7 +857,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -944,7 +908,7 @@ hive -e “LOAD DATA LOCAL INPATH ‘/home/xls/‘“
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">36</span>
+            <span class="sidebar-badge">37</span>
         </a>
     </li>
 </ul>
