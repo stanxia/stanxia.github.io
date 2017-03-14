@@ -10,7 +10,7 @@
     
     <title>
         
-            IDE关闭Spark执行日志 | 
+            hadoop 集群模式 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="IDE关闭Spark执行日志 | 小世界，大梦想">
+    <meta property="og:title" content="hadoop 集群模式 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内容"><span class="post-toc-number">2.</span> <span class="post-toc-text">内容</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单机模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">单机模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完全分布式模式"><span class="post-toc-number">2.</span> <span class="post-toc-text">完全分布式模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高可用模式"><span class="post-toc-number">3.</span> <span class="post-toc-text">高可用模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高可用联邦模式"><span class="post-toc-number">4.</span> <span class="post-toc-text">高可用联邦模式</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,19 +245,11 @@
                 
     <!-- Paradox Post Header -->
     
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
-        
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdlo2zqjn3j20k00a0jte.jpg)">
     
             <p class="article-headline-p">
-                IDE关闭Spark执行日志
+                hadoop 集群模式
             </p>
         </div>
 
@@ -276,7 +268,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>2月 28, 2017</span>
+        <span>3月 14, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -297,7 +289,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3aQU7EMBAEwPz/03BFAkL3OGhXdvmE0CZxZSWamfH1ceS6sLGxsbGxsbGxsd+SfcXr6+e/3+G3e/7w+OCeyefzPWNjY2OfwP7jT//tI5Nrf0OuvNZ8z9jY2NjnsJPQmsXP/ROTq1b2jI2NjY3dFhv3pU7+++RlYWNjY2OvBNj9FpOmUht+2NjY2NjrTaUkTtqQa699QS8NGxsb++3Zs0Hva39+2XwbGxsb+83Ys7VyyCbnPbuwsbGxd2Xft4SSYHi2VZTsp20wYWNjY+/Nbpv+LTU/WDkbMxQ7wcbGxt6U/VSjvz2O0w6PZ2GGjY2NfRo7aQzNBq457KkhNDY2NjZ2e7xydiAyHw+0XwA2Njb2Oey2qTQrIdonFgdxgqEyNjY29gns2Yby+Mm3OHt61PbCxsbG3pSdN9mveOUBttLAaqMUGxsbe1f2eiw9BWuP6dTXYmNjY2/KTv71j8aoC69pdtCzfSI2Njb23uw8ePIxcN7oz1v8K68eGxsb+wT2enTNRrB5OdGOpbGxsbFPYN8HUktt75w/PQ/CYr6NjY2NvSk7b8S3w4C2IGl3go2NjX0yO2/NJ02lNuraFtVsIIGNjY29K3sWXbPDl+tlSR6H2NjY2KexV/7FnxUJeUzmY4M/ShpsbGzsA9jtEHelmMlf03qpg42NjX0CO2/c56VLW0i0YfZAgGFjY2NvxP6/IFkqHkbHeoZNJWxsbOzt2Hlzpz0Web/FJNLaQz/Y2NjYe7NnTf+2cb9exqyPMbCxsbF3ZV/xyscJ7d2eHR4UuY2NjY29ETsJraRQWRnEti2ndqiMjY2NfQJ7JbTykXA7pm0P7mNjY2Nj5839NlSSRtJseBB9PdjY2NjY5TC4HSrk0ZgPhrGxsbFPYz/bGJo18Wd3jkoUbGxs7K3Z66PZPGDyEHr2tWJjY2Pvyj5nYWNjY2NjY2NjY7/N+gQgbFSGyIlvXgAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3klEQVR42u3awU7DMBAE0P7/T8MVCTXMeIMI9supqkLiZ6SOdtevjyOvFzY2NjY2NjY2NvYj2a/4+nr/979tn/n9adfPv/7++i3Y2NjYJ7B/+Ol/c08CyLdm8q5kzdjY2NgnsNeW0kZdEkvv3jJZMzY2NjZ2vgUJI/kmWQM2NjY29oR9jbwuGPIG06TxhI2NjX0aO2nQvFtKNGqNQ+5xvTRsbGzsx7Mng96/+vzH821sbGzsx7DXQigfA0cLuoyxSWRiY2Njn8DOj8i0R3DaJlHCa7cSGxsb+wR2GyRty2nt2OUi7Hr92NjY2Fuz80C6ayntG5NC6Ifww8bGxj6A3RYSayXEJPySO+sAw8bGxt6CnT90bZDQlh/51hT3YGNjY2/KbkuLtXJlLbrmQ2JsbGzsc9jJ69vAW2sktcVP0X7CxsbG3pSdFBJrg9j5W5IyZjQewMbGxt6C3TZ62rHr2hHMpBxqBxXY2NjYu7LXhqztkPjejWjHydjY2Nh7s/NxbB5m7eGeZLM+xhc2Njb2ruy1weok0kYt/njTsbGxsU9j5y2bdulro99J8+i2qQg2Njb2P2HnIbE2dk3KlTzwRi0nbGxs7E3Z+aPvHRj8dkmDjY2NfQ67LSqS8XC+xGSonAcYNjY29pnse5tE7XGfZJQ7GS1jY2Njn8DOYyYvIdZiJom00f3Y2NjYm7LnC53ET77F8yEBNjY29mnsZFOK1vyt44e1cggbGxt7V/bacZkkqPLoarcmGTNgY2Njn8Nur/YAZb7Eew8M1aUINjY29r9lz5ebL3R0dDJeQzEVwcbGxt6I3baZ7mroF0cnywOaxZEdbGxs7I3YbWhNSoW1oGrjFhsbGxu7HbW2MbMWh1Fc3Rtg2NjY2Fuz22W1EZiH32JTCRsbG3sjdttUmmxBElr54Dn6J2FjY2NvzW4HvZMRb9JCSoqZfKOxsbGx92afc2FjY2NjY2NjY2M/5voEZ28qXAlaPxYAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -309,7 +301,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/spark/">spark</a>
+        <a class="post_tag-link" href="/tags/hadoop/">hadoop</a>
     </ul>
     
 
@@ -323,7 +315,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/02/28/IDE关闭Spark执行日志/" class="leancloud-views_num" data-flag-title="IDE关闭Spark执行日志">
+                <span id="/2017/03/14/hadoop-集群模式/" class="leancloud-views_num" data-flag-title="hadoop 集群模式">
      &nbsp;浏览量
 </span>
 
@@ -335,7 +327,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=IDE关闭Spark执行日志&url=https://stanxia.github.io//2017/02/28/IDE关闭Spark执行日志/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=hadoop 集群模式&url=https://stanxia.github.io//2017/03/14/hadoop-集群模式/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -344,7 +336,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=IDE关闭Spark执行日志&url=https://stanxia.github.io//2017/02/28/IDE关闭Spark执行日志/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=hadoop 集群模式&url=https://stanxia.github.io//2017/03/14/hadoop-集群模式/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -353,7 +345,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/02/28/IDE关闭Spark执行日志/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/03/14/hadoop-集群模式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -362,7 +354,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/02/28/IDE关闭Spark执行日志/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/03/14/hadoop-集群模式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -374,7 +366,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=IDE关闭Spark执行日志&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/02/28/IDE关闭Spark执行日志/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=hadoop 集群模式&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/03/14/hadoop-集群模式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -392,10 +384,10 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>用IDE执行spark任务会出现很多的日志信息，当我们不需要看这些日志信息的时候该怎么整，如何优雅的搞掉这些日志，看看下面的，或许对你有帮助。</p>
-<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>添加以下代码：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.log4j.&#123;<span class="type">Level</span>, <span class="type">Logger</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">//设置spark的日志级别为 warn，才会打印日志</span></div><div class="line"> <span class="type">Logger</span>.getLogger(<span class="string">"org.apache.spark"</span>).setLevel(<span class="type">Level</span>.<span class="type">WARN</span>)</div><div class="line"><span class="comment">//直接关闭 jetty日志  </span></div><div class="line"> <span class="type">Logger</span>.getLogger(<span class="string">"org.eclipse.jetty.server"</span>).setLevel(<span class="type">Level</span>.<span class="type">OFF</span>)</div><div class="line"><span class="comment">//直接关闭 spark的运行日志</span></div><div class="line"> <span class="type">SparkContext</span>().setLogLevel(<span class="string">"OFF"</span>)</div></pre></td></tr></table></figure>
-<p> Good Luck!</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h2><p><font color="red">Single Node Cluster，即伪分布式模式（单机模式）</font>，将hadoop安装在一台机器上，通过进程来模拟各主机节点的协作和运行，其可靠性、稳定性都是非常差的，并且具备糟糕的性能效率，没有团队会在生产环境使用它。那么它是否就没有用呢？也不是的，通常使用这种模式进行开发和调试工作。</p>
+<h2 id="完全分布式模式"><a href="#完全分布式模式" class="headerlink" title="完全分布式模式"></a>完全分布式模式</h2><p><font color="red">完全分布式模式(Full Distributed Cluster)</font>，将hadoop部署在至少两台机子上，数据块副本的数量通常也设置为2以上。该模式的集群，无论规模多大，只拥有1台Namenode节点，且也是唯一Active的工作节点。Namenode（简称NN）相当于hadoop文件系统的管家，对集群的所有文件访问和操作都经由NN统一协调管理。可想，当集群规模越来越庞大时，仅有一台NN，必定是不堪重负，那么它很容易就会挂掉，一旦挂掉，不仅集群立即瘫痪，还很容易造成数据丢失。另外，该模式通常ResourceManager（RM）也仅部署1台，ResourceManager是yarn的管家，主要管理任务的执行，例如MapReduce任务。与NN类似，当集群提交的作业过于繁重时，其同样面临超负载的问题。那么此模式是否也无用武之地呢？也不是的，视业务、资金等情况而定，因为该模式日后也可以安全升级成高可用模式。</p>
+<h2 id="高可用模式"><a href="#高可用模式" class="headerlink" title="高可用模式"></a>高可用模式</h2><p><font color="red">高可用模式(HA Cluster)</font>，一般来说，分为NN的高可用和RM的高可用。在完全分布式的基础上，增加备用NN和RM节点。NN高可用，也就是集群里面会部署两台NN（最多也只能两台），以形成主备NN节点，达到高可用的目的。RM高可用与NN高可用类似，也是在集群里部署备用RM节点。不过此种模式下集群里面依然只有一台NN/RM处于Active工作状态，另一台则处于Standby的等待状态。当Active的NN/RM出现问题无法工作时，Standby的那台则立即无缝切入，继续保障集群正常运转。这种模式是很多企业都使用的，但是依然有缺陷。什么缺陷呢？虽然集群的可用性问题解决了，但是性能瓶颈依然存在——仅有一台NN/RM，由于无法横向扩展，其很可能会超负载运行。</p>
+<h2 id="高可用联邦模式"><a href="#高可用联邦模式" class="headerlink" title="高可用联邦模式"></a>高可用联邦模式</h2><p><font color="red">高可用联邦模式(HA + Federation Cluster)</font>，解决了单纯HA模式的性能瓶颈。单纯的HA模式NN和RM之间虽然配置了HA，但是依旧仅有一台NN或RM同时运行，这可能会导致了NN或RM的负载过重，从而造成整个集群的性能瓶颈。而联邦模式将整个HA集群再划分为两个以上的集群，不同的集群之间通过Federation进行连接，不同集群间可以共享数据节点，也可以不共享，可以互相访问和操作数据，也可以不。这样便做到了HA集群的横向扩展，从而移除了单纯HA模式同时仅有1台NN/RM工作所带来的性能瓶颈。Federation模式，相当于在多个集群之上又构建了一个集群层次，从数据访问的角度看，也可以简单的将其理解为一台路由器，而每一个HA集群则是单独的网络，不同网络间通过Federation路由器进行沟通。此模式是目前hadoop生态中最高的一种模式，适用于规模较大的企业。</p>
 
     
 
@@ -425,8 +417,8 @@
     <!-- 多说评论框 start -->
     <div class="ds-thread"
         data-thread-key=""
-        data-url="https://stanxia.github.io/2017/02/28/IDE关闭Spark执行日志/"
-        data-title="IDE关闭Spark执行日志">
+        data-url="https://stanxia.github.io/2017/03/14/hadoop-集群模式/"
+        data-title="hadoop 集群模式">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -442,7 +434,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/01/JVM理解/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/09/26/面试题集锦/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -456,7 +448,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/02/27/Spark-包冲突error-class-javax-servlet-FilterRegistration/" id="post_nav-older" class="next-content">
+        <a href="/2017/03/14/Yarn的ResourceManager配置HA-2-7-1/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

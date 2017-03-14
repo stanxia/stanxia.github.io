@@ -407,9 +407,9 @@
 <p>这个就是目前58大数据平台的整体架构图。</p>
 <p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdlmey8dbvj20hs09zjrv.jpg" alt="img"></p>
 <p>这个图展示的是架构图中所包含的系统数据流动的情况。分为两个部分：</p>
-<font color="red">首先是实时流，就是黄色箭头标识的这个路径。数据实时采集过来之后首先会进入到Kafka平台，先做缓存。实时计算引擎比如Spark streaming或storm会实时的从Kafka中取出它们想要计算的数据。经过实时的处理之后结果可能会写回到Kafka或者是形成最终的数据存到MySQL或者HBase，提供给业务系统，这是一个实时路径。</font>
+<p><font color="red">首先是实时流，就是黄色箭头标识的这个路径。数据实时采集过来之后首先会进入到Kafka平台，先做缓存。实时计算引擎比如Spark streaming或storm会实时的从Kafka中取出它们想要计算的数据。经过实时的处理之后结果可能会写回到Kafka或者是形成最终的数据存到MySQL或者HBase，提供给业务系统，这是一个实时路径。</font></p>
 
-<font color="red">对于离线路径，通过接入层的采集和收集，数据最后会落到HDFS上，然后经过Spark、MR批量计算引擎处理甚至是机器学习引擎的处理。其中大部分的数据要进去数据仓库中，在数据仓库这部分是要经过数据抽取、清洗、过滤、映射、合并汇总，最后聚合建模等等几部分的处理，形成数据仓库的数据。然后通过HIVE、Kylin、SparkSQL这种接口将数据提供给各个业务系统或者我们内部的数据产品，有一部分还会流向MySQL。以上是数据在大数据平台上的流动情况。</font>
+<p><font color="red">对于离线路径，通过接入层的采集和收集，数据最后会落到HDFS上，然后经过Spark、MR批量计算引擎处理甚至是机器学习引擎的处理。其中大部分的数据要进去数据仓库中，在数据仓库这部分是要经过数据抽取、清洗、过滤、映射、合并汇总，最后聚合建模等等几部分的处理，形成数据仓库的数据。然后通过HIVE、Kylin、SparkSQL这种接口将数据提供给各个业务系统或者我们内部的数据产品，有一部分还会流向MySQL。以上是数据在大数据平台上的流动情况。</font></p>
 
 <p>在数据流之外还有一套管理平台。包括元信息管理（云窗）、作业管理平台（58dp）、权限审批和流程自动化管理平台（NightFury）。</p>
 <p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdlmeyoh1oj20hs07qweu.jpg" alt="img"></p>
@@ -640,7 +640,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -654,7 +654,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -705,7 +705,7 @@
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">39</span>
+            <span class="sidebar-badge">41</span>
         </a>
     </li>
 </ul>
