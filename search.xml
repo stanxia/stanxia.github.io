@@ -322,6 +322,12 @@
     </entry>
     
     <entry>
+      <title><![CDATA[mongodb操作指南]]></title>
+      <url>https://stanxia.github.io/2017/03/15/mongodb%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[hadoop 集群模式]]></title>
       <url>https://stanxia.github.io/2017/03/14/hadoop-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h2><p><font color="red">Single Node Cluster，即伪分布式模式（单机模式）</font>，将hadoop安装在一台机器上，通过进程来模拟各主机节点的协作和运行，其可靠性、稳定性都是非常差的，并且具备糟糕的性能效率，没有团队会在生产环境使用它。那么它是否就没有用呢？也不是的，通常使用这种模式进行开发和调试工作。</p>
