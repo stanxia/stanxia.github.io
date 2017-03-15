@@ -221,7 +221,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是MongoDB"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是MongoDB</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主要特点"><span class="post-toc-number">2.</span> <span class="post-toc-text">主要特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念介绍"><span class="post-toc-number">3.</span> <span class="post-toc-text">概念介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文档"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意："><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">注意：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文档键命名规范："><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">文档键命名规范：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集合"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">集合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#合法的集合名"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">合法的集合名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#capped-collections"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">capped collections</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作"><span class="post-toc-number">4.</span> <span class="post-toc-text">操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插入文档："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">插入文档：</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -245,16 +245,8 @@
                 
     <!-- Paradox Post Header -->
     
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
-        
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdnxn9n4swj20sw0fkjs2.jpg)">
     
             <p class="article-headline-p">
                 mongodb操作指南
@@ -392,7 +384,52 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="什么是MongoDB"><a href="#什么是MongoDB" class="headerlink" title="什么是MongoDB"></a>什么是MongoDB</h2><p>MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。<br>在高负载的情况下，添加更多的节点，可以保证服务器性能。<br>MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。<br>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。</p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><p>MongoDB的提供了一个面向文档存储，操作起来比较简单和容易。<br>你可以在MongoDB记录中设置任何属性的索引 (如：FirstName=”Sameer”,Address=”8 Gandhi Road”)来实现更快的排序。<br>你可以通过本地或者网络创建数据镜像，这使得MongoDB有更强的扩展性。<br>如果负载的增加（需要更多的存储空间和更强的处理能力） ，它可以分布在计算机网络中的其他节点上这就是所谓的分片。<br>Mongo支持丰富的查询表达式。查询指令使用JSON形式的标记，可轻易查询文档中内嵌的对象及数组。<br>MongoDb 使用update()命令可以实现替换完成的文档（数据）或者一些指定的数据字段 。<br>Mongodb中的Map/reduce主要是用来对数据进行批量处理和聚合操作。<br>Map和Reduce。Map函数调用emit(key,value)遍历集合中所有的记录，将key与value传给Reduce函数进行处理。<br>Map函数和Reduce函数是使用Javascript编写的，并可以通过db.runCommand或mapreduce命令来执行MapReduce操作。<br>GridFS是MongoDB中的一个内置功能，可以用于存放大量小文件。<br>MongoDB允许在服务端执行脚本，可以用Javascript编写某个函数，直接在服务端执行，也可以把函数的定义存储在服务端，下次直接调用即可。<br>MongoDB支持各种编程语言:RUBY，PYTHON，JAVA，C++，PHP，C#等多种语言。<br>MongoDB安装简单。</p>
+<h2 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h2><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>一个mongodb中可以建立多个数据库。</li>
+<li>MongoDB的默认数据库为”db”，该数据库存储在data目录中。</li>
+<li>MongoDB的单个实例可以容纳多个独立的数据库，每一个都有自己的集合和权限，不同的数据库也放置在不同的文件中。</li>
+<li>“show dbs” 命令可以显示所有数据库的列表。</li>
+</ul>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>文档是一个键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是 MongoDB 非常突出的特点。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ul>
+<li>文档中的键/值对是有序的。</li>
+</ul>
+<ul>
+<li>文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型（甚至可以是整个嵌入的文档)。</li>
+</ul>
+<ul>
+<li>MongoDB区分类型和大小写。</li>
+</ul>
+<ul>
+<li>MongoDB的文档不能有重复的键。</li>
+</ul>
+<ul>
+<li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符。</li>
+</ul>
+<h4 id="文档键命名规范："><a href="#文档键命名规范：" class="headerlink" title="文档键命名规范："></a>文档键命名规范：</h4><ul>
+<li>键不能含有\0 (空字符)。这个字符用来表示键的结尾。</li>
+</ul>
+<ul>
+<li>.和$有特别的意义，只有在特定环境下才能使用。</li>
+</ul>
+<ul>
+<li>以下划线”_”开头的键是保留的(不是严格要求的)。</li>
+</ul>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>集合就是 MongoDB 文档组，类似于 RDBMS （关系数据库管理系统：Relational Database Management System)中的表格。<br>集合存在于数据库中，集合没有固定的结构，这意味着你在对集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性。</p>
+<h4 id="合法的集合名"><a href="#合法的集合名" class="headerlink" title="合法的集合名"></a>合法的集合名</h4><ul>
+<li>集合名不能是空字符串””。</li>
+<li>集合名不能含有\0字符（空字符)，这个字符表示集合名的结尾。</li>
+<li>集合名不能以”system.”开头，这是为系统集合保留的前缀。</li>
+<li>用户创建的集合名字不能含有保留字符。有些驱动程序的确支持在集合名里面包含，这是因为某些系统生成的集合中包含该字符。除非你要访问这种系统创建的集合，否则千万不要在名字里出现$。</li>
+</ul>
+<h4 id="capped-collections"><a href="#capped-collections" class="headerlink" title="capped collections"></a>capped collections</h4><p>Capped collections 就是固定大小的collection。<br>它有很高的性能以及队列过期的特性(过期按照插入的顺序). 有点和 “RRD” 概念类似。<br>Capped collections是高性能自动的维护对象的插入顺序。它非常适合类似记录日志的功能 和标准的collection不同，你必须要显式的创建一个capped collection， 指定一个collection的大小，单位是字节。collection的数据存储空间值提前分配的。<br>要注意的是指定的存储大小包含了数据库的头信息。</p>
+<p>在capped collection中，你能添加新的对象。<br>能进行更新，然而，对象不会增加存储空间。如果增加，更新就会失败 。<br>数据库不允许进行删除。使用drop()方法删除collection所有的行。<br>注意: 删除之后，你必须显式的重新创建这个collection。<br>在32bit机器中，capped collection最大存储为1e9( 1X10^9)个字节。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="插入文档："><a href="#插入文档：" class="headerlink" title="插入文档："></a>插入文档：</h3><p>文档的数据结构和JSON基本一样。<br>所有存储在集合中的数据都是BSON格式。<br>BSON是一种类json的一种二进制形式的存储格式,简称Binary JSON。</p>
+<p>MongoDB 使用 insert() 或 save() 方法向集合中插入文档。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">插入文档:            </div><div class="line">db.COLLECTION_NAME.insert(document)</div><div class="line"></div><div class="line">开启mongodb服务： </div><div class="line">$MONGO_HOME/bin/mongod</div><div class="line"></div><div class="line">查询当前所在数据库：</div><div class="line">db</div><div class="line"></div><div class="line">查询所有的数据库(不会显示没有数据的数据库)：</div><div class="line">show dbs</div><div class="line"></div><div class="line">使用数据库（如果没有数据库会自动创建）：</div><div class="line">use database_name </div><div class="line"></div><div class="line">插入数据：</div><div class="line">db.database_name.insert(&#123;"":""&#125;,&#123;&#125;,&#123;&#125;....)</div><div class="line"></div><div class="line">删除数据库：</div><div class="line">use database_name</div><div class="line">db.dropDatabase()</div><div class="line"></div><div class="line">删除集合：</div><div class="line">db.collection.drop()</div><div class="line"></div><div class="line">显示集合：</div><div class="line">show tables</div><div class="line"></div><div class="line">插入文档(如果该集合不在该数据库中， MongoDB 会自动创建该集合并插入文档)：</div><div class="line">db.COLLECTION_NAME.insert(document)</div><div class="line"></div><div class="line">查看集合中的数据：</div><div class="line">db.col.find()</div><div class="line"></div><div class="line">使用变量：</div><div class="line">document=(&#123;"":""&#125;.....)</div><div class="line">db.table1.insert(document)</div><div class="line"></div><div class="line">更新文档：</div><div class="line">update() 和 save() 方法</div><div class="line">db.col.update(&#123;原来的数据&#125;,&#123;$set:&#123;更新后的数据&#125;&#125;)</div><div class="line">以上语句只会修改第一条发现的文档，如果你要修改多条相同的文档，则需要设置 multi 参数为 true。</div><div class="line">db.col.update(&#123;原来的数据&#125;,&#123;$set:&#123;更新后的数据&#125;&#125;,&#123;multi:true&#125;)</div></pre></td></tr></table></figure>
+
     
 
     
@@ -438,7 +475,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/09/26/面试题集锦/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/03/15/git简单操作/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -544,7 +581,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">7</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">7</span></a>
         </ul>
     </li>
 
@@ -558,7 +595,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/数据库/">数据库<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/版本控制/">版本控制<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/面试题/">面试题<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
     
@@ -609,7 +646,7 @@
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">43</span>
+            <span class="sidebar-badge">44</span>
         </a>
     </li>
 </ul>
