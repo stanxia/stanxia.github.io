@@ -301,6 +301,12 @@
     </entry>
     
     <entry>
+      <title><![CDATA[大数据工作手册]]></title>
+      <url>https://stanxia.github.io/2016/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B7%A5%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="http://download.csdn.net/source/preview/8465531/57fae6e13e16ef0f230f464b839a55bb"></iframe>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[git简单操作]]></title>
       <url>https://stanxia.github.io/2016/03/15/git%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>Git就是一个版本控制软件。在进行软件开发时，一个团队的人靠使用Git，就能轻松管理好项目版本，做好项目的追踪和辅助进度控制。确切的讲，Git是一款分布式版本控制系统。这个“分布式”，要和“集中式”放在一起理解。</p>
