@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.2.6 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Apache Kylin在唯品会大数据的应用 | 
+        
+        小世界，大梦想
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
+    <link rel="icon" sizes="192x192" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
+    <link rel="apple-touch-icon" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="夏">
+    <meta name="description" content="随便说说">
+    <meta name="keywords" content="hive,hadoop,spark,hbase,hdfs,mapreduce,cluster">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="小世界，大梦想">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://stanxia.github.io">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Apache Kylin在唯品会大数据的应用 | 小世界，大梦想">
+    <meta property="og:description" content="随便说说">
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+    body, html {
+        font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    }
+
+    a {
+        color: #00838F;
+    }
+
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important;
+    }
+
+    /* Sidebar User Drop Down Menu Text Color */
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+        color: #0097A7 !important;
+    }
+
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+        color: #0097A7 !important;
+    }
+
+    .toTop {
+        background: #757575 !important;
+    }
+
+    .material-layout .material-post>.material-nav,
+    .material-layout .material-index>.material-nav,
+    .material-nav a {
+        color: #757575;
+    }
+
+    #scheme-Paradox .MD-burger-layer {
+        background-color: #757575;
+    }
+
+    #scheme-Paradox #post-toc-trigger-btn {
+        color: #757575;
+    }
+
+    .post-toc a:hover {
+        color: #00838F;
+        text-decoration: underline;
+    }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-image: url(http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd47t38qv6j21kw0w0167.jpg);
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+
+    <script src="/js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/css/highlight/solarized-white.css">
+
+    <!-- UC Browser Compatible-->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write('<link rel="stylesheet" href="/css/uc.css">');
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Apache-Kylin在唯品会大数据的应用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Apache Kylin在唯品会大数据的应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#唯品会如何使用Kylin"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">唯品会如何使用Kylin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么选择Kylin"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">为什么选择Kylin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#唯品会对Kylin做的改进"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">唯品会对Kylin做的改进</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#讲师介绍"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">讲师介绍</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://kylin.apache.org/assets/images/kylin_logo.jpg)">
+    
+            <p class="article-headline-p">
+                Apache Kylin在唯品会大数据的应用
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>夏</strong>
+        <span>4月 24, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACXUlEQVR42u3aQW7EMAgF0Nz/0u220lTpB2xPOnpeRWon8fPCIOD6+uh14eHh4eHh4eHhPYx3xevn/78+v77tlw/Hb+7tDQ8PD+8k74+rNthEvsV79mRveHh4eOd5+ZWdhIFe8JjvDQ8PD+9pvCipjQ8oDwx4eHh4/5eXJNN52p0XO/Dw8PCeycvT4iRpzoNEfkzbay14eHh4MW/eANv3/Ij+Hh4eHt5g9S7uSQutvEM8PDy8zbwk/U0a/72Bg3ny3ay14OHh4Q14q1Y1SFTHVQtHgIeHh7eZNx+4n4SBPCDlI614eHh4u3mrNrTqV/P2GB4eHt5JXrVB1Sv45oHnHo+Hh4f3Ll6vkBqltkEpYe0e8PDw8M7w7j8w2WKvgJsPYBUmI/Dw8PCW8vLSwP2IwGQUYNWwAh4eHt553vy5WlZIjqxaEMHDw8PbzUsu/fyizxnVQu3i0QE8PDy8bbyobLq01FsNEqPAgIeHhzfg9a7+SWG3+t3C4eLh4eFt5s1b/pNRgDx4FIq8eHh4eG/iVS/ovKHVO5TCDvHw8PA28/IruNeOmhR8r3jh4eHhnedNygG9gm91HKFwZHh4eHibeTs+mV/31QAQlUjw8PDwNvOqq/r5Xno9as7h4eHhbeb1ruOklND7yqRVhoeHh3eSlxdhJ5uYN73KZVw8PDy8zbw8Oa6WGHrhoVqGwMPDw3smLwkk1V/lf00Sazw8PLxn8qLUtpVMV9+8JTDg4eHhLa1zJkntpLk1p+Lh4eGd4U0KAdWw0RsvKCToeHh4eJt5n7fw8PDw8PDw8PAesL4BVrUMN0rMCMQAAAAASUVORK5CYII=">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/大数据案例/">大数据案例</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/04/24/test-youtube/" class="leancloud-views_num" data-flag-title="Apache Kylin在唯品会大数据的应用">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Apache Kylin在唯品会大数据的应用&url=https://stanxia.github.io//2017/04/24/test-youtube/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Apache Kylin在唯品会大数据的应用&url=https://stanxia.github.io//2017/04/24/test-youtube/index.html&via=夏" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/04/24/test-youtube/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/04/24/test-youtube/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=Apache Kylin在唯品会大数据的应用&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg&url=https://stanxia.github.io/2017/04/24/test-youtube/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="/assets/js/DPlayer.min.js"> </script><blockquote>
+<p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data" target="_blank" rel="external">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
+</blockquote>
+<h1 id="Apache-Kylin在唯品会大数据的应用"><a href="#Apache-Kylin在唯品会大数据的应用" class="headerlink" title="Apache Kylin在唯品会大数据的应用"></a>Apache Kylin在唯品会大数据的应用</h1><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
+<p>在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。</p>
+<p><strong>首先</strong>，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复沟通，在沟通过程中参与的人越多，信息衰减也就越厉害。再加上排期的等待，最终的结果一方面可能与初衷有所偏差，另一方面时间一长也失去了对热点关注度，分析变得非常滞后，不能及时的反应线上业务并加以改进。</p>
+<p><strong>其次</strong>，对于有分析能力的业务侧同学，没有趁手的工具就导致即使有能力准备撩袖子大干一场了也发现巧妇难为无米之炊，大家只能感慨大数据的门槛太高了，又回到了第一点的长时间等待的恶性循环里去了。</p>
+<p>我们总结下来，在唯品会这样规模的公司里，数据分析有两个痛点：</p>
+<ol>
+<li>需要一个可以自由组合的维度和指标的平台，业务人员可以根据自己的视角自给自足的完成数据提取和分析；</li>
+<li>这个平台，不仅数据要够丰富，即使大数据量响应速度也要快。</li>
+</ol>
+<p>针对这两个痛点，本着“让大数据成为唯品会的增长引擎”这个目标，我们大数据部门的提供了一套完整的解决方案：自助多维分析平台。我们通过有较高可扩展性的维度建模准备数据，在此之上搭建一套数据查询引擎，并配上操作简单的数据可视化前端，为业务人员搭了数据分析的台子。随着大家数据分析技能的提升，人人都是数据分析师的这个理念就逐渐在公司内部扩展开来了。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg" alt="img"></p>
+<h2 id="唯品会如何使用Kylin"><a href="#唯品会如何使用Kylin" class="headerlink" title="唯品会如何使用Kylin"></a>唯品会如何使用Kylin</h2><p>数据和前端是皮和肉，需要通过好的数据引擎才能支撑起来。在数据引擎角度，我们通过一段时间的积累和演进，从基于Presto的ROLAP模型进化到了基于Kylin和Presto的双计算引擎。往超大数据集也要快速ad-hoc响应的方向走近了一步。</p>
+<p>第一阶段，我们的目标是在Ad-hoc响应时间&lt;= 10秒的前提条件下，支持：</p>
+<ol>
+<li>平均每次查询10亿+明细数据做汇总；</li>
+<li>平均每个查询0-15个维度；</li>
+<li>平均每个查询1-5个指标。</li>
+</ol>
+<p>根据这个目标，我们选择使用Presto作为计算引擎，Presto MPP的架构 + 通过Hive Connector直接访问HDFS上的数据，为我们提供良好的Ad-hoc响应速度和相对较低的维护成本。为了满足高Ad-hoc响应速度的需求，常见的做法是把HDFS上处理完的数据同步到Ad-hoc响应友好的数据库中，比如GreenPlum或Hbase等，但这样的缺点是虽然速度上去了，但数据模型在Hive和Ad-hoc库中需要维护两份并保持一致，维护的成本非常高。Presto的Connector机制很好的解决了这个问题，同时他的计算能力也满足了我们第一阶段的需求。</p>
+<p>然后我们通过SQL Parser，将前端拖拽或事件描述的对象转化为SQL，同时完成SQL的变形和性能优化，把计算引擎和用户操作连接在一起，完成了第一阶段的目标。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/11.jpg" alt="img"></p>
+<p>自助多维分析平台一阶段逻辑架构</p>
+<p>随着业务的不断增长，在自助多维分析平台上逐渐出现了很多维度和指标组合类似、频率较高的查询，这些查询有着明显的模式，且通过分析我们了解到这些维度和指标的组合是业务部门常用的核心数据。这些查询反复的在Presto上执行，显然不是最佳选择，也达不到业务部门提出的新目标，核心数据查询响应时间&lt;=3秒。<strong>此时，Kylin就成了我们的首选</strong>。我们的数据引擎的架构，也从单纯的操纵SQL扩展到计算引擎的路由。通过读取Metadata并根据规则，在Kylin和Presto两个计算引擎之间路由，我们可以在不显著提高数据模型维护成本的前提条件下，通过Kylin对关键数据做预计算，提高核心数据的响应速度。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/12.jpg" alt="img"></p>
+<h2 id="为什么选择Kylin"><a href="#为什么选择Kylin" class="headerlink" title="为什么选择Kylin"></a>为什么选择Kylin</h2><p>首先，Kylin利用空间换时间，从原理上已经确保了Ad-hoc响应速度达标，和Oracle CUBE/物化视图的原理相同易于理解。</p>
+<p>第二，Kylin支持SQL，这对于数据分析而言至关重要，同时满足我们一个SQL在不同计算引擎之间路由的需求。</p>
+<p>另外，Kylin的SQL on Hbase的实现也很好的解决了Hbase不易查询的问题。第三是支持Dimension-Fact的join，这极大的解耦了数据模型和计算引擎之间的关系，不像ES或Pinot只支持单表，还有为他们专门处理数据的额外工作。第四是对数据开发来说，创建和管理CUBE比较简单，且透明化了MR和HBASE同步。第五是可以很方便的在调度系统中调用Kylin API定时刷新CUBE。综上所述，Kylin对于一个数据分析系统来说是一个好的解决方案。</p>
+<p>经过一段时间的测试和线上运行，我们在之前把Kylin覆盖到核心指标的查询基础上还扩展到了在Presto上查询需要30秒以上的指标和维度组合上。因为这类查询往往需要扫描大量的基础数据，在Kylin上预计算可以有效的较低资源使用。另一方面，基于自助多维分析平台的业务场景，我们也在以下两个场景中不启用Kylin。第一是维度的基数大于1亿的场景，主要是由于大基数的维度加载的Kylin Server的内存中容易引起OOM。第二是数据模型经常变化的主题，在Kylin中维护CUBE的成本就很高了，每次变化都需要重建CUBE，重刷数据，这显然与我们提高复用降低重复开发的初衷不符。对于这两个场景，由Presto完成计算也可以很好的满足需求。</p>
+<p>基于以上的原则，目前我们累计有20+个CUBE，10+T存储，最大CUBE记录数上千亿，覆盖了23%的查询。同时，Ad-hoc的响应速度也令人满意。Kylin的平均响应速度是Presto的10.5倍，中位数响应速度是Presto的4.5倍。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/13.jpg" alt="img"></p>
+<h2 id="唯品会对Kylin做的改进"><a href="#唯品会对Kylin做的改进" class="headerlink" title="唯品会对Kylin做的改进"></a>唯品会对Kylin做的改进</h2><p>针对唯品会的痛点，我们也在开源框架的基础上进行了修改。基础升级方面，我们针对自助多维分析平台的需求进行了升级。比如，在查找CUBE的时候，仅当CUBE内数据包含SQL查询的时间范围才命中CUBE，避免给用户不完整的数据集。同时我们采集了Kylin运行中metadata，并给予这些数据提供SQL分析API以解析Kylin能运行的SQL子查询。另外一些BUG修复也提交到了社区。</p>
+<p>除此之外，我们基于Presto+Kylin双引擎的架构，开发了Presto on Kylin这个功能。通过在Presto侧增加Kylin Connector，我们支持了Kylin与Hive数据源的跨源Join，支持Raw data汇总后的数据和Kylin Cube 数据Join。为了支持以上两个功能，我们在Kylin增加了Explain功能简化了Cube命中探查的复杂度。同时，为了进一步降低数据开发寻找查询组合的复杂度，我们开发了Cube Advisor，通过统计分析Presto SQL获得所有维度和指标的组合频次，根据最常使用和响应时间长两个条件，推荐合适的Cube定义建议，数据开发可以直接根据推荐的建议创建Cube。</p>
+<p>下一步，我们会改造Kylin维表的Cache机制，解决大基数维表不能创建CUBE的问题，同时进一步扩展CUBE Advisor支持一键生成CUBE的功能并能够支持自动刷新历史数据，降低人工维护成本。同时，将Kylin的应用推广到报表类数据产品。</p>
+<p>在提高大数据分析Ad-hoc响应速度的路上，可谓八仙过海各显神通，我们通过Presto和Kylin的结合满足了当前的需求，后面我们也会继续探索更多解决方案，寻找下一代的多维分析引擎，在此过程中，欢迎大家与我们一起讨论。</p>
+<h2 id="讲师介绍"><a href="#讲师介绍" class="headerlink" title="讲师介绍"></a>讲师介绍</h2><p><strong>谢麟炯，</strong>唯品会大数据平台高级技术架构经理，主要负责大数据自助多维分析平台，离线数据开发平台及分析引擎团队的开发和管理工作 ，加入唯品会以来还曾负责流量基础数据的 采集和数据仓库建设以及移动流量分析等数据产品的工作。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key=""
+        data-url="https://stanxia.github.io/2017/04/24/test-youtube/"
+        data-title="Apache Kylin在唯品会大数据的应用">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/21/EasyHadoop集群部署入门/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="夏's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xooglexls@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+            主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+    <!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+    -->
+
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">三月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/02/">二月 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/hadoop/">hadoop<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据手册/">大数据手册<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/数据库/">数据库<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/版本控制/">版本控制<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a>
+            </ul>
+        </li>
+    
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+  	
+        <li>
+            <a href="/aboutme/" title="Astan">
+                
+                Astan
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/tags/" title="标签索引">
+                
+                标签索引
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/guestbook/" title="壮士请留步">
+                
+                壮士请留步
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/links" title="常用链接">
+                
+                常用链接
+            </a>
+        </li>
+  	
+        <li>
+            <a href="/gallery" title="邓紫棋">
+                
+                邓紫棋
+            </a>
+        </li>
+  	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+            文章总数
+            <span class="sidebar-badge">47</span>
+        </a>
+    </li>
+</ul>
+
+
+        <!-- Sidebar Divider -->
+        <div class="sidebar-divider"></div>
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        主题 - Material
+        <span class="sidebar-badge badge-circle">i</span>
+    </div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+    sidebar.help
+    <span class="mdl-button__ripple-container">
+      <span class="mdl-ripple"></span>
+    </span>
+  </div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+    </div>
+
+    <!-- Sidebar Sponsor -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/profile.php?id=100014686742374" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/u/1789803763/home?leftnav=1" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;小世界，大梦想
+          <div>
+		<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<div>
+		本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+		你是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+		</div>
+	</div>
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+         
+
+	</div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize("f8AHUn2FOKCWoFzJTLrnSt4A-gzGzoHsz", "dOlRTKgDWf3Ut87VDHex4Wks");
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+        var duoshuoQuery = {
+            short_name: 'stanxia'
+        };
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+    <script>
+    var searchFunc = function(path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: 'xml',
+            success: function( xmlResponse ) {
+                // get the contents from search data
+                var datas = $( 'entry', xmlResponse ).map(function() {
+                    return {
+                        title: $( 'title', this ).text(),
+                        content: $('content',this).text(),
+                        url: $( 'url' , this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function() {
+                    var str='<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function(data) {
+                        var isMatch = true;
+                        var content_index = [];
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                        var data_url = data.url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if(data_title != '' && data_content != '') {
+                            keywords.forEach(function(keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if( index_title < 0 && index_content < 0 ) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += '<li><a href="'+ data_url +'" class="search-result-title" target="_blank">'+ data_title;
+                            var content = data.content.trim().replace(/<[^>]+>/g, '');
+                            if (first_occur >= 0) {
+                                // cut out characters
+                                var start = first_occur - 6;
+                                var end = first_occur + 6;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 10;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, 'gi');
+                                    match_content = match_content.replace(regS, '<em class="search-keyword">'+keyword+'</em>');
+                                })
+                                str += '<p class="search-result">' + match_content +'...</p>' +'</a>';
+                            }
+                        }
+                    });
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    }
+</script>
+
+
+    <script>
+        var inputArea = document.querySelector('#search');
+        var getSearchFile = function() {
+            var path = 'search.xml';
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        if(inputArea) {
+            inputArea.onfocus = function() {
+                getSearchFile();
+            }
+        }
+    </script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
