@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title><![CDATA[企业大数据平台下数仓建设思路]]></title>
+      <url>https://stanxia.github.io/2017/04/25/%E4%BC%81%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E4%B8%8B%E6%95%B0%E4%BB%93%E5%BB%BA%E8%AE%BE%E6%80%9D%E8%B7%AF/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>大牛解读</p>
+<blockquote>
+<p>转载自：<a href="https://yq.aliyun.com/articles/67020" target="_blank" rel="external">https://yq.aliyun.com/articles/67020</a></p>
+</blockquote>
+<h2 id="数仓上遇到的挑战：数据质量保障、稳定和重复性"><a href="#数仓上遇到的挑战：数据质量保障、稳定和重复性" class="headerlink" title="数仓上遇到的挑战：数据质量保障、稳定和重复性"></a>数仓上遇到的挑战：数据质量保障、稳定和重复性</h2><p>在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：</p>
+<p>1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出现乱码、数据库因为切库造成数据同步量变少等等。这就要求在整个数仓体系的搭建过程中不只要完成数据业务逻辑的处理，还需要增加数据质量的监控。“我们在核心的数据处理流程中，增加数据质量监控代码，如果碰到数据量的突变或者核心指标的突变，会将数据处理流程暂停并预警，让数据运维人员处理数据质量问题后再进行后续数据流程的运行，保障有质量问题的数据不流到下游应用中。”</p>
+<p>2.数据产出稳定性保障：随着数据量的增加、计算资源的逐渐饱和，业务数据最终产出的时间开始延迟，并有可能不能按照业务要求的时间点产出。“这个时候我们会分析数据产出的关键路径，找出关键路径下消耗时间最多的运行JOB，通过数据模型优化、计算任务拆解或者计算任务代码优化的手段减少任务产出的时间，同时保障整体产出时间满足预期。”</p>
+<p>3.重复的数据处理代码：由于业务的特殊性，会对某种类型的数据加工操作需求非常多。比如计算交易中,TOP N的商家、TOP N 的品牌、TOP N的商品，商家中TOP N的商品、品牌中TOP N的商家等等。 这类代码都是非常类似的，如果每个计算都独立任务，会造成计算资源的大量浪费。“我们通过特殊的代码框架，让一份基础数据中多种TOPN的数据可以在一次计算过程中产出，大大减少资源消耗，保障数据产出稳定。”</p>
+<h2 id="优秀数仓的三要素：清晰、保障和扩展性好"><a href="#优秀数仓的三要素：清晰、保障和扩展性好" class="headerlink" title="优秀数仓的三要素：清晰、保障和扩展性好"></a>优秀数仓的三要素：清晰、保障和扩展性好</h2><p>介然认为，优秀的数据仓库应该包含以下要素：</p>
+<p>1.结构、分层清晰：不一定需要多少个分层和主题，但是一定要清晰。用数据的人能够很快找到需要数据的位置。</p>
+<p>2.数据质量和产出时间有保障；</p>
+<p>3.扩展性好：不会因为业务的些许变化造成模型的大面积重构。</p>
+<p>而从系统架构、数据架构两个纬度来看，要想设计好大数据应用下的数据仓库，还应做到以下两点。</p>
+<p>1.系统架构上：足够的容错性，减少不必要的系统间的强耦合。因为你会碰到各种问题，不要因为一个不必要的依赖造成数据无法产出。</p>
+<p>2.数据架构上：简单、清晰、强质量控制。数据架构上扁平化的数据处理流程会对数据质量的控制和数据产出的稳定性提供非常好的基础。</p>
+<h2 id="互联网人转型做大数据数仓需要注意哪几个点？"><a href="#互联网人转型做大数据数仓需要注意哪几个点？" class="headerlink" title="互联网人转型做大数据数仓需要注意哪几个点？"></a>互联网人转型做大数据数仓需要注意哪几个点？</h2><p>对于之前做互联网数据仓库，现在想转型做大数据仓库的人，介然也提了一些建议，主要是四点：</p>
+<p>1.不必再苛刻的精打细算：基于传统平台构建数仓时，为了照顾平台的处理能力，我们经常会构建多层数据结构，预先对不同粒度的数据做预先汇总，以方便使用者在使用数据时能够已最小的计算代价获得计算结果。这也造成了整个数据处理流程较长，步骤很多，问题追溯困难。 新的大数据仓库基于分布式计算平台，平台的计算能力通常都比传统的平台强大很多。 所以有时候需要时再计算数据，或者基于明细进行各粒度的数据汇总已经能够满足需求，并能够大大减少整体数据处理流程步骤，用计算的代价减少人工的成本，更划算，数据体系也更健壮。</p>
+<p>2.不是模型层次越多越好：在传统的数仓架构中，大家都喜欢多数据模型进行分层设计，不同的模型层次拥有不同的数据域和作用域。这样设计固然看起来更清晰，但实际情况时多层之间可能存在重复数据，或者数据使用者在上层找不到完全切合的数据时，更愿意从底层的明细数据上自己去加工。一方面造成了数据使用上的混乱，一方面也会让数据整个处理流程长度增加，对于数据的运维带来较大的成本消耗。合理的层次设计，及在计算成本和人力成本间的平衡，是一个好的数仓架构的表现。</p>
+<p>3.质量是生命线：不再是你拿到的数据都是正确的，新的环境下的数据什么情况都会发生，而好的数仓架构需要有足够的容错性和质量保障。不要因为一条日志的乱码造成整个数据流程无法走通，也不要说一份日志50%的乱码你的程序还发现不了。在数据质量上投入再多的资源都不是浪费。</p>
+<p>4.数据变成生产资料：传统的数据应用绝大部分都是以报表和BI分析的形式支持业务。也许你的报表晚出来会被老板骂一通，但是对业务的影响并不大。 但是在新的数据应用场景下，数据已经变成生产资料，数据会服务化直接应用到业务系统中，也许一份数据的质量出现问题或者产出延迟，都可能对你的业务系统产生致命的影响。所以数仓开始承担新的使命。</p>
+<p><img src="" alt="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/ae9f20459c5838978a9d163767982b9e403cbd6e.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/ab1f9275d27c6cdbe39b1e9a46d746041c169e1a.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/487586d50b0fee659990f3915138c06b7fb523e6.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/8f085a4291ece66e7d1b8da28fddb4ea89825a3d.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/a45d8e4c431c951cda6690d0dbc4a48f9cad6eb3.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/2aa2cf31c8657b7e5722f40fd1921ad6bad21ff3.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/b6d3c753639d2a157f022cd84bf39990228c5a5e.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/fe10046f04fe1b57302aeaab49bb822aa0ba5b84.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/917add91d80ecc9e1cac080acac091a8d795ec83.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/caebb3f89a33489bb6250889c221556caf9e2a93.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/4d6f959ed86b8c47ae8e8b0ea3dcc800dfc92694.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/3ba23945c5ff03bdd679cb461a2f56b99baf2f94.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/42a5fd36b3020ccbed8e4f6cc1f34fdbe08ce239.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/a22871be93640b55ce022aba9648752bd1ebe73b.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/6eb136254008467abfd7401c8b81106fdc5460fd.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/7e962808351228f0e450e2c3c80f2eeffe058624.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/1ad7466dffee8b318c5aaadea9a50a7a90e424a6.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/349986d12df4c5d8e926fcc8bf6b6474a63b91a3.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/ab2e7bf1bb5321ca33fdbc9b62065466a9b10030.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/6202ca10ff3850da8a077bdacf2351b15400be2f.png"></p>
+<p><img src="" alt="https://yqfile.alicdn.com/4c17dbdcc180832226b19ed8181e87be01bc3e6e.png"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用 Hexo 插件插入音乐/视频]]></title>
       <url>https://stanxia.github.io/2017/04/25/dplayer-test/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="使用-Hexo-插件插入音乐-视频"><a href="#使用-Hexo-插件插入音乐-视频" class="headerlink" title="使用 Hexo 插件插入音乐/视频"></a>使用 Hexo 插件插入音乐/视频</h1><p>用于播放视频和音乐的的hexo插件：</p>
@@ -2503,6 +2553,52 @@
     </entry>
     
     <entry>
+      <title><![CDATA[kafka安装与简单的应用]]></title>
+      <url>https://stanxia.github.io/2016/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h2><ol>
+<li><p>多台Linux服务器</p>
+</li>
+<li><p>已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）</p>
+</li>
+<li><p>下载kafka</p>
+<p><a href="https://kafka.apache.org/downloads.html" target="_blank" rel="external">点击选择需要下载的kafka版本</a></p>
+<p>或者直接在服务器上面下载：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="二、安装kafka"><a href="#二、安装kafka" class="headerlink" title="二、安装kafka"></a>二、安装kafka</h2><h5 id="创建项目目录："><a href="#创建项目目录：" class="headerlink" title="创建项目目录："></a>创建项目目录：</h5><p>创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /opt/kafka <span class="comment">#创建kafka项目目录</span></div><div class="line">mkdir /opt/kafka/kafkalogs <span class="comment">#创建kafka项目的日志目录</span></div></pre></td></tr></table></figure>
+<h5 id="安装kafka："><a href="#安装kafka：" class="headerlink" title="安装kafka："></a>安装kafka：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar xzvf kafka-0.8.0-beta1-src.tgz -C /opt/kafka/  <span class="comment">#解压kafka到指定目录下</span></div><div class="line"><span class="built_in">cd</span> /opt/kafka/ <span class="comment">#到解压kafka的目录</span></div><div class="line">mv kafka-0.8.0-beta1-src kafka <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
+<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><h5 id="配置文件目录："><a href="#配置文件目录：" class="headerlink" title="配置文件目录："></a>配置文件目录：</h5><p>kafka的配置文件都存放在/opt/kafka/kafka/config/</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/kafka/kafka/config/ </div><div class="line">ll <span class="comment">#查看kafka所有的配置文件</span></div></pre></td></tr></table></figure>
+<h5 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a>修改配置文件：</h5><p>主要修改<em>server.properties</em>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">broker.id=0  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样</div><div class="line">port=19092 #当前kafka对外提供服务的端口默认是9092</div><div class="line">host.name=192.168.7.100 #这个参数默认是关闭的，在0.8.1有个bug，DNS解析问题，失败率的问题。</div><div class="line">num.network.threads=3 #这个是borker进行网络处理的线程数</div><div class="line">num.io.threads=8 #这个是borker进行I/O处理的线程数</div><div class="line">log.dirs=/opt/kafka/kafkalogs/ #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个</div><div class="line">socket.send.buffer.bytes=102400 #发送缓冲区buffer大小，数据不是一下子就发送的，存储到缓冲区到达一定的大小后再发送，能提高性能</div><div class="line">socket.receive.buffer.bytes=102400 #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘</div><div class="line">socket.request.max.bytes=104857600 #这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小</div><div class="line">num.partitions=1 #默认的分区数，一个topic默认1个分区数</div><div class="line">log.retention.hours=168 #默认消息的最大持久化时间，168小时，7天</div><div class="line">message.max.byte=5242880  #消息保存的最大值5M</div><div class="line">default.replication.factor=2  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务</div><div class="line">replica.fetch.max.bytes=5242880  #取消息的最大直接数</div><div class="line">log.segment.bytes=1073741824 #这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新建一个文件</div><div class="line">log.retention.check.interval.ms=300000 #每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours=168 ），到目录查看是否有过期的消息如果有，删除</div><div class="line">log.cleaner.enable=false #是否启用log压缩，一般不用启用，启用的话可以提高性能</div><div class="line">zookeeper.connect=192.168.7.100:12181,192.168.7.101:12181,192.168.7.107:1218 #设置zookeeper的连接端口，与zookeeper的zoo.cfg文件中的clientPort保持一致</div></pre></td></tr></table></figure>
+<h2 id="三、开启并使用kafka"><a href="#三、开启并使用kafka" class="headerlink" title="三、开启并使用kafka"></a>三、开启并使用kafka</h2><h5 id="开启kafka服务："><a href="#开启kafka服务：" class="headerlink" title="开启kafka服务："></a>开启kafka服务：</h5><ol>
+<li><p>首先要确保已经开启了zookeeper服务:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/zookeeper/zookeeper/bin/zkServer.sh start <span class="comment">#开启zookeeper服务</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>后台开启kafka：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp; <span class="comment">#后台挂起kafka服务 nohup  &amp;</span></div><div class="line">ps -ef | grep java | grep -v grep <span class="comment">#查看当前的java进程，zookeeper与kafka都是基于java</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>kafka基本操作：</p>
+<p>创建topics</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-topics.sh --zookeeper 192.168.221.138:2181 --create --topic <span class="built_in">test</span> --replication-factor 1 --partition 1 <span class="comment">#新建主题 连接zookeeper --create 创建主题 --topic 主题名 --replication-factor 副本因子 --partitions 分为几个区</span></div></pre></td></tr></table></figure>
+<p>发消息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span> &gt;/dev/null <span class="comment">#producer发送消息  发送给broker</span></div></pre></td></tr></table></figure>
+<p>收消息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic <span class="built_in">test</span> --from-beginning 2&gt;/dev/null <span class="comment">#consumer接收消息 连接zookeeper服务器  --from-beginning 接收历史消息</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><ol>
+<li>开启kafka之前必须要开启zookeeper</li>
+<li>注意生产者连接broker 端口号默认9092；消费者连接zookeeper 端口号默认2181</li>
+<li>创建主题时，设置分区为集群服务器数的两倍或多倍，可有效避免消息发送和接收的读写热点</li>
+</ol>
+<p>Good Luck!</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[kafka-server-properties参数详解]]></title>
       <url>https://stanxia.github.io/2016/02/13/kafka-server-properties%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
@@ -2763,52 +2859,6 @@
 </tr>
 </tbody>
 </table>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[kafka安装与简单的应用]]></title>
-      <url>https://stanxia.github.io/2016/02/13/kafka%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h2><ol>
-<li><p>多台Linux服务器</p>
-</li>
-<li><p>已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）</p>
-</li>
-<li><p>下载kafka</p>
-<p><a href="https://kafka.apache.org/downloads.html" target="_blank" rel="external">点击选择需要下载的kafka版本</a></p>
-<p>或者直接在服务器上面下载：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="二、安装kafka"><a href="#二、安装kafka" class="headerlink" title="二、安装kafka"></a>二、安装kafka</h2><h5 id="创建项目目录："><a href="#创建项目目录：" class="headerlink" title="创建项目目录："></a>创建项目目录：</h5><p>创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /opt/kafka <span class="comment">#创建kafka项目目录</span></div><div class="line">mkdir /opt/kafka/kafkalogs <span class="comment">#创建kafka项目的日志目录</span></div></pre></td></tr></table></figure>
-<h5 id="安装kafka："><a href="#安装kafka：" class="headerlink" title="安装kafka："></a>安装kafka：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar xzvf kafka-0.8.0-beta1-src.tgz -C /opt/kafka/  <span class="comment">#解压kafka到指定目录下</span></div><div class="line"><span class="built_in">cd</span> /opt/kafka/ <span class="comment">#到解压kafka的目录</span></div><div class="line">mv kafka-0.8.0-beta1-src kafka <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
-<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><h5 id="配置文件目录："><a href="#配置文件目录：" class="headerlink" title="配置文件目录："></a>配置文件目录：</h5><p>kafka的配置文件都存放在/opt/kafka/kafka/config/</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/kafka/kafka/config/ </div><div class="line">ll <span class="comment">#查看kafka所有的配置文件</span></div></pre></td></tr></table></figure>
-<h5 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a>修改配置文件：</h5><p>主要修改<em>server.properties</em>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">broker.id=0  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样</div><div class="line">port=19092 #当前kafka对外提供服务的端口默认是9092</div><div class="line">host.name=192.168.7.100 #这个参数默认是关闭的，在0.8.1有个bug，DNS解析问题，失败率的问题。</div><div class="line">num.network.threads=3 #这个是borker进行网络处理的线程数</div><div class="line">num.io.threads=8 #这个是borker进行I/O处理的线程数</div><div class="line">log.dirs=/opt/kafka/kafkalogs/ #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个</div><div class="line">socket.send.buffer.bytes=102400 #发送缓冲区buffer大小，数据不是一下子就发送的，存储到缓冲区到达一定的大小后再发送，能提高性能</div><div class="line">socket.receive.buffer.bytes=102400 #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘</div><div class="line">socket.request.max.bytes=104857600 #这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小</div><div class="line">num.partitions=1 #默认的分区数，一个topic默认1个分区数</div><div class="line">log.retention.hours=168 #默认消息的最大持久化时间，168小时，7天</div><div class="line">message.max.byte=5242880  #消息保存的最大值5M</div><div class="line">default.replication.factor=2  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务</div><div class="line">replica.fetch.max.bytes=5242880  #取消息的最大直接数</div><div class="line">log.segment.bytes=1073741824 #这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新建一个文件</div><div class="line">log.retention.check.interval.ms=300000 #每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours=168 ），到目录查看是否有过期的消息如果有，删除</div><div class="line">log.cleaner.enable=false #是否启用log压缩，一般不用启用，启用的话可以提高性能</div><div class="line">zookeeper.connect=192.168.7.100:12181,192.168.7.101:12181,192.168.7.107:1218 #设置zookeeper的连接端口，与zookeeper的zoo.cfg文件中的clientPort保持一致</div></pre></td></tr></table></figure>
-<h2 id="三、开启并使用kafka"><a href="#三、开启并使用kafka" class="headerlink" title="三、开启并使用kafka"></a>三、开启并使用kafka</h2><h5 id="开启kafka服务："><a href="#开启kafka服务：" class="headerlink" title="开启kafka服务："></a>开启kafka服务：</h5><ol>
-<li><p>首先要确保已经开启了zookeeper服务:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/zookeeper/zookeeper/bin/zkServer.sh start <span class="comment">#开启zookeeper服务</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>后台开启kafka：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp; <span class="comment">#后台挂起kafka服务 nohup  &amp;</span></div><div class="line">ps -ef | grep java | grep -v grep <span class="comment">#查看当前的java进程，zookeeper与kafka都是基于java</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>kafka基本操作：</p>
-<p>创建topics</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-topics.sh --zookeeper 192.168.221.138:2181 --create --topic <span class="built_in">test</span> --replication-factor 1 --partition 1 <span class="comment">#新建主题 连接zookeeper --create 创建主题 --topic 主题名 --replication-factor 副本因子 --partitions 分为几个区</span></div></pre></td></tr></table></figure>
-<p>发消息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span> &gt;/dev/null <span class="comment">#producer发送消息  发送给broker</span></div></pre></td></tr></table></figure>
-<p>收消息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic <span class="built_in">test</span> --from-beginning 2&gt;/dev/null <span class="comment">#consumer接收消息 连接zookeeper服务器  --from-beginning 接收历史消息</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><ol>
-<li>开启kafka之前必须要开启zookeeper</li>
-<li>注意生产者连接broker 端口号默认9092；消费者连接zookeeper 端口号默认2181</li>
-<li>创建主题时，设置分区为集群服务器数的两倍或多倍，可有效避免消息发送和接收的读写热点</li>
-</ol>
-<p>Good Luck!</p>
 ]]></content>
     </entry>
     
