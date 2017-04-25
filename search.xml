@@ -4,12 +4,18 @@
   
     
     <entry>
+      <title><![CDATA[dplayer-test]]></title>
+      <url>https://stanxia.github.io/2017/04/25/dplayer-test/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Apache Kylin在唯品会大数据的应用]]></title>
       <url>https://stanxia.github.io/2017/04/24/test-youtube/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
 <p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data" target="_blank" rel="external">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
 </blockquote>
-<h1 id="Apache-Kylin在唯品会大数据的应用"><a href="#Apache-Kylin在唯品会大数据的应用" class="headerlink" title="Apache Kylin在唯品会大数据的应用"></a>Apache Kylin在唯品会大数据的应用</h1><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
 <p>在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。</p>
 <p><strong>首先</strong>，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复沟通，在沟通过程中参与的人越多，信息衰减也就越厉害。再加上排期的等待，最终的结果一方面可能与初衷有所偏差，另一方面时间一长也失去了对热点关注度，分析变得非常滞后，不能及时的反应线上业务并加以改进。</p>
 <p><strong>其次</strong>，对于有分析能力的业务侧同学，没有趁手的工具就导致即使有能力准备撩袖子大干一场了也发现巧妇难为无米之炊，大家只能感慨大数据的门槛太高了，又回到了第一点的长时间等待的恶性循环里去了。</p>
