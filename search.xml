@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[dplayer-test]]></title>
       <url>https://stanxia.github.io/2017/04/25/dplayer-test/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>]]></content>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
+<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"https://pan.baidu.com/play/video#video/path=%2F%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B%2F02.mp4&t=-1","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>]]></content>
     </entry>
     
     <entry>
