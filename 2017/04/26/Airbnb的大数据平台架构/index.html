@@ -405,7 +405,7 @@
 <li>预留多余资源：集群资源的超负荷使用让我们培养了一种探索无限可能的文化。对于架构团队来说，经常沉浸在早期资源充足的兴奋中，但Airbnb大数据团队总是假设数据仓库的新业务规模比现有机器资源大。</li>
 </ul>
 <h2 id="Part-2：大数据架构预览"><a href="#Part-2：大数据架构预览" class="headerlink" title="Part 2：大数据架构预览"></a>Part 2：大数据架构预览</h2><p>这里是大数据平台架构一览图。</p>
-<p><img src="" alt="http://oliji9s3j.bkt.clouddn.com/AIRBNB.png"></p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/AIRBNB.png" alt=""></p>
 <p>Airbnb数据源主要来自两方面：数据埋点发送事件日志到Kafka；MySQL数据库dumps存储在AWS的RDS，通过数据传输组件Sqoop传输到Hive“金”集群（其实就是Hive集群，只是Airbnb内部有两个Hive集群，分别为“金”集群和“银”集群，具体分开两个集群的原因会在文章末尾给出。）。</p>
 <p>包含用户行为以及纬度快照的数据发送到Hive“金”集群存储，并进行数据清洗。这步会做些业务逻辑计算，聚合数据表，并进行数据校验。</p>
 <p>在以上架构图中，Hive集群单独区分“金”集群和“银”集群大面上的原因是为了把数据存储和计算进行分离。这样可以保证灾难性恢复。这个架构中，“金”集群运行着更重要的作业和服务，对资源占用和即席查询可以达到无感知。“银”集群只是作为一个产品环境。</p>
@@ -442,7 +442,7 @@
 <li>写吞吐量提高了两倍</li>
 <li>成本减少百分之七十</li>
 </ul>
-<p>**查看英文原文：<a href="https://medium.com/airbnb-engineering/data-infrastructure-at-airbnb-8adfb34f169c#.3nbxp845m" target="_blank" rel="external">Data Infrastructure at Airbnb</a></p>
+<p><strong>查看英文原文：<a href="">Data Infrastructure at Airbnb</a></strong></p>
 
     
 
