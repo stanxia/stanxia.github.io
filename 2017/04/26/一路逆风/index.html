@@ -10,7 +10,7 @@
     
     <title>
         
-            标签: mac | 
+            一路逆风 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: mac | 小世界，大梦想">
+    <meta property="og:title" content="一路逆风 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -200,91 +200,272 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
     
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://img.xclient.info/attachment/cdn/large/006ehIt6jw1execfbx4xnj30nc0b6dgh.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2015/02/15/MAC应用无法打开或文件损坏的处理方法/">MAC应用无法打开或文件损坏的处理方法</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-             
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2015/02/15/MAC应用无法打开或文件损坏的处理方法/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="夏's avatar">
-            </div>
-            <div>
-                <strong>夏</strong>
-                <span>2月 15, 2015</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/生活/">生活</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
         
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
         
-    
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
-    }
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                一路逆风
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>夏</strong>
+        <span>4月 26, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACYElEQVR42u3aQW7DMAwEwPz/0+21QNB0ScqMG4xPhuPIGh8kecXH10cfDzw8PDw8PDw8vJvxHvERNf3jzuf//tZacj3vGx4eHt4Or9fpebeeW570DQ8PD2+f13tw3ulkSnh9HvUNDw8P78a8yYSRDP14eHh4n8GbnydX8PDw8P4Lr/DB/zLeTX7NF+urWQseHh5ezOuFrTvnq/t7eHh4eAGvWdj0Ej/ZJLtFTRkeHh7eS151sM7Bk5gjX9bj4eHhvYs339T/45FxnJFPGOUvBjw8PLxDvF4EkA/Z5c6N28fDw8Pb4UVL1XiJnF8/y8bDw8Pb5PUKT/NQo/oKei3j4eHh7fDmJVDz8tMkBMnjDzw8PLxNXlIccCrGzSPjnI2Hh4e3wyt/6hfvTIb1wqCfvEo8PDy8FV4yZFdD2Hn5fv4q8fDw8DZ51Ti1OtCf2mbL28HDw8O7mpcDqsFEHltUI4xm0RUeHh7eUV4+lM+Xwr0trmNFV3h4eHhjXu/BeeHUpLC1FyLj4eHhXc2rRgbJFNLbSKtGJIXSATw8PLyjvGiojQf0cnBQLLRKfsXDw8O7mtfrXL5Qri6de+VZeHh4eJu8atFAb8FdLUjNXxAeHh7ePq969DbAenFD8xXj4eHhXcyblAL0FsrJ0/PpBA8PD+9dvN4mVg9cDXOr1/Hw8PA2efkA3ftXAl7KWvDw8PAWeXlwkEwqvTsvnBjw8PDwLltzJoFsdVMtiT/w8PDw7sbrDcrVYqz8zsNFV3h4eHhHeZMy03yTrFpk0FvW4+Hh4V3N+7wDDw8PDw8PDw/vBsc3THKglMrd/8EAAAAASUVORK5CYII=">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/GEM/">GEM</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/04/26/一路逆风/" class="leancloud-views_num" data-flag-title="一路逆风">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=一路逆风&url=https://stanxia.github.io//2017/04/26/一路逆风/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=一路逆风&url=https://stanxia.github.io//2017/04/26/一路逆风/index.html&via=夏" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/04/26/一路逆风/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/04/26/一路逆风/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=一路逆风&summary=随便说说&pics=https://stanxia.github.iohttp://wx2.sinaimg.cn/mw690/6aae3cf3gy1fcurfy4214j21kw0w0wr6.jpg&url=https://stanxia.github.io/2017/04/26/一路逆风/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <script src="/assets/js/DPlayer.min.js"> </script><p>不脆弱 不沉默 不协妥 不退缩</p>
+<p>不慌张 不绝望 不狂妄 不投降</p>
+<p>一路逆风 我们不投降</p>
+<p>一路逆风 顽强的飞翔</p>
+<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://ww4.sinaimg.cn/mw1024/65a92dc9jw1fbqdiyxyylj21421kwaku.jpg"}});</script>
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key=""
+        data-url="https://stanxia.github.io/2017/04/26/一路逆风/"
+        data-title="一路逆风">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/04/25/企业大数据平台下数仓建设思路/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -494,6 +675,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

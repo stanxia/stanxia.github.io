@@ -409,7 +409,7 @@
 <p>2.不是模型层次越多越好：在传统的数仓架构中，大家都喜欢多数据模型进行分层设计，不同的模型层次拥有不同的数据域和作用域。这样设计固然看起来更清晰，但实际情况时多层之间可能存在重复数据，或者数据使用者在上层找不到完全切合的数据时，更愿意从底层的明细数据上自己去加工。一方面造成了数据使用上的混乱，一方面也会让数据整个处理流程长度增加，对于数据的运维带来较大的成本消耗。合理的层次设计，及在计算成本和人力成本间的平衡，是一个好的数仓架构的表现。</p>
 <p>3.质量是生命线：不再是你拿到的数据都是正确的，新的环境下的数据什么情况都会发生，而好的数仓架构需要有足够的容错性和质量保障。不要因为一条日志的乱码造成整个数据流程无法走通，也不要说一份日志50%的乱码你的程序还发现不了。在数据质量上投入再多的资源都不是浪费。</p>
 <p>4.数据变成生产资料：传统的数据应用绝大部分都是以报表和BI分析的形式支持业务。也许你的报表晚出来会被老板骂一通，但是对业务的影响并不大。 但是在新的数据应用场景下，数据已经变成生产资料，数据会服务化直接应用到业务系统中，也许一份数据的质量出现问题或者产出延迟，都可能对你的业务系统产生致命的影响。所以数仓开始承担新的使命。</p>
-<p><img src="" alt="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png"></p>
+<p><img src="1" alt="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/ae9f20459c5838978a9d163767982b9e403cbd6e.png"></p>
@@ -478,6 +478,14 @@
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/2017/04/26/一路逆风/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
     
 
     <!-- Section Spacer -->
@@ -577,7 +585,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">三月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/02/">二月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">三月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/02/">二月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -591,7 +599,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/hadoop/">hadoop<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据手册/">大数据手册<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/数据库/">数据库<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/版本控制/">版本控制<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a>
+                <a class="sidebar_archives-link" href="/categories/GEM/">GEM<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/hadoop/">hadoop<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据手册/">大数据手册<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据案例/">大数据案例<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术向/">技术向<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/折腾/">折腾<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/数据库/">数据库<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/漫画/">漫画<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/版本控制/">版本控制<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/集群搭建/">集群搭建<span class="sidebar_archives-count">9</span></a>
             </ul>
         </li>
     
@@ -642,7 +650,7 @@
     <li>
         <a href="/archives">
             文章总数
-            <span class="sidebar-badge">49</span>
+            <span class="sidebar-badge">50</span>
         </a>
     </li>
 </ul>

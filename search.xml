@@ -4,6 +4,16 @@
   
     
     <entry>
+      <title><![CDATA[一路逆风]]></title>
+      <url>https://stanxia.github.io/2017/04/26/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>不脆弱 不沉默 不协妥 不退缩</p>
+<p>不慌张 不绝望 不狂妄 不投降</p>
+<p>一路逆风 我们不投降</p>
+<p>一路逆风 顽强的飞翔</p>
+<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://ww4.sinaimg.cn/mw1024/65a92dc9jw1fbqdiyxyylj21421kwaku.jpg"}});</script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[企业大数据平台下数仓建设思路]]></title>
       <url>https://stanxia.github.io/2017/04/25/%E4%BC%81%E4%B8%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E4%B8%8B%E6%95%B0%E4%BB%93%E5%BB%BA%E8%AE%BE%E6%80%9D%E8%B7%AF/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p>大牛解读</p>
@@ -26,7 +36,7 @@
 <p>2.不是模型层次越多越好：在传统的数仓架构中，大家都喜欢多数据模型进行分层设计，不同的模型层次拥有不同的数据域和作用域。这样设计固然看起来更清晰，但实际情况时多层之间可能存在重复数据，或者数据使用者在上层找不到完全切合的数据时，更愿意从底层的明细数据上自己去加工。一方面造成了数据使用上的混乱，一方面也会让数据整个处理流程长度增加，对于数据的运维带来较大的成本消耗。合理的层次设计，及在计算成本和人力成本间的平衡，是一个好的数仓架构的表现。</p>
 <p>3.质量是生命线：不再是你拿到的数据都是正确的，新的环境下的数据什么情况都会发生，而好的数仓架构需要有足够的容错性和质量保障。不要因为一条日志的乱码造成整个数据流程无法走通，也不要说一份日志50%的乱码你的程序还发现不了。在数据质量上投入再多的资源都不是浪费。</p>
 <p>4.数据变成生产资料：传统的数据应用绝大部分都是以报表和BI分析的形式支持业务。也许你的报表晚出来会被老板骂一通，但是对业务的影响并不大。 但是在新的数据应用场景下，数据已经变成生产资料，数据会服务化直接应用到业务系统中，也许一份数据的质量出现问题或者产出延迟，都可能对你的业务系统产生致命的影响。所以数仓开始承担新的使命。</p>
-<p><img src="" alt="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png"></p>
+<p><img src="1" alt="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png"></p>
 <p><img src="" alt="https://yqfile.alicdn.com/ae9f20459c5838978a9d163767982b9e403cbd6e.png"></p>
