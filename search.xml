@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[「动漫」全职高手05]]></title>
+      <url>https://stanxia.github.io/2017/05/01/%E3%80%8C%E5%8A%A8%E6%BC%AB%E3%80%8D%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B05/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
+<p>不定期更新</p>
+</blockquote>
+<div id="dplayer8" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer8 = new DPlayer({"element":document.getElementById("dplayer8"),"autoplay":false,"theme":"#FADFA3","loop":false,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/05.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B.png"}});</script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Airbnb的大数据平台架构]]></title>
       <url>https://stanxia.github.io/2017/04/26/Airbnb%E7%9A%84%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
