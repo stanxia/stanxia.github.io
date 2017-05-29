@@ -12,6 +12,15 @@
     </entry>
     
     <entry>
+      <title><![CDATA[「动漫」全职高手09]]></title>
+      <url>https://stanxia.github.io/2017/05/29/%E3%80%8C%E5%8A%A8%E6%BC%AB%E3%80%8D%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B09/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
+<p>不定期更新</p>
+</blockquote>
+<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":false,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/%5BTPP&CRL&bilibili%5D%5BThe%20King%27s%20Avatar%5D%5B09%5D%5BGB%5D%5B720P%5D.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B.png"}});</script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[[hive]union用法]]></title>
       <url>https://stanxia.github.io/2017/05/09/hive-union%E7%94%A8%E6%B3%95/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="Hive-Union使用指南"><a href="#Hive-Union使用指南" class="headerlink" title="[Hive]Union使用指南"></a>[Hive]Union使用指南</h1><h4 id="1-union语法"><a href="#1-union语法" class="headerlink" title="1. union语法"></a>1. union语法</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select_statement UNION [ALL | DISTINCT] select_statement UNION [ALL | DISTINCT] select_statement ...</div></pre></td></tr></table></figure>
@@ -72,15 +81,6 @@
 <li>左上角菜单里面找到终端，输入nvram boot-args=”niog=1”，回车问题解决。重启生效</li>
 </ol>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[「动漫」全职高手06]]></title>
-      <url>https://stanxia.github.io/2017/05/06/%E3%80%8C%E5%8A%A8%E6%BC%AB%E3%80%8D%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B06/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
-<p>不定期更新</p>
-</blockquote>
-<div id="dplayer8" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer8 = new DPlayer({"element":document.getElementById("dplayer8"),"autoplay":false,"theme":"#FADFA3","loop":false,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/06.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%85%A8%E8%81%8C%E9%AB%98%E6%89%8B.png"}});</script>]]></content>
     </entry>
     
     <entry>
@@ -256,13 +256,13 @@
 <h2 id="播放视频的dplayer"><a href="#播放视频的dplayer" class="headerlink" title="播放视频的dplayer"></a>播放视频的dplayer</h2><p>在cmd页面内，使用npm安装：<br><code>npm install hexo-tag-dplayer</code></p>
 <p>在markdown内添加以下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% dplayer &quot;url=http://home.ustc.edu.cn/~mmmwhy/GEM.mp4&quot;  &quot;pic=http://home.ustc.edu.cn/~mmmwhy/GEM.jpg&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
-<div id="dplayer7" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer7 = new DPlayer({"element":document.getElementById("dplayer7"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
+<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Apache Kylin在唯品会大数据的应用]]></title>
-      <url>https://stanxia.github.io/2017/04/24/test-youtube/</url>
+      <url>https://stanxia.github.io/2017/04/24/Apache%20Kylin%E5%9C%A8%E5%94%AF%E5%93%81%E4%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BA%94%E7%94%A8/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
 <p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data" target="_blank" rel="external">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
 </blockquote>
@@ -3265,21 +3265,7 @@
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;center&gt;</div><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 </div><div class="line">	src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;</div><div class="line">&lt;/iframe&gt;	</div><div class="line">&lt;/center&gt;</div></pre></td></tr></table></figure>
 <center><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" ​="" src="//music.163.com/outchain/player?type=2&id=4938705&auto=1&height=66"></iframe></center>
 
-<script>
 
-
-
-if ("xls123456"==prompt("通关密码"))
-
-{alert("芝麻开门");
-
-}else{alert("容我再想想");
-
-location="https://stanxia.github.io/";
-
-}
-
-</script>
 
 <p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcspiw6k1lj20nm10477f.jpg" alt="0"></p>
 <p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcspiwqlrgj20nm11idmk.jpg" alt="1"></p>
