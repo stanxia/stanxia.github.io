@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[sqoop连接mysql问题]]></title>
+      <url>https://stanxia.github.io/2017/05/29/sqoop%E8%BF%9E%E6%8E%A5mysql%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h3 id="sqoop连接mysql时，出现以下错误："><a href="#sqoop连接mysql时，出现以下错误：" class="headerlink" title="sqoop连接mysql时，出现以下错误："></a>sqoop连接mysql时，出现以下错误：</h3><p>1:<br>ing statement: java.sql.SQLException: Access denied for user ‘root’@’monsterxls’ (using password: YES)<br>2:<br>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure<br>3:<br>Caused by: java.net.ConnectException: Connection refused</p>
+<h3 id="解决方法：赋予所有服务器访问mysql的权限（集群中的所有服务器）"><a href="#解决方法：赋予所有服务器访问mysql的权限（集群中的所有服务器）" class="headerlink" title="解决方法：赋予所有服务器访问mysql的权限（集群中的所有服务器）"></a>解决方法：赋予所有服务器访问mysql的权限（集群中的所有服务器）</h3><p>mysql&gt; GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@‘master’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>mysql&gt; GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@‘slave1’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>mysql&gt; GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@‘slave2’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>…</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[[hive]union用法]]></title>
       <url>https://stanxia.github.io/2017/05/09/hive-union%E7%94%A8%E6%B3%95/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h1 id="Hive-Union使用指南"><a href="#Hive-Union使用指南" class="headerlink" title="[Hive]Union使用指南"></a>[Hive]Union使用指南</h1><h4 id="1-union语法"><a href="#1-union语法" class="headerlink" title="1. union语法"></a>1. union语法</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select_statement UNION [ALL | DISTINCT] select_statement UNION [ALL | DISTINCT] select_statement ...</div></pre></td></tr></table></figure>
