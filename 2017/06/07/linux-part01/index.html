@@ -10,7 +10,7 @@
     
     <title>
         
-            HDFS机架感知功能原理（rack awareness） | 
+            linux_part01 | 
         
         小世界，大梦想
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://stanxia.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="HDFS机架感知功能原理（rack awareness） | 小世界，大梦想">
+    <meta property="og:title" content="linux_part01 | 小世界，大梦想">
     <meta property="og:description" content="随便说说">
 
     <!--[if lte IE 9]>
@@ -226,7 +226,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#机架感知"><span class="post-toc-number">1.</span> <span class="post-toc-text">机架感知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开启机架感知"><span class="post-toc-number">2.</span> <span class="post-toc-text">开启机架感知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">3.</span> <span class="post-toc-text">测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#没有开启机架感知"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">没有开启机架感知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启机架感知-1"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">开启机架感知</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vi"><span class="post-toc-number">1.</span> <span class="post-toc-text">vi</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cut"><span class="post-toc-number">2.</span> <span class="post-toc-text">cut</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#grep"><span class="post-toc-number">3.</span> <span class="post-toc-text">grep</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#test-或者-判断"><span class="post-toc-number">4.</span> <span class="post-toc-text">test 或者 [  ] 判断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#amp-amp"><span class="post-toc-number">5.</span> <span class="post-toc-text">&& ||</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数字大小判断"><span class="post-toc-number">6.</span> <span class="post-toc-text">数字大小判断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串判断"><span class="post-toc-number">7.</span> <span class="post-toc-text">字符串判断</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -251,10 +251,10 @@
     <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdlo2zqjn3j20k00a0jte.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://oliji9s3j.bkt.clouddn.com/linux1.jpg)">
     
             <p class="article-headline-p">
-                HDFS机架感知功能原理（rack awareness）
+                linux_part01
             </p>
         </div>
 
@@ -273,7 +273,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>夏</strong>
-        <span>3月 14, 2016</span>
+        <span>6月 07, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -294,7 +294,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADgElEQVR42u3aS27kMAwFwL7/pZNtgCCe90jZ3QOUVwbilqXyguHn9eX6cb0Q4MCBAwcOHDhw4MDxwRyv+Lr+1Z8v+/HX389fv+v6PtlVdBYcOHDgwHEDxz9C0eUBro96fZ8c468nk5Wvz4IDBw4cOO7mSAJevolNONysXJ8FBw4cOHB8MMfs/uxqOHDgwIHj/+I4e8h8D0lpEgcOHDhwfBpHUVAr207tCrNE7g21Uhw4cODAsR5o+Pz7R+c7cODAgQPHL47NlSRayZBcnp7lAb44BQ4cOHDgOMoxG27LUTblv/YtyQo4cODAgeNujk2hcDbo0Jb8Nq2muu2EAwcOHDgOcZwdlZ49s28pzZpkOHDgwIHjPo5Zw6kNlnnobcfB873hwIEDB477ODbpUN5k2gTvvPk05MOBAwcOHEc52iO1gbl9cha8N/8c4MCBAweOsxybEt6sqJevmQfv/BkcOHDgwPE8R54+FcEsDsOnxiYKdBw4cODA8TjHJsjlB9iH6vxz4sCBAweO+ziuC22zMlySPm2GHvJULcLFgQMHDhxHOdrGUtuCyltK7V83ySQOHDhw4HiGI0/D8hbRplGUlyZno3U4cODAgeM+jra0lx8+H4OYQbSfBAcOHDhwvIvjjlG29hinksm6C4cDBw4cOBYceQsqSodGadtmCK9tOOHAgQMHjmc42rA62+6pVlbelIqKnjhw4MCB4yhH3shJ0qo8MM9StVlzqx5owIEDBw4chzjaFtQsZRomWqNAjgMHDhw43sWRFOnyTefDB8WmR89HIRkHDhw4cBzlyF85O/C+BNm2ppJT4MCBAweO+ziSYJmPC+xLeO1vZ8VEHDhw4MBxH0ce0vJRhnaLyfFmKDhw4MCB43mO9sCbAYW2aZQE8gOfFgcOHDhwHOVIDt+W52ZrtgMN+zEIHDhw4MBxB8cm0G6CXB6YkyfzUH1jCocDBw4cOEZXnoy1YTL/PMmHydfHgQMHDhxnOdpwladeZ4fn9skhDhw4cOB4kqMNrndjzdY8Fmhx4MCBA8chjtXAWZmGtZ/hNbqiMigOHDhw4HgrR5uM5QNws/ZVO+5wONDiwIEDB45DgbZNzPJQnQfydh0cOHDgwPE8R1scnI0X5ClZm8i1cDhw4MCB4z6OdnM5x6w1NQurxwItDhw4cOBYcLhw4MCBAwcOHDhw4MDxYdc3HAeLTOF3YxgAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACb0lEQVR42u3awW7rMAwEwPz/T/ddC6TPWa4sJS1Gp8CwZY0PIkPx8fWnxwMPDw8PDw8PD+/DeI94PD/1w9Tfrj8/ez3b9fXB2vDw8PCO8F5stU9LvGtZ/5u5WxseHh7eeV734nzRd33KF2vDw8PD+2BejkwCSZ6g4+Hh4f0uXr6UvDzRhR88PDy8T+AN/vBXASD/EG+rteDh4eHFvK7Yeub30fM9PDw8vIBXNjZVR1/JnTc3XeHh4eFt4E036wScFHnzmacJNx4eHt4Z3rRwsHJPF1oGwQkPDw9vMy8/prq+3oG7ptXBARgeHh7eBl7XAtUd8HeYcWjBw8PD28ybBokuEe9au/I2LDw8PLyTvGlzwHXhtZstub6UUuPh4eFt4E0LqdOjsuSjTBPopX8MeHh4eAu8aVFgusQ8dZ4m2VHrAB4eHt42Xpcid8daj+GYfnQ8PDy8M7zpYf96UFkp1L54Ox4eHt4R3sqWnb++e2qpjIuHh4e3mZc3AeQFhek83Zx4eHh4J3ndi/OUumtgXUnf8fDw8HbzusCQNwrcdU9eqsDDw8Pbzcvb65M0d1w46ADXwQMPDw9vMy9PpvP78+Jvjr+hpwwPDw/vJl6+ESfH/9MEumvGwsPDw3svbzryBSXz5C1Wg8IuHh4e3mbedDvOU+oktHQHb4OmKzw8PLxtvDwYTMu1640I40MyPDw8vIO8u5quuqJDVwguay14eHh4B3nJEteT6bcFBjw8PLw35ZzT4mxCXSrj4uHh4W3jdZty/oG61qvxnXh4eHhHeOttptO0Oy9DJGk9Hh4e3kne3xt4eHh4eHh4eHgfMP4Bj6sHSm46r7AAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -306,7 +306,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/hadoop/">hadoop</a>
+        <a class="post_tag-link" href="/tags/linux/">linux</a>
     </ul>
     
 
@@ -320,7 +320,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2016/03/14/HDFS机架感知功能原理（rack-awareness）/" class="leancloud-views_num" data-flag-title="HDFS机架感知功能原理（rack awareness）">
+                <span id="/2017/06/07/linux-part01/" class="leancloud-views_num" data-flag-title="linux_part01">
      &nbsp;浏览量
 </span>
 
@@ -332,7 +332,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HDFS机架感知功能原理（rack awareness）&url=https://stanxia.github.io//2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=linux_part01&url=https://stanxia.github.io//2017/06/07/linux-part01/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -341,7 +341,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=HDFS机架感知功能原理（rack awareness）&url=https://stanxia.github.io//2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html&via=夏" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=linux_part01&url=https://stanxia.github.io//2017/06/07/linux-part01/index.html&via=夏" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -350,7 +350,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/06/07/linux-part01/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -359,7 +359,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/06/07/linux-part01/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -371,7 +371,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=HDFS机架感知功能原理（rack awareness）&summary=随便说说&pics=https://stanxia.github.iohttp://oliji9s3j.bkt.clouddn.com/favicon.ico&url=https://stanxia.github.io/2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=linux_part01&summary=随便说说&pics=https://stanxia.github.iohttp://oliji9s3j.bkt.clouddn.com/favicon.ico&url=https://stanxia.github.io/2017/06/07/linux-part01/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -389,23 +389,13 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="机架感知"><a href="#机架感知" class="headerlink" title="机架感知"></a>机架感知</h2><p>HDFS NameNode对文件块复制相关所有事物负责，它周期性接受来自于DataNode的HeartBeat和BlockReport信息，HDFS文件块副本的放置对于系统整体的可靠性和性能有关键性影响。<br>一个简单但非优化的副本放置策略是，把副本分别放在不同机架，甚至不同IDC。这样可以防止整个机架、甚至整个IDC崩溃带来的错误，但是这样文件写必须在多个机架之间、甚至IDC之间传输，增加了副本写的代价。<br>在缺省配置下副本数是3个，通常的策略是：第一个副本放在和Client相同机架的Node里（如果Client不在集群范围，第一个Node是随机选取不太满或者不太忙的Node）；第二个副本放在与第一个Node不同的机架中的Node；第三个副本放在与第二个Node所在机架里不同的Node。<br>Hadoop的副本放置策略在可靠性（副本在不同机架）和带宽（只需跨越一个机架）中做了一个很好的平衡。<br>但是，HDFS如何知道各个DataNode的网络拓扑情况呢？它的机架感知功能需要 topology.script.file.name 属性定义的可执行文件（或者脚本）来实现，文件提供了NodeIP对应RackID的翻译。如果 topology.script.file.name 没有设定，则每个IP都会翻译成/default-rack。</p>
-<h2 id="开启机架感知"><a href="#开启机架感知" class="headerlink" title="开启机架感知"></a>开启机架感知</h2><p><font color="red">默认情况下，Hadoop机架感知是没有启用的</font>，需要在NameNode机器的hadoop-site.xml里配置一个选项，例如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>topology.script.file.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/path/to/script<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这个配置选项的value指定为一个可执行程序，通常为一个脚本，该脚本接受一个参数，输出一个值。接受的参数通常为datanode机器的ip地址，而输出的值通常为该ip地址对应的datanode所在的rackID，例如”/rack1”。Namenode启动时，会判断该配置选项是否为空，如果非空，则表示已经启用机架感知的配置，此时namenode会根据配置寻找该脚本，并在接收到每一个datanode的heartbeat时，将该datanode的ip地址作为参数传给该脚本运行，并将得到的输出作为该datanode所属的机架，保存到内存的一个map中。</p>
-<p>至于脚本的编写，就需要将真实的网络拓朴和机架信息了解清楚后，通过该脚本能够将机器的ip地址正确的映射到相应的机架上去。Hadoop官方给出的脚本：<a href="http://wiki.apache.org/hadoop/topology_rack_awareness_scripts" target="_blank" rel="external">http://wiki.apache.org/hadoop/topology_rack_awareness_scripts</a></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="没有开启机架感知"><a href="#没有开启机架感知" class="headerlink" title="没有开启机架感知"></a>没有开启机架感知</h3><p>当没有配置机架信息时，所有的机器hadoop都默认在同一个默认的机架下，名为 “/default-rack”，这种情况下，任何一台datanode机器，不管物理上是否属于同一个机架，都会被认为是在同一个机架下，此时，就很容易出现之前提到的增添机架间网络负载的情况。在没有机架信息的情况下，namenode默认将所有的slaves机器全部默认为在/default-rack下，此时写block时，三个datanode机器的选择完全是随机的。</p>
-<h3 id="开启机架感知-1"><a href="#开启机架感知-1" class="headerlink" title="开启机架感知"></a>开启机架感知</h3><p>当配置了机架感知信息以后，hadoop在选择三个datanode时，就会进行相应的判断：</p>
-<ol>
-<li>如果上传本机不是一个datanode，而是一个客户端，那么就从所有slave机器中随机选择一台datanode作为第一个块的写入机器(datanode1)。而此时如果上传机器本身就是一个datanode，那么就将该datanode本身作为第一个块写入机器(datanode1)。</li>
-<li>随后在datanode1所属的机架以外的另外的机架上，随机的选择一台，作为第二个block的写入datanode机器(datanode2)。</li>
-<li>在写第三个block前，先判断是否前两个datanode是否是在同一个机架上，如果是在同一个机架，那么就尝试在另外一个机架上选择第三个datanode作为写入机器(datanode3)。而如果datanode1和datanode2没有在同一个机架上，则在datanode2所在的机架上选择一台datanode作为datanode3。</li>
-<li>得到3个datanode的列表以后，从namenode返回该列表到DFSClient之前，会在namenode端首先根据该写入客户端跟datanode列表中每个datanode之间的“距离”由近到远进行一个排序，客户端根据这个顺序有近到远的进行数据块的写入。</li>
-<li>当根据“距离”排好序的datanode节点列表返回给DFSClient以后，DFSClient便会创建Block OutputStream，并向这次block写入pipeline中的第一个节点（最近的节点）开始写入block数据。</li>
-<li>写完第一个block以后，依次按照datanode列表中的次远的node进行写入，直到最后一个block写入成功，DFSClient返回成功，该block写入操作结束。</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>开启机架感知，namenode在选择数据块的写入datanode列表时，就充分考虑到了将block副本分散在不同机架下，并同时尽量地避免了之前描述的网络开销。</p>
-<p>Good Luck!</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">:set nu 显示行号</div><div class="line"></div><div class="line">:set nonu 隐藏行号</div><div class="line"></div><div class="line">a  光标所在字符后插入</div><div class="line"></div><div class="line">A  光标所在行尾插入</div><div class="line"></div><div class="line">i  光标所在字符前插入</div><div class="line"></div><div class="line">I  光标所在行行首插入</div><div class="line"></div><div class="line">o  光标下插入新行</div><div class="line"></div><div class="line">O  光标上插入新行</div><div class="line"></div><div class="line">gg 到第一行</div><div class="line"></div><div class="line">G  到最后一行</div><div class="line"></div><div class="line">nG 到第n行</div><div class="line"></div><div class="line">:n 到第n行</div><div class="line"></div><div class="line">$  到行尾</div><div class="line"></div><div class="line">0  到行首</div><div class="line"></div><div class="line">yy 复制当前行</div><div class="line"></div><div class="line">nyy 复制当前行以下几行</div><div class="line"></div><div class="line">dd 剪切当前行</div><div class="line"></div><div class="line">ndd 剪切当前行以下几行</div><div class="line"></div><div class="line">p（小写）  粘贴在当前光标所在行下</div><div class="line"></div><div class="line">P(大写）   粘贴在当前光标所在行上</div><div class="line"></div><div class="line">u  撤销</div><div class="line"></div><div class="line">/string 搜索字符串</div><div class="line"></div><div class="line">:set ic 忽略大小写</div><div class="line"></div><div class="line">n  搜索下一个出现位置</div><div class="line"></div><div class="line">:%s/old/new/g  全文替换指定字符串</div><div class="line"></div><div class="line">:n1,n2s/old/new/g  在一定范围内替换指定字符串</div><div class="line"></div><div class="line">:ws 保存并退出</div><div class="line"></div><div class="line">ZZ  保存并退出</div><div class="line"></div><div class="line">:q! 不保存退出</div></pre></td></tr></table></figure>
+<h2 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h2><p>cut -f 2 xxx.txt 提取第二列的数据<br>cut -d “:” -f 2 xxx.txt 指定分隔符 提取第二列的数据</p>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep xxx file 查看file中含xxx的行<br>grep -v xxx 去除含xxx的行</p>
+<h2 id="test-或者-判断"><a href="#test-或者-判断" class="headerlink" title="test 或者 [  ] 判断"></a>test 或者 [  ] 判断</h2><p>test -e xxx.file 判断是否存在 返回 ：$? 0 1   ##状态码 执行成功0 失败1<br>[ -e xxx.file ]  ##注意有空格<br>[ -d file ] 判断文件是否存在，并且是否为目录  /是目录为true<br>[ -f file ] 判断文件是否为存在，并且是否为普通文件 ／是普通文件为真<br>[ -r file ] 判断文件是否为存在，并且是否有读权限 ／是读权限为真<br>[ -w file ] 判断文件是否为存在，并且是否有写权限 ／是有写权限为真<br>[ -x file ] 判断文件是否为存在，并且是否有执行权限 ／是有执行权限为真</p>
+<h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp; ||"></a>&amp;&amp; ||</h2><p>xxx &amp;&amp; yyy    表示只有xxx为true时才执行yyy<br>yyy || zzz     表示只有yyy为false时才执行zzz<br>[ -d /root] &amp;&amp; echo “yes” || echo “no”     表示第一个判断为true时执行yes否则no</p>
+<h2 id="数字大小判断"><a href="#数字大小判断" class="headerlink" title="数字大小判断"></a>数字大小判断</h2><p>-eq    =<br>-ne    !=<br>-gt     &gt;<br>-lt      &lt;<br>-ge    ≥<br>-le     ≤</p>
+<h2 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断"></a>字符串判断</h2><p>-z  是否为空<br>-n  是否非空<br>==  相等<br>!=  不等</p>
 
     
 
@@ -427,7 +417,7 @@
     $('html').ready(function() {
         setTimeout(function() {
             var disqus_config = function () {
-                this.page.url = 'https://stanxia.github.io/2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.url = 'https://stanxia.github.io/2017/06/07/linux-part01/index.html';  // Replace PAGE_URL with your page's canonical URL variable
                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
 
@@ -458,21 +448,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2016/03/14/Yarn的ResourceManager配置HA-2-7-1/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2016/03/12/hadoop集群动态添加删除节点/" id="post_nav-older" class="next-content">
+        <a href="/2017/06/04/Anaconda安装TensorFlow/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
