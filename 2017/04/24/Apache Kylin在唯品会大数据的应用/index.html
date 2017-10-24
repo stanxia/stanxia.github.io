@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="kylin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="东篱下" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Kylin在唯品会大数据的应用">
+<meta property="og:url" content="https://stanxia.github.io/2017/04/24/Apache Kylin在唯品会大数据的应用/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/11.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/12.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/13.jpg">
+<meta property="og:updated_time" content="2017-05-30T02:49:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Kylin在唯品会大数据的应用">
+<meta name="twitter:description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的">
+<meta name="twitter:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/2017/04/24/Apache Kylin在唯品会大数据的应用/"/>
+
+
+
+
+
+  <title>Apache Kylin在唯品会大数据的应用 | 东篱下</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东篱下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">斯坦@森</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/aboutme/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/04/24/Apache Kylin在唯品会大数据的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Apache Kylin在唯品会大数据的应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T20:54:56+08:00">
+                2017-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><blockquote>
+<p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data" target="_blank" rel="external">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
+</blockquote>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
+<p>在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。</p>
+<p><strong>首先</strong>，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复沟通，在沟通过程中参与的人越多，信息衰减也就越厉害。再加上排期的等待，最终的结果一方面可能与初衷有所偏差，另一方面时间一长也失去了对热点关注度，分析变得非常滞后，不能及时的反应线上业务并加以改进。</p>
+<p><strong>其次</strong>，对于有分析能力的业务侧同学，没有趁手的工具就导致即使有能力准备撩袖子大干一场了也发现巧妇难为无米之炊，大家只能感慨大数据的门槛太高了，又回到了第一点的长时间等待的恶性循环里去了。</p>
+<p>我们总结下来，在唯品会这样规模的公司里，数据分析有两个痛点：</p>
+<ol>
+<li>需要一个可以自由组合的维度和指标的平台，业务人员可以根据自己的视角自给自足的完成数据提取和分析；</li>
+<li>这个平台，不仅数据要够丰富，即使大数据量响应速度也要快。</li>
+</ol>
+<p>针对这两个痛点，本着“让大数据成为唯品会的增长引擎”这个目标，我们大数据部门的提供了一套完整的解决方案：自助多维分析平台。我们通过有较高可扩展性的维度建模准备数据，在此之上搭建一套数据查询引擎，并配上操作简单的数据可视化前端，为业务人员搭了数据分析的台子。随着大家数据分析技能的提升，人人都是数据分析师的这个理念就逐渐在公司内部扩展开来了。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg" alt="img"></p>
+<h2 id="唯品会如何使用Kylin"><a href="#唯品会如何使用Kylin" class="headerlink" title="唯品会如何使用Kylin"></a>唯品会如何使用Kylin</h2><p>数据和前端是皮和肉，需要通过好的数据引擎才能支撑起来。在数据引擎角度，我们通过一段时间的积累和演进，从基于Presto的ROLAP模型进化到了基于Kylin和Presto的双计算引擎。往超大数据集也要快速ad-hoc响应的方向走近了一步。</p>
+<p>第一阶段，我们的目标是在Ad-hoc响应时间&lt;= 10秒的前提条件下，支持：</p>
+<ol>
+<li>平均每次查询10亿+明细数据做汇总；</li>
+<li>平均每个查询0-15个维度；</li>
+<li>平均每个查询1-5个指标。</li>
+</ol>
+<p>根据这个目标，我们选择使用Presto作为计算引擎，Presto MPP的架构 + 通过Hive Connector直接访问HDFS上的数据，为我们提供良好的Ad-hoc响应速度和相对较低的维护成本。为了满足高Ad-hoc响应速度的需求，常见的做法是把HDFS上处理完的数据同步到Ad-hoc响应友好的数据库中，比如GreenPlum或Hbase等，但这样的缺点是虽然速度上去了，但数据模型在Hive和Ad-hoc库中需要维护两份并保持一致，维护的成本非常高。Presto的Connector机制很好的解决了这个问题，同时他的计算能力也满足了我们第一阶段的需求。</p>
+<p>然后我们通过SQL Parser，将前端拖拽或事件描述的对象转化为SQL，同时完成SQL的变形和性能优化，把计算引擎和用户操作连接在一起，完成了第一阶段的目标。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/11.jpg" alt="img"></p>
+<p>自助多维分析平台一阶段逻辑架构</p>
+<p>随着业务的不断增长，在自助多维分析平台上逐渐出现了很多维度和指标组合类似、频率较高的查询，这些查询有着明显的模式，且通过分析我们了解到这些维度和指标的组合是业务部门常用的核心数据。这些查询反复的在Presto上执行，显然不是最佳选择，也达不到业务部门提出的新目标，核心数据查询响应时间&lt;=3秒。<strong>此时，Kylin就成了我们的首选</strong>。我们的数据引擎的架构，也从单纯的操纵SQL扩展到计算引擎的路由。通过读取Metadata并根据规则，在Kylin和Presto两个计算引擎之间路由，我们可以在不显著提高数据模型维护成本的前提条件下，通过Kylin对关键数据做预计算，提高核心数据的响应速度。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/12.jpg" alt="img"></p>
+<h2 id="为什么选择Kylin"><a href="#为什么选择Kylin" class="headerlink" title="为什么选择Kylin"></a>为什么选择Kylin</h2><p>首先，Kylin利用空间换时间，从原理上已经确保了Ad-hoc响应速度达标，和Oracle CUBE/物化视图的原理相同易于理解。</p>
+<p>第二，Kylin支持SQL，这对于数据分析而言至关重要，同时满足我们一个SQL在不同计算引擎之间路由的需求。</p>
+<p>另外，Kylin的SQL on Hbase的实现也很好的解决了Hbase不易查询的问题。第三是支持Dimension-Fact的join，这极大的解耦了数据模型和计算引擎之间的关系，不像ES或Pinot只支持单表，还有为他们专门处理数据的额外工作。第四是对数据开发来说，创建和管理CUBE比较简单，且透明化了MR和HBASE同步。第五是可以很方便的在调度系统中调用Kylin API定时刷新CUBE。综上所述，Kylin对于一个数据分析系统来说是一个好的解决方案。</p>
+<p>经过一段时间的测试和线上运行，我们在之前把Kylin覆盖到核心指标的查询基础上还扩展到了在Presto上查询需要30秒以上的指标和维度组合上。因为这类查询往往需要扫描大量的基础数据，在Kylin上预计算可以有效的较低资源使用。另一方面，基于自助多维分析平台的业务场景，我们也在以下两个场景中不启用Kylin。第一是维度的基数大于1亿的场景，主要是由于大基数的维度加载的Kylin Server的内存中容易引起OOM。第二是数据模型经常变化的主题，在Kylin中维护CUBE的成本就很高了，每次变化都需要重建CUBE，重刷数据，这显然与我们提高复用降低重复开发的初衷不符。对于这两个场景，由Presto完成计算也可以很好的满足需求。</p>
+<p>基于以上的原则，目前我们累计有20+个CUBE，10+T存储，最大CUBE记录数上千亿，覆盖了23%的查询。同时，Ad-hoc的响应速度也令人满意。Kylin的平均响应速度是Presto的10.5倍，中位数响应速度是Presto的4.5倍。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/13.jpg" alt="img"></p>
+<h2 id="唯品会对Kylin做的改进"><a href="#唯品会对Kylin做的改进" class="headerlink" title="唯品会对Kylin做的改进"></a>唯品会对Kylin做的改进</h2><p>针对唯品会的痛点，我们也在开源框架的基础上进行了修改。基础升级方面，我们针对自助多维分析平台的需求进行了升级。比如，在查找CUBE的时候，仅当CUBE内数据包含SQL查询的时间范围才命中CUBE，避免给用户不完整的数据集。同时我们采集了Kylin运行中metadata，并给予这些数据提供SQL分析API以解析Kylin能运行的SQL子查询。另外一些BUG修复也提交到了社区。</p>
+<p>除此之外，我们基于Presto+Kylin双引擎的架构，开发了Presto on Kylin这个功能。通过在Presto侧增加Kylin Connector，我们支持了Kylin与Hive数据源的跨源Join，支持Raw data汇总后的数据和Kylin Cube 数据Join。为了支持以上两个功能，我们在Kylin增加了Explain功能简化了Cube命中探查的复杂度。同时，为了进一步降低数据开发寻找查询组合的复杂度，我们开发了Cube Advisor，通过统计分析Presto SQL获得所有维度和指标的组合频次，根据最常使用和响应时间长两个条件，推荐合适的Cube定义建议，数据开发可以直接根据推荐的建议创建Cube。</p>
+<p>下一步，我们会改造Kylin维表的Cache机制，解决大基数维表不能创建CUBE的问题，同时进一步扩展CUBE Advisor支持一键生成CUBE的功能并能够支持自动刷新历史数据，降低人工维护成本。同时，将Kylin的应用推广到报表类数据产品。</p>
+<p>在提高大数据分析Ad-hoc响应速度的路上，可谓八仙过海各显神通，我们通过Presto和Kylin的结合满足了当前的需求，后面我们也会继续探索更多解决方案，寻找下一代的多维分析引擎，在此过程中，欢迎大家与我们一起讨论。</p>
+<h2 id="讲师介绍"><a href="#讲师介绍" class="headerlink" title="讲师介绍"></a>讲师介绍</h2><p><strong>谢麟炯，</strong>唯品会大数据平台高级技术架构经理，主要负责大数据自助多维分析平台，离线数据开发平台及分析引擎团队的开发和管理工作 ，加入唯品会以来还曾负责流量基础数据的 采集和数据仓库建设以及移动流量分析等数据产品的工作。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kylin/" rel="tag"># kylin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/21/EasyHadoop集群部署入门/" rel="next" title="EasyHadoop集群部署入门">
+                <i class="fa fa-chevron-left"></i> EasyHadoop集群部署入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/25/dplayer-test/" rel="prev" title="使用 Hexo 插件插入音乐/视频">
+                使用 Hexo 插件插入音乐/视频 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">森</p>
+              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景介绍"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯品会如何使用Kylin"><span class="nav-number">2.</span> <span class="nav-text">唯品会如何使用Kylin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么选择Kylin"><span class="nav-number">3.</span> <span class="nav-text">为什么选择Kylin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯品会对Kylin做的改进"><span class="nav-number">4.</span> <span class="nav-text">唯品会对Kylin做的改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#讲师介绍"><span class="nav-number">5.</span> <span class="nav-text">讲师介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

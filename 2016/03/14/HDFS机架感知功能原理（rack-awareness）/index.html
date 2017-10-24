@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hadoop," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="东篱下" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="机架感知HDFS NameNode对文件块复制相关所有事物负责，它周期性接受来自于DataNode的HeartBeat和BlockReport信息，HDFS文件块副本的放置对于系统整体的可靠性和性能有关键性影响。一个简单但非优化的副本放置策略是，把副本分别放在不同机架，甚至不同IDC。这样可以防止整个机架、甚至整个IDC崩溃带来的错误，但是这样文件写必须在多个机架之间、甚至IDC之间传输，增加了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS机架感知功能原理（rack awareness）">
+<meta property="og:url" content="https://stanxia.github.io/2016/03/14/HDFS机架感知功能原理（rack-awareness）/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="机架感知HDFS NameNode对文件块复制相关所有事物负责，它周期性接受来自于DataNode的HeartBeat和BlockReport信息，HDFS文件块副本的放置对于系统整体的可靠性和性能有关键性影响。一个简单但非优化的副本放置策略是，把副本分别放在不同机架，甚至不同IDC。这样可以防止整个机架、甚至整个IDC崩溃带来的错误，但是这样文件写必须在多个机架之间、甚至IDC之间传输，增加了">
+<meta property="og:updated_time" content="2017-03-19T14:30:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS机架感知功能原理（rack awareness）">
+<meta name="twitter:description" content="机架感知HDFS NameNode对文件块复制相关所有事物负责，它周期性接受来自于DataNode的HeartBeat和BlockReport信息，HDFS文件块副本的放置对于系统整体的可靠性和性能有关键性影响。一个简单但非优化的副本放置策略是，把副本分别放在不同机架，甚至不同IDC。这样可以防止整个机架、甚至整个IDC崩溃带来的错误，但是这样文件写必须在多个机架之间、甚至IDC之间传输，增加了">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/2016/03/14/HDFS机架感知功能原理（rack-awareness）/"/>
+
+
+
+
+
+  <title>HDFS机架感知功能原理（rack awareness） | 东篱下</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东篱下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">斯坦@森</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/aboutme/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/03/14/HDFS机架感知功能原理（rack-awareness）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HDFS机架感知功能原理（rack awareness）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-14T00:07:40+08:00">
+                2016-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="机架感知"><a href="#机架感知" class="headerlink" title="机架感知"></a>机架感知</h2><p>HDFS NameNode对文件块复制相关所有事物负责，它周期性接受来自于DataNode的HeartBeat和BlockReport信息，HDFS文件块副本的放置对于系统整体的可靠性和性能有关键性影响。<br>一个简单但非优化的副本放置策略是，把副本分别放在不同机架，甚至不同IDC。这样可以防止整个机架、甚至整个IDC崩溃带来的错误，但是这样文件写必须在多个机架之间、甚至IDC之间传输，增加了副本写的代价。<br>在缺省配置下副本数是3个，通常的策略是：第一个副本放在和Client相同机架的Node里（如果Client不在集群范围，第一个Node是随机选取不太满或者不太忙的Node）；第二个副本放在与第一个Node不同的机架中的Node；第三个副本放在与第二个Node所在机架里不同的Node。<br>Hadoop的副本放置策略在可靠性（副本在不同机架）和带宽（只需跨越一个机架）中做了一个很好的平衡。<br>但是，HDFS如何知道各个DataNode的网络拓扑情况呢？它的机架感知功能需要 topology.script.file.name 属性定义的可执行文件（或者脚本）来实现，文件提供了NodeIP对应RackID的翻译。如果 topology.script.file.name 没有设定，则每个IP都会翻译成/default-rack。</p>
+<h2 id="开启机架感知"><a href="#开启机架感知" class="headerlink" title="开启机架感知"></a>开启机架感知</h2><p><font color="red">默认情况下，Hadoop机架感知是没有启用的</font>，需要在NameNode机器的hadoop-site.xml里配置一个选项，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>topology.script.file.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/path/to/script<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个配置选项的value指定为一个可执行程序，通常为一个脚本，该脚本接受一个参数，输出一个值。接受的参数通常为datanode机器的ip地址，而输出的值通常为该ip地址对应的datanode所在的rackID，例如”/rack1”。Namenode启动时，会判断该配置选项是否为空，如果非空，则表示已经启用机架感知的配置，此时namenode会根据配置寻找该脚本，并在接收到每一个datanode的heartbeat时，将该datanode的ip地址作为参数传给该脚本运行，并将得到的输出作为该datanode所属的机架，保存到内存的一个map中。</p>
+<p>至于脚本的编写，就需要将真实的网络拓朴和机架信息了解清楚后，通过该脚本能够将机器的ip地址正确的映射到相应的机架上去。Hadoop官方给出的脚本：<a href="http://wiki.apache.org/hadoop/topology_rack_awareness_scripts" target="_blank" rel="external">http://wiki.apache.org/hadoop/topology_rack_awareness_scripts</a></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="没有开启机架感知"><a href="#没有开启机架感知" class="headerlink" title="没有开启机架感知"></a>没有开启机架感知</h3><p>当没有配置机架信息时，所有的机器hadoop都默认在同一个默认的机架下，名为 “/default-rack”，这种情况下，任何一台datanode机器，不管物理上是否属于同一个机架，都会被认为是在同一个机架下，此时，就很容易出现之前提到的增添机架间网络负载的情况。在没有机架信息的情况下，namenode默认将所有的slaves机器全部默认为在/default-rack下，此时写block时，三个datanode机器的选择完全是随机的。</p>
+<h3 id="开启机架感知-1"><a href="#开启机架感知-1" class="headerlink" title="开启机架感知"></a>开启机架感知</h3><p>当配置了机架感知信息以后，hadoop在选择三个datanode时，就会进行相应的判断：</p>
+<ol>
+<li>如果上传本机不是一个datanode，而是一个客户端，那么就从所有slave机器中随机选择一台datanode作为第一个块的写入机器(datanode1)。而此时如果上传机器本身就是一个datanode，那么就将该datanode本身作为第一个块写入机器(datanode1)。</li>
+<li>随后在datanode1所属的机架以外的另外的机架上，随机的选择一台，作为第二个block的写入datanode机器(datanode2)。</li>
+<li>在写第三个block前，先判断是否前两个datanode是否是在同一个机架上，如果是在同一个机架，那么就尝试在另外一个机架上选择第三个datanode作为写入机器(datanode3)。而如果datanode1和datanode2没有在同一个机架上，则在datanode2所在的机架上选择一台datanode作为datanode3。</li>
+<li>得到3个datanode的列表以后，从namenode返回该列表到DFSClient之前，会在namenode端首先根据该写入客户端跟datanode列表中每个datanode之间的“距离”由近到远进行一个排序，客户端根据这个顺序有近到远的进行数据块的写入。</li>
+<li>当根据“距离”排好序的datanode节点列表返回给DFSClient以后，DFSClient便会创建Block OutputStream，并向这次block写入pipeline中的第一个节点（最近的节点）开始写入block数据。</li>
+<li>写完第一个block以后，依次按照datanode列表中的次远的node进行写入，直到最后一个block写入成功，DFSClient返回成功，该block写入操作结束。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>开启机架感知，namenode在选择数据块的写入datanode列表时，就充分考虑到了将block副本分散在不同机架下，并同时尽量地避免了之前描述的网络开销。</p>
+<p>Good Luck!</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/12/hadoop集群动态添加删除节点/" rel="next" title="hadoop集群动态添加删除节点">
+                <i class="fa fa-chevron-left"></i> hadoop集群动态添加删除节点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/14/Yarn的ResourceManager配置HA-2-7-1/" rel="prev" title="Yarn的ResourceManager配置HA(2.7.1)">
+                Yarn的ResourceManager配置HA(2.7.1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">森</p>
+              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机架感知"><span class="nav-number">1.</span> <span class="nav-text">机架感知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启机架感知"><span class="nav-number">2.</span> <span class="nav-text">开启机架感知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#没有开启机架感知"><span class="nav-number">3.1.</span> <span class="nav-text">没有开启机架感知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启机架感知-1"><span class="nav-number">3.2.</span> <span class="nav-text">开启机架感知</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
