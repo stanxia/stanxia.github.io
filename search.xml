@@ -12,7 +12,7 @@
 <p>2、Spark比Hadoop更通用</p>
 <p>3、Spark提供了统一的编程接口</p>
 <p>4、容错性– 在分布式数据集计算时通过checkpoint来实现容错</p>
-<p>5、可用性– Spark通过提供丰富的Scala, Java，Python API及交互式Shell来提高可用性</p>
+<p>5、可用性– Spark通过提供丰富的Scala, Java，Python API及交互式Shell来提高可用性<br><a id="more"></a></p>
 <h3 id="3-Spark有那些组件"><a href="#3-Spark有那些组件" class="headerlink" title="3.Spark有那些组件"></a>3.Spark有那些组件</h3><p>1、Spark Streaming：支持高吞吐量、支持容错的实时流数据处理</p>
 <p>2、Spark SQL， Data frames: 结构化数据查询</p>
 <p>3、MLLib：Spark 生态系统里用来解决大数据机器学习问题的模块</p>
