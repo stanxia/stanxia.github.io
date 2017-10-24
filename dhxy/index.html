@@ -1,477 +1,654 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.2.6 -->
+<!doctype html>
 
-    <!-- Title -->
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
-    <title>
-        
-            dhxy | 
-        
-        小世界，大梦想
-    </title>
-
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="http://oliji9s3j.bkt.clouddn.com/favicon.ico">
-    <link rel="icon" sizes="192x192" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
-    <link rel="apple-touch-icon" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
-
-    <!-- Meta & Info -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0097A7">
-    <meta name="author" content="夏">
-    <meta name="description" content="随便说说">
-    <meta name="keywords" content="hive,hadoop,spark,hbase,hdfs,mapreduce,cluster">
-
-    <!--iOS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-title" content="Title">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="480">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="小世界，大梦想">
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://stanxia.github.io">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="dhxy | 小世界，大梦想">
-    <meta property="og:description" content="随便说说">
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
-    <!-- Config CSS -->
-
-
-<!-- Other Styles -->
-<style>
-    body, html {
-        font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    }
-
-    a {
-        color: #00838F;
-    }
-
-    .mdl-card__media,
-    #search-label,
-    #search-form-label:after,
-    #scheme-Paradox .hot_tags-count,
-    #scheme-Paradox .sidebar_archives-count,
-    #scheme-Paradox .sidebar-colored .sidebar-header,
-    #scheme-Paradox .sidebar-colored .sidebar-badge{
-        background-color: #0097A7 !important;
-    }
-
-    /* Sidebar User Drop Down Menu Text Color */
-    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-        color: #0097A7 !important;
-    }
-
-    #post_entry-right-info,
-    .sidebar-colored .sidebar-nav li:hover > a,
-    .sidebar-colored .sidebar-nav li:hover > a i,
-    .sidebar-colored .sidebar-nav li > a:hover,
-    .sidebar-colored .sidebar-nav li > a:hover i,
-    .sidebar-colored .sidebar-nav li > a:focus i,
-    .sidebar-colored .sidebar-nav > .open > a,
-    .sidebar-colored .sidebar-nav > .open > a:hover,
-    .sidebar-colored .sidebar-nav > .open > a:focus,
-    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-        color: #0097A7 !important;
-    }
-
-    .toTop {
-        background: #757575 !important;
-    }
-
-    .material-layout .material-post>.material-nav,
-    .material-layout .material-index>.material-nav,
-    .material-nav a {
-        color: #757575;
-    }
-
-    #scheme-Paradox .MD-burger-layer {
-        background-color: #757575;
-    }
-
-    #scheme-Paradox #post-toc-trigger-btn {
-        color: #757575;
-    }
-
-    .post-toc a:hover {
-        color: #00838F;
-        text-decoration: underline;
-    }
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-        body{
-            background-color: #F5F5F5;
-        }
-
-        /* blog_info bottom background */
-        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-            background-color: #fff;
-        }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-        .fade {
-            transition: all 800ms linear;
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            -ms-transform: translate3d(0,0,0);
-            -o-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-            opacity: 1;
-        }
-
-        .fade.out{
-            opacity: 0;
-        }
-    </style>
-
-
-    <script src="/js/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="/css/highlight/solarized-white.css">
-
-    <!-- UC Browser Compatible-->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write('<link rel="stylesheet" href="/css/uc.css">');
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
-    </script>
-
-    <!-- Custom Head -->
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="东篱下" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="dhxy">
+<meta property="og:url" content="https://stanxia.github.io/dhxy/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:updated_time" content="2017-06-04T15:57:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dhxy">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/dhxy/"/>
+
+
+
+
+
+  <title>
+  
+
+  
+    dhxy | 东篱下
+  
+</title>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-    
-        <!-- Single dhxy Page -->
-        <link rel="stylesheet" href="/css/dhxy.min.css">
+  
 
-<body style="text-align:center;background-image:url(http://oliji9s3j.bkt.clouddn.com/%E5%A4%B4%E5%9B%BE1.jpg);">
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
     
-        <!-- Header -->
-        <h1>
-        从此以后，大漠孤烟
-        </h1>
+  
+
+  <div class="container one-collumn sidebar-position-left  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">东篱下</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
     
-        <!-- Main -->
-        <div id="main" style="margin-left:auto;margin-right:auto;">
+      <p class="site-subtitle">斯坦@森</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/WechatIMG51.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/WechatIMG51.jpeg" alt="DHXY1" /></a>
-                        <h2>DHXY1</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/WechatIMG52.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/WechatIMG52.jpeg" alt="DHXY2" /></a>
-                        <h2>DHXY2</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy7.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy7.jpeg" alt="DHXY3" /></a>
-                        <h2>DHXY3</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy4.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy4.jpg" alt="DHXY4" /></a>
-                        <h2>DHXY4</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy5.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy5.jpg" alt="DHXY5" /></a>
-                        <h2>DHXY5</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy6.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy6.jpg" alt="DHXY6" /></a>
-                        <h2>DHXY6</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/%E5%A4%A7%E8%AF%9D%E8%A5%BF%E6%B8%B8-7.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/%E5%A4%A7%E8%AF%9D%E8%A5%BF%E6%B8%B8-7.jpeg" alt="DHXY7" /></a>
-                        <h2>DHXY7</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy8.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy8.jpeg" alt="DHXY8" /></a>
-                        <h2>DHXY8</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy9.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy9.jpg" alt="DHXY9" /></a>
-                        <h2>DHXY9</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy10.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy10.jpeg" alt="DHXY10" /></a>
-                        <h2>DHXY10</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy11.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy11.jpeg" alt="DHXY11" /></a>
-                        <h2>DHXY11</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy12.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy12.jpeg" alt="DHXY12" /></a>
-                        <h2>DHXY12</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy13.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy13.jpeg" alt="DHXY13" /></a>
-                        <h2>DHXY13</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy14.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy14.jpeg" alt="DHXY14" /></a>
-                        <h2>DHXY14</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy15.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy15.jpeg" alt="DHXY15" /></a>
-                        <h2>DHXY15</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy16.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy16.jpeg" alt="DHXY16" /></a>
-                        <h2>DHXY16</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy17.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy17.jpeg" alt="DHXY17" /></a>
-                        <h2>DHXY17</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy18.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy18.jpeg" alt="DHXY18" /></a>
-                        <h2>DHXY18</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy19.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy19.jpeg" alt="DHXY19" /></a>
-                        <h2>DHXY19</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy20.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy20.jpeg" alt="DHXY20" /></a>
-                        <h2>DHXY20</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy21.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy21.jpeg" alt="DHXY21" /></a>
-                        <h2>DHXY21</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy22.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy22.jpeg" alt="DHXY22" /></a>
-                        <h2>DHXY22</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy23.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy23.jpeg" alt="DHXY23" /></a>
-                        <h2>DHXY23</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy24.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy24.jpeg" alt="DHXY24" /></a>
-                        <h2>DHXY24</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy25.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy25.jpeg" alt="DHXY25" /></a>
-                        <h2>DHXY25</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy26.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy26.jpeg" alt="DHXY26" /></a>
-                        <h2>DHXY26</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy27.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy27.jpeg" alt="DHXY27" /></a>
-                        <h2>DHXY27</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy28.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy28.jpeg" alt="DHXY28" /></a>
-                        <h2>DHXY28</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy29.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy29.jpeg" alt="DHXY29" /></a>
-                        <h2>DHXY29</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy30.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy30.jpeg" alt="DHXY30" /></a>
-                        <h2>DHXY30</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy31.jpeg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy31.jpeg" alt="DHXY31" /></a>
-                        <h2>DHXY31</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy32.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy32.jpg" alt="DHXY32" /></a>
-                        <h2>DHXY32</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy33.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy33.jpg" alt="DHXY33" /></a>
-                        <h2>DHXY33</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy34.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy34.jpg" alt="DHXY34" /></a>
-                        <h2>DHXY34</h2>
-                        <p>大话西游</p>
-                    </article>
-                
-                    <article class="thumb">
-                        <a href="http://oliji9s3j.bkt.clouddn.com/dhxy35.jpg" class="image"><img src="http://oliji9s3j.bkt.clouddn.com/dhxy35.jpg" alt="DHXY35" /></a>
-                        <h2>DHXY35</h2>
-                        <p>大话西游</p>
-                    </article>
-                
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-        </div>
-    
-        <!-- Footer -->
-        <!--
-        <footer id="footer" class="panel">
-          <div class="inner split">
-            <div>
-              <section>
-                <h2>Magna feugiat sed adipiscing</h2>
-                <p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
-              </section>
-              <section>
-                <h2>Follow me on ...</h2>
-                <ul class="icons">
-                  <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                  <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                  <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                  <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-                  <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-                  <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                  <li><a href="#" class="icon fa-telegram"><span class="label">Telegram</span></a></li>
-                </ul>
-              </section>
-              <p class="copyright">
-                © Design: <a href="#">Gallery</a>.
-              </p>
-            </div>
-            <div>
-              <section>
-                <h2>Get in touch</h2>
-                <form method="post" action="#">
-                  <div class="field half first">
-                    <input type="text" name="name" id="name" placeholder="Name" />
-                  </div>
-                  <div class="field half">
-                    <input type="text" name="email" id="email" placeholder="Email" />
-                  </div>
-                  <div class="field">
-                    <textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-                  </div>
-                  <ul class="actions">
-                    <li><input type="submit" value="Send" class="special" /></li>
-                    <li><input type="reset" value="Reset" /></li>
-                  </ul>
-                </form>
-              </section>
-            </div>
-          </div>
-        </footer>
-        -->
-    
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Suche
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
     </div>
-    
-    <!-- Scripts -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/dhxy/jquery.poptrox.min.js"></script>
-    <script src="/js/dhxy/skel.min.js"></script>
-    <script src="/js/dhxy/util.min.js"></script>
-    <script src="/js/dhxy/main.min.js"></script>
-</body>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
+
+	<h2 class="post-title" itemprop="name headline">dhxy</h2>
+
+
+
+</header>
 
     
     
+      <script src="/assets/js/DPlayer.min.js"> </script>
+    
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="森" />
+          <p class="site-author-name" itemprop="name">森</p>
+          <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
 </html>

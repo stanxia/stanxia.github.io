@@ -1,394 +1,412 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.2.6 -->
+<!doctype html>
 
-    <!-- Title -->
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
-    <title>
-        
-            Alibaba代码规范 | 
-        
-        小世界，大梦想
-    </title>
-
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="http://oliji9s3j.bkt.clouddn.com/favicon.ico">
-    <link rel="icon" sizes="192x192" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
-    <link rel="apple-touch-icon" href="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcur6pcgo6j20lf0f2175.jpg">
-
-    <!-- Meta & Info -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0097A7">
-    <meta name="author" content="夏">
-    <meta name="description" content="随便说说">
-    <meta name="keywords" content="hive,hadoop,spark,hbase,hdfs,mapreduce,cluster">
-
-    <!--iOS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-title" content="Title">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="480">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="小世界，大梦想">
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://stanxia.github.io">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Alibaba代码规范 | 小世界，大梦想">
-    <meta property="og:description" content="随便说说">
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
-    <!-- Config CSS -->
-
-
-<!-- Other Styles -->
-<style>
-    body, html {
-        font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    }
-
-    a {
-        color: #00838F;
-    }
-
-    .mdl-card__media,
-    #search-label,
-    #search-form-label:after,
-    #scheme-Paradox .hot_tags-count,
-    #scheme-Paradox .sidebar_archives-count,
-    #scheme-Paradox .sidebar-colored .sidebar-header,
-    #scheme-Paradox .sidebar-colored .sidebar-badge{
-        background-color: #0097A7 !important;
-    }
-
-    /* Sidebar User Drop Down Menu Text Color */
-    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-        color: #0097A7 !important;
-    }
-
-    #post_entry-right-info,
-    .sidebar-colored .sidebar-nav li:hover > a,
-    .sidebar-colored .sidebar-nav li:hover > a i,
-    .sidebar-colored .sidebar-nav li > a:hover,
-    .sidebar-colored .sidebar-nav li > a:hover i,
-    .sidebar-colored .sidebar-nav li > a:focus i,
-    .sidebar-colored .sidebar-nav > .open > a,
-    .sidebar-colored .sidebar-nav > .open > a:hover,
-    .sidebar-colored .sidebar-nav > .open > a:focus,
-    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-        color: #0097A7 !important;
-    }
-
-    .toTop {
-        background: #757575 !important;
-    }
-
-    .material-layout .material-post>.material-nav,
-    .material-layout .material-index>.material-nav,
-    .material-nav a {
-        color: #757575;
-    }
-
-    #scheme-Paradox .MD-burger-layer {
-        background-color: #757575;
-    }
-
-    #scheme-Paradox #post-toc-trigger-btn {
-        color: #757575;
-    }
-
-    .post-toc a:hover {
-        color: #00838F;
-        text-decoration: underline;
-    }
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-        body{
-            background-color: #F5F5F5;
-        }
-
-        /* blog_info bottom background */
-        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-            background-color: #fff;
-        }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-        .fade {
-            transition: all 800ms linear;
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            -ms-transform: translate3d(0,0,0);
-            -o-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-            opacity: 1;
-        }
-
-        .fade.out{
-            opacity: 0;
-        }
-    </style>
-
-
-    <script src="/js/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="/css/highlight/solarized-white.css">
-
-    <!-- UC Browser Compatible-->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write('<link rel="stylesheet" href="/css/uc.css">');
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
-    </script>
-
-    <!-- Custom Head -->
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="代码规范," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="东篱下" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Good Luck!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alibaba代码规范">
+<meta property="og:url" content="https://stanxia.github.io/2017/03/07/Alibaba代码规范/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="Good Luck!">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrez7aj20m10v6wid.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrozi5j20m10v60xm.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrxvhzj20m10v6dmk.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnls4woqj20m10v6wjg.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlsevkgj20m10v6n3c.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlso65nj20m10v6af9.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnlt2v04j20m10v6wji.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlteijwj20m10v6jv6.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnltobz1j20m10v6jxd.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnmp0dsgj20m10v6n31.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpcafoj20m10v60wt.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpkfj4j20m10v6act.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnmpsz1gj20m10v67a9.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmq29kaj20m10v6jvc.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnmqc2z2j20m10v6tei.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnmquwirj20m10v6dme.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnmr8hefj20m10v6gr3.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnmrgurmj20m10v60xo.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnn3j1roj20m10v6grf.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn3tks7j20m10v60zs.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn424u1j20m10v6wgi.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn4gxacj20m10v6gra.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn51icgj20m10v6gsi.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5ccrej20m10v6jx5.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5o68dj20m10v6grd.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnn5wzwdj20m10v641o.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnn6fm1wj20m10v6n3f.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnicr5kj20m10v6tbr.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnjg99vj20m10v6q94.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnkcow3j20m10v67av.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3ly1fddnnkzpc6j20m10v679k.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnllrwnj20m10v6wl6.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnm019vj20m10v6dkg.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnnm9rsrj20m10v6djm.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnml164j20m10v6tdv.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw1024/6aae3cf3ly1fddnnmulirj20m10v6jvt.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnxpv60j20m10v6q7b.jpg">
+<meta property="og:updated_time" content="2017-03-10T10:44:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alibaba代码规范">
+<meta name="twitter:description" content="Good Luck!">
+<meta name="twitter:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrez7aj20m10v6wid.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/2017/03/07/Alibaba代码规范/"/>
+
+
+
+
+
+  <title> Alibaba代码规范 | 东篱下 </title>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
     
-        <body id="scheme-Paradox">
-            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">东篱下</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
     
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
+      <p class="site-subtitle">斯坦@森</p>
     
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-    
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span class="MD-burger-layer"></span>
-                        </button>
-                    
-    
-                    <!-- Post TOC -->
-
-    
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#"><span class="post-toc-number">1.</span> <span class="post-toc-text"></span></a></li></ol>
-
-        <!--
-        <li class="mdl-menu__item">
-            Some Action
-        </li>
-        -->
-    </ul>
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdhxnwnqgmj211h0s4af4.jpg)">
-    
-            <p class="article-headline-p">
-                Alibaba代码规范
-            </p>
-        </div>
-
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>夏</strong>
-        <span>3月 07, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">devices other</i>
-            <span class="visuallyhidden">devices other</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1UlEQVR42u3aUW4bMQwEUN//0ukBCjszpNHa0tNX4Ox69bRAGA31+LlyPLCxsbGxsbGxsbE/kv2Ix993vf7k2VNeX588cThnbGxs7KPZv/zpDyaRTCj/tvYbojljY2NjX8BOHpMUtme/fQ3bLHq0uNjY2NjYL69vC9tmObCxsbGx31XAkggpj5/yzQY2NjY29iZUahl5ecuL2X/I0rCxsbE/np03TT/n53/a38bGxsb+YHY7Zu3b9nBPW2KjmWNjY2Mfym6Py2ymMitC+UbllwXFxsbGPpqdB+6bUKmNgWbl8OmV2NjY2EezZ23UTWT/3vZA9HqwsbGxD2UnZSyZ6Oyu2SHLYciFjY2NfTS73WzMIv5N0coLW93oxcbGxj6I3QY9bWM43+q03/Pm/jY2Njb2V7H3EdKsXM0irfZ4KDY2Nvad7DbW2TR9kwKWFL/oWdjY2NiHsttIKN9UtMvU3ls3j7GxsbEPZW+i/yTKnyHzgClfLGxsbOyz2W0LdrPN2DSJ2zYwNjY29g3s5J/4TVFJrpxFVPXLw8bGxj6aPQvc27hntihJyzlaRGxsbOyj2XkQ3x6aaVuzedxfzx8bGxv7UPa7ysOGkS9Tvuj1SSVsbGzsL2fnMc2m0bt/4uplYGNjY1/ArkvCArxpHucxFjY2NvY97LwgzUhJy3bWlsjLGDY2NvYN7GRC+WHN5JPXV7aHh+ozp9jY2NgXsNtjN8mibBYoL6KrAoaNjY39tezHm8bPaOTBVntsCBsbG/ts9mZyeYnKMXlhW4VK2NjY2AexN2Wp3cbMppuEXMNQCRsbG/sgdvvIfdO33cDMwi9sbGzs29jJxqCN72ftgTZOiuaJjY2NjR0ctcmDoRbQLis2NjY29iy4aTcJbRugbRVjY2Nj38ZuA519DLRpQtStYmxsbOyj2W1w05a3fDPzro0KNjY29j3sewY2NjY2NjY2Njb2x4w/IQ/Yu77XCFEAAAAASUVORK5CYII=">
-        </ul>
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/代码规范/">代码规范</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    <!-- Leancloud Views -->
-        <a class="post_share-link" href="#">
-            <li class="mdl-menu__item">
-                <span id="/2017/03/07/Alibaba代码规范/" class="leancloud-views_num" data-flag-title="Alibaba代码规范">
-     &nbsp;浏览量
-</span>
-
-            </li>
-        </a>
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Alibaba代码规范&url=https://stanxia.github.io//2017/03/07/Alibaba代码规范/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Alibaba代码规范&url=https://stanxia.github.io//2017/03/07/Alibaba代码规范/index.html&via=夏" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://stanxia.github.io//2017/03/07/Alibaba代码规范/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://stanxia.github.io//2017/03/07/Alibaba代码规范/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=小世界，大梦想&title=Alibaba代码规范&summary=随便说说&pics=https://stanxia.github.iohttp://oliji9s3j.bkt.clouddn.com/favicon.ico&url=https://stanxia.github.io/2017/03/07/Alibaba代码规范/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
 </div>
 
-                
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
 
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Suche
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/03/07/Alibaba代码规范/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="森">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="东篱下">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="东篱下" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Alibaba代码规范
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T01:24:49+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         <script src="/assets/js/DPlayer.min.js"> </script><h1 id=""><a href="#" class="headerlink" title=""></a><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrez7aj20m10v6wid.jpg" alt="1"></h1><p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrozi5j20m10v60xm.jpg" alt="2"></p>
 <p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrxvhzj20m10v6dmk.jpg" alt="3"></p>
 <p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnls4woqj20m10v6wjg.jpg" alt="4"></p>
@@ -427,507 +445,242 @@
 <p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3ly1fddnnxpv60j20m10v6q7b.jpg" alt=""></p>
 <p>Good Luck!</p>
 
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-
-
-    <!-- 使用 DISQUS -->
-    <div id="disqus-comment">
-        <div id="disqus_thread"></div>
-<script>
-    $('html').ready(function() {
-        setTimeout(function() {
-            var disqus_config = function () {
-                this.page.url = 'https://stanxia.github.io/2017/03/07/Alibaba代码规范/index.html';  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document;
-                var s = d.createElement('script');
-                s.src = '//astan.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', + new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        },1500);
-    });
-</script>
-
+      
     </div>
-    <style>
-        #disqus-comment{
-            background-color: #eee;
-            padding: 2pc;
-        }
-    </style>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
 
 
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/03/13/兼顾稳定和性能，58大数据平台的技术演进与实践/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码规范/" rel="tag"># 代码规范</a>
+          
         </div>
-    </div>
+      
 
+      
+        
+      
 
-    
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
-
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.png" alt="夏's avatar">
-    </div>
-
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        xooglexls@gmail.com
-        <b class="caret"></b>
-    </a>
-</div>
-
-
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-                <li>
-                    <a href="#" target="_blank" title="Email Me">
-                        <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        Email Me
-                    </a>
-                </li>
+              <a href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/" rel="next" title="经典大数据架构案例：酷狗音乐的大数据平台重构">
+                <i class="fa fa-chevron-left"></i> 经典大数据架构案例：酷狗音乐的大数据平台重构
+              </a>
             
-        </ul>
-    </li>
+          </div>
 
-    <!-- Homepage -->
-    <li id="sidebar-first-li">
-        <a href="/" target="_self">
-            <i class="material-icons sidebar-material-icons">home</i>
-            主页
-        </a>
-    </li>
+          <span class="post-nav-divider"></span>
 
-    <!-- I'm Feeling Lucky -->
-    <!--
-    <li class="dropdown">
-        <a href="" target="_self">
-            <i class="material-icons sidebar-material-icons">explore</i>
-             sidebar.imlucky
-        </a>
-    </li>
-    -->
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/13/兼顾稳定和性能，58大数据平台的技术演进与实践/" rel="prev" title="兼顾稳定和性能，58大数据平台的技术演进与实践">
+                兼顾稳定和性能，58大数据平台的技术演进与实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-    <!-- Archives  -->
-    <li class="dropdown">
-        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-            <i class="material-icons sidebar-material-icons">inbox</i>
-             归档
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-            <li>
-            <a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">三月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/02/">二月 2015<span class="sidebar_archives-count">1</span></a>
-        </ul>
-    </li>
-
-    <!-- Categories  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
-                分类
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                <a class="sidebar_archives-link" href="/categories/GEM/">GEM<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Spark/">Spark<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/mac/">mac<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/动漫/">动漫<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/大数据/">大数据<span class="sidebar_archives-count">31</span></a></li><li><a class="sidebar_archives-link" href="/categories/技术/">技术<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/数据库/">数据库<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/测试功能/">测试功能<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/游戏/">游戏<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/版本控制/">版本控制<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/电影/">电影<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/问题集锦/">问题集锦<span class="sidebar_archives-count">6</span></a>
-            </ul>
-        </li>
-    
-
-    <!-- Divider -->
-    <li class="divider"></li>
+      
+      
+    </footer>
+  </article>
 
 
-    <!-- Pages  -->
-  	
-        <li>
-            <a href="/aboutme/" title="Astan">
-                
-                Astan
-            </a>
-        </li>
-  	
-        <li>
-            <a href="/tags/" title="标签索引">
-                
-                标签索引
-            </a>
-        </li>
-  	
-        <li>
-            <a href="/galleries/" title="图库">
-                
-                图库
-            </a>
-        </li>
-  	
 
-    <!-- Article Numebr  -->
-    <li>
-        <a href="/archives">
-            文章总数
-            <span class="sidebar-badge">59</span>
-        </a>
-    </li>
-</ul>
-
-
-        <!-- Sidebar Divider -->
-        <div class="sidebar-divider"></div>
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Theme Material -->
-<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-        主题 - Material
-        <span class="sidebar-badge badge-circle">i</span>
+    <div class="post-spread">
+      
     </div>
-</a>
-
-<!-- Help & Support -->
-<!--
-<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
-    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-    sidebar.help
-    <span class="mdl-button__ripple-container">
-      <span class="mdl-ripple"></span>
-    </span>
   </div>
-</a>
--->
 
-<!-- Feedback -->
-<!--
-<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
-    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-         sidebar.feedback
-                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
-</a>
--->
+          
+          </div>
+          
 
-<!-- Abount Theme -->
-<!--
-<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
-    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-         sidebar.about_theme
-        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
-</a>-->
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="森" />
+          <p class="site-author-name" itemprop="name">森</p>
+          <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
     </div>
+  </aside>
 
-    <!-- Sidebar Sponsor -->
-    
 
-</aside>
+        
+      </div>
+    </main>
 
-                    
-    
-                    
-                        <!-- Footer Top Button -->
-                        <div class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
-
-                    
-    
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
-    
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/profile.php?id=100014686742374" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
-                <span class="visuallyhidden">Facebook</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
-                <span class="visuallyhidden">Google Plus</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/u/1789803763/home?leftnav=1" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
-                <span class="visuallyhidden">Weibo</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-
-    <!-- Bilibili -->
-    
-
-    <!-- Telegram -->
-    
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
 </div>
 
 
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;
-            <script type="text/javascript">
-                var fd = new Date();
-                document.write(fd.getFullYear());
-            </script>
-            &nbsp;小世界，大梦想
-          <div>
-		<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-		<div>
-		本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
-		你是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
-		</div>
-	</div>
-        </div>
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
 
-        <!-- Paradox Footer Right Section -->
-        <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
 
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
 
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
-        </div>
-         
+        
+      </div>
+    </footer>
 
-	</div>
-    
-</footer>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
 
-    
-                    <!-- Import File -->
-<script src="/js/highlight.min.js"></script>
-<script src="/js/js.min.js"></script>
-<script src="/js/nprogress.js"></script>
+  
 
 <script type="text/javascript">
-    NProgress.configure({
-        showSpinner: true
-    });
-    NProgress.start();
-
-    $('#nprogress .bar').css({
-        'background': '#FF4081'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#FF4081',
-        'border-left-color': '#FF4081'
-    });
-
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
-
-
-
-
-
-    <!-- Leancloud -->
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-    <script>
-        AV.initialize("f8AHUn2FOKCWoFzJTLrnSt4A-gzGzoHsz", "dOlRTKgDWf3Ut87VDHex4Wks");
-    </script>
-    <script>
-    function showTime(Counter) {
-        var query = new AV.Query(Counter);
-        $('.leancloud-views_num').each(function() {
-            var url = $(this).attr('id').trim();
-            query.equalTo('url', url);
-            query.find({
-                success: function(results) {
-                    if (results.length === 0) {
-                        var content = '0 ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                        return;
-                    }
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    }
-                },
-                error: function(object, error) {
-                    console.log('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        });
-    }
-
-    function addCount(Counter) {
-      var Counter = AV.Object.extend('Counter');
-      url = $('.leancloud-views_num').attr('id').trim();
-      title = $('.leancloud-views_num').attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-      query.equalTo('url', url);
-      query.find({
-          success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment('time');
-                counter.save(null, {
-                    success: function(counter) {
-                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-              var newcounter = new Counter();
-              newcounter.set('title', title);
-              newcounter.set('url', url);
-              newcounter.set('time', 1);
-              newcounter.save(null, {
-                  success: function(newcounter) {
-                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
-                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-                      $(document.getElementById(url)).text(content);
-                  },
-                  error: function(newcounter, error) {
-                      console.log('Failed to create');
-                  }
-              });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + ' ' + error.message);
-        }
-      });
-    }
-    $(function() {
-        var Counter = AV.Object.extend('Counter');
-        if ($('.leancloud-views_num').length === 1) {
-            addCount(Counter);
-        } else if ($('.post-title-link').length > 1) {
-            showTime(Counter);
-        }
-    });
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
@@ -937,130 +690,222 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 使用 DISQUS js 代码 -->
-    <script id="dsq-count-scr" src="//astan.disqus.com/count.js" async></script>
+
+  
 
 
 
-<!-- Swiftye -->
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-<!-- Local Search-->
+  
 
-    <script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
     var searchFunc = function(path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: 'xml',
-            success: function( xmlResponse ) {
-                // get the contents from search data
-                var datas = $( 'entry', xmlResponse ).map(function() {
-                    return {
-                        title: $( 'title', this ).text(),
-                        content: $('content',this).text(),
-                        url: $( 'url' , this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function() {
-                    var str='<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
                     }
-                    // perform local searching
-                    datas.forEach(function(data) {
-                        var isMatch = true;
-                        var content_index = [];
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                        var data_url = data.url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if(data_title != '' && data_content != '') {
-                            keywords.forEach(function(keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if( index_title < 0 && index_content < 0 ) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += '<li><a href="'+ data_url +'" class="search-result-title" target="_blank">'+ data_title;
-                            var content = data.content.trim().replace(/<[^>]+>/g, '');
-                            if (first_occur >= 0) {
-                                // cut out characters
-                                var start = first_occur - 6;
-                                var end = first_occur + 6;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 10;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function(keyword) {
-                                    var regS = new RegExp(keyword, 'gi');
-                                    match_content = match_content.replace(regS, '<em class="search-keyword">'+keyword+'</em>');
-                                })
-                                str += '<p class="search-result">' + match_content +'...</p>' +'</a>';
-                            }
-                        }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                     });
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    }
-</script>
 
-
-    <script>
-        var inputArea = document.querySelector('#search');
-        var getSearchFile = function() {
-            var path = 'search.xml';
-            searchFunc(path, 'search', 'local-search-result');
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
         }
+      });}
 
-        if(inputArea) {
-            inputArea.onfocus = function() {
-                getSearchFile();
-            }
-        }
-    </script>
-
-
-<!-- Window Load-->
-<script>
-    $(window).load(function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
     });
-</script>
 
-<!-- MathJax Load-->
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
 
-                </main>
-            </div>
-        </body>
-    
+  
+
+  
+
+  
+
+  
+
+
+</body>
 </html>
