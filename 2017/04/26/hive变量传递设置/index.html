@@ -81,19 +81,16 @@
 
 
 
-<meta name="description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：
-### org.apache.hadoop.hive.ql.">
+<meta name="description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hive变量传递设置">
 <meta property="og:url" content="https://stanxia.github.io/2017/04/26/hive变量传递设置/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：
-### org.apache.hadoop.hive.ql.">
-<meta property="og:updated_time" content="2017-05-29T10:21:00.000Z">
+<meta property="og:description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：">
+<meta property="og:updated_time" content="2017-10-25T15:27:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive变量传递设置">
-<meta name="twitter:description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：
-### org.apache.hadoop.hive.ql.">
+<meta name="twitter:description" content="在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：">
 
 
 
@@ -407,7 +404,8 @@
 
       
         <script src="/assets/js/DPlayer.min.js"> </script><p>在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：</p>
-<p>### org.apache.hadoop.hive.ql.parse.VariableSubstitution：</p>
+<a id="more"></a>
+<p>org.apache.hadoop.hive.ql.parse.VariableSubstitution：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">substitute</span><span class="params">(HiveConf conf, String expr)</span> </span>&#123;</div><div class="line"><span class="keyword">if</span> (expr == <span class="keyword">null</span>) &#123;   </div><div class="line">  <span class="keyword">return</span> expr;</div><div class="line">    &#125;    </div><div class="line"><span class="keyword">if</span> (HiveConf.getBoolVar(conf, ConfVars.HIVEVARIABLESUBSTITUTE)) &#123;</div><div class="line">      l4j.debug(<span class="string">"Substitution is on: "</span> + expr);</div><div class="line">    &#125; </div><div class="line"><span class="keyword">else</span> &#123;     </div><div class="line">  <span class="keyword">return</span> expr;</div><div class="line">    &#125;    </div><div class="line"><span class="keyword">int</span> depth = HiveConf.getIntVar(conf, ConfVars.HIVEVARIABLESUBSTITUTEDEPTH);    <span class="keyword">return</span> substitute(conf, expr, depth);</div><div class="line">  &#125;<span class="number">123456789101112</span></div></pre></td></tr></table></figure>
 <p>如果开启hive.variable.substitute（默认开启），则使用SystemVariables的substitute方法和hive.variable.substitute.depth(默认为40)进行进一步的判断：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> String <span class="title">substitute</span><span class="params">(Configuration conf, String expr, <span class="keyword">int</span> depth)</span> </span>&#123;</div><div class="line">    Matcher match = varPat.matcher(<span class="string">""</span>);</div><div class="line">    String eval = expr;</div><div class="line">    StringBuilder builder = <span class="keyword">new</span> StringBuilder();    <span class="keyword">int</span> s = <span class="number">0</span>;    <span class="keyword">for</span> (; s &lt;= depth; s++) &#123;</div><div class="line">      match.reset(eval);</div><div class="line">      builder.setLength(<span class="number">0</span>);      <span class="keyword">int</span> prev = <span class="number">0</span>;      <span class="keyword">boolean</span> found = <span class="keyword">false</span>;      <span class="keyword">while</span> (match.find(prev)) &#123;</div><div class="line">        String group = match.group();</div><div class="line">        String var = group.substring(<span class="number">2</span>, group.length() - <span class="number">1</span>); <span class="comment">// remove $&#123; .. &#125;</span></div><div class="line">        String substitute = getSubstitute(conf, var);        <span class="keyword">if</span> (substitute == <span class="keyword">null</span>) &#123;</div><div class="line">          substitute = group;   <span class="comment">// append as-is</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          found = <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        builder.append(eval.substring(prev, match.start())).append(substitute);</div><div class="line">        prev = match.end();</div><div class="line">      &#125;      <span class="keyword">if</span> (!found) &#123;        <span class="keyword">return</span> eval;</div><div class="line">      &#125;</div><div class="line">      builder.append(eval.substring(prev));</div><div class="line">      eval = builder.toString();</div><div class="line">    &#125;    <span class="keyword">if</span> (s &gt; depth) &#123;      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(          <span class="string">"Variable substitution depth is deeper than "</span> + depth + <span class="string">" for expression "</span> + expr);</div><div class="line">    &#125;    <span class="keyword">return</span> eval;</div><div class="line">  &#125; <span class="number">12345678910111213141516171819202122232425262728293031323334</span></div></pre></td></tr></table></figure>
@@ -538,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -549,7 +547,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -560,7 +558,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

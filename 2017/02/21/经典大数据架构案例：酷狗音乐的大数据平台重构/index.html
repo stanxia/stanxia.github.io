@@ -82,13 +82,13 @@
 
 
 <meta name="description" content="前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年">
+眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="经典大数据架构案例：酷狗音乐的大数据平台重构">
 <meta property="og:url" content="https://stanxia.github.io/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/index.html">
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年">
+眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时">
 <meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcxe2flakmj20at07j0tr.jpg">
 <meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcxe2gw02gj20jp0cxwjl.jpg">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fcxe2iu0jpj20kb0d4tbj.jpg">
@@ -102,11 +102,11 @@
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcxe3ao3htj20eb03474f.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcxe3bzx3ij20j904c3z3.jpg">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcxe3dps6xj20de06u3zc.jpg">
-<meta property="og:updated_time" content="2017-05-29T10:14:54.000Z">
+<meta property="og:updated_time" content="2017-10-25T15:02:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="经典大数据架构案例：酷狗音乐的大数据平台重构">
 <meta name="twitter:description" content="前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年">
+眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时">
 <meta name="twitter:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcxe2flakmj20at07j0tr.jpg">
 
 
@@ -424,6 +424,7 @@
 <p>眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术支柱，感到很欣慰。</p>
 <p>从重构原因，技术架构，踩过的坑，后续持续改进四个方面来描述酷狗音乐大数据平台重构的过程，在此抛砖引玉，这次的内容与6月份在高可用架构群分享的大数据技术实践的有点不同，技术架构做了些调整。</p>
 <p>其实大数据平台是一个庞大的系统工程，整个建设周期很长，涉及的生态链很长(包括：数据采集、接入，清洗、存储计算、数据挖掘，可视化等环节，每个环节都可以当做一个复杂的系统来建设)，风险也很大。</p>
+<a id="more"></a>
 <h2 id="一、重构原因"><a href="#一、重构原因" class="headerlink" title="一、重构原因"></a>一、重构原因</h2><p>在讲重构原因前，先介绍下原有的大数据平台架构，如下图：</p>
 <p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcxe2flakmj20at07j0tr.jpg" alt="1"></p>
 <p>从上图可知，主要基于Hadoop1.x+hive做离线计算(T+1)，基于大数据平台的数据采集、数据接入、数据清洗、作业调度、平台监控几个环节存在的一些问题来列举下。</p>
@@ -658,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +670,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -680,7 +681,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

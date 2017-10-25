@@ -81,31 +81,31 @@
 
 
 
-<meta name="description" content="问题1ntp同步时间过长
+<meta name="description" content="问题no1ntp同步时间过长
 解决方案修改 /etc/ntp.conf
 主节点配置：
 12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
 从节点配置：
-12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ibur">
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ib">
 <meta property="og:type" content="article">
 <meta property="og:title" content="完善ntp时间同步">
 <meta property="og:url" content="https://stanxia.github.io/2016/02/14/完善ntp时间同步/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="问题1ntp同步时间过长
+<meta property="og:description" content="问题no1ntp同步时间过长
 解决方案修改 /etc/ntp.conf
 主节点配置：
 12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
 从节点配置：
-12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ibur">
-<meta property="og:updated_time" content="2017-05-29T10:17:08.000Z">
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ib">
+<meta property="og:updated_time" content="2017-10-25T15:03:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="完善ntp时间同步">
-<meta name="twitter:description" content="问题1ntp同步时间过长
+<meta name="twitter:description" content="问题no1ntp同步时间过长
 解决方案修改 /etc/ntp.conf
 主节点配置：
 12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
 从节点配置：
-12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ibur">
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) ib">
 
 
 
@@ -418,13 +418,13 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><p>ntp同步时间过长</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h1 id="问题no1"><a href="#问题no1" class="headerlink" title="问题no1"></a>问题no1</h1><p>ntp同步时间过长</p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 /etc/ntp.conf</p>
 <p>主节点配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">server ntp7.aliyun.com iburst</div><div class="line">restrict ntp7.aliyun.com nomodify notrap noquery</div></pre></td></tr></table></figure>
 <p>从节点配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">restrict hadoop1(主机名) nomodify notrap noquery</div><div class="line">server hadoop1(主机名) iburst</div></pre></td></tr></table></figure>
-<h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><p>ntp时间同步之后，显示非中国时区</p>
+<h1 id="问题no2"><a href="#问题no2" class="headerlink" title="问题no2"></a>问题no2</h1><p>ntp时间同步之后，显示非中国时区</p>
 <h1 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div></pre></td></tr></table></figure>
       
     </div>
@@ -558,7 +558,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +569,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -580,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -622,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题1"><span class="nav-number">1.</span> <span class="nav-text">问题1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题2"><span class="nav-number">3.</span> <span class="nav-text">问题2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案-1"><span class="nav-number">4.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题no1"><span class="nav-number">1.</span> <span class="nav-text">问题no1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题no2"><span class="nav-number">3.</span> <span class="nav-text">问题no2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案-1"><span class="nav-number">4.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
             
 
           </div>

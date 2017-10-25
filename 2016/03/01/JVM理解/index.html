@@ -81,25 +81,19 @@
 
 
 
-<meta name="description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。
-jvm的组成部分
-Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。（注意：并不会加载所有的.class文件，而是只加载符合c">
+<meta name="description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM理解">
 <meta property="og:url" content="https://stanxia.github.io/2016/03/01/JVM理解/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。
-jvm的组成部分
-Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。（注意：并不会加载所有的.class文件，而是只加载符合c">
+<meta property="og:description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fd7kltd18vj20ye0leq7j.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fd7kltq5vcj20f90oi0u1.jpg">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fd7klu48owj20ci09mgo7.jpg">
-<meta property="og:updated_time" content="2017-03-19T14:30:38.000Z">
+<meta property="og:updated_time" content="2017-10-25T15:33:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM理解">
-<meta name="twitter:description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。
-jvm的组成部分
-Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。（注意：并不会加载所有的.class文件，而是只加载符合c">
+<meta name="twitter:description" content="什么是jvmjvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。为什么java一次编译，随处运行？都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。">
 <meta name="twitter:image" content="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fd7kltd18vj20ye0leq7j.jpg">
 
 
@@ -414,6 +408,7 @@ Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。
 
       
         <script src="/assets/js/DPlayer.min.js"> </script><h2 id="什么是jvm"><a href="#什么是jvm" class="headerlink" title="什么是jvm"></a>什么是jvm</h2><p>jvm（java virtual machine）,java虚拟机，就是在计算机的内存中再虚拟出个计算机。<br>为什么java一次编译，随处运行？<br>都归功于jvm的命令集，jvm翻译之后，根据不同的cpu，翻译成不同的机器语言。</p>
+<a id="more"></a>
 <h2 id="jvm的组成部分"><a href="#jvm的组成部分" class="headerlink" title="jvm的组成部分"></a>jvm的组成部分</h2><ol>
 <li><h5 id="Class-Loader-类加载器"><a href="#Class-Loader-类加载器" class="headerlink" title="Class Loader 类加载器"></a>Class Loader 类加载器</h5><p>将javac 编译后的 .class文件加载到内存中。（注意：并不会加载所有的.class文件，而是只加载符合class规范的文件。可阅读<jvm specification="">中的第四章”The Class File Format”）</jvm></p>
 </li>
@@ -588,7 +583,7 @@ Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +594,7 @@ Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -610,7 +605,7 @@ Class Loader 类加载器将javac 编译后的 .class文件加载到内存中。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

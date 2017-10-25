@@ -82,13 +82,13 @@
 
 
 <meta name="description" content="初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
-Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2">
+Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于20">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka文件存储机制及partition和offset">
 <meta property="og:url" content="https://stanxia.github.io/2016/02/15/Kafka文件存储机制及partition和offset/index.html">
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
-Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2">
+Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于20">
 <meta property="og:image" content="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275349891.png">
 <meta property="og:image" content="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275118393.png">
 <meta property="og:image" content="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275129022.png">
@@ -96,11 +96,11 @@ Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副�
 <meta property="og:image" content="http://www.111cn.net/get_pic/2015/10/31/20151031233153426.jpg">
 <meta property="og:image" content="http://www.111cn.net/get_pic/2015/10/31/20151031233155850.jpg">
 <meta property="og:image" content="http://www.111cn.net/get_pic/2015/10/31/20151031233158914.jpg">
-<meta property="og:updated_time" content="2017-03-19T14:31:00.000Z">
+<meta property="og:updated_time" content="2017-10-25T15:34:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka文件存储机制及partition和offset">
 <meta name="twitter:description" content="初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
-Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2">
+Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于20">
 <meta name="twitter:image" content="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275349891.png">
 
 
@@ -416,6 +416,7 @@ Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副�
       
         <script src="/assets/js/DPlayer.min.js"> </script><h2 id="初识kafka"><a href="#初识kafka" class="headerlink" title="初识kafka"></a>初识kafka</h2><p>kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。</p>
 <p>Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
+<a id="more"></a>
 <h2 id="为什么用kafka"><a href="#为什么用kafka" class="headerlink" title="为什么用kafka"></a>为什么用kafka</h2><p>一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。</p>
 <p>下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。</p>
 <h2 id="kafka名词解释"><a href="#kafka名词解释" class="headerlink" title="kafka名词解释"></a>kafka名词解释</h2><table>
@@ -699,7 +700,7 @@ Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -710,7 +711,7 @@ Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副�
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -721,7 +722,7 @@ Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -81,28 +81,43 @@
 
 
 
-<meta name="description" content="1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
+<meta name="description" content="ssh-keygen -t rsa -P ‘’
+​    -t  rsa表示通过rsa算法
+​    -P表示设置密码
 cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.p">
+如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
+
+
+
+跨机器传输：
+scp 文件 hadoop@hadoop1:/目标路径">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssh互信">
 <meta property="og:url" content="https://stanxia.github.io/2016/02/11/ssh互信/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
+<meta property="og:description" content="ssh-keygen -t rsa -P ‘’
+​    -t  rsa表示通过rsa算法
+​    -P表示设置密码
 cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.p">
-<meta property="og:updated_time" content="2017-05-29T10:22:48.000Z">
+如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
+
+
+
+跨机器传输：
+scp 文件 hadoop@hadoop1:/目标路径">
+<meta property="og:updated_time" content="2017-10-25T15:42:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh互信">
-<meta name="twitter:description" content="1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
+<meta name="twitter:description" content="ssh-keygen -t rsa -P ‘’
+​    -t  rsa表示通过rsa算法
+​    -P表示设置密码
 cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.p">
+如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
+
+
+
+跨机器传输：
+scp 文件 hadoop@hadoop1:/目标路径">
 
 
 
@@ -415,11 +430,21 @@ scp idrsa.p">
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p>1.ssh-keygen -t rsa -P ‘’<br>-t  rsa表示通过rsa算法<br>-P表示设置密码</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><ol>
+<li><p>ssh-keygen -t rsa -P ‘’</p>
+<p>​    -t  rsa表示通过rsa算法</p>
+<p>​    -P表示设置密码</p>
 <p>cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥</p>
-<p> 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop </p>
-<p>2.跨机器传输：<br>scp 文件 hadoop@hadoop1:/目标路径</p>
-<p>scp idrsa.pub hadoop@hadoop1:/home/hadoop/<br>文件夹为：scp -r …</p>
+<p>如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop </p>
+</li>
+</ol>
+<ol>
+<li><p>跨机器传输：</p>
+<p>scp 文件 hadoop@hadoop1:/目标路径</p>
+<p>scp idrsa.pub hadoop@hadoop1:/home/hadoop/</p>
+<p>文件夹为：scp -r …</p>
+</li>
+</ol>
 
       
     </div>
@@ -544,7 +569,7 @@ scp idrsa.p">
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -555,7 +580,7 @@ scp idrsa.p">
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -566,7 +591,7 @@ scp idrsa.p">
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

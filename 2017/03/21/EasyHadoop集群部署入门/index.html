@@ -83,14 +83,14 @@
 
 <meta name="description" content="EasyHadoop 让你的Hadoop应用飞起来!EasyHadoop集群部署入门目录
 EasyHadoop集群部署入门文档……………………………………………………………………………………………………………………………………………………………………….. 2
-目录……………………………………………………………………………………………………………………………………………">
+目录………………………………………………………………………………………………………………………………………………">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EasyHadoop集群部署入门">
 <meta property="og:url" content="https://stanxia.github.io/2017/03/21/EasyHadoop集群部署入门/index.html">
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="EasyHadoop 让你的Hadoop应用飞起来!EasyHadoop集群部署入门目录
 EasyHadoop集群部署入门文档……………………………………………………………………………………………………………………………………………………………………….. 2
-目录……………………………………………………………………………………………………………………………………………">
+目录………………………………………………………………………………………………………………………………………………">
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image004.png">
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image006.png">
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image008.png">
@@ -110,12 +110,12 @@ EasyHadoop集群部署入门文档………………………………………�
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image034.png">
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image036.png">
 <meta property="og:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image038.png">
-<meta property="og:updated_time" content="2017-05-29T10:18:44.000Z">
+<meta property="og:updated_time" content="2017-10-25T15:17:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EasyHadoop集群部署入门">
 <meta name="twitter:description" content="EasyHadoop 让你的Hadoop应用飞起来!EasyHadoop集群部署入门目录
 EasyHadoop集群部署入门文档……………………………………………………………………………………………………………………………………………………………………….. 2
-目录……………………………………………………………………………………………………………………………………………">
+目录………………………………………………………………………………………………………………………………………………">
 <meta name="twitter:image" content="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image004.png">
 
 
@@ -507,6 +507,7 @@ EasyHadoop集群部署入门文档………………………………………�
 <p><a href="#_Toc1768">#安装FineReport,使用注册码!……………………………………………………………………………………………………………………………………………………… 29</a></p>
 <p><a href="#_Toc3908">#使用FineReport,快速展现数据报表。…………………………………………………………………………………………………………………………………….. 29</a></p>
 <p><a href="#_Toc16553">#FineReport 的问题和局限…………………………………………………………………………………………………………………………………………………………… 29</a></p>
+<a id="more"></a>
 <h2 id="1-文档概述"><a href="#1-文档概述" class="headerlink" title="1.  文档概述"></a><a href="undefined">1.  文档概述</a></h2><p>本文档是Hadoop部署文档,提供了Hadoop单机安装和Hadoop集群安装的方法和步骤,本文档希望让Hadoop安装部署更简单(Easy)。</p>
 <p>本安装文档适用于 centos 5 /red hat 5.2 32位,64位版本,ubuntu 等操作系统需要做部分修改。</p>
 <h2 id="2-背景"><a href="#2-背景" class="headerlink" title="2.  背景"></a><a href="undefined">2.  背景</a></h2><p>Hadoop为分布式文件系统和计算的基础框架系统，其中包含hadoop程序，hdfs系统等。</p>
@@ -1440,21 +1441,18 @@ EasyHadoop集群部署入门文档………………………………………�
 <p> Select * from alexa.top100w limit 100;</p>
 <p>  #加载数据到内部表</p>
 <p>  LOADDATA LOCAL INPATH ‘/home/hadoop/top100w.csv’ OVERWRITE INTO TABLE log;</p>
-<h3 id="分析查询"><a href="#分析查询" class="headerlink" title="#分析查询"></a>#分析查询</h3><ol>
-<li><p>简单查询 select * from top100w limit 10 分析背后原理</p>
-</li>
-<li><p>简单查询 select a from top100w limit 10  分析背后原理</p>
-<p>3.where 练习</p>
-<p>4.group by 练习</p>
-<p>5.order by 练习</p>
-<p>6.union all 练习</p>
-<p>7.INSERT OVERWRITE TABLE 练习</p>
-<p>8.INSERT OVERWRITE DIRECTORY ‘/user/facebook/tmp/pv_age_sum’</p>
-<p>9.SELECT a.key, a.value FROM a WHERE a.key in (SELECT b.key FROM B) -&gt; SELECTa.key, a.val FROM a LEFT SEMI JOIN b on (a.key = b.key)</p>
-<p>10.Hive 函数查询方法 查询地址: <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual" target="_blank" rel="external">https://cwiki.apache.org/confluence/display/Hive/LanguageManual</a></p>
-<p>11.dfs 操作命令</p>
-</li>
-</ol>
+<h3 id="分析查询"><a href="#分析查询" class="headerlink" title="#分析查询"></a>#分析查询</h3><pre><code>1. 简单查询 select * from top100w limit 10 分析背后原理
+
+2. 简单查询 select a from top100w limit 10  分析背后原理
+</code></pre><p>  3.where 练习</p>
+<p>  4.group by 练习</p>
+<p>  5.order by 练习</p>
+<p>  6.union all 练习</p>
+<p>  7.INSERT OVERWRITE TABLE 练习</p>
+<p>  8.INSERT OVERWRITE DIRECTORY ‘/user/facebook/tmp/pv_age_sum’</p>
+<p>  9.SELECT a.key, a.value FROM a WHERE a.key in (SELECT b.key FROM B) -&gt; SELECTa.key, a.val FROM a LEFT SEMI JOIN b on (a.key = b.key)</p>
+<p>  10.Hive 函数查询方法 查询地址: <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual" target="_blank" rel="external">https://cwiki.apache.org/confluence/display/Hive/LanguageManual</a></p>
+<p>  11.dfs 操作命令</p>
 <h2 id="6-使用hive到Mysql构建简单数据集市"><a href="#6-使用hive到Mysql构建简单数据集市" class="headerlink" title="6.  使用hive到Mysql构建简单数据集市"></a><a href="undefined">6.  使用hive</a>到Mysql构建简单数据集市</h2><h3 id="创建一个数据表使用Hivecli-进行数据分析"><a href="#创建一个数据表使用Hivecli-进行数据分析" class="headerlink" title="#创建一个数据表使用Hivecli 进行数据分析"></a><a href="undefined">#</a>创建一个数据表使用Hivecli 进行数据分析</h3><h3 id="使用shell-编写Hsql-并使用HiveCli导出数据-使用Mysql命令加载到数据库中。"><a href="#使用shell-编写Hsql-并使用HiveCli导出数据-使用Mysql命令加载到数据库中。" class="headerlink" title="#使用shell 编写Hsql 并使用HiveCli导出数据,使用Mysql命令加载到数据库中。"></a><a href="undefined">#</a>使用shell 编写Hsql 并使用HiveCli导出数据,使用Mysql命令加载到数据库中。</h3><h3 id="使用crontab-新增每日运行任务定时器"><a href="#使用crontab-新增每日运行任务定时器" class="headerlink" title="#使用crontab 新增每日运行任务定时器"></a><a href="undefined">#</a>使用crontab 新增每日运行任务定时器</h3><p> crontab -e</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">50 02 * * *  /opt/<span class="built_in">jobs</span>/top100w.sh</div></pre></td></tr></table></figure>
 <h2 id="7-使用FineReport-数据展现数据"><a href="#7-使用FineReport-数据展现数据" class="headerlink" title="7.  使用FineReport 数据展现数据"></a><a href="undefined">7.  使用FineReport </a>数据展现数据</h2><h3 id="安装FineReport-使用注册码"><a href="#安装FineReport-使用注册码" class="headerlink" title="#安装FineReport,使用注册码"></a><a href="undefined">#</a>安装FineReport,使用注册码</h3><h3 id="使用FineReport-快速展现数据报表"><a href="#使用FineReport-快速展现数据报表" class="headerlink" title="#使用FineReport,快速展现数据报表"></a><a href="undefined">#</a>使用FineReport,快速展现数据报表</h3><h2 id="8-练习"><a href="#8-练习" class="headerlink" title="8.  练习"></a>8.  练习</h2><p>\1. 下载 <a href="http://www.sogou.com/labs/dl/q.html" target="_blank" rel="external">http://www.sogou.com/labs/dl/q.html</a>完整版(1.9GB)</p>
@@ -1632,7 +1630,7 @@ EasyHadoop集群部署入门文档………………………………………�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1643,7 +1641,7 @@ EasyHadoop集群部署入门文档………………………………………�
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1654,7 +1652,7 @@ EasyHadoop集群部署入门文档………………………………………�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

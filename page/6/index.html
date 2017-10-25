@@ -287,361 +287,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/02/11/hadoop原生集群搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/11/hadoop原生集群搭建/" itemprop="url">hadoop原生集群搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-11T10:55:39+08:00">
-                2016-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/02/11/hadoop原生集群搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/02/11/hadoop原生集群搭建/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/02/11/hadoop原生集群搭建/" class="leancloud_visitors" data-flag-title="hadoop原生集群搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           一：解压hadoop.tar.gz和jdk安装包
-将hadoop和jdk解压在/opt目录下面
-12tar -zxvf jdk1.8.gz -C /opt/  #解压jdk到/opt下tar -zxvf hadoop-2.6.0.tar.gz -C /opt/ #解压hadoop到/opt
-
-在/opt目录下面修改 Hadoop和jdk 名字（非必需，只是为了后续的操作方便）
-12mv hadoop-2.6.0 hadoop #hadoop文件夹重命名mv jdk1.8 jdk #jdk文件夹重命名
-
-
-二：设置SSH互信：
-在每台服务器上面设置SSH无密码登录：
-1ssh-keygen -
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/11/hadoop原生集群搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/02/11/ssh互信/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/11/ssh互信/" itemprop="url">ssh互信</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-11T09:58:28+08:00">
-                2016-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/02/11/ssh互信/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/02/11/ssh互信/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/02/11/ssh互信/" class="leancloud_visitors" data-flag-title="ssh互信">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           1.ssh-keygen -t rsa -P ‘’-t  rsa表示通过rsa算法-P表示设置密码
-cd .ssh :包含文件  idrsa为密匙   idrsa.pub为公钥
- 如果当前使用的用户时hadoop，当使用ssh切换时默认的是到hadoop用户 ，可以使用ssh root@hadoop 
-2.跨机器传输：scp 文件 hadoop@hadoop1:/目标路径
-scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/11/ssh互信/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/01/18/chrome离线恐龙快跑游戏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -757,30 +402,24 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
       
         
           
-           游戏介绍来源自Google chrome 浏览器没有网络状态下的小彩蛋。
-安装指南
-右键这里存储连接下载源码
-
-将下载的js文件放置在source/js/下面
-
-在页面上添加如下代码即可：
-12345&lt;div id="container"&gt;&lt;/div&gt;&lt;script src="/js/runner.js"&gt;&lt;/script&gt;&lt;script&gt; initRunner('#container');&lt;/script&gt;
-
-
-食用指南手机端：点触屏幕即可开始和操作。
-电脑端：点击小恐龙，按空格键即可开始和操作。
-
-
-
- initRu
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/18/chrome离线恐龙快跑游戏/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><p>来源自Google chrome 浏览器没有网络状态下的小彩蛋。</p>
+<h2 id="安装指南"><a href="#安装指南" class="headerlink" title="安装指南"></a>安装指南</h2><ol>
+<li><p>右键<a href="https://unpkg.com/t-rex-runner/dist/runner.js" style="text-decoration:none" target="_blank" rel="external">这里</a>存储连接下载源码</p>
+</li>
+<li><p>将下载的js文件放置在source/js/下面</p>
+</li>
+<li><p>在页面上添加如下代码即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/runner.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"> initRunner('#container');</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="食用指南"><a href="#食用指南" class="headerlink" title="食用指南"></a>食用指南</h2><p>手机端：点触屏幕即可开始和操作。</p>
+<p>电脑端：点击小恐龙，按空格键即可开始和操作。</p>
+<p><div id="container"></div></p>
+<script src="/js/runner.js"></script>
+<script>
+ initRunner('#container');
+</script>
+          
         
       
     </div>
@@ -942,15 +581,8 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
       
         
           
-           
+            <script src="/assets/js/DPlayer.min.js"> </script><iframe src="https://www.bilibili.com/html/html5player.html?aid=3209983&cid=5061993" width="640" height="480" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe>
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/17/这个杀手不太冷/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1111,15 +743,10 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
 
       
         
-          
-           不定期转更！12345&lt;center&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 	src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;	&lt;/center&gt;
+          <h2 id="不定期转更！"><a href="#不定期转更！" class="headerlink" title="不定期转更！"></a>不定期转更！</h2><center><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+​    src="//music.163.com/outchain/player?type=2&id=4938705&auto=1&height=66"></iframe></center>
 
-
-
-
-
-
-          ...
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcspiwqlrgj20nm11idmk.jpg" alt="1"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/01/16/海贼王856“少骗人了”/#more" rel="contents">
@@ -1287,13 +914,11 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
 
       
         
-          
-           测试视频播放接入bilibili的视频，只需要在md文档中添加如下代码即可：
-1&lt;iframe src="https://www.bilibili.com/html/html5player.html?aid=3521416&amp;cid=6041635" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
-其中aid和cid在bilibili网页上都可以爬出来。
-效果如下：
-
-          
+          <h2 id="测试视频播放"><a href="#测试视频播放" class="headerlink" title="测试视频播放"></a>测试视频播放</h2><p>接入bilibili的视频，只需要在md文档中添加如下代码即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"https://www.bilibili.com/html/html5player.html?aid=3521416&amp;cid=6041635"</span> <span class="attr">width</span>=<span class="string">"640"</span> <span class="attr">height</span>=<span class="string">"480"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">webkitallowfullscreen</span> <span class="attr">mozallowfullscreen</span> <span class="attr">allowfullscreen</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其中aid和cid在bilibili网页上都可以爬出来。</p>
+<p>效果如下：</p>
+<iframe src="https://www.bilibili.com/html/html5player.html?aid=3521416&cid=6041635" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/01/15/测试视频播放/#more" rel="contents">
@@ -1462,47 +1087,41 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
       
         
           
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <script src="/assets/js/DPlayer.min.js"> </script><a id="more"></a>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmsnyzfywj20cr1e3dkh.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdmsnzkv9zj21100jf0yc.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmso01yw7j20de1gkgrn.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdmso0nxhuj20sm199gwk.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmso1kq1tj20t51godve.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmso292qfj20l5135jwt.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmso2z41rj20wd14f49v.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmso3k1xtj21as0zb14n.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmso45ndmj20s3123ajc.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmsqcjaifj21kw16o4qp.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmsqexqcdj21kw16o7v2.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmsqg08acj216o1kwtpd.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmsqhc4l7j216o1kwql9.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmsqhr4nuj216o1kwgww.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmspchpwuj20jy1cz453.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmspdm0qij20y214ngw2.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmspgd211j21ax11mnid.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmspgt3ruj20dz1dn0xb.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmspi64ztj21kw16otrj.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmspjfenrj216o1kwaqq.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdmspl3bamj216o1kw1kx.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmspm9wnaj216o1kwh2l.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmspriswmj216o1kwkco.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmsoiyf0cj216414owpl.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmsojrkpxj20qw13bdoe.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmsok81qpj215b1g7dut.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fdmsol39j8j211x1ejqbq.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fdmsolu140j212d12kao7.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmsomztobj21ei0t5wom.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmsonhwjaj20u917ptlg.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fdmsoo0gw4j21f70srtnb.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fdmsop645nj216c138gxf.jpg" alt=""></p>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/14/敦煌展/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1663,18 +1282,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
 
       
         
-          
-           
-
-
-
-
-
-
-
-
-
-          
+          <p><img src="http://pic04.ishuhui.com/cartoon/book-1/1/859-8638/01.png?a2958561" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/03/16/海賊王-第-859-话-四皇暗殺作戰/#more" rel="contents">
@@ -1842,12 +1450,8 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
 
       
         
-          
-           问题下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”
-
-原因在MAC下安装一些软件时提示”来自身份不明开发者”，其实这是MAC新系统启用了新的安全机制。默认只信任 Mac App Store 下载的软件和拥有开发者 ID 签名的应用程序。换句话说就是 MAC 系统默认只能安装靠谱渠道（有苹果审核的 Mac App Store）下载的软件或被认可的人开发的软件。
-这当然是为了用户不会稀里糊涂安装流氓软件中招，但没有开发者签名的 “老实软件” 也受影响了，安装就会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发
-          ...
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>下载了一些程序之后，却发现无法在MAC中安装，安装时会弹出下图所示警告框：“打不开 xxx，因为它来自身份不明的开发者”</p>
+<p><img src="http://img.xclient.info/attachment/cdn/large/006ehIt6jw1execfbx4xnj30nc0b6dgh.jpg" alt="img1"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/02/15/MAC应用无法打开或文件损坏的处理方法/#more" rel="contents">
@@ -1942,7 +1546,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1953,7 +1557,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1964,7 +1568,7 @@ scp idrsa.pub hadoop@hadoop1:/home/hadoop/文件夹为：scp -r …
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

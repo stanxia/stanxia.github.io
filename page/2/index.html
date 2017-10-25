@@ -401,14 +401,14 @@
 
       
         
-          
-           大牛解读
-
-转载自：https://yq.aliyun.com/articles/67020
-
-数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
-1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出现乱码、数据库因为切库造成数据同步量变少等等。这就要求在整个数仓体系的搭建过程中不只要完成数据业务逻辑的处理，还需要增加数据质量的监控。“我们在核心的数据处理流程中，增加数据质量监控代码，如果碰到数
-          ...
+          <p>大牛解读</p>
+<blockquote>
+<p>转载自：<a href="https://yq.aliyun.com/articles/67020">https://yq.aliyun.com/articles/67020</a></p>
+</blockquote>
+<h2 id="数仓上遇到的挑战：数据质量保障、稳定和重复性"><a href="#数仓上遇到的挑战：数据质量保障、稳定和重复性" class="headerlink" title="数仓上遇到的挑战：数据质量保障、稳定和重复性"></a>数仓上遇到的挑战：数据质量保障、稳定和重复性</h2><p>在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：</p>
+<p>1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出现乱码、数据库因为切库造成数据同步量变少等等。这就要求在整个数仓体系的搭建过程中不只要完成数据业务逻辑的处理，还需要增加数据质量的监控。“我们在核心的数据处理流程中，增加数据质量监控代码，如果碰到数据量的突变或者核心指标的突变，会将数据处理流程暂停并预警，让数据运维人员处理数据质量问题后再进行后续数据流程的运行，保障有质量问题的数据不流到下游应用中。”</p>
+<p>2.数据产出稳定性保障：随着数据量的增加、计算资源的逐渐饱和，业务数据最终产出的时间开始延迟，并有可能不能按照业务要求的时间点产出。“这个时候我们会分析数据产出的关键路径，找出关键路径下消耗时间最多的运行JOB，通过数据模型优化、计算任务拆解或者计算任务代码优化的手段减少任务产出的时间，同时保障整体产出时间满足预期。”</p>
+<p>3.重复的数据处理代码：由于业务的特殊性，会对某种类型的数据加工操作需求非常多。比如计算交易中,TOP N的商家、TOP N 的品牌、TOP N的商品，商家中TOP N的商品、品牌中TOP N的商家等等。 这类代码都是非常类似的，如果每个计算都独立任务，会造成计算资源的大量浪费。“我们通过特殊的代码框架，让一份基础数据中多种TOPN的数据可以在一次计算过程中产出，大大减少资源消耗，保障数据产出稳定。”</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/25/企业大数据平台下数仓建设思路/#more" rel="contents">
@@ -577,20 +577,18 @@
       
         
           
-           使用 Hexo 插件插入音乐/视频用于播放视频和音乐的的hexo插件：
-hexo-tag-aplayer：https://github.com/grzhan/hexo-tag-aplayer
-hexo-tag-dplayer： https://github.com/NextMoe/hexo-tag-dplayer
-播放音乐的aplayer在cmd页面内，使用npm安装：npm install hexo-tag-aplayer
-在markdown内添加以下代码：
-1&#123;% aplayer "她的睫毛" "周杰伦" "http://home.ustc.edu.cn/~mmmwhy/%d6
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/25/dplayer-test/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <script src="/assets/js/DPlayer.min.js"> </script><h1 id="使用-Hexo-插件插入音乐-视频"><a href="#使用-Hexo-插件插入音乐-视频" class="headerlink" title="使用 Hexo 插件插入音乐/视频"></a>使用 Hexo 插件插入音乐/视频</h1><p>用于播放视频和音乐的的hexo插件：</p>
+<p><strong>hexo-tag-aplayer：<a href="https://github.com/grzhan/hexo-tag-aplayer" target="_blank" rel="external">https://github.com/grzhan/hexo-tag-aplayer</a></strong></p>
+<p><strong>hexo-tag-dplayer： <a href="https://github.com/NextMoe/hexo-tag-dplayer" target="_blank" rel="external">https://github.com/NextMoe/hexo-tag-dplayer</a></strong></p>
+<h2 id="播放音乐的aplayer"><a href="#播放音乐的aplayer" class="headerlink" title="播放音乐的aplayer"></a>播放音乐的aplayer</h2><p>在cmd页面内，使用npm安装：<br><code>npm install hexo-tag-aplayer</code></p>
+<p>在markdown内添加以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer "她的睫毛" "周杰伦" "http://home.ustc.edu.cn/~mmmwhy/%d6%dc%bd%dc%c2%d7%20-%20%cb%fd%b5%c4%bd%de%c3%ab.mp3"  "http://home.ustc.edu.cn/~mmmwhy/jay.jpg" "autoplay=false" %&#125;</div></pre></td></tr></table></figure>
+<h2 id="播放视频的dplayer"><a href="#播放视频的dplayer" class="headerlink" title="播放视频的dplayer"></a>播放视频的dplayer</h2><p>在cmd页面内，使用npm安装：<br><code>npm install hexo-tag-dplayer</code></p>
+<p>在markdown内添加以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% dplayer &quot;url=http://home.ustc.edu.cn/~mmmwhy/GEM.mp4&quot;  &quot;pic=http://home.ustc.edu.cn/~mmmwhy/GEM.jpg&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
+<div id="dplayer7" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer7 = new DPlayer({"element":document.getElementById("dplayer7"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
+
+          
         
       
     </div>
@@ -751,14 +749,13 @@ hexo-tag-dplayer： https://github.com/NextMoe/hexo-tag-dplayer
 
       
         
-          
-           
-转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
-
-背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
-在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。
-首先，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复
-          ...
+          <blockquote>
+<p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
+</blockquote>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
+<p>在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。</p>
+<p><strong>首先</strong>，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复沟通，在沟通过程中参与的人越多，信息衰减也就越厉害。再加上排期的等待，最终的结果一方面可能与初衷有所偏差，另一方面时间一长也失去了对热点关注度，分析变得非常滞后，不能及时的反应线上业务并加以改进。</p>
+<p><strong>其次</strong>，对于有分析能力的业务侧同学，没有趁手的工具就导致即使有能力准备撩袖子大干一场了也发现巧妇难为无米之炊，大家只能感慨大数据的门槛太高了，又回到了第一点的长时间等待的恶性循环里去了。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/24/Apache Kylin在唯品会大数据的应用/#more" rel="contents">
@@ -926,25 +923,84 @@ hexo-tag-dplayer： https://github.com/NextMoe/hexo-tag-dplayer
 
       
         
-          
-           
-
-
-
-
-
-
-
-
-
-
-
-
-EasyHadoop 让你的Hadoop应用飞起来!EasyHadoop集群部署入门目录
-EasyHadoop集群部署入门文档……………………………………………………………………………………………………………………………………………………………………….. 2
-目录……………………………………………………………………………………………………………………………………………………………………………………………………………………….. 2
-1. 文档概述………………………………………………………………………………………………………………………………………………………………
-          ...
+          <table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="EasyHadoop-让你的Hadoop应用飞起来"><a href="#EasyHadoop-让你的Hadoop应用飞起来" class="headerlink" title="EasyHadoop 让你的Hadoop应用飞起来!"></a>EasyHadoop 让你的Hadoop应用飞起来!</h1><h1 id=""><a href="#" class="headerlink" title=""></a><img src="file://localhost/Users/xialinsheng/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image004.png" alt="img"></h1><h1 id="EasyHadoop集群部署入门"><a href="#EasyHadoop集群部署入门" class="headerlink" title="EasyHadoop集群部署入门"></a><a href="undefined">EasyHadoop</a>集群部署入门</h1><p><a href="undefined">目录</a></p>
+<p><a href="#_Toc17781">EasyHadoop集群部署入门文档……………………………………………………………………………………………………………………………………………………………………….. 2</a></p>
+<p><a href="#_Toc20988">目录……………………………………………………………………………………………………………………………………………………………………………………………………………………….. 2</a></p>
+<p><a href="#_Toc4660">1. 文档概述……………………………………………………………………………………………………………………………………………………………………………………………….. 3</a></p>
+<p><a href="#_Toc2456">2. 背景………………………………………………………………………………………………………………………………………………………………………………………………………… 3</a></p>
+<p><a href="#_Toc32501">3. 名词解释……………………………………………………………………………………………………………………………………………………………………………………………….. 4</a></p>
+<p><a href="#_Toc16693">4. 服务器结构…………………………………………………………………………………………………………………………………………………………………………………………… 4</a></p>
+<p><a href="#_Toc13472">#Hadoop试验集群的部署结构……………………………………………………………………………………………………………………………………………………… 4</a></p>
+<p><a href="#_Toc2122">#系统和组建的依赖关系……………………………………………………………………………………………………………………………………………………………….. 5</a></p>
+<p><a href="#_Toc11834">#生产环境的部署结构……………………………………………………………………………………………………………………………………………………………………. 6</a></p>
+<p><a href="#_Toc6542">5. Red hat Linux基础环境搭建…………………………………………………………………………………………………………………………………………………………………. 6</a></p>
+<p><a href="#_Toc16475">#linux 安装 (vm虚拟机)………………………………………………………………………………………………………………………………………………………………… 6</a></p>
+<p><a href="#_Toc20745">#配置机器时间同步………………………………………………………………………………………………………………………………………………………………………… 6</a></p>
+<p><a href="#_Toc4466">#配置机器网络环境………………………………………………………………………………………………………………………………………………………………………… 7</a></p>
+<p><a href="#_Toc13264">#配置集群hosts列表…………………………………………………………………………………………………………………………………………………………………….. 10</a></p>
+<p><a href="#_Toc12566">#下载并安装 JAVA JDK系统软件……………………………………………………………………………………………………………………………………………….. 10</a></p>
+<p><a href="#_Toc7823">#生成登陆密钥………………………………………………………………………………………………………………………………………………………………………………. 11</a></p>
+<p><a href="#_Toc12023">#创建用户账号和Hadoop部署目录和数据目录…………………………………………………………………………………………………………………… 11</a></p>
+<p><a href="#_Toc6460">#检查基础环境………………………………………………………………………………………………………………………………………………………………………………. 12</a></p>
+<p><a href="#_Toc22052">6. Hadoop 单机系统 安装配置…………………………………………………………………………………………………………………………………………………………… 13</a></p>
+<p><a href="#_Toc440">#Hadoop 文件下载和解压…………………………………………………………………………………………………………………………………………………………… 13</a></p>
+<p><a href="#_Toc6086">#配置 hadoop-env.sh 环境变量………………………………………………………………………………………………………………………………………………….. 13</a></p>
+<p><a href="#_Toc3113">#Hadoop Common组件 配置core-site.xml………………………………………………………………………………………………………………………………… 13</a></p>
+<p><a href="#_Toc18568">#HDFS NameNode,DataNode组建配置hdfs-site.xml…………………………………………………………………………………………………………………… 14</a></p>
+<p><a href="#_Toc20292">#配置MapReduce - JobTracker TaskTracker 启动配置………………………………………………………………………………………………………………… 15</a></p>
+<p><a href="#_Toc11828">#Hadoop单机系统,启动执行和异常检查………………………………………………………………………………………………………………………………… 17</a></p>
+<p><a href="#_Toc1006">#通过界面查看集群部署部署成功…………………………………………………………………………………………………………………………………………… 18</a></p>
+<p><a href="#_Toc1875">#通过执行 Hadoop pi 运行样例检查集群是否成功…………………………………………………………………………………………………………….. 19</a></p>
+<p><a href="#_Toc6872">#安装部署 常见错误……………………………………………………………………………………………………………………………………………………………………. 20</a></p>
+<p><a href="#_Toc17628">7. Hadoop 集群系统 配置安装配置………………………………………………………………………………………………………………………………………………….. 20</a></p>
+<p><a href="#_Toc8194">#检查node节点linux 基础环境是否正常,参考 [ linux 基础环境搭建]一节。…………………………………………………………….. 20</a></p>
+<p><a href="#_Toc11821">#配置从master 机器到 node 节点无密钥登陆…………………………………………………………………………………………………………………….. 20</a></p>
+<p><a href="#_Toc25415">#检查master到每个node节点在hadoop用户下使用密钥登陆是否正常………………………………………………………………………. 21</a></p>
+<p><a href="#_Toc10716">#配置master 集群服务器地址 stop-all.sh start-all.sh 的时候调用……………………………………………………………………………………….. 21</a></p>
+<p><a href="#_Toc22114">#通过界面查看集群部署部署成功…………………………………………………………………………………………………………………………………………… 22</a></p>
+<p><a href="#_Toc31281">#通过执行 Hadoop pi 运行样例检查集群是否成功…………………………………………………………………………………………………………….. 24</a></p>
+<p><a href="#_Toc21520">8. 自动化安装脚本………………………………………………………………………………………………………………………………………………………………………………… 25</a></p>
+<p><a href="#_Toc29249">#master 服务器自动安装脚本…………………………………………………………………………………………………………………………………………………….. 25</a></p>
+<p><a href="#_Toc24883">Hive仓库集群部署入门文档…………………………………………………………………………………………………………………………………………………………………………. 27</a></p>
+<p><a href="#_Toc4350">1. 名词解释……………………………………………………………………………………………………………………………………………………………………………………………… 27</a></p>
+<p><a href="#_Toc16424">2. Hive的作用和原理说明…………………………………………………………………………………………………………………………………………………………………….. 27</a></p>
+<p><a href="#_Toc6591">#数据仓库结构图………………………………………………………………………………………………………………………………………………………………………….. 27</a></p>
+<p><a href="#_Toc12201">#Hive仓库流程图…………………………………………………………………………………………………………………………………………………………………………… 27</a></p>
+<p><a href="#_Toc15882">#hive内部结构图……………………………………………………………………………………………………………………………………………………………………………. 27</a></p>
+<p><a href="#_Toc14841">3. Hive 部署和安装…………………………………………………………………………………………………………………………………………………………………………………. 27</a></p>
+<p><a href="#_Toc19110">#安装Hadoop集群,看EasyHadoop安装文档。……………………………………………………………………………………………………………………….. 27</a></p>
+<p><a href="#_Toc24103">#安装Mysql,启动Mysql,检查gc++包。………………………………………………………………………………………………………………………………………. 27</a></p>
+<p><a href="#_Toc6714">#解压Hive包并配置JDBC连接地址。……………………………………………………………………………………………………………………………………… 27</a></p>
+<p><a href="#_Toc27818">#启动Hive thrift Server。………………………………………………………………………………………………………………………………………………………………… 27</a></p>
+<p><a href="#_Toc25105">#启动内置的Hive UI。………………………………………………………………………………………………………………………………………………………………….. 27</a></p>
+<p><a href="#_Toc31144">4. Hive Cli 的基本用法……………………………………………………………………………………………………………………………………………………………………………. 28</a></p>
+<p><a href="#_Toc20912">#登陆查询……………………………………………………………………………………………………………………………………………………………………………………….. 28</a></p>
+<p><a href="#_Toc6817">#查询文件方式………………………………………………………………………………………………………………………………………………………………………………. 28</a></p>
+<p><a href="#_Toc1120">#命令行模式…………………………………………………………………………………………………………………………………………………………………………………… 28</a></p>
+<p><a href="#_Toc4701">5. HQL基本语法 (创建表,加载表,分析查询,删除表)……………………………………………………………………………………………………………………… 28</a></p>
+<p><a href="#_Toc31717">#创建表……………………………………………………………………………………………………………………………………………………………………………………………. 28</a></p>
+<p><a href="#_Toc25926">6. 使用Mysql构建简单数据集市……………………………………………………………………………………………………………………………………………………….. 29</a></p>
+<p><a href="#_Toc21993">#Mysql的两种引擎介绍……………………………………………………………………………………………………………………………………………………………….. 29</a></p>
+<p><a href="#_Toc24983">#创建一个数据表使用Hive cli 进行数据分析………………………………………………………………………………………………………………………… 29</a></p>
+<p><a href="#_Toc14839">#使用shell 编写Hsql 并使用HiveCli导出数据,使用Mysql命令加载到数据库中。……………………………………………………… 29</a></p>
+<p><a href="#_Toc16906">#使用crontab 新增每日运行任务定时器……………………………………………………………………………………………………………………………….. 29</a></p>
+<p><a href="#_Toc11243">7. 使用FineReport 数据展现数据………………………………………………………………………………………………………………………………………………………. 29</a></p>
+<p><a href="#_Toc1768">#安装FineReport,使用注册码!……………………………………………………………………………………………………………………………………………………… 29</a></p>
+<p><a href="#_Toc3908">#使用FineReport,快速展现数据报表。…………………………………………………………………………………………………………………………………….. 29</a></p>
+<p><a href="#_Toc16553">#FineReport 的问题和局限…………………………………………………………………………………………………………………………………………………………… 29</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/21/EasyHadoop集群部署入门/#more" rel="contents">
@@ -1112,58 +1168,55 @@ EasyHadoop集群部署入门文档………………………………………�
 
       
         
-          
-              在这里我们选用4台机器进行示范，各台机器的职责如下表格所示
-
-
-
-
-hadoop0
-hadoop1
-hadoop2
-hadoop3
-
-
-
-
-是NameNode吗?
-是，属集群cluster1
-是，属集群cluster1
-是，属集群cluster2
-是，属集群cluster2
-
-
-是DataNode吗？
-否
-是
-是
-是
-
-
-是JournalNode吗？
-是
-是
-是
-否
-
-
-是ZooKeeper吗？
-是
-是
-是
-否
-
-
-是ZKFC吗?
-是
-是
-是
-是
-
-
-
-1.     搭建自动HA1.1.    复制编译后的hadoop项目到/usr/local目录下1.2.    修改位于etc/ha
-          ...
+          <p>   在这里我们选用4台机器进行示范，各台机器的职责如下表格所示</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>hadoop0</th>
+<th>hadoop1</th>
+<th>hadoop2</th>
+<th>hadoop3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是NameNode吗?</td>
+<td>是，属集群cluster1</td>
+<td>是，属集群cluster1</td>
+<td>是，属集群cluster2</td>
+<td>是，属集群cluster2</td>
+</tr>
+<tr>
+<td>是DataNode吗？</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>是JournalNode吗？</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是ZooKeeper吗？</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是ZKFC吗?</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/20/Hadoop-HA配置/#more" rel="contents">
@@ -1331,12 +1384,10 @@ hadoop3
 
       
         
-          
-           讲师｜赵健博
-编辑｜尚剑
-大家好！我是赵健博，来自58赶集，今天给大家分享一下58大数据这块的经验。我先做个自我介绍，我本科和研究生分别是在北京邮电大学和中国科学院计算技术研究所先后毕业的，之前在百度和360工作，现在是58赶集高级架构师、58大数据平台负责人。我有多年的分布式系统（存储、计算）的实践和研发经验，在我工作的这些年中运营了大大小小的集群，最大单集群也达到了四五千台，在这个过程中做了大量的功能研发、系统优化，当然也淌了大量的坑，今天会给大家介绍一些我认为比较重要的。
-接下来我会跟大家分享一下58大数据平台在最近一年半的时间内技术演进的过程。主要内容分为三方面：58大数据平台目前的
-          ...
+          <p>讲师｜赵健博</p>
+<p>编辑｜尚剑</p>
+<p>大家好！我是赵健博，来自58赶集，今天给大家分享一下58大数据这块的经验。我先做个自我介绍，我本科和研究生分别是在北京邮电大学和中国科学院计算技术研究所先后毕业的，之前在百度和360工作，现在是58赶集高级架构师、58大数据平台负责人。我有多年的分布式系统（存储、计算）的实践和研发经验，在我工作的这些年中运营了大大小小的集群，最大单集群也达到了四五千台，在这个过程中做了大量的功能研发、系统优化，当然也淌了大量的坑，今天会给大家介绍一些我认为比较重要的。</p>
+<p>接下来我会跟大家分享一下58大数据平台在最近一年半的时间内技术演进的过程。主要内容分为三方面：58大数据平台目前的整体架构是怎么样的；最近一年半的时间内我们面临的问题、挑战以及技术演进过程；以及未来的规划。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/13/兼顾稳定和性能，58大数据平台的技术演进与实践/#more" rel="contents">
@@ -1504,46 +1555,7 @@ hadoop3
 
       
         
-          
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Good Luck!
-
-          
+          <h1 id=""><a href="#" class="headerlink" title=""></a><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3ly1fddnlrez7aj20m10v6wid.jpg" alt="1"></h1>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/07/Alibaba代码规范/#more" rel="contents">
@@ -1711,10 +1723,10 @@ Good Luck!
 
       
         
-          
-           前言编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。
-眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>编者按：本文是酷狗音乐的架构师王劲对酷狗大数据架构重构的总结。酷狗音乐的大数据架构本身很经典，而这篇讲解了对原来的架构上进行重构的工作内容，总共分为重构的原因、新一代的大数据技术架构、踩过的坑、后续持续改进四个部分来给大家谈酷狗音乐大数据平台重构的过程。</p>
+<p>眨眼就新的一年了，时间过的真快，趁这段时间一直在写总结的机会，也总结下上一年的工作经验，避免重复踩坑。酷狗音乐大数据平台重构整整经历了一年时间，大头的行为流水数据迁移到新平台稳定运行，在这过程中填过坑，挖过坑，为后续业务的实时计算需求打下了很好的基础。在此感谢酷狗团队成员的不懈努力，大部分从开始只知道大数据这个概念，到现在成为团队的技术支柱，感到很欣慰。</p>
+<p>从重构原因，技术架构，踩过的坑，后续持续改进四个方面来描述酷狗音乐大数据平台重构的过程，在此抛砖引玉，这次的内容与6月份在高可用架构群分享的大数据技术实践的有点不同，技术架构做了些调整。</p>
+<p>其实大数据平台是一个庞大的系统工程，整个建设周期很长，涉及的生态链很长(包括：数据采集、接入，清洗、存储计算、数据挖掘，可视化等环节，每个环节都可以当做一个复杂的系统来建设)，风险也很大。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/02/21/经典大数据架构案例：酷狗音乐的大数据平台重构/#more" rel="contents">
@@ -1883,34 +1895,35 @@ Good Luck!
       
         
           
-           介绍CAD制图软件pojie方式。
-步骤点我看看原博
-破解
-运行破解包中的AutoCAD_2017_English_Win_64bit_dlm_001_002.sfx.exe进行解压安装Autodesk 2017.
+            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>CAD制图软件pojie方式。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p><a href="https://www.rkdot.com/autodesk-autocad-2017/" target="_blank" rel="external">点我看看原博</a></p>
+<h5 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h5><ol>
+<li><p>运行破解包中的AutoCAD_2017_English_Win_64bit_dlm_001_002.sfx.exe进行解压安装Autodesk 2017.</p>
+</li>
+<li><p>安装完重启</p>
+</li>
+<li><p>运行Autodesk 2017</p>
+</li>
+<li><p>提示注册，选择“Enter a Serial Number”</p>
+</li>
+<li><p>使用一下序列号：</p>
+<pre><code>666-69696969, 667-98989898, 400-45454545或者066-66666666，产品密钥为001I1
+</code></pre></li>
+<li><p>断开网络，点击Next</p>
+</li>
+<li><p>会提示需要网络连接，选择离线激活（第二个选项）</p>
+</li>
+<li><p>重点步骤：</p>
+<p>8.1 管理员身份运行注册机，点击Patch,此时会看到successfully patched；</p>
+<p>8.2 拷贝请求码（Request cod））到注册机中，然后点击Generate，生成激活码（Activation）；</p>
+<p>8.3 拷贝激活码（Activation）到软件注册窗口完成注册。</p>
+</li>
+</ol>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://pan.baidu.com/s/1c2eO9sk" target="_blank" rel="external">点我下载</a></p>
+<p>密码: yuux</p>
+<p>Good Luck!</p>
 
-安装完重启
-
-运行Autodesk 2017
-
-提示注册，选择“Enter a Serial Number”
-
-使用一下序列号：
-666-69696969, 667-98989898, 400-45454545或者066-66666666，产品密钥为001I1
-
-断开网络，点击Next
-
-会提示需要网络连接，选择离线激活（第二个选项）
-
-重点步骤：
-8.1 管理员身份运行注册机
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/26/CAD破解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1957,7 +1970,7 @@ Good Luck!
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/05/22/linux防火墙开启特定端口访问/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/03/19/大数据工作手册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -1976,7 +1989,7 @@ Good Luck!
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/22/linux防火墙开启特定端口访问/" itemprop="url">linux防火墙开启特定端口访问</a></h1>
+                <a class="post-title-link" href="/2016/03/19/大数据工作手册/" itemprop="url">大数据工作手册</a></h1>
         
 
         <div class="post-meta">
@@ -1988,8 +2001,8 @@ Good Luck!
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-22T14:56:40+08:00">
-                2016-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-19T23:58:06+08:00">
+                2016-03-19
               </time>
             
 
@@ -2011,8 +2024,8 @@ Good Luck!
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
                   </a>
                 </span>
 
@@ -2029,9 +2042,9 @@ Good Luck!
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/05/22/linux防火墙开启特定端口访问/#comments" itemprop="discussionUrl">
+                <a href="/2016/03/19/大数据工作手册/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/05/22/linux防火墙开启特定端口访问/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2016/03/19/大数据工作手册/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2039,7 +2052,7 @@ Good Luck!
 
           
           
-             <span id="/2016/05/22/linux防火墙开启特定端口访问/" class="leancloud_visitors" data-flag-title="linux防火墙开启特定端口访问">
+             <span id="/2016/03/19/大数据工作手册/" class="leancloud_visitors" data-flag-title="大数据工作手册">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2072,20 +2085,9 @@ Good Luck!
       
         
           
-           linux开启和关闭端口外网访问的两种方式：
-1、命令方式：
-12/sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT #开启3306端口/sbin/iptables -A INPUT -p tcp --dport 3306 -j DROP #关闭端口
-修改完时记得保存并重启服务
-123/etc/rc.d/init.d/iptables save #保存配置 /etc/rc.d/init.d/iptables restart #重启服务 netstat -anp|grep 3306    #查看端口是否已经开放
-2、编辑iptables文
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/05/22/linux防火墙开启特定端口访问/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <script src="/assets/js/DPlayer.min.js"> </script><a id="more"></a>
+<iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="http://download.csdn.net/source/preview/8465531/57fae6e13e16ef0f230f464b839a55bb"></iframe>
+          
         
       
     </div>
@@ -2173,7 +2175,7 @@ Good Luck!
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2184,7 +2186,7 @@ Good Luck!
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2195,7 +2197,7 @@ Good Luck!
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

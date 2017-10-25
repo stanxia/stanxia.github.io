@@ -86,7 +86,7 @@
 转载自：https://yq.aliyun.com/articles/67020
 
 数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
-1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志">
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="企业大数据平台下数仓建设思路">
 <meta property="og:url" content="https://stanxia.github.io/2017/04/25/企业大数据平台下数仓建设思路/index.html">
@@ -96,7 +96,7 @@
 转载自：https://yq.aliyun.com/articles/67020
 
 数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
-1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志">
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
 <meta property="og:image" content="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png">
 <meta property="og:image" content="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png">
 <meta property="og:image" content="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png">
@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://yqfile.alicdn.com/ab2e7bf1bb5321ca33fdbc9b62065466a9b10030.png">
 <meta property="og:image" content="https://yqfile.alicdn.com/6202ca10ff3850da8a077bdacf2351b15400be2f.png">
 <meta property="og:image" content="https://yqfile.alicdn.com/4c17dbdcc180832226b19ed8181e87be01bc3e6e.png">
-<meta property="og:updated_time" content="2017-05-29T10:15:02.000Z">
+<meta property="og:updated_time" content="2017-10-25T15:03:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="企业大数据平台下数仓建设思路">
 <meta name="twitter:description" content="大牛解读
@@ -129,7 +129,7 @@
 转载自：https://yq.aliyun.com/articles/67020
 
 数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
-1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志">
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
 <meta name="twitter:image" content="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png">
 
 
@@ -451,6 +451,7 @@
 <p>1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出现乱码、数据库因为切库造成数据同步量变少等等。这就要求在整个数仓体系的搭建过程中不只要完成数据业务逻辑的处理，还需要增加数据质量的监控。“我们在核心的数据处理流程中，增加数据质量监控代码，如果碰到数据量的突变或者核心指标的突变，会将数据处理流程暂停并预警，让数据运维人员处理数据质量问题后再进行后续数据流程的运行，保障有质量问题的数据不流到下游应用中。”</p>
 <p>2.数据产出稳定性保障：随着数据量的增加、计算资源的逐渐饱和，业务数据最终产出的时间开始延迟，并有可能不能按照业务要求的时间点产出。“这个时候我们会分析数据产出的关键路径，找出关键路径下消耗时间最多的运行JOB，通过数据模型优化、计算任务拆解或者计算任务代码优化的手段减少任务产出的时间，同时保障整体产出时间满足预期。”</p>
 <p>3.重复的数据处理代码：由于业务的特殊性，会对某种类型的数据加工操作需求非常多。比如计算交易中,TOP N的商家、TOP N 的品牌、TOP N的商品，商家中TOP N的商品、品牌中TOP N的商家等等。 这类代码都是非常类似的，如果每个计算都独立任务，会造成计算资源的大量浪费。“我们通过特殊的代码框架，让一份基础数据中多种TOPN的数据可以在一次计算过程中产出，大大减少资源消耗，保障数据产出稳定。”</p>
+<a id="more"></a>
 <h2 id="优秀数仓的三要素：清晰、保障和扩展性好"><a href="#优秀数仓的三要素：清晰、保障和扩展性好" class="headerlink" title="优秀数仓的三要素：清晰、保障和扩展性好"></a>优秀数仓的三要素：清晰、保障和扩展性好</h2><p>介然认为，优秀的数据仓库应该包含以下要素：</p>
 <p>1.结构、分层清晰：不一定需要多少个分层和主题，但是一定要清晰。用数据的人能够很快找到需要数据的位置。</p>
 <p>2.数据质量和产出时间有保障；</p>
@@ -620,7 +621,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +632,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -642,7 +643,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
