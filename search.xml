@@ -6,9 +6,9 @@
     <entry>
       <title><![CDATA[Music Queen]]></title>
       <url>https://stanxia.github.io/2019/12/26/Music%20Queen/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E.png"}});</script>
-<blockquote>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote>
 <p>不脆弱 不沉默 不协妥 不退缩     一路逆风 我们不投降</p>
+<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E.png"}});</script>
 <p>不慌张 不绝望 不狂妄 不投降     一路逆风 顽强的飞翔</p>
 </blockquote>
 <a id="more"></a>
