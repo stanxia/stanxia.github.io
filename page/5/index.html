@@ -402,12 +402,17 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>利用flume1.7抓取数据，传入到kafka</p>
-<h2 id="配置文件设置"><a href="#配置文件设置" class="headerlink" title="配置文件设置"></a>配置文件设置</h2><p>在flume/conf/新建一个 kafka.conf,修改该文件,相关配置如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">vi flume/conf/kafka.conf</div><div class="line">#agent1表示代理名称</div><div class="line">agent1.sources=source1</div><div class="line">agent1.channels=channel1</div><div class="line">agent1.sinks=sink1</div><div class="line">#Spooling Directory是监控指定文件夹中新文件的变化，一旦新文件出现，就解析该文件内容，然后</div><div class="line">写入到channle。写入完成后，标记该文件已完成或者删除该文件。</div><div class="line">#配置source</div><div class="line">#数据来源类型 spooldir表示 文件夹 ，command</div><div class="line">agent1.sources.source1.type=spooldir</div><div class="line">#指定监控的目录</div><div class="line">agent1.sources.source1.spoolDir=/home/hadoop/logs</div><div class="line">agent1.sources.source1.channels=channel1</div><div class="line">agent1.sources.source1.fileHeader=false</div><div class="line">agent1.sources.source1.interceptors=i1</div><div class="line">agent1.sources.source1.interceptors.i1.type=timestamp</div><div class="line">#配置channel1</div><div class="line">agent1.channels.channel1.type=file</div><div class="line">#channel数据存放的备份目录</div><div class="line">agent1.channels.channel1.checkpointDir=/home/hadoop/channel_data.backup</div><div class="line">#channel数据存放目录</div><div class="line">agent1.channels.channel1.dataDir=/home/hadoop/channel_data</div><div class="line">#配置sink1</div><div class="line">agent1.sinks.sink1.type = org.apache.flume.sink.kafka.KafkaSink</div><div class="line">#新版本开始使用如下配置：</div><div class="line">agent1.sinks.sink1.kafka.bootstrap.servers=monsterxls:9092,slave1xls:9092,slave2xls:9092</div><div class="line">#agent1.sinks.sink1.partition.key=0</div><div class="line">#agent1.sinks.sink1.partitioner.class=org.apache.flume.plugins.SinglePartition</div><div class="line">agent1.sinks.sink1.serializer.class=kafka.serializer.StringEncoder</div><div class="line">agent1.sinks.sink1.max.message.size=1000000</div><div class="line">agent1.sinks.sink1.producer.type=sync</div><div class="line">agent1.sinks.sink1.custom.encoding=UTF-8</div><div class="line">#新版本使用如下配置：</div><div class="line">agent1.sinks.sink1.topic=stanxls</div><div class="line">agent1.sinks.sink1.channel=channel1</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>注意版本的问题。新版本改动了很多，在配置之前多看下帮助文档，了解下各种属性。</p>
-
-          
+           简介利用flume1.7抓取数据，传入到kafka
+配置文件设置在flume/conf/新建一个 kafka.conf,修改该文件,相关配置如下：
+1234567891011121314151617181920212223242526272829303132333435vi flume/conf/kafka.conf#agent1表示代理名称agent1.sources=source1agent1.channels=channel1agent1.sinks=sink1#Spooling Directory是监控指定文件夹中新文件的变化，一旦新文件出现，就解析该文件内容，然后写入到channl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/20/flume1-7结合kafka0-9-0-1相关配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -569,34 +574,28 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="yarn三种调度机制"><a href="#yarn三种调度机制" class="headerlink" title="yarn三种调度机制"></a>yarn三种调度机制</h2><ol>
-<li><p>FIFO Scheduler先进先出调度机制</p>
-</li>
-<li><p>Fair Scheduler公平调度机制</p>
-</li>
-<li><p>Capacity Scheduler容量机制</p>
-</li>
-</ol>
-<h2 id="FIFO-Scheduler"><a href="#FIFO-Scheduler" class="headerlink" title="FIFO Scheduler"></a>FIFO Scheduler</h2><p>按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。</p>
-<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。</p>
-<p>面对以上缺点，yarn提出了另两种策略，更加适合共享集群。</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsouzgzg1j20q80eqabe.jpg" alt="3"></p>
-<h2 id="Capacity-Scheduler"><a href="#Capacity-Scheduler" class="headerlink" title="Capacity Scheduler"></a>Capacity Scheduler</h2><p>定位：多人共享调度器。</p>
-<p>机制：为每人分配一个队列，每个队列占用集群固定的资源，每个队列占用的资源可以不同，每个队列内部还是按照FIFO的策略。</p>
-<p>特性：queue elasticity （弹性队列）根据实际情况分配资源</p>
-<p>Capacity Scheduler 的队列时支持层级关系的：</p>
-<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7b1tkj216m068mxf.jpg" alt="capacity1"></p>
-<p>相关配置如下：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsoa7u5psj20vy13m44h.jpg" alt="capacity2"></p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouw6wsej20p60g8401.jpg" alt="1"></p>
-<h5 id="队列设置"><a href="#队列设置" class="headerlink" title="队列设置"></a>队列设置</h5><p>如果是mapreduce任务，通过 <code>mapreduce.job.queuename</code>来设置执行队列。</p>
-<h2 id="Fair-Scheduler"><a href="#Fair-Scheduler" class="headerlink" title="Fair Scheduler"></a>Fair Scheduler</h2><p>机制：为每一个任务均匀分配资源，一个任务就可以用整个集群资源，两个任务就平分集群资源，依次类推。</p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fcsouwra8hj20og0ekjsr.jpg" alt="2"></p>
-<h5 id="开启Fair-Scheduler"><a href="#开启Fair-Scheduler" class="headerlink" title="开启Fair Scheduler"></a>开启Fair Scheduler</h5><p>在<strong>yarn-site.xml</strong>中设置 <code>yarn.resourcemanager.scheduler.class</code>为<code>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</code> 。NOTE:CDH默认的就是Faire Scheduler ，CDH并不支持 Capacity Scheduler.</p>
-<h5 id="队列设置-1"><a href="#队列设置-1" class="headerlink" title="队列设置"></a>队列设置</h5><p>设置fair-scheduler.xml文件，可参考下图：</p>
-<p><img src="http://wx2.sinaimg.cn/mw1024/6aae3cf3gy1fcsortg5yjj215c0litcz.jpg" alt="fair"></p>
+           yarn三种调度机制
+FIFO Scheduler先进先出调度机制
 
-          
+Fair Scheduler公平调度机制
+
+Capacity Scheduler容量机制
+
+
+FIFO Scheduler按照先进先出的调度机制，所有的application将按照提交的顺序来执行，这些application都放在一个队列里面，顺序执行，执行完一个之后，才会执行下一个。
+缺点：如果任务耗时长，后面提交的任务会一直处于等待状态，影响效率。所以只适合单人跑任务。
+面对以上缺点，yarn提出了另两种策略，更加适合共享集群。
+
+Capacity Scheduler定位：多人共享调度器。
+机制：为每人分配一个队列，每
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/16/yarn三种调度规则/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -758,160 +757,18 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="初识kafka"><a href="#初识kafka" class="headerlink" title="初识kafka"></a>初识kafka</h2><p>kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。</p>
-<p>Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
-<h2 id="为什么用kafka"><a href="#为什么用kafka" class="headerlink" title="为什么用kafka"></a>为什么用kafka</h2><p>一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。</p>
-<p>下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。</p>
-<h2 id="kafka名词解释"><a href="#kafka名词解释" class="headerlink" title="kafka名词解释"></a>kafka名词解释</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">名词</th>
-<th style="text-align:center">解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">broker</td>
-<td style="text-align:center">消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。</td>
-</tr>
-<tr>
-<td style="text-align:center">topic</td>
-<td style="text-align:center">一类消息，例如page view日志、click日志等都可以以topic的形式存在，Kafka集群能够同时负责多个topic的分发。</td>
-</tr>
-<tr>
-<td style="text-align:center">partition</td>
-<td style="text-align:center">topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队列。</td>
-</tr>
-<tr>
-<td style="text-align:center">segment</td>
-<td style="text-align:center">partition物理上由多个segment组成，下面有详细解释</td>
-</tr>
-</tbody>
-</table>
-<h2 id="kafka分析步骤"><a href="#kafka分析步骤" class="headerlink" title="kafka分析步骤"></a>kafka分析步骤</h2><ol>
-<li>topic中partition存储分布</li>
-<li>partiton中文件存储方式</li>
-<li>partiton中segment文件存储结构</li>
-<li>在partition中如何通过offset查找message</li>
-</ol>
-<h2 id="topic中partition存储分布详解"><a href="#topic中partition存储分布详解" class="headerlink" title="topic中partition存储分布详解"></a>topic中partition存储分布详解</h2><p>假设实验环境中Kafka集群只有一个broker，xxx/message-folder为数据文件存储根目录，在Kafka broker中server.properties文件配置(参数log.dirs=xxx/message-folder)，例如创建2个topic名称分别为report_push、launch_info, partitions数量都为partitions=4</p>
-<p>存储路径和目录规则为：</p>
-<p>xxx/message-folder</p>
-<p>|–report_push-0</p>
-<p>|–report_push-1</p>
-<p>|–report_push-2</p>
-<p>|–report_push-3</p>
-<p>|–launch_info-0</p>
-<p>|–launch_info-1</p>
-<p>|–launch_info-2</p>
-<p>|–launch_info-3</p>
-<p>在Kafka文件存储中，同一个topic下有多个不同partition，每个partition为一个目录，partiton命名规则为topic名称+有序序号，第一个partiton序号从0开始，序号最大值为partitions数量减1。</p>
-<h2 id="partiton中文件存储方式"><a href="#partiton中文件存储方式" class="headerlink" title="partiton中文件存储方式"></a>partiton中文件存储方式</h2><p><img src="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275349891.png" alt="img1"></p>
-<p>  <del>图1</del></p>
-<p>每个partion(目录)相当于一个巨型文件被平均分配到多个大小相等segment(段)数据文件中。但每个段segment file消息数量不一定相等，这种特性方便old segment file快速被删除。</p>
-<p>每个partiton只需要支持顺序读写就行了，segment文件生命周期由服务端配置参数决定。</p>
-<p>这样做的好处就是能快速删除无用文件，有效提高磁盘利用率。</p>
-<h2 id="partiton中segment文件存储结构"><a href="#partiton中segment文件存储结构" class="headerlink" title="partiton中segment文件存储结构"></a>partiton中segment文件存储结构</h2><p>segment file组成：由2大部分组成，分别为index file和data file，此2个文件一一对应，成对出现，后缀”.index”和“.log”分别表示为segment索引文件、数据文件.</p>
-<p>segment文件命名规则：partion全局的第一个segment从0开始，后续每个segment文件名为上一个segment文件最后一条消息的offset值。数值最大为64位long大小，19位数字字符长度，没有数字用0填充。</p>
-<p>下面文件列表是笔者在Kafka broker上做的一个实验，创建一个topicXXX包含1 partition，设置每个segment大小为500MB,并启动producer向Kafka broker写入大量数据,如下图2所示segment文件列表形象说明了上述2个规则：</p>
-<p><img src="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275118393.png" alt="img2"></p>
-<p><del>图2</del></p>
-<p>上图中对segment file文件为例，说明segment中index&lt;—-&gt;data file对应关系物理结构如下：</p>
-<p><img src="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275129022.png" alt="img3"></p>
-<p><del>图3</del></p>
-<p>上图中索引文件存储大量元数据，数据文件存储大量消息，索引文件中元数据指向对应数据文件中message的物理偏移地址。</p>
-<p>其中以索引文件中元数据3,497为例，依次在数据文件中表示第3个message(在全局partiton表示第368772个message)、以及该消息的物理偏移地址为497。</p>
-<p>从上图了解到segment data file由许多message组成，下面详细说明message物理结构如下：</p>
-<p><img src="http://www.111cn.net/get_pic/php/upload/image/20151031/1446305275773410.png" alt="img4"></p>
-<p><del>图4</del></p>
-<p>参数说明：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">8 byte  offset</td>
-<td style="text-align:center">在parition(分区)内的每条消息都有一个有序的id号，这个id号被称为偏移(offset),它可以唯一确定每条消息, 在parition(分区)内的位置。即offset表示partiion的第多少message</td>
-</tr>
-<tr>
-<td style="text-align:center">4 byte   message  size</td>
-<td style="text-align:center">message大小</td>
-</tr>
-<tr>
-<td style="text-align:center">4 byte   CRC32</td>
-<td style="text-align:center">用crc32校验message</td>
-</tr>
-<tr>
-<td style="text-align:center">1 byte   “magic”</td>
-<td style="text-align:center">表示本次发布Kafka服务程序协议版本号</td>
-</tr>
-<tr>
-<td style="text-align:center">1 byte    “attributes”</td>
-<td style="text-align:center">表示为独立版本、或标识压缩类型、或编码类型。</td>
-</tr>
-<tr>
-<td style="text-align:center">4 byte key  length</td>
-<td style="text-align:center">表示key的长度,当key为-1时，K byte key字段不填</td>
-</tr>
-<tr>
-<td style="text-align:center">K byte key</td>
-<td style="text-align:center">可选</td>
-</tr>
-<tr>
-<td style="text-align:center">value bytes   payload</td>
-<td style="text-align:center">表示实际消息数据。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="在partition中如何通过offset查找message"><a href="#在partition中如何通过offset查找message" class="headerlink" title="在partition中如何通过offset查找message"></a>在partition中如何通过offset查找message</h2><p>例如读取offset=368776的message，需要通过下面2个步骤查找。</p>
-<p>第一步查找segment file：</p>
-<p>上述图2为例，其中00000000000000000000.index表示最开始的文件，起始偏移量(offset)为0.第二个文件00000000000000368769.index的消息量起始偏移量为368770 = 368769 + 1.同样，第三个文件00000000000000737337.index的起始偏移量为737338=737337 + 1，其他后续文件依次类推，以起始偏移量命名并排序这些文件，只要根据offset <strong>二分查找</strong>文件列表，就可以快速定位到具体文件。</p>
-<p>当offset=368776时定位到00000000000000368769.index|log</p>
-<p>第二步通过segment file查找message：</p>
-<p>通过第一步定位到segment file，当offset=368776时，依次定位到00000000000000368769.index的元数据物理位置和 00000000000000368769.log的物理偏移地址，然后再通过00000000000000368769.log顺序查找直到 offset=368776为止。</p>
-<p>从上述图3可知这样做的优点，segment index file采取稀疏索引存储方式，它减少索引文件大小，通过mmap可以直接内存操作，稀疏索引为数据文件的每个对应message设置一个元数据指针,它比稠密索引节省了更多的存储空间，但查找起来需要消耗更多的时间。</p>
-<h2 id="Kafka文件存储机制-实际运行效果"><a href="#Kafka文件存储机制-实际运行效果" class="headerlink" title="Kafka文件存储机制?实际运行效果"></a>Kafka文件存储机制?实际运行效果</h2><p>Kafka运行时很少有大量读磁盘的操作，主要是定期批量写磁盘操作，因此操作磁盘很高效。这跟Kafka文件存储中读写message的设计是息息相关的。Kafka中读写message有如下特点:</p>
-<h5 id="写message"><a href="#写message" class="headerlink" title="写message"></a>写message</h5><p>消息从java堆转入page cache(即物理内存)。</p>
-<p>由异步线程刷盘,消息从page cache刷入磁盘。</p>
-<h5 id="读message"><a href="#读message" class="headerlink" title="读message"></a>读message</h5><p>消息直接从page cache转入socket发送出去。</p>
-<p>当从page cache没有找到相应数据时，此时会产生磁盘IO,从磁盘Load消息到page cache,然后直接从socket发出去。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h5 id="Kafka高效文件存储设计特点"><a href="#Kafka高效文件存储设计特点" class="headerlink" title="Kafka高效文件存储设计特点"></a>Kafka高效文件存储设计特点</h5><p>Kafka把topic中一个parition大文件分成多个小文件段，通过多个小文件段，就容易定期清除或删除已经消费完文件，减少磁盘占用。</p>
-<p>通过索引信息可以快速定位message和确定response的最大大小。</p>
-<p>通过index元数据全部映射到memory，可以避免segment file的IO磁盘操作。</p>
-<p>通过索引文件稀疏存储，可以大幅降低index文件元数据占用空间大小。</p>
-<h5 id="kafka中的partition和offset-log机制"><a href="#kafka中的partition和offset-log机制" class="headerlink" title="kafka中的partition和offset,log机制"></a>kafka中的partition和offset,log机制</h5><p><img src="http://www.111cn.net/get_pic/2015/10/31/20151031233153426.jpg" alt="img5"></p>
-<p><del>图5 分区读写日志</del></p>
-<p>首先,kafka是通过log(日志)来记录消息发布的.每当产生一个消息,kafka会记录到本地的log文件中,这个log和我们平时的log有一定的区别.</p>
-<p>这个log文件默认的位置在config/server.properties中指定的.默认的位置是log.dirs=/tmp/kafka-logs</p>
-<h5 id="分区partition"><a href="#分区partition" class="headerlink" title="分区partition"></a>分区partition</h5><p>kafka是为分布式环境设计的,因此如果日志文件,其实也可以理解成消息<a href="http://www.111cn.net/database/database.html" target="_blank" rel="external">数据库</a>,放在同一个地方,那么必然会带来可用性的下降,一挂全挂,如果全量拷贝到所有的机器上,那么数据又存在过多的冗余,而且由于每台机器的磁盘大小是有限的,所以即使有再多的机器,可处理的消息还是被磁盘所限制,无法超越当前磁盘大小.因此有了partition的概念.</p>
-<p>kafka对消息进行一定的计算,通过hash来进行分区.这样,就把一份log文件分成了多份.如上面的分区读写日志图,分成多份以后,在单台broker上,比如快速上手中,如果新建topic的时候,我们选择了–replication-factor 1 –partitions 2,那么在log目录里,我们会看到：</p>
-<p>test-0目录和test-1目录.就是两个分区了.</p>
-<p><img src="http://www.111cn.net/get_pic/2015/10/31/20151031233155850.jpg" alt="img6"></p>
-<p><del>图6 kafka分布式分区存储</del></p>
-<p>这是一个topic包含4个Partition，2 Replication(拷贝),也就是说全部的消息被放在了4个分区存储,为了高可用,将4个分区做了2份冗余,然后根据分配算法.将总共8份数据,分配到broker集群上.</p>
-<p>结果就是每个broker上存储的数据比全量数据要少,但每份数据都有冗余,这样,一旦一台机器宕机,并不影响使用.比如图中的Broker1,宕机了.那么剩下的三台broker依然保留了全量的分区数据.所以还能使用,如果再宕机一台,那么数据不完整了.当然你可以设置更多的冗余,比如设置了冗余是4,那么每台机器就有了0123完整的数据,宕机几台都行.需要在存储占用和高可用之间做衡量.</p>
-<p>宕机后,zookeeper会选出新的partition leader.来提供服务.</p>
-<h5 id="偏移offset"><a href="#偏移offset" class="headerlink" title="偏移offset"></a>偏移offset</h5><p>上面说了分区，分区是一个有序的,不可变的消息队列.新来的commit log持续往后面加数据.这些消息被分配了一个下标(或者偏移),就是offset,用来定位这一条消息.</p>
-<p>消费者消费到了哪条消息,是保持在消费者这一端的.消息者也可以控制,消费者可以在本地保存最后消息的offset,并间歇性的向zookeeper注册offset.也可以重置offset.</p>
-<h5 id="如何通过offset算出分区"><a href="#如何通过offset算出分区" class="headerlink" title="如何通过offset算出分区"></a>如何通过offset算出分区</h5><p>partition存储的时候,又分成了多个segment(段),然后通过一个index,索引,来标识第几段.</p>
-<p>在磁盘中，每个topic目录下面会有两个文件 index和log.</p>
-<p><img src="http://www.111cn.net/get_pic/2015/10/31/20151031233158914.jpg" alt="img7"></p>
-<p><del>图7 index文件和log文件</del></p>
-<p>对于某个指定的分区,假设每5个消息,作为一个段大小,当产生了10条消息的情况下,目前有会得到：</p>
-<p>0.index (表示这里index是对0-4做的索引)</p>
-<p>5.index (表示这里index是对5-9做的索引)</p>
-<p>10.index (表示这里index是对10-15做的索引,目前还没满)</p>
-<p>和log文件</p>
-<p>0.log</p>
-<p>5.log</p>
-<p>10.log</p>
-<p>,当消费者需要读取offset=8的时候,首先kafka对index文件列表进行<u>二分查找</u>,可以算出.应该是在5.index对应的log文件中,然后对对应的5.log文件,进行顺序查找,5-&gt;6-&gt;7-&gt;8,直到顺序找到8就好了.</p>
-
-          
+           初识kafkakafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作是在现代网络上的许多社会功能的一个关键因素。
+Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。
+为什么用kafka一个商业化消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。
+下面将从Kafka文件存储机
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/15/Kafka文件存储机制及partition和offset/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1073,149 +930,34 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一：前提"><a href="#一：前提" class="headerlink" title="一：前提"></a>一：前提</h2><ol>
-<li>准备MYSQL JDBC驱动</li>
-<li>本机已经安装了JDK</li>
-<li>基于自己已有的HADOOP集群进行操作</li>
-<li>在开启HIve之前，开启HDFS + YARN+ntpd时间同步</li>
-</ol>
-<h2 id="二：HIVE下载"><a href="#二：HIVE下载" class="headerlink" title="二：HIVE下载"></a>二：HIVE下载</h2><ol>
-<li>HIVE的安装包下载</li>
-</ol>
-<p><code>wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz</code></p>
-<ol>
-<li>然后解压</li>
-</ol>
-<p><code>tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/</code></p>
-<p><code>cd /opt/</code></p>
-<p><code>mv apache-hive-1.2.1-bin hive</code></p>
-<ol>
-<li>配置环境变量</li>
-</ol>
-<p><code>vi /etc/profile</code></p>
-<p>添加以下内容：</p>
-<p><code>HIVE_HOME=/opt/hive</code></p>
-<p><code>export PATH=$PATH:$HIVE_HOME/bin</code></p>
-<p>文件生效：</p>
-<p><code>source /etc/profile</code></p>
-<p>最好 ROOT用户与 <strong>HADOOP用户</strong>都执行一次</p>
-<h2 id="三：安装依赖包"><a href="#三：安装依赖包" class="headerlink" title="三：安装依赖包"></a>三：安装依赖包</h2><ol>
-<li>安装nettools</li>
-</ol>
-<p><code>yum -y install net-tools</code></p>
-<ol>
-<li>安装perl</li>
-</ol>
-<p><code>yum install -y perl-Module-Install.noarch</code></p>
-<h2 id="四：MySQL安装与配置"><a href="#四：MySQL安装与配置" class="headerlink" title="四：MySQL安装与配置"></a>四：MySQL安装与配置</h2><ol>
-<li><h5 id="安装MYSQL"><a href="#安装MYSQL" class="headerlink" title="安装MYSQL"></a>安装MYSQL</h5></li>
-</ol>
-<ul>
-<li><p>查看是否已经安装MYSQL执行命令如下：</p>
-<p><code>rpm -qa | grep mariadb</code></p>
-</li>
-<li><p>如果存在 执行卸载:</p>
-<p> <code>yum remove mariadb-libs</code>  然后 <code>yum remove mariadb</code></p>
-</li>
-<li><p>安装MYSQL  简易版需要安装 unzip工具 </p>
-<p><code>yum -y install unzip</code></p>
-</li>
-<li><p>下载mysql并解压，建议下载rpm包：</p>
-<p>点击<a href="http://www.mysql.com/downloads" target="_blank" rel="external">MySQL 下载</a></p>
-<p>解压下载的zip：</p>
-<p><code>unzip **.zip</code></p>
-<p>进入到解压的MYSQL目录，安装rpm包：</p>
-<p><code>rpm –ivh **.rpm</code></p>
-</li>
-</ul>
-<ol>
-<li><h5 id="配置MYSQL"><a href="#配置MYSQL" class="headerlink" title="配置MYSQL"></a>配置MYSQL</h5></li>
-</ol>
-<ul>
-<li><p>修改配置文件路径：cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
-</li>
-<li><p>在配置文件中增加以下配置并保存：</p>
-<p><code>vim /etc/my.cnf</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">default-storage-engine = innodb</div><div class="line"></div><div class="line">innodb_file_per_table</div><div class="line"></div><div class="line">collation-server = utf8_general_ci</div><div class="line"></div><div class="line">init-connect = 'SET NAMES utf8'</div><div class="line"></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li><p>初始化数据库执行：</p>
-<p><code>/usr/bin/mysql_install_db</code></p>
-</li>
-<li><p>开启MYSQL服务：</p>
-<p><code>service mysql restart</code></p>
-</li>
-<li><p>查看mysql root初始化密码：</p>
-<p><code>cat /root/.mysql_secret</code></p>
-</li>
-<li><p>登陆mysql ：</p>
-<p> <code>mysql -u root –p</code> </p>
-<ul>
-<li>复制root的初始密码</li>
-</ul>
-<p>（MYSQL下执行）<code>SET PASSWORD=PASSWORD(&#39;123456&#39;);</code></p>
-<ul>
-<li><p>创建HIVE用户，HIVE数据库</p>
-<p><code>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</code></p>
-<p><code>use mysql;</code></p>
-<p><code>grant all privileges on *.* to hive@&quot;%&quot; identified by &quot;hive&quot; with grant option;</code></p>
-<p><code>flush privileges;</code></p>
-<p>最好添加如下代码（否则可能会有乱码产生）：</p>
-<p><code>alter database hive CHARACTER SET latin1</code></p>
-</li>
-</ul>
-</li>
-<li><p>（LINUX下执行）开启开机启动：</p>
-<p><code>chkconfig mysql on</code></p>
-</li>
-<li><p>（LINUX下执行）拷贝mysql驱动包到 hive/lib目录下面,否则hive不能连接上mysql：</p>
-<p><code>cp mysql-connector-java-5.1.34-bin.jar /opt/hive/lib</code></p>
-</li>
-</ol>
-<h2 id="五：解决冲突包"><a href="#五：解决冲突包" class="headerlink" title="五：解决冲突包"></a>五：解决冲突包</h2><p>查看<em>hadoop目录/share/hadoop/yarn/lib</em>和<em>hive目录/lib</em>，检查jlinexxxx.jar 的版本，将低版本的替换为另一边高版本的。</p>
-<p>例如：/opt/Hadoop/share/Hadoop/yarn/lib下的jline为jline 2.xx，而/opt/hive/lib/jiline为jline 0.xxx版本，则将</p>
-<p>/opt/Hadoop/share/Hadoop/yarn/lib下的jline 2.xx包复制到/opt/hive/lib/下面，并且删除/opt/hive/lib/jline 0.xxx包。</p>
-<p><code>ls /opt/hadoop/share/hadoop/yarn/lib</code> </p>
-<p><code>ls /opt/hive/lib/</code> </p>
-<h2 id="六：-修改配置文件"><a href="#六：-修改配置文件" class="headerlink" title="六： 修改配置文件"></a>六： 修改配置文件</h2><p>进入到hive的配置文件目录下，找到hive-default.xml.template，cp为hive-default.xml</p>
-<p><code>cd /opt/hive/conf/</code></p>
-<p><code>cp hive-default.xml.template hive-default.xml</code></p>
-<p>另创建hive-site.xml并添加参数</p>
-<p><code>vi hive-site.xml</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0"?&gt;</div><div class="line"></div><div class="line">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/user/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>location of default database for the warehouse<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.querylog.location<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hivelog<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">      Location of Hive run time structured log file</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive-$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Scratch space for Hive jobs<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://monsterxls:3306/hive?createDatabaseIfNotExist=true&amp; useUnicode=true&amp;characterEncoding=utf-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>复制 hive-env.sh.template文件为 hive-env.sh</p>
-<p><code>cp hive-env.sh.template hive-env.sh</code></p>
-<p>主要修改以下三行</p>
-<p><code>vi hive-env.sh</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HADOOP_HOME=/opt/hadoop</div><div class="line"></div><div class="line">export HIVE_CONF_DIR=/opt/hive/conf</div><div class="line"></div><div class="line">export HIVE_AUX_JARS_PATH=/opt/hive/lib</div></pre></td></tr></table></figure>
-<h2 id="七：-Hive启动"><a href="#七：-Hive启动" class="headerlink" title="七： Hive启动"></a>七： Hive启动</h2><ol>
-<li><p>启动命令如下</p>
-<p><code>hive --service metastore &amp;</code></p>
-</li>
-<li><p>查看启动后，进程是否存在</p>
-<p><code>jps</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">10288 RunJar  #多了一个进程</div><div class="line"></div><div class="line">9365 NameNode</div><div class="line"></div><div class="line">9670 SecondaryNameNode</div><div class="line"></div><div class="line">11096 Jps</div><div class="line"></div><div class="line">9944 NodeManager</div><div class="line"></div><div class="line">9838 ResourceManager</div><div class="line"></div><div class="line">9471 DataNode</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="八：Hive服务器端访问"><a href="#八：Hive服务器端访问" class="headerlink" title="八：Hive服务器端访问"></a>八：Hive服务器端访问</h2><p>直接在命令控制台输入：</p>
-<p><code>hive</code> </p>
-<p>即可进入hive的控制台界面</p>
-<p>进行一些简单的操作查看hive是否安装成功：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">hive&gt; show databases;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">default</div><div class="line"></div><div class="line">Time taken: <span class="number">1.332</span> seconds, Fetched: <span class="number">2</span> row(s)</div><div class="line"></div><div class="line">hive&gt; use default;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.037</span> seconds</div><div class="line"></div><div class="line">hive&gt; create table test1(id int);</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">Time taken: <span class="number">0.572</span> seconds</div><div class="line"></div><div class="line">hive&gt; show tables;</div><div class="line"></div><div class="line">OK</div><div class="line"></div><div class="line">test1</div><div class="line"></div><div class="line">Time taken: <span class="number">0.057</span> seconds, Fetched: <span class="number">3</span> row(s)</div><div class="line"></div><div class="line">hive&gt;</div></pre></td></tr></table></figure>
-<p>创建表 testload  字段包含 id1,id2,id3，以逗号分割：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; CREATE TABLE testload (id1 STRING,id2 STRING,id3 STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;,&apos;;</div></pre></td></tr></table></figure>
-<p> 使用 Hiveload进入testload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; LOAD DATA LOCAL INPATH &apos;目标文件&apos; OVERWRITE INTO TABLE  testload;</div></pre></td></tr></table></figure>
-<p>测试能否执行mapreduce任务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive&gt; SELECT count(*) FROM testload;</div></pre></td></tr></table></figure>
-<h2 id="结束语："><a href="#结束语：" class="headerlink" title="结束语："></a>结束语：</h2><ol>
-<li>安装集群需要耐心以及细心，否则前面错一步后面会很难找到错误的来源。</li>
-<li>出现错误请看日志，一般都会在日志中找到问题的原因。</li>
-</ol>
-<p>GOOD LUCK!!</p>
+           一：前提
+准备MYSQL JDBC驱动
+本机已经安装了JDK
+基于自己已有的HADOOP集群进行操作
+在开启HIve之前，开启HDFS + YARN+ntpd时间同步
 
-          
+二：HIVE下载
+HIVE的安装包下载
+
+wget http://mirrors.cnnic.cn/apache/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
+
+然后解压
+
+tar -zxvf apache-hive-1.2.1-bin.tar.gz -C /opt/
+cd /opt/
+mv apache-hive-1.2.1-bin hive
+
+配置环境变量
+
+vi /etc/p
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/15/Hadoop原生集群添加hive组件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1377,15 +1119,22 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><p>ntp同步时间过长</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 /etc/ntp.conf</p>
-<p>主节点配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">server ntp7.aliyun.com iburst</div><div class="line">restrict ntp7.aliyun.com nomodify notrap noquery</div></pre></td></tr></table></figure>
-<p>从节点配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">restrict hadoop1(主机名) nomodify notrap noquery</div><div class="line">server hadoop1(主机名) iburst</div></pre></td></tr></table></figure>
-<h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><p>ntp时间同步之后，显示非中国时区</p>
-<h1 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div></pre></td></tr></table></figure>
+           问题1ntp同步时间过长
+解决方案修改 /etc/ntp.conf
+主节点配置：
+12server ntp7.aliyun.com iburstrestrict ntp7.aliyun.com nomodify notrap noquery
+从节点配置：
+12restrict hadoop1(主机名) nomodify notrap noqueryserver hadoop1(主机名) iburst
+问题2ntp时间同步之后，显示非中国时区
+解决方案1cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/14/完善ntp时间同步/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1547,11 +1296,18 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>启动zookeeper时，出现以下异常信息：</p>
-<p><img src="http://wx1.sinaimg.cn/mw1024/6aae3cf3gy1fcsp95necuj21ji0jidla.jpg" alt="1"></p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>修改 ／zookeeper/conf/zoo.cfg文件<br>修改服务器id和ip映射时注意格式为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi /zookeeper/conf/zoo.cfg</div><div class="line">server.1=host:port:port或者host:port或者host:port:port:type</div></pre></td></tr></table></figure></p>
+           问题启动zookeeper时，出现以下异常信息：
+
+解决方案修改 ／zookeeper/conf/zoo.cfg文件修改服务器id和ip映射时注意格式为：12vi /zookeeper/conf/zoo.cfgserver.1=host:port:port或者host:port或者host:port:port:type
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/14/zookeeper启动时数组越界异常/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1713,266 +1469,37 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h1 id="server-properties参数说明"><a href="#server-properties参数说明" class="headerlink" title="server.properties参数说明"></a>server.properties参数说明</h1><table>
-<thead>
-<tr>
-<th style="text-align:right">参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right">broker.id=0</td>
-<td>每一个broker在集群中的唯一表示，要求是正数。当该服务器的IP地址发生改变时，broker.id没有变化，则不会影响consumers的消息情况</td>
-</tr>
-<tr>
-<td style="text-align:right">log.dirs=/data/kafka-logs</td>
-<td>kafka数据的存放地址，多个地址的话用逗号分割,多个目录分布在不同磁盘上可以提高读写性能  /data/kafka-logs-1，/data/kafka-logs-2</td>
-</tr>
-<tr>
-<td style="text-align:right">port =9092</td>
-<td>broker server服务端口</td>
-</tr>
-<tr>
-<td style="text-align:right">message.max.bytes =6525000</td>
-<td>表示消息体的最大大小，单位是字节</td>
-</tr>
-<tr>
-<td style="text-align:right">num.network.threads =4</td>
-<td>broker处理消息的最大线程数，一般情况下数量为cpu核数</td>
-</tr>
-<tr>
-<td style="text-align:right">num.io.threads =8</td>
-<td>broker处理磁盘IO的线程数，数值为cpu核数2倍</td>
-</tr>
-<tr>
-<td style="text-align:right">background.threads =4</td>
-<td>一些后台任务处理的线程数，例如过期消息文件的删除等，一般情况下不需要去做修改</td>
-</tr>
-<tr>
-<td style="text-align:right">queued.max.requests =500</td>
-<td>等待IO线程处理的请求队列最大数，若是等待IO的请求超过这个数值，那么会停止接受外部消息，应该是一种自我保护机制。</td>
-</tr>
-<tr>
-<td style="text-align:right">host.name</td>
-<td>broker的主机地址，若是设置了，那么会绑定到这个地址上，若是没有，会绑定到所有的接口上，并将其中之一发送到ZK</td>
-</tr>
-<tr>
-<td style="text-align:right">socket.send.buffer.bytes=100*1024</td>
-<td>socket的发送缓冲区，socket的调优参数SO_SNDBUFF</td>
-</tr>
-<tr>
-<td style="text-align:right">socket.receive.buffer.bytes =100*1024</td>
-<td>socket的接受缓冲区，socket的调优参数SO_RCVBUFF</td>
-</tr>
-<tr>
-<td style="text-align:right">socket.request.max.bytes =100<em>1024</em>1024</td>
-<td>socket请求的最大数值，防止serverOOM，message.max.bytes必然要小于socket.request.max.bytes，会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.segment.bytes =1024<em>1024</em>1024</td>
-<td>topic的分区是以一堆segment文件存储的，这个控制每个segment的大小，会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.roll.hours =24*7</td>
-<td>这个参数会在日志segment没有达到log.segment.bytes设置的大小，也会强制新建一个segment会被 topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleanup.policy = delete</td>
-<td>日志清理策略选择有：delete和compact主要针对过期数据的处理，或是日志文件达到限制的额度，会被 topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.retention.bytes=-1</td>
-<td>topic每个分区的最大文件大小，一个topic的大小限制 = 分区数*log.retention.bytes。-1没有大小限log.retention.bytes和log.retention.minutes任意一个达到要求，都会执行删除，会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.retention.check.interval.ms=5minutes</td>
-<td>文件大小检查的周期时间，是否处罚 log.cleanup.policy中设置的策略</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.enable=<strong>false</strong></td>
-<td>是否开启日志清理</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.threads = 2</td>
-<td>日志清理运行的线程数</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.io.max.bytes.per.second=None</td>
-<td>日志清理时候处理的最大大小</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.dedupe.buffer.size=500<em>1024</em>1024</td>
-<td>日志清理去重时候的缓存空间，在空间允许的情况下，越大越好</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.io.buffer.size=512*1024</td>
-<td>日志清理时候用到的IO块大小一般不需要修改</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.io.buffer.load.factor =0.9</td>
-<td>日志清理中hash表的扩大因子一般不需要修改</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.backoff.ms =15000</td>
-<td>检查是否处罚日志清理的间隔</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.min.cleanable.ratio=0.5</td>
-<td>日志清理的频率控制，越大意味着更高效的清理，同时会存在一些空间上的浪费，会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.cleaner.delete.retention.ms =1day</td>
-<td>对于压缩的日志保留的最长时间，也是客户端消费消息的最长时间，同log.retention.minutes的区别在于一个控制未压缩数据，一个控制压缩后的数据。会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.index.size.max.bytes =10<em>1024</em>1024</td>
-<td>对于segment日志的索引文件大小限制，会被topic创建时的指定参数覆盖</td>
-</tr>
-<tr>
-<td style="text-align:right">log.index.interval.bytes =4096</td>
-<td>当执行一个fetch操作后，需要一定的空间来扫描最近的offset大小，设置越大，代表扫描速度越快，但是也更好内存，一般情况下不需要搭理这个参数</td>
-</tr>
-<tr>
-<td style="text-align:right">log.flush.interval.messages=None</td>
-<td>log文件”sync”到磁盘之前累积的消息条数,因为磁盘IO操作是一个慢操作,但又是一个”数据可靠性”的必要手段,所以此参数的设置,需要在<strong>“**</strong>数据可靠性<strong>**”</strong>与”性能”之间做必要的权衡.如果此值过大,将会导致每次”fsync”的时间较长(IO阻塞),如果此值过小,将会导致<strong>“fsync”</strong>的次数较多,这也意味着整体的client请求有一定的延迟.物理server故障,将会导致没有fsync的消息丢失.</td>
-</tr>
-<tr>
-<td style="text-align:right">log.flush.scheduler.interval.ms =3000</td>
-<td>检查是否需要固化到硬盘的时间间隔</td>
-</tr>
-<tr>
-<td style="text-align:right">log.flush.interval.ms = None</td>
-<td>仅仅通过interval来控制消息的磁盘写入时机,是不足的.此参数用于控制<strong>“fsync”</strong>的时间间隔,如果消息量始终没有达到阀值,但是离上一次磁盘同步的时间间隔达到阀值,也将触发.</td>
-</tr>
-<tr>
-<td style="text-align:right">log.delete.delay.ms =60000</td>
-<td>文件在索引中清除后保留的时间一般不需要去修改</td>
-</tr>
-<tr>
-<td style="text-align:right">log.flush.offset.checkpoint.interval.ms =60000</td>
-<td>控制上次固化硬盘的时间点，以便于数据恢复一般不需要去修改</td>
-</tr>
-<tr>
-<td style="text-align:right">auto.create.topics.enable =<strong>true</strong></td>
-<td>是否允许自动创建topic，若是<strong>false</strong>，就需要通过命令创建topic</td>
-</tr>
-<tr>
-<td style="text-align:right"><strong>default</strong>.replication.factor =1</td>
-<td>默认副本因子</td>
-</tr>
-<tr>
-<td style="text-align:right">num.partitions =1</td>
-<td>每个topic的分区个数，若是在topic创建时候没有指定的话会被topic创建时的指定参数覆盖</td>
-</tr>
-</tbody>
-</table>
-<h1 id="以下是Leader，replicas配置"><a href="#以下是Leader，replicas配置" class="headerlink" title="以下是Leader，replicas配置"></a>以下是Leader，replicas配置</h1><table>
-<thead>
-<tr>
-<th style="text-align:right">参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right">controller.message.queue.size=10</td>
-<td>partition leader与replicas数据同步时,消息的队列尺寸</td>
-</tr>
-<tr>
-<td style="text-align:right">controller.socket.timeout.ms =30000</td>
-<td>partition leader与replicas之间通讯时,socket的超时时间</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.lag.time.max.ms =10000</td>
-<td>replicas响应partition leader的最长等待时间，若是超过这个时间，就将replicas列入ISR(in-sync replicas)，并认为它是死的，不会再加入管理中</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.lag.max.messages =4000</td>
-<td>如果follower落后与leader太多,将会认为此follower[或者说partition relicas]已经失效， 通常,在follower与leader通讯时,因为网络延迟或者链接断开,总会导致replicas中消息同步滞后， 如果消息之后太多,leader将认为此follower网络延迟较大或者消息吞吐能力有限,将会把此replicas迁移， 到其他follower中， 在broker数量较少,或者网络不足的环境中,建议提高此值.</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.socket.timeout.ms=30*1000</td>
-<td>follower与leader之间的socket超时时间</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.socket.receive.buffer.bytes=64*1024</td>
-<td>leader复制时候的socket缓存大小</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.fetch.max.bytes =1024*1024</td>
-<td>replicas每次获取数据的最大大小</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.fetch.wait.max.ms =500</td>
-<td>replicas同leader之间通信的最大等待时间，失败了会重试</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.fetch.min.bytes =1</td>
-<td>fetch的最小数据尺寸,如果leader中尚未同步的数据不足此值,将会阻塞,直到满足条件</td>
-</tr>
-<tr>
-<td style="text-align:right">num.replica.fetchers=1</td>
-<td>leader进行复制的线程数，增大这个数值会增加follower的IO</td>
-</tr>
-<tr>
-<td style="text-align:right">replica.high.watermark.checkpoint.interval.ms =5000</td>
-<td>每个replica检查是否将最高水位进行固化的频率</td>
-</tr>
-<tr>
-<td style="text-align:right">controlled.shutdown.enable =<strong>false</strong></td>
-<td>是否允许控制器关闭broker ,若是设置为<strong>true</strong>,会关闭所有在这个broker上的leader，并转移到其他broker</td>
-</tr>
-<tr>
-<td style="text-align:right">controlled.shutdown.max.retries =3</td>
-<td>控制器关闭的尝试次数</td>
-</tr>
-<tr>
-<td style="text-align:right">controlled.shutdown.retry.backoff.ms =5000</td>
-<td>每次关闭尝试的时间间隔</td>
-</tr>
-<tr>
-<td style="text-align:right">leader.imbalance.per.broker.percentage =10</td>
-<td>leader的不平衡比例，若是超过这个数值，会对分区进行重新的平衡</td>
-</tr>
-<tr>
-<td style="text-align:right">leader.imbalance.check.interval.seconds =300</td>
-<td>检查leader是否不平衡的时间间隔</td>
-</tr>
-<tr>
-<td style="text-align:right">offset.metadata.max.bytes</td>
-<td>客户端保留offset信息的最大空间大小</td>
-</tr>
-</tbody>
-</table>
-<h1 id="kafka中zookeeper参数配置"><a href="#kafka中zookeeper参数配置" class="headerlink" title="kafka中zookeeper参数配置"></a>kafka中zookeeper参数配置</h1><table>
-<thead>
-<tr>
-<th style="text-align:right">参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right">zookeeper.connect = localhost:2181</td>
-<td>zookeeper集群的地址，可以是多个，多个之间用逗号分割hostname1:port1,hostname2:port2,hostname3:port3</td>
-</tr>
-<tr>
-<td style="text-align:right">zookeeper.session.timeout.ms=6000</td>
-<td>ZooKeeper的最大超时时间，就是心跳的间隔，若是没有反映，那么认为已经死了，不易过大</td>
-</tr>
-<tr>
-<td style="text-align:right">zookeeper.connection.timeout.ms =6000</td>
-<td>ZooKeeper的连接超时时间</td>
-</tr>
-<tr>
-<td style="text-align:right">zookeeper.sync.time.ms =2000</td>
-<td>ZooKeeper集群中leader和follower之间的同步时间</td>
-</tr>
-</tbody>
-</table>
+           server.properties参数说明
 
-          
+
+参数
+说明
+
+
+
+
+broker.id=0
+每一个broker在集群中的唯一表示，要求是正数。当该服务器的IP地址发生改变时，broker.id没有变化，则不会影响consumers的消息情况
+
+
+log.dirs=/data/kafka-logs
+kafka数据的存放地址，多个地址的话用逗号分割,多个目录分布在不同磁盘上可以提高读写性能  /data/kafka-logs-1，/data/kafka-logs-2
+
+
+port =9092
+broker server服务端口
+
+
+message.max.bytes =6525000
+表示消息体
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/13/kafka-server-properties参数详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2134,48 +1661,27 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、安装环境"><a href="#一、安装环境" class="headerlink" title="一、安装环境"></a>一、安装环境</h2><ol>
-<li><p>多台Linux服务器</p>
-</li>
-<li><p>已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）</p>
-</li>
-<li><p>下载kafka</p>
-<p><a href="https://kafka.apache.org/downloads.html" target="_blank" rel="external">点击选择需要下载的kafka版本</a></p>
-<p>或者直接在服务器上面下载：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="二、安装kafka"><a href="#二、安装kafka" class="headerlink" title="二、安装kafka"></a>二、安装kafka</h2><h5 id="创建项目目录："><a href="#创建项目目录：" class="headerlink" title="创建项目目录："></a>创建项目目录：</h5><p>创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /opt/kafka <span class="comment">#创建kafka项目目录</span></div><div class="line">mkdir /opt/kafka/kafkalogs <span class="comment">#创建kafka项目的日志目录</span></div></pre></td></tr></table></figure>
-<h5 id="安装kafka："><a href="#安装kafka：" class="headerlink" title="安装kafka："></a>安装kafka：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar xzvf kafka-0.8.0-beta1-src.tgz -C /opt/kafka/  <span class="comment">#解压kafka到指定目录下</span></div><div class="line"><span class="built_in">cd</span> /opt/kafka/ <span class="comment">#到解压kafka的目录</span></div><div class="line">mv kafka-0.8.0-beta1-src kafka <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
-<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><h5 id="配置文件目录："><a href="#配置文件目录：" class="headerlink" title="配置文件目录："></a>配置文件目录：</h5><p>kafka的配置文件都存放在/opt/kafka/kafka/config/</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/kafka/kafka/config/ </div><div class="line">ll <span class="comment">#查看kafka所有的配置文件</span></div></pre></td></tr></table></figure>
-<h5 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a>修改配置文件：</h5><p>主要修改<em>server.properties</em>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">broker.id=0  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样</div><div class="line">port=19092 #当前kafka对外提供服务的端口默认是9092</div><div class="line">host.name=192.168.7.100 #这个参数默认是关闭的，在0.8.1有个bug，DNS解析问题，失败率的问题。</div><div class="line">num.network.threads=3 #这个是borker进行网络处理的线程数</div><div class="line">num.io.threads=8 #这个是borker进行I/O处理的线程数</div><div class="line">log.dirs=/opt/kafka/kafkalogs/ #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个</div><div class="line">socket.send.buffer.bytes=102400 #发送缓冲区buffer大小，数据不是一下子就发送的，存储到缓冲区到达一定的大小后再发送，能提高性能</div><div class="line">socket.receive.buffer.bytes=102400 #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘</div><div class="line">socket.request.max.bytes=104857600 #这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小</div><div class="line">num.partitions=1 #默认的分区数，一个topic默认1个分区数</div><div class="line">log.retention.hours=168 #默认消息的最大持久化时间，168小时，7天</div><div class="line">message.max.byte=5242880  #消息保存的最大值5M</div><div class="line">default.replication.factor=2  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务</div><div class="line">replica.fetch.max.bytes=5242880  #取消息的最大直接数</div><div class="line">log.segment.bytes=1073741824 #这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新建一个文件</div><div class="line">log.retention.check.interval.ms=300000 #每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours=168 ），到目录查看是否有过期的消息如果有，删除</div><div class="line">log.cleaner.enable=false #是否启用log压缩，一般不用启用，启用的话可以提高性能</div><div class="line">zookeeper.connect=192.168.7.100:12181,192.168.7.101:12181,192.168.7.107:1218 #设置zookeeper的连接端口，与zookeeper的zoo.cfg文件中的clientPort保持一致</div></pre></td></tr></table></figure>
-<h2 id="三、开启并使用kafka"><a href="#三、开启并使用kafka" class="headerlink" title="三、开启并使用kafka"></a>三、开启并使用kafka</h2><h5 id="开启kafka服务："><a href="#开启kafka服务：" class="headerlink" title="开启kafka服务："></a>开启kafka服务：</h5><ol>
-<li><p>首先要确保已经开启了zookeeper服务:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/zookeeper/zookeeper/bin/zkServer.sh start <span class="comment">#开启zookeeper服务</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>后台开启kafka：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties &amp; <span class="comment">#后台挂起kafka服务 nohup  &amp;</span></div><div class="line">ps -ef | grep java | grep -v grep <span class="comment">#查看当前的java进程，zookeeper与kafka都是基于java</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>kafka基本操作：</p>
-<p>创建topics</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-topics.sh --zookeeper 192.168.221.138:2181 --create --topic <span class="built_in">test</span> --replication-factor 1 --partition 1 <span class="comment">#新建主题 连接zookeeper --create 创建主题 --topic 主题名 --replication-factor 副本因子 --partitions 分为几个区</span></div></pre></td></tr></table></figure>
-<p>发消息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span> &gt;/dev/null <span class="comment">#producer发送消息  发送给broker</span></div></pre></td></tr></table></figure>
-<p>收消息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic <span class="built_in">test</span> --from-beginning 2&gt;/dev/null <span class="comment">#consumer接收消息 连接zookeeper服务器  --from-beginning 接收历史消息</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><ol>
-<li>开启kafka之前必须要开启zookeeper</li>
-<li>注意生产者连接broker 端口号默认9092；消费者连接zookeeper 端口号默认2181</li>
-<li>创建主题时，设置分区为集群服务器数的两倍或多倍，可有效避免消息发送和接收的读写热点</li>
-</ol>
-<p>Good Luck!</p>
+           一、安装环境
+多台Linux服务器
 
-          
+已经安装好zookeeper的集群（安装zookeeper的步骤可以查看前篇文章）
+
+下载kafka
+点击选择需要下载的kafka版本
+或者直接在服务器上面下载：
+1wget  http://apache.opencas.org/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz
+
+
+二、安装kafka创建项目目录：创建kafka项目目录，最好是将多有的集群项目都放在一个目录下面，方便管理各类项目。博主是将所有的集群项目都放在/opt下面。
+12mkdir /opt/kafka #创建kafka项目目录mkdir /opt/kafk
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/13/kafka安装与简单的应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2337,32 +1843,20 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h5 id="服务器准备："><a href="#服务器准备：" class="headerlink" title="服务器准备："></a>服务器准备：</h5><p>Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。</p>
-<h5 id="jdk环境："><a href="#jdk环境：" class="headerlink" title="jdk环境："></a>jdk环境：</h5><p>zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。</p>
-<h5 id="下载zookeeper："><a href="#下载zookeeper：" class="headerlink" title="下载zookeeper："></a>下载zookeeper：</h5><p><a href="http://www.apache.org/dyn/closer.cgi/zookeeper/" target="_blank" rel="external">点我下载zookeeper</a></p>
-<p>或者直接在服务器上面下载：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</div></pre></td></tr></table></figure>
-<h2 id="二、安装zookeeper"><a href="#二、安装zookeeper" class="headerlink" title="二、安装zookeeper"></a>二、安装zookeeper</h2><p>首先确定好zookeeper的目录结构，避免在项目过多的时候找不到所需的项目。</p>
-<p>在这里博主统一把所有组件都安装在/opt下的。</p>
-<h5 id="创建zookeeper-项目目录："><a href="#创建zookeeper-项目目录：" class="headerlink" title="创建zookeeper 项目目录："></a>创建zookeeper 项目目录：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -r /opt/zookeeper  <span class="comment">#创建zookeeper项目目录</span></div><div class="line">mkdir -r /opt/zookeeper/zkdata <span class="comment">#存放快照日志</span></div><div class="line">mkdir -r /opt/zookeeper/zkdatalog <span class="comment">#存放事务日志</span></div></pre></td></tr></table></figure>
-<h5 id="解压："><a href="#解压：" class="headerlink" title="解压："></a>解压：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxvf zookeeper-3.4.6.tar.gz -C /opt/zookeeper  <span class="comment">#解压到/opt/zookeeper下</span></div><div class="line">mv zookeeper-3.4.6 zookeeper <span class="comment">#重命名</span></div></pre></td></tr></table></figure>
-<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><p>zookeeper的相关配置都在zoo.cfg文件中。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/conf/ <span class="comment">#进入conf目录</span></div><div class="line">ll <span class="comment">#查看配置文件</span></div><div class="line">cp zoo_sample.cfg zoo.cfg <span class="comment">#复制并更名为zoo.cfg，zookeeper指定的命名规范为zoo.cfg</span></div></pre></td></tr></table></figure>
-<h5 id="修改zoo-cfg"><a href="#修改zoo-cfg" class="headerlink" title="修改zoo.cfg:"></a>修改zoo.cfg:</h5><p><code>vi zoo.cfg #设置如下属性：</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">tickTime=2000 <span class="comment">#用于配置zookeeper中的最小时间单元的长度。默认为3000ms，很多运行时的时间间隔都是tickTime的倍数。例如：zookeeper中会话的最小超时时间默认为2*tickTime.</span></div><div class="line">initLimit=10 <span class="comment">#默认为10，表示参数tickTime的10倍。用于配置Leader服务器等待Follower启动并完成数据同步的时间。Leader允许Follower在initLimit时间内与Leader完成连接并数据同步。</span></div><div class="line">syncLimit=5 <span class="comment">#默认5，表示参数tickTime的5倍。用于配置Leader与Follower之间心跳连接的最长延时时间。如果Leader在syncLimit时间内无法获取到Follower的心跳检测相应，则会认为该Follower已经脱离了和自己的同步。</span></div><div class="line">dataDir=/opt/zookeeper/zkdata <span class="comment">#无默认值，必须配置。用于配置存放快照文件的目录。如果没有配置参数dataLogDir属性，那么会默认把日志文件存在该目录下。所以最好设置dataLogDir参数。</span></div><div class="line">dataLogDir=/opt/zookeeper/zkdatalog <span class="comment">#zookeeper存放日志的目录。</span></div><div class="line">clientPort=2181  <span class="comment">#必须配置。用于配置该服务器对外的服务端口。客户端会通过该服务端口语zookeeper服务器创建连接，一般设置为2181。每台服务器都可以随意设置该端口号，同个集群中的每个服务器也可以设置不同的端口号。</span></div><div class="line"><span class="comment">#server.id=host:port:port 无默认值。用于配置集群中的服务器列表。id为ServerID,与myid文件中的保持一致，用于辨识这是哪一台服务器，所以必须要唯一。第一个端口用于指定Follower与Leader之间通信和数据同步的端口。第二个端口专门用于Leader选举的投票端口。</span></div><div class="line">server.1=192.168.7.100:12888:13888 </div><div class="line">server.2=192.168.7.101:12888:13888</div><div class="line">server.3=192.168.7.107:12888:13888</div></pre></td></tr></table></figure>
-<h5 id="创建myid文件："><a href="#创建myid文件：" class="headerlink" title="创建myid文件："></a>创建myid文件：</h5><p>myid文件用于存放当前服务器的ServerID，即当前服务器的唯一标识，必须唯一。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"ServerId"</span>&gt;&gt;/opt/zookeeper/zkdata/myid <span class="comment">#存放在zkdata下，ServerID必须与zoo.cfg中的id保持一致。</span></div></pre></td></tr></table></figure>
-<h2 id="四、启动zookeeper"><a href="#四、启动zookeeper" class="headerlink" title="四、启动zookeeper"></a>四、启动zookeeper</h2><h5 id="启动服务："><a href="#启动服务：" class="headerlink" title="启动服务："></a>启动服务：</h5><p>进入到zookeeper/bin目录下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /opt/zookeeper/zookeeper/bin/ <span class="comment">#进入zookeeper/bin目录下</span></div><div class="line">./zkServer.sh start <span class="comment">#启动zookeeper服务，集群所有的服务器都需要开启</span></div></pre></td></tr></table></figure>
-<h5 id="检查服务器状态："><a href="#检查服务器状态：" class="headerlink" title="检查服务器状态："></a>检查服务器状态：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./zkServer.sh status <span class="comment">#查看zookeeper服务器状态</span></div></pre></td></tr></table></figure>
-<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
-<li>注意创建zkdata与zkdatalog文件夹用于存放数据与日志。如果没有设置zkdatalog，zookeeper会默认把日志都存放在zkdata中，但是这样会严重影响zookeeper的性能。作为性能调优的地方，最好将zkdatalog设置在单独的磁盘中。</li>
-<li>注意各个端口的设置，如果不使用默认的端口，尽量设置大端口号，以免端口冲突。TCP能设置的最大端口号：65535</li>
-<li>注意设置ServerID的时候，一定要保证唯一，否则将不能识别该服务器。</li>
-</ol>
-<p>Good Luck!</p>
-
-          
+           一、环境准备服务器准备：Linxu服务器2*n+1台，最好是奇数台服务器，因为 zookeeper集群的机制是选举制度，需要超过半数才能对外提供服务。
+jdk环境：zookeeper底层是用java写的，所以需要jdk环境。jdk环境的安装在之前几篇文章中已经说过，这里就不赘述了。
+下载zookeeper：点我下载zookeeper
+或者直接在服务器上面下载：
+1wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+二、安装zookeeper首先确定好zookeeper的目录结
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/12/zookeeper集群搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2524,60 +2018,23 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><p>1.如果存在jdk：<br>卸载方式：rpm -qa | grep jdk<br>rpm -e —nodeps 加上上面返回的结构</p>
-<p>2.安装jdk：<br>rpm -ivh jdk-7u80-linux-x64.rpm </p>
-<p>3.配置hostname<br>vi /etc/sysconfig/network<br>NETWORKING=yes<br>HOSTNAME=master</p>
-<p>4.vi /etc/hostname</p>
-<p>#删除文件内容  ,然后输入<br>master</p>
-<p>5.修改host映射<br>vi /etc/hosts</p>
-<p>10.211.55.9 master</p>
-<p>#ipDress1为master服务器的IP地址</p>
-<p>6.selinux 关闭<br>vi /etc/sysconfig/selinux<br>SELINUX=disable</p>
-<p>7.重启<br>reboot</p>
-<p>8.更改防火墙<br>systemctl stop firewalld<br>systemctl disable firewalld<br>systemctl status firewalld</p>
-<p>9.安装时间同步服务<br>yum -y install ntp<br>vi /etc/ntp.conf</p>
-<p>#注释掉所有的server<em>.</em>.* 的指向 ，新添加一条可连接的ntp服务器<br>server ntp.sjtu.edu.cn iburst</p>
-<p>#启动时间同步服务<br>service ntpd start </p>
-<p>#执行命令<br>ntpdate -u 1.asia.pool.ntp.org</p>
-<p>#重启时间同步服务<br>service ntpd restart</p>
-<p>10.ssh无密码登陆配置<br>ssh-keygen -t rsa #一直使用默认</p>
-<p>11.安装mysql</p>
-<p>#查看mysql是否意境安装：<br>rpm -qa | grep mariadb </p>
-<p>#如果存在：<br>cd </p>
-<p>#安装mysql依赖：<br>yum install -y perl-Module-Install.noarch</p>
-<p>unzip <strong>.zip<br>rpm -ivh </strong>.rpm </p>
-<p>#修改配置文件目录<br>cp /usr/share/mysql/my-default.cnf /etc/my.cnf</p>
-<p>#在配置文件中增加以下配置并保存：<br>vi /etc/my.cnf<br>default-storage-engine = innodb<br>innodb_file_per_table<br>collation-server = utf8_general_ci<br>init-connect = ‘SET NAMES utf8’<br>character-set-server=utf8</p>
-<p>#初始化数据库执行：<br>/usr/bin/mysql_install_db</p>
-<p>#开启mysql服务：<br>service mysql restart</p>
-<p>#查看mysql root 初始化密码：<br>cat /root/.mysql_secret</p>
-<p>T1STjiM6A1TXQB5p</p>
-<p>#登陆mysql：<br>mysql -u root -p<br>SET PASSWORD=PASSWORD(‘123456’)#复制root的初始密码<br>mysql下面执行：<br>SET PASSWORDcd /=PASSWORD(‘123456’)</p>
-<p>#linux开启开机启动：<br>chkconfig mysql on</p>
-<p>#linux下面执行 拷贝mysql-connector-java-5.1.25-bin.jar 到/usr/share/java/mysql-connector-java.jar</p>
-<p>#创建数据库：<br>mysql<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database hue DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database monitor DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</p>
-<p>use mysql;<br>grant all on <em>.</em> to root@‘master’ Identified by ‘123456’;<br>flush privileges;</p>
-<p>12.安装cloudera-manager</p>
-<p>#解压cm tar 包到指定目录<br>mkdir /opt/cloudera-manager<br>tar -zxvf cloudier-manager-centos7-cm5.6.0_x86_64.tar.gz -C<br>/opt/cloudera-manager</p>
-<p>#创建cloudera-scm用户：<br>[root@master cloudera-manager]# useradd –system –home=/opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-server–no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
-<p>#在注解点创建cloudera-manager-server的本地元数据保存目录<br>mkdir /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /var/cloudera-scm-server<br>chown cloudera-scm:cloudera-scm /opt/cloudera-manager</p>
-<p>#配置从节点cloudera-manager-agent 指向注解点服务器<br>vi /opt/cloudera-manager/cm-5.6.0/etc/cloudera-scm-agent/config.ini</p>
-<p>#将server host改为CMS所在的主机名即master</p>
-<p>#注解点中创建parcel-repo 仓库目录：<br>mkdir -p /opt/cloudera/parcel-repo<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcel-repo<br>cp CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel  CDH-5.6.0-1.cdh5.6.0.p0.18-el7.parcel.sha   manifest.json /opt/cloudera/parcel-repo</p>
-<p>#所有节点创建parcel目录：<br>mkdir -p /opt/cloudera/parcels<br>chown cloudera-scm:cloudera-scm/opt/cloudera/parcels</p>
-<p>13.初始化脚本配置数据库：<br>/opt/cloudera-manager/cm-5.6.0/share/cmf/schema/scm_prepare_database.sh mysql -hmaster -uroot -p123456 —sim-host master scmdbn scmdbu scmdbp</p>
-<p>14.启动注解点cloudera scm server<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-server  /etc/init.d/cloudera-scm-server</p>
-<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-server</p>
-<p>将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
-<p>chkconfig cloudera-scm-server on</p>
-<p>#启动注解点cloudera scm server</p>
-<p>mkdir /opt/cloudera-manager/cm-5.6.0/run/cloudera-scm-agent<br>cp /opt/cloudera-manager/cm-5.6.0/etc/init.d/cloudera-scm-agent /etc/init.d/cloudera-scm-agent</p>
-<p>#修改变量路径：<br>vi /etc/init.d/cloudera-scm-agent</p>
-<p>#将CMF_DEFAULTS=${CMF_DEFAULTS:-/etc/default}改为=/opt/cloudera-manager/cm-5.6.0/etc/default</p>
-<p>chkconfig cloudera-scm-agent on</p>
-<p>service cloudera-scm-server start</p>
-
-          
+           1.如果存在jdk：卸载方式：rpm -qa | grep jdkrpm -e —nodeps 加上上面返回的结构
+2.安装jdk：rpm -ivh jdk-7u80-linux-x64.rpm 
+3.配置hostnamevi /etc/sysconfig/networkNETWORKING=yesHOSTNAME=master
+4.vi /etc/hostname
+#删除文件内容  ,然后输入master
+5.修改host映射vi /etc/hosts
+10.211.55.9 master
+#ipDress1为master服务器的IP地址
+6.selinux 关闭vi /etc/sysco
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/11/cdh集群搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2649,6 +2106,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="森" />
             
               <p class="site-author-name" itemprop="name">森</p>
               <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
@@ -2739,15 +2200,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
 
 
 
