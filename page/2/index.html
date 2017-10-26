@@ -266,13 +266,181 @@
 
  </div>
     </header>
-
+    
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/04/26/hive变量传递设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/26/hive变量传递设置/" itemprop="url">hive变量传递设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T21:51:57+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/26/hive变量传递设置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/26/hive变量传递设置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/26/hive变量传递设置/" class="leancloud_visitors" data-flag-title="hive变量传递设置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在oozie的workflow中执行一个hive查询，但是直接就报异常：Variable substitution depth too large:40，从网上查询可知，可以确认是由于语句中使用了过多的变量导致，在hive以前的版本中，这个限制是写死的40个，查询Hive的最新的原代码，虽然判断的位置的提示信息已经变化，但是原理一样：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/26/hive变量传递设置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -586,7 +754,7 @@
 <h2 id="播放视频的dplayer"><a href="#播放视频的dplayer" class="headerlink" title="播放视频的dplayer"></a>播放视频的dplayer</h2><p>在cmd页面内，使用npm安装：<br><code>npm install hexo-tag-dplayer</code></p>
 <p>在markdown内添加以下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% dplayer &quot;url=http://home.ustc.edu.cn/~mmmwhy/GEM.mp4&quot;  &quot;pic=http://home.ustc.edu.cn/~mmmwhy/GEM.jpg&quot; &quot;loop=yes&quot; &quot;theme=#FADFA3&quot; &quot;autoplay=false&quot; &quot;token=tokendemo&quot; %&#125;</div></pre></td></tr></table></figure>
-<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
+<div id="dplayer7" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer7 = new DPlayer({"element":document.getElementById("dplayer7"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://home.ustc.edu.cn/~mmmwhy/GEM.mp4","pic":"http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"}});</script>
 
           
         
@@ -1725,7 +1893,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/03/15/git简单操作/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/05/22/linux防火墙开启特定端口访问/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -1744,7 +1912,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/15/git简单操作/" itemprop="url">git简单操作</a></h1>
+                <a class="post-title-link" href="/2016/05/22/linux防火墙开启特定端口访问/" itemprop="url">linux防火墙开启特定端口访问</a></h1>
         
 
         <div class="post-meta">
@@ -1756,8 +1924,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-15T23:50:47+08:00">
-                2016-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-22T14:56:40+08:00">
+                2016-05-22
               </time>
             
 
@@ -1779,8 +1947,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/版本控制/" itemprop="url" rel="index">
-                    <span itemprop="name">版本控制</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -1797,9 +1965,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/03/15/git简单操作/#comments" itemprop="discussionUrl">
+                <a href="/2016/05/22/linux防火墙开启特定端口访问/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/03/15/git简单操作/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2016/05/22/linux防火墙开启特定端口访问/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1807,7 +1975,7 @@
 
           
           
-             <span id="/2016/03/15/git简单操作/" class="leancloud_visitors" data-flag-title="git简单操作">
+             <span id="/2016/05/22/linux防火墙开启特定端口访问/" class="leancloud_visitors" data-flag-title="linux防火墙开启特定端口访问">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1839,179 +2007,12 @@
 
       
         
-          <h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>Git就是一个版本控制软件。在进行软件开发时，一个团队的人靠使用Git，就能轻松管理好项目版本，做好项目的追踪和辅助进度控制。确切的讲，Git是一款分布式版本控制系统。这个“分布式”，要和“集中式”放在一起理解。</p>
-<p>所谓“集中式版本控制”，就好比这一个团队中，<strong>版本库</strong>都集中在一台服务器上，每个开发者都要从服务器上获取最新的版本库后才能进行开发，开发完了再把新的版本提交回去。</p>
+          <p>linux开启和关闭端口外网访问的两种方式：</p>
+<h3 id="命令方式："><a href="#命令方式：" class="headerlink" title="命令方式："></a>命令方式：</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT <span class="comment">#开启3306端口</span></div><div class="line">/sbin/iptables -A INPUT -p tcp --dport 3306 -j DROP <span class="comment">#关闭端口</span></div></pre></td></tr></table></figure>
+<h3 id="修改完时记得保存并重启服务"><a href="#修改完时记得保存并重启服务" class="headerlink" title="修改完时记得保存并重启服务"></a>修改完时记得保存并重启服务</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/etc/rc.d/init.d/iptables save <span class="comment">#保存配置 </span></div><div class="line">/etc/rc.d/init.d/iptables restart <span class="comment">#重启服务 </span></div><div class="line">netstat -anp|grep 3306    <span class="comment">#查看端口是否已经开放</span></div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/15/git简单操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2016/03/15/mongodb操作指南/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/15/mongodb操作指南/" itemprop="url">mongodb操作指南</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-15T23:15:33+08:00">
-                2016-03-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/15/mongodb操作指南/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/03/15/mongodb操作指南/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/03/15/mongodb操作指南/" class="leancloud_visitors" data-flag-title="mongodb操作指南">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="什么是MongoDB"><a href="#什么是MongoDB" class="headerlink" title="什么是MongoDB"></a>什么是MongoDB</h2><p>MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。<br>在高负载的情况下，添加更多的节点，可以保证服务器性能。<br>MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。<br>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/03/15/mongodb操作指南/#more" rel="contents">
+            <a class="btn" href="/2016/05/22/linux防火墙开启特定端口访问/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2103,7 +2104,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2114,7 +2115,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2125,7 +2126,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2168,7 +2169,7 @@
         
       </div>
     </main>
-
+    
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2017</span>
@@ -2219,14 +2220,14 @@
         
       </div>
     </footer>
-
+    
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
       </div>
     
-
+    
     
 
   </div>
@@ -2250,8 +2251,6 @@
   
 
 
-  
-
 
 
 
@@ -2260,9 +2259,6 @@
   
 
 
-
-  
-  
 
 
 
@@ -2300,22 +2296,12 @@
 
   
   
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/three/three.min.js"></script>
   
 
   
   
     <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
   
 
 
@@ -2827,5 +2813,9 @@
 
   
 
-</body>
-</html>
+
+<!-- 页面点击小红心 -->
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html>
