@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+<script>
+
+    (function () {
+        if ('') {
+            if (prompt('天王盖地虎') !== '') {
+                alert('识别失败！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=",,,,," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大牛解读
+
+转载自：https://yq.aliyun.com/articles/67020
+
+数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
+<meta property="og:type" content="website">
+<meta property="og:title" content="企业大数据平台下数仓建设思路">
+<meta property="og:url" content="https://stanxia.github.io/no_post/企业大数据平台下数仓建设思路.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="大牛解读
+
+转载自：https://yq.aliyun.com/articles/67020
+
+数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
+<meta property="og:image" content="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/ae9f20459c5838978a9d163767982b9e403cbd6e.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/ab1f9275d27c6cdbe39b1e9a46d746041c169e1a.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/487586d50b0fee659990f3915138c06b7fb523e6.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/8f085a4291ece66e7d1b8da28fddb4ea89825a3d.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/a45d8e4c431c951cda6690d0dbc4a48f9cad6eb3.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/2aa2cf31c8657b7e5722f40fd1921ad6bad21ff3.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/b6d3c753639d2a157f022cd84bf39990228c5a5e.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/fe10046f04fe1b57302aeaab49bb822aa0ba5b84.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/917add91d80ecc9e1cac080acac091a8d795ec83.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/caebb3f89a33489bb6250889c221556caf9e2a93.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/4d6f959ed86b8c47ae8e8b0ea3dcc800dfc92694.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/3ba23945c5ff03bdd679cb461a2f56b99baf2f94.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/42a5fd36b3020ccbed8e4f6cc1f34fdbe08ce239.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/a22871be93640b55ce022aba9648752bd1ebe73b.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/6eb136254008467abfd7401c8b81106fdc5460fd.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/7e962808351228f0e450e2c3c80f2eeffe058624.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/1ad7466dffee8b318c5aaadea9a50a7a90e424a6.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/349986d12df4c5d8e926fcc8bf6b6474a63b91a3.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/ab2e7bf1bb5321ca33fdbc9b62065466a9b10030.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/6202ca10ff3850da8a077bdacf2351b15400be2f.png">
+<meta property="og:image" content="https://yqfile.alicdn.com/4c17dbdcc180832226b19ed8181e87be01bc3e6e.png">
+<meta property="og:updated_time" content="2017-10-25T15:03:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企业大数据平台下数仓建设思路">
+<meta name="twitter:description" content="大牛解读
+
+转载自：https://yq.aliyun.com/articles/67020
+
+数仓上遇到的挑战：数据质量保障、稳定和重复性在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：
+1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出">
+<meta name="twitter:image" content="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/no_post/企业大数据平台下数仓建设思路.html"/>
+
+
+
+
+
+  <title>企业大数据平台下数仓建设思路 | 东篱下</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东篱下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">斯坦@森</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/aboutme/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">企业大数据平台下数仓建设思路</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <script src="/assets/js/DPlayer.min.js"> </script><p>大牛解读</p>
+<blockquote>
+<p>转载自：<a href="https://yq.aliyun.com/articles/67020" target="_blank" rel="external">https://yq.aliyun.com/articles/67020</a></p>
+</blockquote>
+<h2 id="数仓上遇到的挑战：数据质量保障、稳定和重复性"><a href="#数仓上遇到的挑战：数据质量保障、稳定和重复性" class="headerlink" title="数仓上遇到的挑战：数据质量保障、稳定和重复性"></a>数仓上遇到的挑战：数据质量保障、稳定和重复性</h2><p>在数据魔方、淘宝指数和阿里大数据数仓解决方案设计中，介然遇到了不少有挑战性的技术问题，主要集中在以下三点：</p>
+<p>1.数据质量保障：随着业务的复杂度增加，数据源头的类型和数据量也会越来越多，经常会碰到某些数据源因为一些偶发的原因同步过来的数据质量出现问题。比如日志出现乱码、数据库因为切库造成数据同步量变少等等。这就要求在整个数仓体系的搭建过程中不只要完成数据业务逻辑的处理，还需要增加数据质量的监控。“我们在核心的数据处理流程中，增加数据质量监控代码，如果碰到数据量的突变或者核心指标的突变，会将数据处理流程暂停并预警，让数据运维人员处理数据质量问题后再进行后续数据流程的运行，保障有质量问题的数据不流到下游应用中。”</p>
+<p>2.数据产出稳定性保障：随着数据量的增加、计算资源的逐渐饱和，业务数据最终产出的时间开始延迟，并有可能不能按照业务要求的时间点产出。“这个时候我们会分析数据产出的关键路径，找出关键路径下消耗时间最多的运行JOB，通过数据模型优化、计算任务拆解或者计算任务代码优化的手段减少任务产出的时间，同时保障整体产出时间满足预期。”</p>
+<p>3.重复的数据处理代码：由于业务的特殊性，会对某种类型的数据加工操作需求非常多。比如计算交易中,TOP N的商家、TOP N 的品牌、TOP N的商品，商家中TOP N的商品、品牌中TOP N的商家等等。 这类代码都是非常类似的，如果每个计算都独立任务，会造成计算资源的大量浪费。“我们通过特殊的代码框架，让一份基础数据中多种TOPN的数据可以在一次计算过程中产出，大大减少资源消耗，保障数据产出稳定。”</p>
+<a id="more"></a>
+<h2 id="优秀数仓的三要素：清晰、保障和扩展性好"><a href="#优秀数仓的三要素：清晰、保障和扩展性好" class="headerlink" title="优秀数仓的三要素：清晰、保障和扩展性好"></a>优秀数仓的三要素：清晰、保障和扩展性好</h2><p>介然认为，优秀的数据仓库应该包含以下要素：</p>
+<p>1.结构、分层清晰：不一定需要多少个分层和主题，但是一定要清晰。用数据的人能够很快找到需要数据的位置。</p>
+<p>2.数据质量和产出时间有保障；</p>
+<p>3.扩展性好：不会因为业务的些许变化造成模型的大面积重构。</p>
+<p>而从系统架构、数据架构两个纬度来看，要想设计好大数据应用下的数据仓库，还应做到以下两点。</p>
+<p>1.系统架构上：足够的容错性，减少不必要的系统间的强耦合。因为你会碰到各种问题，不要因为一个不必要的依赖造成数据无法产出。</p>
+<p>2.数据架构上：简单、清晰、强质量控制。数据架构上扁平化的数据处理流程会对数据质量的控制和数据产出的稳定性提供非常好的基础。</p>
+<h2 id="互联网人转型做大数据数仓需要注意哪几个点？"><a href="#互联网人转型做大数据数仓需要注意哪几个点？" class="headerlink" title="互联网人转型做大数据数仓需要注意哪几个点？"></a>互联网人转型做大数据数仓需要注意哪几个点？</h2><p>对于之前做互联网数据仓库，现在想转型做大数据仓库的人，介然也提了一些建议，主要是四点：</p>
+<p>1.不必再苛刻的精打细算：基于传统平台构建数仓时，为了照顾平台的处理能力，我们经常会构建多层数据结构，预先对不同粒度的数据做预先汇总，以方便使用者在使用数据时能够已最小的计算代价获得计算结果。这也造成了整个数据处理流程较长，步骤很多，问题追溯困难。 新的大数据仓库基于分布式计算平台，平台的计算能力通常都比传统的平台强大很多。 所以有时候需要时再计算数据，或者基于明细进行各粒度的数据汇总已经能够满足需求，并能够大大减少整体数据处理流程步骤，用计算的代价减少人工的成本，更划算，数据体系也更健壮。</p>
+<p>2.不是模型层次越多越好：在传统的数仓架构中，大家都喜欢多数据模型进行分层设计，不同的模型层次拥有不同的数据域和作用域。这样设计固然看起来更清晰，但实际情况时多层之间可能存在重复数据，或者数据使用者在上层找不到完全切合的数据时，更愿意从底层的明细数据上自己去加工。一方面造成了数据使用上的混乱，一方面也会让数据整个处理流程长度增加，对于数据的运维带来较大的成本消耗。合理的层次设计，及在计算成本和人力成本间的平衡，是一个好的数仓架构的表现。</p>
+<p>3.质量是生命线：不再是你拿到的数据都是正确的，新的环境下的数据什么情况都会发生，而好的数仓架构需要有足够的容错性和质量保障。不要因为一条日志的乱码造成整个数据流程无法走通，也不要说一份日志50%的乱码你的程序还发现不了。在数据质量上投入再多的资源都不是浪费。</p>
+<p>4.数据变成生产资料：传统的数据应用绝大部分都是以报表和BI分析的形式支持业务。也许你的报表晚出来会被老板骂一通，但是对业务的影响并不大。 但是在新的数据应用场景下，数据已经变成生产资料，数据会服务化直接应用到业务系统中，也许一份数据的质量出现问题或者产出延迟，都可能对你的业务系统产生致命的影响。所以数仓开始承担新的使命。</p>
+<p><img src="https://yqfile.alicdn.com/b179703ed70608ead1d5f1c2ee360c9944cf65fd.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/d45d71f1e7150b1db613d34bff12b325d013ffbf.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/76327d7ec53932d8c16f6d1f02b0c5026eee96d1.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/ae9f20459c5838978a9d163767982b9e403cbd6e.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/ab1f9275d27c6cdbe39b1e9a46d746041c169e1a.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/487586d50b0fee659990f3915138c06b7fb523e6.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/8f085a4291ece66e7d1b8da28fddb4ea89825a3d.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/a45d8e4c431c951cda6690d0dbc4a48f9cad6eb3.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/2aa2cf31c8657b7e5722f40fd1921ad6bad21ff3.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/b6d3c753639d2a157f022cd84bf39990228c5a5e.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/fe10046f04fe1b57302aeaab49bb822aa0ba5b84.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/917add91d80ecc9e1cac080acac091a8d795ec83.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/caebb3f89a33489bb6250889c221556caf9e2a93.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/4d6f959ed86b8c47ae8e8b0ea3dcc800dfc92694.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/3ba23945c5ff03bdd679cb461a2f56b99baf2f94.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/42a5fd36b3020ccbed8e4f6cc1f34fdbe08ce239.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/a22871be93640b55ce022aba9648752bd1ebe73b.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/6eb136254008467abfd7401c8b81106fdc5460fd.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/7e962808351228f0e450e2c3c80f2eeffe058624.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/1ad7466dffee8b318c5aaadea9a50a7a90e424a6.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/349986d12df4c5d8e926fcc8bf6b6474a63b91a3.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/ab2e7bf1bb5321ca33fdbc9b62065466a9b10030.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/6202ca10ff3850da8a077bdacf2351b15400be2f.png" alt=""></p>
+<p><img src="https://yqfile.alicdn.com/4c17dbdcc180832226b19ed8181e87be01bc3e6e.png" alt=""></p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="森" />
+            
+              <p class="site-author-name" itemprop="name">森</p>
+              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/stanxia" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="xooglexls@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ishuhui.com/cartoon/book/1" title="海贼王" target="_blank">海贼王</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ac.qq.com/Comic/comicInfo/id/541812" title="西行记" target="_blank">西行记</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/video/av2208896/" title="黑人兄弟" target="_blank">黑人兄弟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.panuso.com/" title="网盘搜索" target="_blank">网盘搜索</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://portal.qiniu.com/bucket/stanxia/resource" title="七牛云" target="_blank">七牛云</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xclient.info/?_=f49599f195e2d87e8265beb1e55f423b" title="MAC软件" target="_blank">MAC软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/caesar0301/awesome-public-datasets#finance" title="公共数据集" target="_blank">公共数据集</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数仓上遇到的挑战：数据质量保障、稳定和重复性"><span class="nav-number">1.</span> <span class="nav-text">数仓上遇到的挑战：数据质量保障、稳定和重复性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优秀数仓的三要素：清晰、保障和扩展性好"><span class="nav-number">2.</span> <span class="nav-text">优秀数仓的三要素：清晰、保障和扩展性好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网人转型做大数据数仓需要注意哪几个点？"><span class="nav-number">3.</span> <span class="nav-text">互联网人转型做大数据数仓需要注意哪几个点？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+    
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/no_post/企业大数据平台下数仓建设思路.html';
+          this.page.identifier = 'no_post/企业大数据平台下数仓建设思路.html';
+          this.page.title = '企业大数据平台下数仓建设思路';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("f8AHUn2FOKCWoFzJTLrnSt4A-gzGzoHsz", "dOlRTKgDWf3Ut87VDHex4Wks");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+<!-- 页面点击小红心 -->
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html>

@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+<script>
+
+    (function () {
+        if ('') {
+            if (prompt('天王盖地虎') !== '') {
+                alert('识别失败！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=",,,,," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Apache Kylin在唯品会大数据的应用">
+<meta property="og:url" content="https://stanxia.github.io/no_post/Apache Kylin在唯品会大数据的应用.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/11.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/12.jpg">
+<meta property="og:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/13.jpg">
+<meta property="og:updated_time" content="2017-10-25T15:06:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Kylin在唯品会大数据的应用">
+<meta name="twitter:description" content="转载自：http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data
+
+背景介绍引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。
+在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流">
+<meta name="twitter:image" content="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/no_post/Apache Kylin在唯品会大数据的应用.html"/>
+
+
+
+
+
+  <title>Apache Kylin在唯品会大数据的应用 | 东篱下</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东篱下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">斯坦@森</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/aboutme/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">Apache Kylin在唯品会大数据的应用</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <script src="/assets/js/DPlayer.min.js"> </script><blockquote>
+<p>转载自：<a href="http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data" target="_blank" rel="external">http://www.infoq.com/cn/articles/application-of-apache-kylin-in-vip-big-data</a></p>
+</blockquote>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>引子：随着传统基于RDBMS的EDW往大数据的演进的过程中，Batch可处理的数据量越来越大，时间越来越快，但是Ad-hoc的响应速度却始终是大数据的瓶颈。</p>
+<p>在2015年 唯品会的数据分析碰到了以下两个瓶颈：第一是数据准备的流程长，第二是缺少合适数据提取和分析工具。</p>
+<p><strong>首先</strong>，从数据准备流程来看，常见的流程是业务人员提出需求，BI同事定角度、找数据， 如果数据不完善，还得继续找数据开发。这就导致同一个需求，需要和不同的人反复沟通，在沟通过程中参与的人越多，信息衰减也就越厉害。再加上排期的等待，最终的结果一方面可能与初衷有所偏差，另一方面时间一长也失去了对热点关注度，分析变得非常滞后，不能及时的反应线上业务并加以改进。</p>
+<p><strong>其次</strong>，对于有分析能力的业务侧同学，没有趁手的工具就导致即使有能力准备撩袖子大干一场了也发现巧妇难为无米之炊，大家只能感慨大数据的门槛太高了，又回到了第一点的长时间等待的恶性循环里去了。</p>
+<a id="more"></a>
+<p>我们总结下来，在唯品会这样规模的公司里，数据分析有两个痛点：</p>
+<ol>
+<li>需要一个可以自由组合的维度和指标的平台，业务人员可以根据自己的视角自给自足的完成数据提取和分析；</li>
+<li>这个平台，不仅数据要够丰富，即使大数据量响应速度也要快。</li>
+</ol>
+<p>针对这两个痛点，本着“让大数据成为唯品会的增长引擎”这个目标，我们大数据部门的提供了一套完整的解决方案：自助多维分析平台。我们通过有较高可扩展性的维度建模准备数据，在此之上搭建一套数据查询引擎，并配上操作简单的数据可视化前端，为业务人员搭了数据分析的台子。随着大家数据分析技能的提升，人人都是数据分析师的这个理念就逐渐在公司内部扩展开来了。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/10.jpg" alt="img"></p>
+<h2 id="唯品会如何使用Kylin"><a href="#唯品会如何使用Kylin" class="headerlink" title="唯品会如何使用Kylin"></a>唯品会如何使用Kylin</h2><p>数据和前端是皮和肉，需要通过好的数据引擎才能支撑起来。在数据引擎角度，我们通过一段时间的积累和演进，从基于Presto的ROLAP模型进化到了基于Kylin和Presto的双计算引擎。往超大数据集也要快速ad-hoc响应的方向走近了一步。</p>
+<p>第一阶段，我们的目标是在Ad-hoc响应时间&lt;= 10秒的前提条件下，支持：</p>
+<ol>
+<li>平均每次查询10亿+明细数据做汇总；</li>
+<li>平均每个查询0-15个维度；</li>
+<li>平均每个查询1-5个指标。</li>
+</ol>
+<p>根据这个目标，我们选择使用Presto作为计算引擎，Presto MPP的架构 + 通过Hive Connector直接访问HDFS上的数据，为我们提供良好的Ad-hoc响应速度和相对较低的维护成本。为了满足高Ad-hoc响应速度的需求，常见的做法是把HDFS上处理完的数据同步到Ad-hoc响应友好的数据库中，比如GreenPlum或Hbase等，但这样的缺点是虽然速度上去了，但数据模型在Hive和Ad-hoc库中需要维护两份并保持一致，维护的成本非常高。Presto的Connector机制很好的解决了这个问题，同时他的计算能力也满足了我们第一阶段的需求。</p>
+<p>然后我们通过SQL Parser，将前端拖拽或事件描述的对象转化为SQL，同时完成SQL的变形和性能优化，把计算引擎和用户操作连接在一起，完成了第一阶段的目标。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/11.jpg" alt="img"></p>
+<p>自助多维分析平台一阶段逻辑架构</p>
+<p>随着业务的不断增长，在自助多维分析平台上逐渐出现了很多维度和指标组合类似、频率较高的查询，这些查询有着明显的模式，且通过分析我们了解到这些维度和指标的组合是业务部门常用的核心数据。这些查询反复的在Presto上执行，显然不是最佳选择，也达不到业务部门提出的新目标，核心数据查询响应时间&lt;=3秒。<strong>此时，Kylin就成了我们的首选</strong>。我们的数据引擎的架构，也从单纯的操纵SQL扩展到计算引擎的路由。通过读取Metadata并根据规则，在Kylin和Presto两个计算引擎之间路由，我们可以在不显著提高数据模型维护成本的前提条件下，通过Kylin对关键数据做预计算，提高核心数据的响应速度。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/12.jpg" alt="img"></p>
+<h2 id="为什么选择Kylin"><a href="#为什么选择Kylin" class="headerlink" title="为什么选择Kylin"></a>为什么选择Kylin</h2><p>首先，Kylin利用空间换时间，从原理上已经确保了Ad-hoc响应速度达标，和Oracle CUBE/物化视图的原理相同易于理解。</p>
+<p>第二，Kylin支持SQL，这对于数据分析而言至关重要，同时满足我们一个SQL在不同计算引擎之间路由的需求。</p>
+<p>另外，Kylin的SQL on Hbase的实现也很好的解决了Hbase不易查询的问题。第三是支持Dimension-Fact的join，这极大的解耦了数据模型和计算引擎之间的关系，不像ES或Pinot只支持单表，还有为他们专门处理数据的额外工作。第四是对数据开发来说，创建和管理CUBE比较简单，且透明化了MR和HBASE同步。第五是可以很方便的在调度系统中调用Kylin API定时刷新CUBE。综上所述，Kylin对于一个数据分析系统来说是一个好的解决方案。</p>
+<p>经过一段时间的测试和线上运行，我们在之前把Kylin覆盖到核心指标的查询基础上还扩展到了在Presto上查询需要30秒以上的指标和维度组合上。因为这类查询往往需要扫描大量的基础数据，在Kylin上预计算可以有效的较低资源使用。另一方面，基于自助多维分析平台的业务场景，我们也在以下两个场景中不启用Kylin。第一是维度的基数大于1亿的场景，主要是由于大基数的维度加载的Kylin Server的内存中容易引起OOM。第二是数据模型经常变化的主题，在Kylin中维护CUBE的成本就很高了，每次变化都需要重建CUBE，重刷数据，这显然与我们提高复用降低重复开发的初衷不符。对于这两个场景，由Presto完成计算也可以很好的满足需求。</p>
+<p>基于以上的原则，目前我们累计有20+个CUBE，10+T存储，最大CUBE记录数上千亿，覆盖了23%的查询。同时，Ad-hoc的响应速度也令人满意。Kylin的平均响应速度是Presto的10.5倍，中位数响应速度是Presto的4.5倍。</p>
+<p><img src="http://cdn1.infoqstatic.com/statics_s2_20170411-0445/resource/articles/application-of-apache-kylin-in-vip-big-data/zh/resources/13.jpg" alt="img"></p>
+<h2 id="唯品会对Kylin做的改进"><a href="#唯品会对Kylin做的改进" class="headerlink" title="唯品会对Kylin做的改进"></a>唯品会对Kylin做的改进</h2><p>针对唯品会的痛点，我们也在开源框架的基础上进行了修改。基础升级方面，我们针对自助多维分析平台的需求进行了升级。比如，在查找CUBE的时候，仅当CUBE内数据包含SQL查询的时间范围才命中CUBE，避免给用户不完整的数据集。同时我们采集了Kylin运行中metadata，并给予这些数据提供SQL分析API以解析Kylin能运行的SQL子查询。另外一些BUG修复也提交到了社区。</p>
+<p>除此之外，我们基于Presto+Kylin双引擎的架构，开发了Presto on Kylin这个功能。通过在Presto侧增加Kylin Connector，我们支持了Kylin与Hive数据源的跨源Join，支持Raw data汇总后的数据和Kylin Cube 数据Join。为了支持以上两个功能，我们在Kylin增加了Explain功能简化了Cube命中探查的复杂度。同时，为了进一步降低数据开发寻找查询组合的复杂度，我们开发了Cube Advisor，通过统计分析Presto SQL获得所有维度和指标的组合频次，根据最常使用和响应时间长两个条件，推荐合适的Cube定义建议，数据开发可以直接根据推荐的建议创建Cube。</p>
+<p>下一步，我们会改造Kylin维表的Cache机制，解决大基数维表不能创建CUBE的问题，同时进一步扩展CUBE Advisor支持一键生成CUBE的功能并能够支持自动刷新历史数据，降低人工维护成本。同时，将Kylin的应用推广到报表类数据产品。</p>
+<p>在提高大数据分析Ad-hoc响应速度的路上，可谓八仙过海各显神通，我们通过Presto和Kylin的结合满足了当前的需求，后面我们也会继续探索更多解决方案，寻找下一代的多维分析引擎，在此过程中，欢迎大家与我们一起讨论。</p>
+<h2 id="讲师介绍"><a href="#讲师介绍" class="headerlink" title="讲师介绍"></a>讲师介绍</h2><p><strong>谢麟炯，</strong>唯品会大数据平台高级技术架构经理，主要负责大数据自助多维分析平台，离线数据开发平台及分析引擎团队的开发和管理工作 ，加入唯品会以来还曾负责流量基础数据的 采集和数据仓库建设以及移动流量分析等数据产品的工作。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="森" />
+            
+              <p class="site-author-name" itemprop="name">森</p>
+              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/stanxia" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="xooglexls@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ishuhui.com/cartoon/book/1" title="海贼王" target="_blank">海贼王</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ac.qq.com/Comic/comicInfo/id/541812" title="西行记" target="_blank">西行记</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/video/av2208896/" title="黑人兄弟" target="_blank">黑人兄弟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.panuso.com/" title="网盘搜索" target="_blank">网盘搜索</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://portal.qiniu.com/bucket/stanxia/resource" title="七牛云" target="_blank">七牛云</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xclient.info/?_=f49599f195e2d87e8265beb1e55f423b" title="MAC软件" target="_blank">MAC软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/caesar0301/awesome-public-datasets#finance" title="公共数据集" target="_blank">公共数据集</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景介绍"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯品会如何使用Kylin"><span class="nav-number">2.</span> <span class="nav-text">唯品会如何使用Kylin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么选择Kylin"><span class="nav-number">3.</span> <span class="nav-text">为什么选择Kylin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯品会对Kylin做的改进"><span class="nav-number">4.</span> <span class="nav-text">唯品会对Kylin做的改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#讲师介绍"><span class="nav-number">5.</span> <span class="nav-text">讲师介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+    
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/no_post/Apache Kylin在唯品会大数据的应用.html';
+          this.page.identifier = 'no_post/Apache Kylin在唯品会大数据的应用.html';
+          this.page.title = 'Apache Kylin在唯品会大数据的应用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("f8AHUn2FOKCWoFzJTLrnSt4A-gzGzoHsz", "dOlRTKgDWf3Ut87VDHex4Wks");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+<!-- 页面点击小红心 -->
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html>
