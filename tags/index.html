@@ -312,7 +312,7 @@
                 目前共计 5 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/GEM/" style="font-size: 12px; color: #ccc">GEM</a> <a href="/tags/mac/" style="font-size: 12px; color: #ccc">mac</a> <a href="/tags/movie/" style="font-size: 12px; color: #ccc">movie</a> <a href="/tags/think/" style="font-size: 30px; color: #111">think</a> <a href="/tags/动漫/" style="font-size: 12px; color: #ccc">动漫</a>
+              <a href="/tags/GEM/" style="font-size: 12px; color: #ccc">GEM</a> <a href="/tags/mac/" style="font-size: 12px; color: #ccc">mac</a> <a href="/tags/movie/" style="font-size: 30px; color: #111">movie</a> <a href="/tags/think/" style="font-size: 30px; color: #111">think</a> <a href="/tags/动漫/" style="font-size: 12px; color: #ccc">动漫</a>
             </div>
           </div>
         
@@ -335,12 +335,7 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
+      <div id="hypercomments_widget"></div>
     </div>
 
   
@@ -386,7 +381,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,36 +676,34 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'https://stanxia.github.io/tags/index.html';
-          this.page.identifier = 'tags/index.html';
-          this.page.title = 'tags';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://astan.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
 	
 
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "tags/index.html"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
 
 
-
-
-  
 
 
 
