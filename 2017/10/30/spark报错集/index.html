@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="不忘历史
 方能自信向前">
-<meta property="og:updated_time" content="2017-10-30T06:35:38.000Z">
+<meta property="og:updated_time" content="2017-10-30T06:49:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark报错集">
 <meta name="twitter:description" content="不忘历史
@@ -432,10 +432,10 @@
 <!--请开始装逼-->
 <h2 id="有话要说"><a href="#有话要说" class="headerlink" title="有话要说"></a>有话要说</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
 <p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。</p>
-<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</div></pre></td></tr></table></figure>
-<h3 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在本地调试spark程序，连接虚拟机上的集群，尝试执行sparkSQL时，启动任务就报错。</div></pre></td></tr></table></figure>
-<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">缺少sparkSQL连接hive的必要和依赖jar包</div></pre></td></tr></table></figure>
-<h3 id="办法："><a href="#办法：" class="headerlink" title="办法："></a>办法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">在项目／模块的pom.xml中添加相关的spark-hive依赖jar包。</div><div class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive_2.11 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.1.1&lt;/version&gt;</div><div class="line">    &lt;scope&gt;provided&lt;/scope&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">重新编译项目／模块即可。</div></pre></td></tr></table></figure>
+<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="关键词：spark-hive"><a href="#关键词：spark-hive" class="headerlink" title="关键词：spark-hive"></a>关键词：spark-hive</h3><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</div></pre></td></tr></table></figure>
+<h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在本地调试spark程序，连接虚拟机上的集群，尝试执行sparkSQL时，启动任务就报错。</div></pre></td></tr></table></figure>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">缺少sparkSQL连接hive的必要和依赖jar包</div></pre></td></tr></table></figure>
+<h4 id="办法："><a href="#办法：" class="headerlink" title="办法："></a>办法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">在项目／模块的pom.xml中添加相关的spark-hive依赖jar包。</div><div class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive_2.11 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.1.1&lt;/version&gt;</div><div class="line">    &lt;scope&gt;provided&lt;/scope&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">重新编译项目／模块即可。</div></pre></td></tr></table></figure>
 <hr>
 <!--对不起，到时间了，请停止装逼-->
       
@@ -489,8 +489,8 @@
     
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/26/Music Queen/" rel="prev" title="Music Queen">
-                Music Queen <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/31/手把手搭建vps和shadowsocks/" rel="prev" title="手把手搭建vps和shadowsocks">
+                手把手搭建vps和shadowsocks <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +577,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,7 +588,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -599,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -625,15 +625,21 @@
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                  <a href="https://plus.google.com/u/0/+SengleXia" target="_blank" title="Google">
                     
                       <i class="fa fa-fw fa-google"></i></a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                  <a href="https://twitter.com/stillstan1" target="_blank" title="Twitter">
                     
                       <i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/xlsstan" target="_blank" title="FB Page">
+                    
+                      <i class="fa fa-fw fa-facebook"></i></a>
                 </span>
               
             
@@ -698,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有话要说"><span class="nav-number">1.</span> <span class="nav-text">有话要说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题汇总"><span class="nav-number">2.</span> <span class="nav-text">问题汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述："><span class="nav-number">2.1.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景："><span class="nav-number">2.2.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理："><span class="nav-number">2.3.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#办法："><span class="nav-number">2.4.</span> <span class="nav-text">办法：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有话要说"><span class="nav-number">1.</span> <span class="nav-text">有话要说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题汇总"><span class="nav-number">2.</span> <span class="nav-text">问题汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键词：spark-hive"><span class="nav-number">2.1.</span> <span class="nav-text">关键词：spark-hive</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述："><span class="nav-number">2.1.1.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景："><span class="nav-number">2.1.2.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理："><span class="nav-number">2.1.3.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#办法："><span class="nav-number">2.1.4.</span> <span class="nav-text">办法：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
