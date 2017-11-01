@@ -39,13 +39,74 @@
 <blockquote>
 <p>新的心跳</p>
 </blockquote>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YJSpGXxkCqE" frameborder="0" allowfullscreen></iframe>
+
+<blockquote>
+<p>漂向北方</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[spark关于parquet的优化]]></title>
+      <url>https://stanxia.github.io/2017/11/01/spark%E5%85%B3%E4%BA%8Eparquet%E7%9A%84%E4%BC%98%E5%8C%96/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/kawayi.png" alt="kawayi"></p>
+<p>Parquet</p>
+<p>列式存储在sparkSQL中的应用</p>
+</blockquote>
+<a id="more"></a>
+<!--请开始装逼-->
+<h2 id="Parquet的简介"><a href="#Parquet的简介" class="headerlink" title="Parquet的简介"></a>Parquet的简介</h2><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p>
+<h2 id="Parquet的优势"><a href="#Parquet的优势" class="headerlink" title="Parquet的优势"></a>Parquet的优势</h2><p>在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。</p>
+<h3 id="存储方面"><a href="#存储方面" class="headerlink" title="存储方面"></a>存储方面</h3><p>因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。</p>
+<h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。</p>
+<h3 id="实例测试"><a href="#实例测试" class="headerlink" title="实例测试"></a>实例测试</h3><table>
+<thead>
+<tr>
+<th>测试数据大小</th>
+<th>存储类型</th>
+<th>存储所占空间</th>
+<th>查询性能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1T</td>
+<td>TEXTFILE</td>
+<td>897.9G</td>
+<td>698s</td>
+</tr>
+<tr>
+<td>1T</td>
+<td>Parquet</td>
+<td>231.4G</td>
+<td>21s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Parquet的使用"><a href="#Parquet的使用" class="headerlink" title="Parquet的使用"></a>Parquet的使用</h2><p>使用parquet的简单demo：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Encoders for most common types are automatically provided by importing spark.implicits._</span></div><div class="line"><span class="keyword">import</span> spark.implicits._</div><div class="line"></div><div class="line"><span class="keyword">val</span> peopleDF = spark.read.json(<span class="string">"examples/src/main/resources/people.json"</span>)</div><div class="line"></div><div class="line"><span class="comment">// DataFrames can be saved as Parquet files, maintaining the schema information</span></div><div class="line">peopleDF.write.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Read in the parquet file created above</span></div><div class="line"><span class="comment">// Parquet files are self-describing so the schema is preserved</span></div><div class="line"><span class="comment">// The result of loading a Parquet file is also a DataFrame</span></div><div class="line"><span class="keyword">val</span> parquetFileDF = spark.read.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Parquet files can also be used to create a temporary view and then used in SQL statements</span></div><div class="line">parquetFileDF.createOrReplaceTempView(<span class="string">"parquetFile"</span>)</div><div class="line"><span class="keyword">val</span> namesDF = spark.sql(<span class="string">"SELECT name FROM parquetFile WHERE age BETWEEN 13 AND 19"</span>)</div><div class="line">namesDF.map(attributes =&gt; <span class="string">"Name: "</span> + attributes(<span class="number">0</span>)).show()</div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |       value|</span></div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |Name: Justin|</span></div><div class="line"><span class="comment">// +------------+</span></div></pre></td></tr></table></figure>
+<!--对不起，到时间了，请停止装逼-->
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[三步走战略]]></title>
+      <url>https://stanxia.github.io/2017/11/01/%E4%B8%89%E6%AD%A5%E8%B5%B0%E6%88%98%E7%95%A5/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>设定中长期规划</p>
+<p>稳扎稳打，逐个击破，实现技术上的重大突破</p>
+</blockquote>
+<a id="more"></a>
+<!--请开始装逼-->
+<h2 id="第一步深刻了解spark运行机制"><a href="#第一步深刻了解spark运行机制" class="headerlink" title="第一步深刻了解spark运行机制"></a>第一步深刻了解spark运行机制</h2><h2 id="第二步深度剖析sparkSQL和sparkStreaming"><a href="#第二步深度剖析sparkSQL和sparkStreaming" class="headerlink" title="第二步深度剖析sparkSQL和sparkStreaming"></a>第二步深度剖析sparkSQL和sparkStreaming</h2><h2 id="第三步实现对spark机器学习的深度掌握"><a href="#第三步实现对spark机器学习的深度掌握" class="headerlink" title="第三步实现对spark机器学习的深度掌握"></a>第三步实现对spark机器学习的深度掌握</h2><!--对不起，到时间了，请停止装逼-->
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[手把手搭建vps和shadowsocks]]></title>
       <url>https://stanxia.github.io/2017/10/31/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BAvps%E5%92%8Cshadowsocks/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>何来的枷锁</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/free.jpg" alt="free"></p>
+<p>何来的枷锁</p>
 <p>没有人应该被困在牢笼之中</p>
 </blockquote>
 <a id="more"></a>
@@ -127,8 +188,9 @@
     <entry>
       <title><![CDATA[spark报错集]]></title>
       <url>https://stanxia.github.io/2017/10/30/spark%E6%8A%A5%E9%94%99%E9%9B%86/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>不忘历史</p>
-<p>方能自信向前</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/error.png" alt="eroor"></p>
+<p>魔高一尺</p>
+<p>道高一丈</p>
 </blockquote>
 <a id="more"></a>
 <!--请开始装逼-->
@@ -160,7 +222,8 @@
     <entry>
       <title><![CDATA[杂乱无章]]></title>
       <url>https://stanxia.github.io/2017/10/29/%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>时光的机器，加足马力冲回过去</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/yekong.jpg" alt="yekong"></p>
+<p>时光的机器，加足马力冲回过去</p>
 <p>历史的长河，丝丝涟漪涌向未来</p>
 </blockquote>
 <a id="more"></a>
@@ -182,7 +245,8 @@
     <entry>
       <title><![CDATA[闲谈]]></title>
       <url>https://stanxia.github.io/2017/10/28/%E9%97%B2%E8%B0%88/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>九九登高忆重阳</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/xueshan.jpg" alt="xueshan"></p>
+<p>九九登高忆重阳</p>
 </blockquote>
 <a id="more"></a>
 <!--请开始装逼-->
@@ -208,7 +272,8 @@
     <entry>
       <title><![CDATA[mac使用小技巧]]></title>
       <url>https://stanxia.github.io/2017/10/28/mac%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p>记录mac使用的小技巧</p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><blockquote class="blockquote-center"><p><img src="/images/pic/gaozhongsheng.jpg" alt="gaozhongshneg"></p>
+<p>记录mac使用的小技巧</p>
 <p>持续更新ing </p>
 </blockquote>
 <a id="more"></a>
