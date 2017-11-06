@@ -1957,7 +1957,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f16b46;
+  background: #ecd5d0;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3276,7 +3276,7 @@ body {
   font-size: 14px;
   line-height: 2;
   color: #555;
-  background-image: url("/images/pic/life.jpeg");
+  background-image: url("/images/pic/bg2.png");
   background-position-x: initial;
   background-position-y: initial;
   background-size: initial;

@@ -10,31 +10,31 @@
 <div class="note info"><p>不脆弱 不沉默 不协妥 不退缩     一路逆风 我们不投降</p>
 <p>不慌张 不绝望 不狂妄 不投降     一路逆风 顽强的飞翔</p></div>
 <a id="more"></a>
-<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E.png"}});</script>
+<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%B8%80%E8%B7%AF%E9%80%86%E9%A2%A8%20AGAINST%20THE%20WIND%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E.png"}});</script>
 <blockquote>
 <p>一路逆风</p>
 </blockquote>
-<div id="dplayer2" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer2 = new DPlayer({"element":document.getElementById("dplayer2"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%BE%86%E8%87%AA%E5%A4%A9%E5%A0%82%E7%9A%84%E9%AD%94%E9%AC%BC%20AWAY%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E6%9D%A5%E8%87%AA%E5%A4%A9%E5%A0%82%E7%9A%84%E9%AD%94%E9%AC%BC.png"}});</script>
+<div id="dplayer1" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer1 = new DPlayer({"element":document.getElementById("dplayer1"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E4%BE%86%E8%87%AA%E5%A4%A9%E5%A0%82%E7%9A%84%E9%AD%94%E9%AC%BC%20AWAY%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E6%9D%A5%E8%87%AA%E5%A4%A9%E5%A0%82%E7%9A%84%E9%AD%94%E9%AC%BC.png"}});</script>
 <blockquote>
 <p>来自天堂的魔鬼</p>
 </blockquote>
-<div id="dplayer3" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer3 = new DPlayer({"element":document.getElementById("dplayer3"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%86%8D%E8%A6%8B%20GOODBYE%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%86%8D%E8%A7%81mtv.png"}});</script>
+<div id="dplayer2" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer2 = new DPlayer({"element":document.getElementById("dplayer2"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%86%8D%E8%A6%8B%20GOODBYE%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%86%8D%E8%A7%81mtv.png"}});</script>
 <blockquote>
 <p>再见MTV</p>
 </blockquote>
-<div id="dplayer4" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer4 = new DPlayer({"element":document.getElementById("dplayer4"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%86%8D%E8%A6%8B%20GOODBYE%E3%80%91LIVE%20PIANO%20SESSION%20II%20%28Part%203_3%29%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%86%8D%E8%A7%81.png"}});</script>
+<div id="dplayer3" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer3 = new DPlayer({"element":document.getElementById("dplayer3"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%86%8D%E8%A6%8B%20GOODBYE%E3%80%91LIVE%20PIANO%20SESSION%20II%20%28Part%203_3%29%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%86%8D%E8%A7%81.png"}});</script>
 <blockquote>
 <p>再见LIVE</p>
 </blockquote>
-<div id="dplayer5" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer5 = new DPlayer({"element":document.getElementById("dplayer5"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%A4%9A%E9%81%A0%E9%83%BD%E8%A6%81%E5%9C%A8%E4%B8%80%E8%B5%B7%20LONG%20DISTANCE%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%A4%9A%E8%BF%9C%E9%83%BD%E8%A6%81%E5%9C%A8%E4%B8%80%E8%B5%B7.png"}});</script>
+<div id="dplayer4" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer4 = new DPlayer({"element":document.getElementById("dplayer4"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%A4%9A%E9%81%A0%E9%83%BD%E8%A6%81%E5%9C%A8%E4%B8%80%E8%B5%B7%20LONG%20DISTANCE%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%A4%9A%E8%BF%9C%E9%83%BD%E8%A6%81%E5%9C%A8%E4%B8%80%E8%B5%B7.png"}});</script>
 <blockquote>
 <p>多远都要在一起</p>
 </blockquote>
-<div id="dplayer6" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer6 = new DPlayer({"element":document.getElementById("dplayer6"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%85%89%E5%B9%B4%E4%B9%8B%E5%A4%96%E3%80%91MV%20%28%E9%9B%BB%E5%BD%B1%E3%80%8A%E5%A4%AA%E7%A9%BA%E6%BD%9B%E8%A1%8C%E8%80%85%20Passengers%E3%80%8B%E4%B8%AD%E6%96%87%E4%B8%BB%E9%A1%8C%E6%9B%B2%29%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%85%89%E5%B9%B4%E4%B9%8B%E5%A4%96.png"}});</script>
+<div id="dplayer5" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer5 = new DPlayer({"element":document.getElementById("dplayer5"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E5%85%89%E5%B9%B4%E4%B9%8B%E5%A4%96%E3%80%91MV%20%28%E9%9B%BB%E5%BD%B1%E3%80%8A%E5%A4%AA%E7%A9%BA%E6%BD%9B%E8%A1%8C%E8%80%85%20Passengers%E3%80%8B%E4%B8%AD%E6%96%87%E4%B8%BB%E9%A1%8C%E6%9B%B2%29%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E5%85%89%E5%B9%B4%E4%B9%8B%E5%A4%96.png"}});</script>
 <blockquote>
 <p>光年之外</p>
 </blockquote>
-<div id="dplayer7" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer7 = new DPlayer({"element":document.getElementById("dplayer7"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E6%96%B0%E7%9A%84%E5%BF%83%E8%B7%B3%20HEARTBEAT%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E6%96%B0%E7%9A%84%E5%BF%83%E8%B7%B3.png"}});</script>
+<div id="dplayer6" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer6 = new DPlayer({"element":document.getElementById("dplayer6"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/G.E.M.%E3%80%90%E6%96%B0%E7%9A%84%E5%BF%83%E8%B7%B3%20HEARTBEAT%E3%80%91Official%20MV%20%5BHD%5D%20%E9%84%A7%E7%B4%AB%E6%A3%8B.mp4","pic":"http://oliji9s3j.bkt.clouddn.com/%E6%96%B0%E7%9A%84%E5%BF%83%E8%B7%B3.png"}});</script>
 <blockquote>
 <p>新的心跳</p>
 </blockquote>
@@ -63,6 +63,141 @@
 <blockquote>
 <p>我的秘密</p>
 </blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[spark源码注释翻译]]></title>
+      <url>https://stanxia.github.io/2017/11/06/spark%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A%E7%BF%BB%E8%AF%91/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/bg.png" alt="pic1"></p>
+<div class="note info"><p>版本：spark2.1.1</p>
+<p>目的：方便中文用户阅读源码，把时间花在理解而不是翻译上</p></div>
+<a id="more"></a>
+<!--请开始装逼-->
+<h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。</p>
+<h2 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h2><p>已完成：</p>
+<p>正在作：spark core模块</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模块名</th>
+<th style="text-align:center">模块介绍</th>
+<th style="text-align:center">完成度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">api</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">broadcast</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">deploy</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">executor</td>
+<td style="text-align:center">执行器：用于启动线程池，是真正负责执行task的部件</td>
+<td style="text-align:center">已完成</td>
+</tr>
+<tr>
+<td style="text-align:center">input</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">internal</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">io</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">launcher</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">mapred</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">memory</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">metrics</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">network</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">partial</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">rdd</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">rpc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">scheduler</td>
+<td style="text-align:center">调度器：spark应用程序的任务调度器</td>
+<td style="text-align:center">正在作</td>
+</tr>
+<tr>
+<td style="text-align:center">security</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">serializer</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">shuffle</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">status.api.v1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">storage</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">util</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<!--对不起，到时间了，请停止装逼-->
 ]]></content>
     </entry>
     
@@ -227,7 +362,7 @@
 <a id="more"></a>
 <!--请开始装逼-->
 <!--视频start-->
-<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"xx","pic":"xx"}});</script>
+<div id="dplayer7" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer7 = new DPlayer({"element":document.getElementById("dplayer7"),"autoplay":false,"theme":"#FADFA3","loop":true,"video":{"url":"xx","pic":"xx"}});</script>
 <!--视频end-->
 <!--对不起，到时间了，请停止装逼-->
 ]]></content>
