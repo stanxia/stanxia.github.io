@@ -79,13 +79,51 @@
 
 
 
+<meta name="description" content=".hexo-douban-clearfix{
+    clear:both;
+  }
+  #tabs{
+    margin-bottom: 15px;
+    margin-top:15px;
+  }
+  #tabs a {
+    padding: 5px;
+  }
+  #tabs a.hexo-douban-active{
+    background: #657b83;
+    co">
 <meta property="og:type" content="website">
-<meta property="og:title" content="books">
+<meta property="og:title" content="森的黄金屋">
 <meta property="og:url" content="https://stanxia.github.io/books/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:updated_time" content="2017-11-15T04:51:22.000Z">
+<meta property="og:description" content=".hexo-douban-clearfix{
+    clear:both;
+  }
+  #tabs{
+    margin-bottom: 15px;
+    margin-top:15px;
+  }
+  #tabs a {
+    padding: 5px;
+  }
+  #tabs a.hexo-douban-active{
+    background: #657b83;
+    co">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="books">
+<meta name="twitter:title" content="森的黄金屋">
+<meta name="twitter:description" content=".hexo-douban-clearfix{
+    clear:both;
+  }
+  #tabs{
+    margin-bottom: 15px;
+    margin-top:15px;
+  }
+  #tabs a {
+    padding: 5px;
+  }
+  #tabs a.hexo-douban-active{
+    background: #657b83;
+    co">
 
 
 
@@ -121,7 +159,7 @@
 
 
 
-  <title>books | 东篱下</title>
+  <title>森的黄金屋 | 东篱下</title>
   
 
 
@@ -315,7 +353,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">books</h1>
+	<h1 class="post-title" itemprop="name headline">森的黄金屋</h1>
 
 
 
@@ -327,7 +365,114 @@
       <div class="post-body">
         
         
-          <script src="/assets/js/DPlayer.min.js"> </script>
+          <style>
+  .hexo-douban-clearfix{
+    clear:both;
+  }
+  #tabs{
+    margin-bottom: 15px;
+    margin-top:15px;
+  }
+  #tabs a {
+    padding: 5px;
+  }
+  #tabs a.hexo-douban-active{
+    background: #657b83;
+    color: #fff;
+  }
+  #collections .hexo-douban-book{
+    /*width: 100%;*/
+    /*float: left;*/
+    padding-bottom: 10px;
+    position: relative;
+    clear: both;
+    min-height: 170px;
+    padding: 10px 0;
+    border-bottom: 1px #ddd solid;
+  }
+  .hexo-douban-book .hexo-douban-picture{
+    position: absolute;
+    left: 0;
+    top: 10px;
+  }
+  .hexo-douban-book .hexo-douban-info{
+    padding-left: 120px;
+  }
+  .hexo-douban-book .hexo-douban-meta{
+    font-size: 12px;
+    padding-right: 10px;
+  }
+  .hexo-douban-book .hexo-douban-comments{
+    font-size: 12px;
+  }
+  .hexo-douban-hide{
+    display: none;
+  }
+  #collections .hexo-douban-active{
+    display: block;
+  }
+  @media screen and (max-width:600px) {
+    #collections .hexo-douban-book{
+      width: 100%;
+    }
+  }
+  #refresh{
+
+    color: red;
+  }
+</style>
+
+<div>
+  <blockquote>
+      <p>活到老 学到老</p>
+  </blockquote>
+</div>
+
+<div id="douban">
+    <div id="tabs">
+      <a id="reading-tab" href="javascript:show('reading')" target="_blank" rel="external">在读(0)</a>
+      <a id="wish-tab" href="javascript:show('wish')" target="_blank" rel="external">想读(0)</a>
+      <a id="read-tab" href="javascript:show('read')" target="_blank" rel="external">已读(0)</a>
+    </div>
+
+    <div id="collections">
+      <div id="reading" class="hexo-douban-hide">
+         
+      </div>
+      <div class="hexo-douban-clearfix"></div>
+      <div id="wish" class="hexo-douban-hide">
+         
+      </div>
+      <div class="hexo-douban-clearfix"></div>
+      <div id="read" class="hexo-douban-hide">
+         
+      </div>
+      <div class="hexo-douban-clearfix"></div>
+    </div>
+</div>
+
+<script>
+function show(id){
+  document.getElementById('reading').classList.remove('hexo-douban-active');
+  document.getElementById('read').classList.remove('hexo-douban-active');
+  document.getElementById('wish').classList.remove('hexo-douban-active');
+  document.getElementById('reading').classList.add('hexo-douban-hide');
+  document.getElementById('read').classList.add('hexo-douban-hide');
+  document.getElementById('wish').classList.add('hexo-douban-hide');
+
+  var ele = document.getElementById(id);
+  ele.classList.remove('hexo-douban-hide');
+  ele.classList.add('hexo-douban-active');
+
+  document.getElementById('reading-tab').classList.remove('hexo-douban-active');
+  document.getElementById('read-tab').classList.remove('hexo-douban-active');
+  document.getElementById('wish-tab').classList.remove('hexo-douban-active');
+  document.getElementById(id+'-tab').classList.add('hexo-douban-active');
+  };
+ show("reading")
+</script>
+
+
         
       </div>
       
@@ -345,15 +490,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -690,8 +826,6 @@
 
 		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "books/index.html"});
 		
 
 		(function() {
