@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,parquet," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,13 @@
 
 
 
-<meta name="description" content="Parquet列式存储在sparkSQL中的应用">
-<meta property="og:type" content="article">
-<meta property="og:title" content="spark关于parquet的优化">
-<meta property="og:url" content="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="movies">
+<meta property="og:url" content="https://stanxia.github.io/movies/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="Parquet列式存储在sparkSQL中的应用">
-<meta property="og:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
-<meta property="og:updated_time" content="2017-11-08T04:20:04.000Z">
+<meta property="og:updated_time" content="2017-11-15T04:50:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark关于parquet的优化">
-<meta name="twitter:description" content="Parquet列式存储在sparkSQL中的应用">
-<meta name="twitter:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
+<meta name="twitter:title" content="movies">
 
 
 
@@ -120,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/"/>
+  <link rel="canonical" href="https://stanxia.github.io/movies/"/>
 
 
 
 
 
-  <title>spark关于parquet的优化 | 东篱下</title>
+  <title>movies | 东篱下</title>
   
 
 
@@ -315,276 +310,33 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
     
     
+    <div class="post-block page">
       <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">spark关于parquet的优化</h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T14:53:13+08:00">
-                2017-11-01
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/01/spark关于parquet的优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/01/spark关于parquet的优化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-    
-          
-          
-             <span id="/2017/11/01/spark关于parquet的优化/" class="leancloud_visitors" data-flag-title="spark关于parquet的优化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn5.jpg" alt="kawayi"></p>
-<div class="note info"><p>Parquet列式存储在sparkSQL中的应用</p></div>
-<a id="more"></a>
-<!--请开始装逼-->
-<h2 id="Parquet的简介"><a href="#Parquet的简介" class="headerlink" title="Parquet的简介"></a>Parquet的简介</h2><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p>
-<h2 id="Parquet的优势"><a href="#Parquet的优势" class="headerlink" title="Parquet的优势"></a>Parquet的优势</h2><p>在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。</p>
-<h3 id="存储方面"><a href="#存储方面" class="headerlink" title="存储方面"></a>存储方面</h3><p>因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。</p>
-<h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。</p>
-<h3 id="实例测试"><a href="#实例测试" class="headerlink" title="实例测试"></a>实例测试</h3><table>
-<thead>
-<tr>
-<th>测试数据大小</th>
-<th>存储类型</th>
-<th>存储所占空间</th>
-<th>查询性能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1T</td>
-<td>TEXTFILE</td>
-<td>897.9G</td>
-<td>698s</td>
-</tr>
-<tr>
-<td>1T</td>
-<td>Parquet</td>
-<td>231.4G</td>
-<td>21s</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Parquet的使用"><a href="#Parquet的使用" class="headerlink" title="Parquet的使用"></a>Parquet的使用</h2><p>使用parquet的简单demo：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Encoders for most common types are automatically provided by importing spark.implicits._</span></div><div class="line"><span class="keyword">import</span> spark.implicits._</div><div class="line"></div><div class="line"><span class="keyword">val</span> peopleDF = spark.read.json(<span class="string">"examples/src/main/resources/people.json"</span>)</div><div class="line"></div><div class="line"><span class="comment">// DataFrames can be saved as Parquet files, maintaining the schema information</span></div><div class="line">peopleDF.write.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Read in the parquet file created above</span></div><div class="line"><span class="comment">// Parquet files are self-describing so the schema is preserved</span></div><div class="line"><span class="comment">// The result of loading a Parquet file is also a DataFrame</span></div><div class="line"><span class="keyword">val</span> parquetFileDF = spark.read.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Parquet files can also be used to create a temporary view and then used in SQL statements</span></div><div class="line">parquetFileDF.createOrReplaceTempView(<span class="string">"parquetFile"</span>)</div><div class="line"><span class="keyword">val</span> namesDF = spark.sql(<span class="string">"SELECT name FROM parquetFile WHERE age BETWEEN 13 AND 19"</span>)</div><div class="line">namesDF.map(attributes =&gt; <span class="string">"Name: "</span> + attributes(<span class="number">0</span>)).show()</div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |       value|</span></div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |Name: Justin|</span></div><div class="line"><span class="comment">// +------------+</span></div></pre></td></tr></table></figure>
-<!--对不起，到时间了，请停止装逼-->
 
+	<h1 class="post-title" itemprop="name headline">movies</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <script src="/assets/js/DPlayer.min.js"> </script>
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-    
-    
-    
-    <div>
-      
-        <div>
-<div>
-
-
-
-<div style="text-align:center;color: #ccc;font-size:14px;">
-
--------------THE<i class="fa fa-paw"></i>END-------------</div>
-
-
-
-</div>
-</div>
-      
-    </div>
-    
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/pic/alipay.jpeg" alt="森 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
-          
-            <a href="/tags/parquet/" rel="tag"><i class="fa fa-tag"></i> parquet</a>
-          
-        </div>
-      
-    
-      
-      
-      
-    
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/01/三步走战略/" rel="next" title="三步走战略">
-                <i class="fa fa-chevron-left"></i> 三步走战略
-              </a>
-            
-          </div>
-    
-          <span class="post-nav-divider"></span>
-    
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/06/spark源码注释翻译/" rel="prev" title="spark源码注释翻译">
-                spark源码注释翻译 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-    
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -622,17 +374,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -764,22 +507,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的简介"><span class="nav-number">1.</span> <span class="nav-text">Parquet的简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">2.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">2.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">2.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">2.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">3.</span> <span class="nav-text">Parquet的使用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -964,7 +691,7 @@
 		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
 		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/01/spark关于parquet的优化/"});
+		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "movies/index.html"});
 		
 
 		(function() {
