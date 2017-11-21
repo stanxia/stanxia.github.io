@@ -4,16 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Music Queen]]></title>
-      <url>https://stanxia.github.io/2019/12/26/Music%20Queen/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/gem.jpg" alt="pic1"></p>
-<div class="note info"><p>不脆弱 不沉默 不协妥 不退缩     一路逆风 我们不投降</p>
-<p>不慌张 不绝望 不狂妄 不投降     一路逆风 顽强的飞翔</p></div>
-<a id="more"></a>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[JavaRDDLike.scala]]></title>
       <url>https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/</url>
       <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释</p>
