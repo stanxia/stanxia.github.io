@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释
-JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
+<meta name="description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaRDDLike.scala">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释
-JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
+<meta property="og:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg">
-<meta property="og:updated_time" content="2017-11-22T06:04:36.000Z">
+<meta property="og:updated_time" content="2017-11-22T06:21:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaRDDLike.scala">
-<meta name="twitter:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释
-JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
+<meta name="twitter:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
 <meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg">
 
 
@@ -442,8 +439,7 @@ JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg" alt=""><br><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释</p>
-<p>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div></p>
+        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg" alt=""><br><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div></p>
 <a id="more"></a>
 <!--请开始装逼-->
 <h2 id="JavaRDD"><a href="#JavaRDD" class="headerlink" title="JavaRDD"></a>JavaRDD</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.apache.spark.api.java</div><div class="line"></div><div class="line"><span class="keyword">private</span>[spark] <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractJavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]]</span></div><div class="line">  <span class="keyword">extends</span> <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Defines operations common to several Java RDD implementations.</div><div class="line">  *</div><div class="line">  * 定义几个Java RDD实现的常见操作。</div><div class="line">  *</div><div class="line">  * @note This trait is not intended to be implemented by user code.</div><div class="line">  *</div><div class="line">  *       该特性不打算由用户代码实现。</div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]] <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">wrapRDD</span></span>(rdd: <span class="type">RDD</span>[<span class="type">T</span>]): <span class="type">This</span></div><div class="line"></div><div class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> classTag: <span class="type">ClassTag</span>[<span class="type">T</span>]</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">rdd</span></span>: <span class="type">RDD</span>[<span class="type">T</span>]</div></pre></td></tr></table></figure>
