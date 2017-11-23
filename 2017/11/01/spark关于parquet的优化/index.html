@@ -79,26 +79,26 @@
 
 
 
-<meta name="description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+<meta name="description" content="parquet是一种列式存储。可以提供面向列的存储和查询。
 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
-查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark关于parquet的优化">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+<meta property="og:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。
 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
-查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
-<meta property="og:updated_time" content="2017-11-23T02:35:42.000Z">
+<meta property="og:updated_time" content="2017-11-23T08:00:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark关于parquet的优化">
-<meta name="twitter:description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+<meta name="twitter:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。
 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
-查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta name="twitter:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
 
 
@@ -448,8 +448,7 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn5.jpg" alt="kawayi"><br><!--请开始装逼--></p>
-<h2 id="Parquet的简介"><a href="#Parquet的简介" class="headerlink" title="Parquet的简介"></a>Parquet的简介</h2><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn5.jpg" alt="kawayi"><br><div class="note info"><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p></div></p>
 <h2 id="Parquet的优势"><a href="#Parquet的优势" class="headerlink" title="Parquet的优势"></a>Parquet的优势</h2><p>在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。</p>
 <h3 id="存储方面"><a href="#存储方面" class="headerlink" title="存储方面"></a>存储方面</h3><p>因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。</p>
 <h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。<br><a id="more"></a></p>
@@ -780,7 +779,7 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的简介"><span class="nav-number">1.</span> <span class="nav-text">Parquet的简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">2.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">2.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">2.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">2.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">3.</span> <span class="nav-text">Parquet的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">1.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">1.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">1.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">1.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">2.</span> <span class="nav-text">Parquet的使用</span></a></li></ol></div>
             
 
           </div>
