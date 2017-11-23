@@ -1956,7 +1956,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c9b11b;
+  background: #da1499;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2793,13 +2793,31 @@ embed {
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
 }
+.header {
+  background: url("http://oliji9s3j.bkt.clouddn.com/15113319007022.jpg");
+  height: 200px;
+}
+.header-inner {
+  margin: auto;
+  padding: 30px 0 0px;
+}
+.container .header-inner {
+  width: 100%;
+}
 .content-wrap {
   padding-bottom: 30px;
   padding-left: 30px;
 }
 .post {
-  margin-top: 0px;
   margin-bottom: 60px;
+  margin-top: 50px;
+  padding-top: 15px;
+  padding-bottom: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  background-color: rgba(109,186,130,0);
 }
 .headband {
   height: 0px;
@@ -2826,4 +2844,106 @@ body {
   background-origin: initial;
   background-clip: initial;
   background-color: #eee;
+}
+.back-to-top.back-to-top-on {
+  bottom: 10px;
+}
+.back-to-top {
+  background-color: rgba(247,149,51,0);
+  padding: 2.5px 5px;
+}
+.back-to-top,
+.sidebar-toggle {
+  right: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.35);
+}
+.back-to-top {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1050;
+  width: initial;
+  background: #222;
+  font-size: 12px;
+  opacity: 1;
+  cursor: pointer;
+  transition-property: bottom;
+}
+.back-to-top,
+.menu,
+.pagination,
+.site-meta,
+.tag-cloud {
+  text-align: center;
+}
+.back-to-top,
+.brand,
+.brand:hover {
+  color: #fff;
+}
+.back-to-top,
+.btn,
+.menu .menu-item a,
+.pagination .next,
+.pagination .page-number,
+.pagination .prev,
+.post-toc ol a,
+.posts-collapse .post-header,
+.posts-collapse .post-header::before,
+.posts-expand .post-title-link::before {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.site-title {
+  font-size: 50px;
+  font-weight: 700;
+  color: #fff;
+}
+.pagination .page-number.current {
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.35);
+}
+.pagination .prev,
+.pagination .next,
+.pagination .page-number {
+  margin-bottom: 10px;
+  border: none;
+}
+.posts-expand .post-eof {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  background-color: rgba(255,255,255,0);
+}
+.post-body p {
+  text-indent: 2em;
+}
+.posts-expand .post-meta {
+  margin: 3px 0 10px 0;
+  color: #999;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+.post-button {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.brand {
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+  background: rgba(34,34,34,0);
+  border-bottom: none;
+}
+.posts-expand {
+  padding-top: 0px;
+}
+.footer-inner {
+  box-sizing: border-box;
+  margin: 50px auto;
+  width: 700px;
 }
