@@ -79,17 +79,26 @@
 
 
 
-<meta name="description" content="Parquet列式存储在sparkSQL中的应用">
+<meta name="description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
+存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark关于parquet的优化">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="Parquet列式存储在sparkSQL中的应用">
+<meta property="og:description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
+存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
-<meta property="og:updated_time" content="2017-11-08T04:20:04.000Z">
+<meta property="og:updated_time" content="2017-11-23T02:35:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark关于parquet的优化">
-<meta name="twitter:description" content="Parquet列式存储在sparkSQL中的应用">
+<meta name="twitter:description" content="Parquet的简介parquet是一种列式存储。可以提供面向列的存储和查询。
+Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。
+存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
+查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效">
 <meta name="twitter:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
 
 
@@ -439,14 +448,11 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn5.jpg" alt="kawayi"></p>
-<div class="note info"><p>Parquet列式存储在sparkSQL中的应用</p></div>
-<a id="more"></a>
-<!--请开始装逼-->
+        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn5.jpg" alt="kawayi"><br><!--请开始装逼--></p>
 <h2 id="Parquet的简介"><a href="#Parquet的简介" class="headerlink" title="Parquet的简介"></a>Parquet的简介</h2><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p>
 <h2 id="Parquet的优势"><a href="#Parquet的优势" class="headerlink" title="Parquet的优势"></a>Parquet的优势</h2><p>在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。</p>
 <h3 id="存储方面"><a href="#存储方面" class="headerlink" title="存储方面"></a>存储方面</h3><p>因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。</p>
-<h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。</p>
+<h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。<br><a id="more"></a></p>
 <h3 id="实例测试"><a href="#实例测试" class="headerlink" title="实例测试"></a>实例测试</h3><table>
 <thead>
 <tr>

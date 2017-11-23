@@ -79,20 +79,23 @@
 
 
 
-<meta name="description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。
-Dataset 上可用的操作分为转换和动作:转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
+<meta name="description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
+
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dataset.scala">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/23/Dataset-scala/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。
-Dataset 上可用的操作分为转换和动作:转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
+<meta property="og:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
+
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg">
-<meta property="og:updated_time" content="2017-11-23T01:53:38.000Z">
+<meta property="og:updated_time" content="2017-11-23T03:03:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dataset.scala">
-<meta name="twitter:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。
-Dataset 上可用的操作分为转换和动作:转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
+<meta name="twitter:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
+
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
 <meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg">
 
 
@@ -443,11 +446,16 @@ Dataset 上可用的操作分为转换和动作:转换：产生新的 Dataset �
     
       
         <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg" alt=""></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。</p>
-<p>Dataset 上可用的操作分为转换和动作:<br><div class="note info"><p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p></div></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
+<blockquote>
+<p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p>
+</blockquote>
 <p>Dataset是懒加载的，例如：只有提交动作的时候才会触发计算。在内部，Datasets表示一个逻辑计划，它描述生成数据所需的计算。当提交动作时，Spark的查询优化器会优化逻辑计划，并以并行和分布式的方式生成有效执行的物理计划。请使用<code>explain</code> 功能，探索逻辑计划和优化的物理计划。</p>
 <p>为了有效地支持特定于领域的对象，需要[[Encoder]]。编码器将特定类型的“T”映射到Spark的内部类型系统。例如：给一个 <code>Person</code> 类，并带有两个属性：<code>name</code> (string) and <code>age</code> (int),编码器告诉Spark在运行时生成代码，序列化 <code>Person</code> 对象为二进制结构。</p>
-<p>通常有两种创建Dataset的方法:<br><div class="note info"><p>使用 <code>SparkSession</code> 上可用的 <code>read</code> 方法读取 Spark 指向的存储系统上的文件。<br>用现存的 Datasets 转换而来。</p></div></p>
+<p>通常有两种创建Dataset的方法:</p>
+<blockquote>
+<p>使用 <code>SparkSession</code> 上可用的 <code>read</code> 方法读取 Spark 指向的存储系统上的文件。<br>用现存的 Datasets 转换而来。</p>
+</blockquote>
 <p>Dataset操作也可以是无类型的，通过多种领域专用语言（DSL）方法定义：这些操作非常类似于 R或Python语言中的 数据框架抽象中可用的操作。<br><a id="more"></a></p>
 <!--请开始装逼-->
 <!--对不起，到时间了，请停止装逼-->

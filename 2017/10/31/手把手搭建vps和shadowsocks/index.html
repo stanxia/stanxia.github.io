@@ -79,14 +79,18 @@
 
 
 
-<meta name="description" content="何来的枷锁
-没有人应该被困在牢笼之中">
+<meta name="description" content="背景记性不好，做个记录，日后有需要时难得费神。
+名词解释了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。
+vpsVPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。
+vultrVultr 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手搭建vps和shadowsocks">
 <meta property="og:url" content="https://stanxia.github.io/2017/10/31/手把手搭建vps和shadowsocks/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="何来的枷锁
-没有人应该被困在牢笼之中">
+<meta property="og:description" content="背景记性不好，做个记录，日后有需要时难得费神。
+名词解释了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。
+vpsVPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。
+vultrVultr 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/free.jpg">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/1.png">
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/goumai-01.png">
@@ -111,11 +115,13 @@
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-001-2.png">
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-002.png">
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-003.png">
-<meta property="og:updated_time" content="2017-11-05T04:22:43.000Z">
+<meta property="og:updated_time" content="2017-11-23T03:28:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手搭建vps和shadowsocks">
-<meta name="twitter:description" content="何来的枷锁
-没有人应该被困在牢笼之中">
+<meta name="twitter:description" content="背景记性不好，做个记录，日后有需要时难得费神。
+名词解释了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。
+vpsVPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。
+vultrVultr 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等">
 <meta name="twitter:image" content="https://stanxia.github.io/images/pic/free.jpg">
 
 
@@ -465,20 +471,14 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/free.jpg" alt="s"></p>
-<div class="note info"><p>何来的枷锁</p>
-<p>没有人应该被困在牢笼之中</p></div>
-<a id="more"></a>
-<!--请开始装逼-->
-<!--视频start-->
+        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/free.jpg" alt="s"><br><!--请开始装逼--></p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>记性不好，做个记录，日后有需要时难得费神。</p>
 <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。</p>
 <h3 id="vps"><a href="#vps" class="headerlink" title="vps"></a>vps</h3><p>VPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。</p>
 <h3 id="vultr"><a href="#vultr" class="headerlink" title="vultr"></a>vultr</h3><p><a href="https://www.vultr.com/" target="_blank" rel="external">Vultr</a> 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等多地的 VPS。它家的服务器以性价比高闻名，按时间计费，最低的资费为每月 $2.5。</p>
 <h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>Linux 是免费开源的操作系统，大概被世界上过半服务器所采用。有大量优秀的开源软件可以安装，上述 Shadowsocks 就是其一。你可以通过命令行来直接给 Linux 操作系统「下命令」，比如 $ cd ~/Desktop 就是进入你根目录下的 Desktop 文件夹。</p>
 <h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p> SSH 是一种网络协议，作为每一台 Linux 电脑的标准配置，用于计算机之间的加密登录。当你为租用的 VPS 安装 Linux 系统后，只要借助一些工具，就可以用 SSH 在你自己的 Mac/PC 电脑上远程登录该 VPS 了。</p>
-<h3 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h3><p>Shadowsocks(ss) 是由 <a href="https://github.com/Clowwindy" target="_blank" rel="external">Clowwindy</a> 开发的一款软件，其作用本来是加密传输资料。当然，也正因为它加密传输资料的特性，使得 GFW 没法将由它传输的资料和其他普通资料区分开来，也就不能干扰我们访问那些「不存在」的网站了。</p>
-<p><img src="/images/pic/1.png" alt="121"></p>
+<h3 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h3><p>Shadowsocks(ss) 是由 <a href="https://github.com/Clowwindy" target="_blank" rel="external">Clowwindy</a> 开发的一款软件，其作用本来是加密传输资料。当然，也正因为它加密传输资料的特性，使得 GFW 没法将由它传输的资料和其他普通资料区分开来，也就不能干扰我们访问那些「不存在」的网站了。<br><a id="more"></a><br><img src="/images/pic/1.png" alt="121"></p>
 <h2 id="搭建vps"><a href="#搭建vps" class="headerlink" title="搭建vps"></a>搭建vps</h2><p>目的就是搭建梯子。无建站的需求。推荐vultr，最便宜的有2.5美元一个月。500g流量完全够用了。且现在支持支付宝付款，颇为方便。现阶段的优惠活动是新注册的用户完成指定的任务会获得3美元的奖励。（详细情况可依参见官网。）</p>
 <h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>首先点击右侧注册链接：<a href="https://www.vultr.com/?ref=7008162" target="_blank" rel="external">https://www.vultr.com/2017Promo</a>，然后会来到下图所示的注册页面。</p>
 <p><img src="https://www.vultr.net.cn/resources/images/goumai-01.png" alt="11"></p>

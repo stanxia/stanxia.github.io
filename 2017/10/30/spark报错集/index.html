@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="魔高一尺
-道高一丈">
+<meta name="description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。
+总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark报错集">
 <meta property="og:url" content="https://stanxia.github.io/2017/10/30/spark报错集/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="魔高一尺
-道高一丈">
+<meta property="og:description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。
+总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/sn4.jpg">
-<meta property="og:updated_time" content="2017-11-05T05:11:40.000Z">
+<meta property="og:updated_time" content="2017-11-23T03:29:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark报错集">
-<meta name="twitter:description" content="魔高一尺
-道高一丈">
+<meta name="twitter:description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。
+总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
 <meta name="twitter:image" content="https://stanxia.github.io/images/pic/sn4.jpg">
 
 
@@ -443,18 +443,14 @@
     
       
         <script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/pic/sn4.jpg" alt="eroor"></p>
-<div class="note info"><p>魔高一尺</p>
-<p>道高一丈</p></div>
-<a id="more"></a>
-<!--请开始装逼-->
 <h2 id="有话要说"><a href="#有话要说" class="headerlink" title="有话要说"></a>有话要说</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
-<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
 <h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="关键词：spark-hive"><a href="#关键词：spark-hive" class="headerlink" title="关键词：spark-hive"></a>关键词：spark-hive</h3><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</div></pre></td></tr></table></figure>
 <h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在本地调试spark程序，连接虚拟机上的集群，尝试执行sparkSQL时，启动任务就报错。</div></pre></td></tr></table></figure>
 <h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">缺少sparkSQL连接hive的必要和依赖jar包</div></pre></td></tr></table></figure>
 <h4 id="办法："><a href="#办法：" class="headerlink" title="办法："></a>办法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">在项目／模块的pom.xml中添加相关的spark-hive依赖jar包。</div><div class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive_2.11 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.1.1&lt;/version&gt;</div><div class="line">    &lt;scope&gt;provided&lt;/scope&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">重新编译项目／模块即可。</div></pre></td></tr></table></figure>
-<hr>
 <!--对不起，到时间了，请停止装逼-->
+
       
     </div>
     
