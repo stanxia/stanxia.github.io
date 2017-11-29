@@ -92,7 +92,8 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。
 查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta property="og:image" content="https://stanxia.github.io/images/pic/sn5.jpg">
-<meta property="og:updated_time" content="2017-11-23T08:00:07.000Z">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg">
+<meta property="og:updated_time" content="2017-11-29T01:15:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark关于parquet的优化">
 <meta name="twitter:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。
@@ -478,6 +479,12 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
 </table>
 <h2 id="Parquet的使用"><a href="#Parquet的使用" class="headerlink" title="Parquet的使用"></a>Parquet的使用</h2><p>使用parquet的简单demo：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Encoders for most common types are automatically provided by importing spark.implicits._</span></div><div class="line"><span class="keyword">import</span> spark.implicits._</div><div class="line"></div><div class="line"><span class="keyword">val</span> peopleDF = spark.read.json(<span class="string">"examples/src/main/resources/people.json"</span>)</div><div class="line"></div><div class="line"><span class="comment">// DataFrames can be saved as Parquet files, maintaining the schema information</span></div><div class="line">peopleDF.write.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Read in the parquet file created above</span></div><div class="line"><span class="comment">// Parquet files are self-describing so the schema is preserved</span></div><div class="line"><span class="comment">// The result of loading a Parquet file is also a DataFrame</span></div><div class="line"><span class="keyword">val</span> parquetFileDF = spark.read.parquet(<span class="string">"people.parquet"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Parquet files can also be used to create a temporary view and then used in SQL statements</span></div><div class="line">parquetFileDF.createOrReplaceTempView(<span class="string">"parquetFile"</span>)</div><div class="line"><span class="keyword">val</span> namesDF = spark.sql(<span class="string">"SELECT name FROM parquetFile WHERE age BETWEEN 13 AND 19"</span>)</div><div class="line">namesDF.map(attributes =&gt; <span class="string">"Name: "</span> + attributes(<span class="number">0</span>)).show()</div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |       value|</span></div><div class="line"><span class="comment">// +------------+</span></div><div class="line"><span class="comment">// |Name: Justin|</span></div><div class="line"><span class="comment">// +------------+</span></div></pre></td></tr></table></figure>
+<h2 id="Parquet-的问题"><a href="#Parquet-的问题" class="headerlink" title="Parquet 的问题"></a>Parquet 的问题</h2><p> spark 写入数据到 hive 中，使用 Parquet 存储格式，查询该表时报错如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">Error</span>: java.io.<span class="type">IOException</span>: org.apache.parquet.io.<span class="type">ParquetDecodingException</span>: <span class="type">Can</span> not read value at <span class="number">0</span> in block <span class="number">-1</span> in file</div></pre></td></tr></table></figure>
+<p>当时设置的字段属性为：<br><img src="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg" alt=""></p>
+<p>经过比对，发现是 decimal 类型出了问题，查询 decimal 的字段时候就会报错，而查询其他的并不会报错。（这应该是 spark 引起的，因为在 hive 客户端执行 decimal 类型的操作时并不会出错。）</p>
+<p>查阅网上，也有些朋友遇到了类似的事情，应该是官方的 bug ，暂时的解决办法是:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 将 <span class="type">Parquet</span> 的存储格式转换为 <span class="type">ORC</span> </div><div class="line"><span class="number">2.</span> 或将 decimal 换为 double 类型存储字段</div></pre></td></tr></table></figure>
 <!--对不起，到时间了，请停止装逼-->
 
       
@@ -656,7 +663,7 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +685,7 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -779,7 +786,7 @@ Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">1.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">1.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">1.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">1.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">2.</span> <span class="nav-text">Parquet的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">1.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">1.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">1.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">1.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">2.</span> <span class="nav-text">Parquet的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet-的问题"><span class="nav-number">3.</span> <span class="nav-text">Parquet 的问题</span></a></li></ol></div>
             
 
           </div>
