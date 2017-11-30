@@ -13,19 +13,66 @@
     </entry>
     
     <entry>
+      <title><![CDATA[SparkSQL-Catalyst优化理解]]></title>
+      <url>https://stanxia.github.io/2017/11/30/SparkSQL-Catalyst%E4%BC%98%E5%8C%96%E7%90%86%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
+<p>SQL优化器核心执行策略主要分为两个大的方向：</p>
+<ol>
+<li>基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心优化算子Join却显得有点力不从心。</li>
+<li>基于代价优化 (CBO)：根据代价估算确定一种代价最小的方案。</li>
+</ol>
+<p>举个简单的例子，两个表执行Join到底应该使用BroadcastHashJoin还是SortMergeJoin？当前SparkSQL的方式是通过手工设定参数来确定，如果一个表的数据量小于这个值就使用BroadcastHashJoin，但是这种方案显得很不优雅，很不灵活。基于代价优化就是为了解决这类问题，它会针对每个Join评估当前两张表使用每种Join策略的代价，根据代价估算确定一种代价最小的方案。</p>
+<a id="more"></a>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120193767483.jpg" alt=""></p>
+<h2 id="Tree-amp-Rule"><a href="#Tree-amp-Rule" class="headerlink" title="Tree&amp;Rule"></a>Tree&amp;Rule</h2><p>在介绍SQL优化器工作原理之前，有必要首先介绍两个重要的数据结构：Tree和Rule。SQL语法树就是SQL语句通过编译器之后会被解析成一棵树状结构。这棵树会包含很多节点对象，每个节点都拥有特定的数据类型，同时会有0个或多个孩子节点（节点对象在代码中定义为TreeNode对象），下图是个简单的示例：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194433988.jpg" alt=""><br>如上图所示，箭头左边表达式有3种数据类型（Literal表示常量、Attribute表示变量、Add表示动作），表示x+(1+2)。映射到右边树状结构后，每一种数据类型就会变成一个节点。另外，Tree还有一个非常重要的特性，可以通过一定的规则进行等价变换，如下图：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194660866.jpg" alt=""></p>
+<p>上图定义了一个等价变换规则(Rule)：两个Integer类型的常量相加可以等价转换为一个Integer常量，这个规则其实很简单，对于上文中提到的表达式x+(1+2)来说就可以转变为x+3。对于程序来讲，如何找到两个Integer常量呢？其实就是简单的二叉树遍历算法，每遍历到一个节点，就模式匹配当前节点为Add、左右子节点是Integer常量的结构，定位到之后将此三个节点替换为一个Literal类型的节点。</p>
+<p>上面用一个最简单的示例来说明等价变换规则以及如何将规则应用于语法树。在任何一个SQL优化器中，通常会定义大量的Rule（后面会讲到），SQL优化器会遍历语法树中每个节点，针对遍历到的节点模式匹配所有给定规则（Rule），如果有匹配成功的，就进行相应转换，如果所有规则都匹配失败，就继续遍历下一个节点。</p>
+<h2 id="Catalyst工作流程"><a href="#Catalyst工作流程" class="headerlink" title="Catalyst工作流程"></a>Catalyst工作流程</h2><p>任何一个优化器工作原理都大同小异：SQL语句首先通过Parser模块被解析为语法树，此棵树称为Unresolved Logical Plan；Unresolved Logical Plan通过Analyzer模块借助于数据元数据解析为Logical Plan；此时再通过各种基于规则的优化策略进行深入优化，得到Optimized Logical Plan；优化后的逻辑执行计划依然是逻辑的，并不能被Spark系统理解，此时需要将此逻辑执行计划转换为Physical Plan；为了更好的对整个过程进行理解，下文通过一个简单示例进行解释。</p>
+<h3 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h3><p>Parser简单来说是将SQL字符串切分成一个一个Token，再根据一定语义规则解析为一棵语法树。Parser模块目前基本都使用第三方类库ANTLR进行实现，比如Hive、 Presto、SparkSQL等。下图是一个示例性的SQL语句（有两张表，其中people表主要存储用户基本信息，score表存储用户的各种成绩），通过Parser解析后的AST语法树如图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120196105832.jpg" alt=""></p>
+<h3 id="Analyzer"><a href="#Analyzer" class="headerlink" title="Analyzer"></a>Analyzer</h3><p>通过解析后的逻辑执行计划基本有了骨架，但是系统并不知道score、sum这些都是些什么鬼，此时需要基本的元数据信息来表达这些词素，最重要的元数据信息主要包括两部分：表的Scheme和基本函数信息，表的scheme主要包括表的基本定义（列名、数据类型）、表的数据格式（Json、Text）、表的物理位置等，基本函数信息主要指类信息。</p>
+<p>Analyzer会再次遍历整个语法树，对树上的每个节点进行数据类型绑定以及函数绑定，比如people词素会根据元数据表信息解析为包含age、id以及name三列的表，people.age会被解析为数据类型为int的变量，sum会被解析为特定的聚合函数，如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120196532182.jpg" alt=""></p>
+<p>SparkSQL中Analyzer定义了各种解析规则，可以查看Analyzer类，其中定义了基本的解析规则，如下：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120196892326.jpg" alt=""></p>
+<h3 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h3><p>优化器是整个Catalyst的核心，上文提到优化器分为基于规则优化和基于代价优化两种，当前SparkSQL 2.1依然没有很好的支持基于代价优化，此处只介绍基于规则的优化策略，基于规则的优化策略实际上就是对语法树进行一次遍历，模式匹配能够满足特定规则的节点，再进行相应的等价转换。因此，基于规则优化说到底就是一棵树等价地转换为另一棵树。SQL中经典的优化规则有很多，下文结合示例介绍三种比较常见的规则：</p>
+<ol>
+<li>谓词下推（Predicate Pushdown）</li>
+<li>常量累加（Constant Folding）</li>
+<li>列值裁剪（Column Pruning）</li>
+</ol>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120197859386.jpg" alt=""></p>
+<p>上图左边是经过Analyzer解析后的语法树，语法树中两个表先做join，之后再使用age&gt;10对结果进行过滤。大家知道join算子通常是一个非常耗时的算子，耗时多少一般取决于参与join的两个表的大小，如果能够减少参与join两表的大小，就可以大大降低join算子所需时间。谓词下推就是这样一种功能，它会将过滤操作下推到join之前进行，上图中过滤条件age&gt;0以及id!=null两个条件就分别下推到了join之前。这样，系统在扫描数据的时候就对数据进行了过滤，参与join的数据量将会得到显著的减少，join耗时必然也会降低。</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120198070875.jpg" alt=""></p>
+<p>常量累加其实很简单，就是上文中提到的规则  x+(1+2)  -&gt; x+3，虽然是一个很小的改动，但是意义巨大。示例如果没有进行优化的话，每一条结果都需要执行一次100+80的操作，然后再与变量math_score以及english_score相加，而优化后就不需要再执行100+80操作。</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120198279383.jpg" alt=""></p>
+<p>列值裁剪是另一个经典的规则，示例中对于people表来说，并不需要扫描它的所有列值，而只需要列值id，所以在扫描people之后需要将其他列进行裁剪，只留下列id。这个优化一方面大幅度减少了网络、内存数据量消耗，另一方面对于列存数据库（Parquet）来说大大提高了扫描效率。</p>
+<p>除此之外，Catalyst还定义了很多其他优化规则，可以查看Optimizer类，下图简单的截取一部分规则：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120198495604.jpg" alt=""></p>
+<p>至此，逻辑执行计划已经得到了比较完善的优化，然而，逻辑执行计划依然没办法真正执行，他们只是逻辑上可行，实际上Spark并不知道如何去执行这个东西。比如Join只是一个抽象概念，代表两个表根据相同的id进行合并，然而具体怎么实现这个合并，逻辑执行计划并没有说明。</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120198739726.jpg" alt=""></p>
+<p>此时就需要将逻辑执行计划转换为物理执行计划，将逻辑上可行的执行计划变为Spark可以真正执行的计划。比如Join算子，Spark根据不同场景为该算子制定了不同的算法策略，有BroadcastHashJoin、ShuffleHashJoin以及SortMergeJoin等（可以将Join理解为一个接口，BroadcastHashJoin是其中一个具体实现），物理执行计划实际上就是在这些具体实现中挑选一个耗时最小的算法实现，这个过程涉及到基于代价优化策略。</p>
+<h2 id="查看SparkSQL执行计划"><a href="#查看SparkSQL执行计划" class="headerlink" title="查看SparkSQL执行计划"></a>查看SparkSQL执行计划</h2><p>至此，通过一个简单的示例完整的介绍了Catalyst的整个工作流程，包括Parser阶段、Analyzer阶段、Optimize阶段以及Physical Planning阶段。有同学可能会比较感兴趣Spark环境下如何查看一条具体的SQL的整个过程，在此介绍两种方法：</p>
+<h3 id="查看逻辑执行计划"><a href="#查看逻辑执行计划" class="headerlink" title="查看逻辑执行计划"></a>查看逻辑执行计划</h3><p>使用queryExecution方法查看逻辑执行计划，如下所示：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120199915140.jpg" alt=""></p>
+<h3 id="查看物理执行计划"><a href="#查看物理执行计划" class="headerlink" title="查看物理执行计划"></a>查看物理执行计划</h3><p>使用explain方法查看物理执行计划：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120200455737.jpg" alt=""></p>
+<h3 id="Spark-WebUI进行查看"><a href="#Spark-WebUI进行查看" class="headerlink" title="Spark WebUI进行查看"></a>Spark WebUI进行查看</h3><p><img src="http://oliji9s3j.bkt.clouddn.com/15120200683962.jpg" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[spark容错机制]]></title>
       <url>https://stanxia.github.io/2017/11/29/spark%E5%AE%B9%E9%94%99%E6%9C%BA%E5%88%B6/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： ==数据检查点== 和 ==记录数据的更新== 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
-<p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，==RDD只支持粗粒度转换==，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称==“血统(Lineage)”容错==）记录下来，以便恢复丢失的分区。 </p>
+      <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
+<p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称“血统(Lineage)”容错）记录下来，以便恢复丢失的分区。 </p>
 <p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。</p>
 <a id="more"></a>
 <h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2><h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
-<h3 id="两种依赖关系"><a href="#两种依赖关系" class="headerlink" title="两种依赖关系"></a>两种依赖关系</h3><p>RDD在Lineage依赖方面分为两种：==窄依赖(Narrow Dependencies)==与==宽依赖(Wide Dependencies==,源码中称为Shuffle Dependencies)，用来解决数据容错的高效性。</p>
+<h3 id="两种依赖关系"><a href="#两种依赖关系" class="headerlink" title="两种依赖关系"></a>两种依赖关系</h3><p>RDD在Lineage依赖方面分为两种：窄依赖(Narrow Dependencies)与宽依赖(Wide Dependencies,源码中称为Shuffle Dependencies)，用来解决数据容错的高效性。</p>
 <ul>
-<li>==窄依赖==：是指父RDD的每一个分区最多被一个子RDD的分区所用，表现为一个父RDD的分区对应于一个子RDD的分区，或多个父RDD的分区对应于一个子RDD的分区，也就是说一个父RDD的一个分区不可能对应一个子RDD的多个分区。 1个父RDD分区对应1个子RDD分区，这其中又分两种情况：1个子RDD分区对应1个父RDD分区（如map、filter等算子），1个子RDD分区对应N个父RDD分区（如co-paritioned（协同划分）过的Join）。</li>
-<li>==宽依赖==：是指子RDD的分区依赖于父RDD的多个分区或所有分区，即存在一个父RDD的一个分区对应一个子RDD的多个分区。 1个父RDD分区对应多个子RDD分区，这其中又分两种情况：1个父RDD对应所有子RDD分区（未经协同划分的Join）或者1个父RDD对应非全部的多个RDD分区（如groupByKey）。 </li>
+<li>窄依赖：是指父RDD的每一个分区最多被一个子RDD的分区所用，表现为一个父RDD的分区对应于一个子RDD的分区，或多个父RDD的分区对应于一个子RDD的分区，也就是说一个父RDD的一个分区不可能对应一个子RDD的多个分区。 1个父RDD分区对应1个子RDD分区，这其中又分两种情况：1个子RDD分区对应1个父RDD分区（如map、filter等算子），1个子RDD分区对应N个父RDD分区（如co-paritioned（协同划分）过的Join）。</li>
+<li>宽依赖：是指子RDD的分区依赖于父RDD的多个分区或所有分区，即存在一个父RDD的一个分区对应一个子RDD的多个分区。 1个父RDD分区对应多个子RDD分区，这其中又分两种情况：1个父RDD对应所有子RDD分区（未经协同划分的Join）或者1个父RDD对应非全部的多个RDD分区（如groupByKey）。 </li>
 </ul>
-<h3 id="本质理解"><a href="#本质理解" class="headerlink" title="本质理解"></a>本质理解</h3><p>根据父RDD分区是对应1个还是多个子RDD分区来区分==窄依赖（父分区对应一个子分区，多个父分区对应一个子分区）和宽依赖（父分区对应多个子分区）==。如果对应多个，则当容错重算分区时，因为父分区数据只有一部分是需要重算子分区的，其余数据重算就造成了冗余计算。</p>
+<h3 id="本质理解"><a href="#本质理解" class="headerlink" title="本质理解"></a>本质理解</h3><p>根据父RDD分区是对应1个还是多个子RDD分区来区分窄依赖（父分区对应一个子分区，多个父分区对应一个子分区）和宽依赖（父分区对应多个子分区）。如果对应多个，则当容错重算分区时，因为父分区数据只有一部分是需要重算子分区的，其余数据重算就造成了冗余计算。</p>
 <p>对于宽依赖，Stage计算的输入和输出在不同的节点上，对于输入节点完好，而输出节点死机的情况，通过重新计算恢复数据这种情况下，这种方法容错是有效的，否则无效，因为无法重试，需要向上追溯其祖先看是否可以重试（这就是lineage，血统的意思），窄依赖对于数据的重算开销要远小于宽依赖的数据重算开销。</p>
 <p>窄依赖和宽依赖的概念主要用在两个地方：一个是容错中相当于Redo日志的功能；另一个是在调度中构建DAG作为不同Stage的划分点。</p>
 <h3 id="依赖关系的特性"><a href="#依赖关系的特性" class="headerlink" title="依赖关系的特性"></a>依赖关系的特性</h3><p>第一，窄依赖可以在某个计算节点上直接通过计算父RDD的某块数据计算得到子RDD对应的某块数据；宽依赖则要等到父RDD所有数据都计算完成之后，并且父RDD的计算结果进行hash并传到对应节点上之后才能计算子RDD。 </p>
@@ -40,7 +87,7 @@
 </ol>
 <p>由于RDD是只读的，所以Spark的RDD计算中一致性不是主要关心的内容，内存相对容易管理，这也是设计者很有远见的地方，这样减少了框架的复杂性，提升了性能和可扩展性，为以后上层框架的丰富奠定了强有力的基础。 </p>
 <p>在RDD计算中，通过检查点机制进行容错，传统做检查点有两种方式：通过冗余数据和日志记录更新操作。在RDD中的doCheckPoint方法相当于通过冗余数据来缓存数据，而之前介绍的血统就是通过相当粗粒度的记录更新操作来实现容错的。</p>
-<p>==检查点==（本质是通过将RDD写入Disk做检查点）是为了通过lineage做容错的辅助，lineage过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果之后有节点出现问题而丢失分区，从做检查点的RDD开始重做Lineage，就会减少开销。</p>
+<p>检查点（本质是通过将RDD写入Disk做检查点）是为了通过lineage做容错的辅助，lineage过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果之后有节点出现问题而丢失分区，从做检查点的RDD开始重做Lineage，就会减少开销。</p>
 ]]></content>
     </entry>
     

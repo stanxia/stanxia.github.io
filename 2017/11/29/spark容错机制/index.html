@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="引言一般来说，分布式数据集的容错性有两种方式： ==数据检查点== 和 ==记录数据的更新== 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
-但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，==RDD只支持粗粒度转换==，即只记录单个块">
+<meta name="description" content="引言一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
+但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark容错机制">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/29/spark容错机制/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="引言一般来说，分布式数据集的容错性有两种方式： ==数据检查点== 和 ==记录数据的更新== 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
-但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，==RDD只支持粗粒度转换==，即只记录单个块">
-<meta property="og:updated_time" content="2017-11-29T09:37:31.000Z">
+<meta property="og:description" content="引言一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
+但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将">
+<meta property="og:updated_time" content="2017-11-30T01:15:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark容错机制">
-<meta name="twitter:description" content="引言一般来说，分布式数据集的容错性有两种方式： ==数据检查点== 和 ==记录数据的更新== 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
-但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，==RDD只支持粗粒度转换==，即只记录单个块">
+<meta name="twitter:description" content="引言一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。
+但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将">
 
 
 
@@ -185,8 +185,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             首页
           </a>
         </li>
@@ -194,8 +192,6 @@
         
         <li class="menu-item menu-item-about">
           <a href="/aboutme/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -205,8 +201,6 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
             标签
           </a>
         </li>
@@ -214,8 +208,6 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,8 +217,6 @@
         <li class="menu-item menu-item-gem">
           <a href="/gem/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
-            
             gem
           </a>
         </li>
@@ -234,8 +224,6 @@
         
         <li class="menu-item menu-item-书单">
           <a href="/books" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
             书单
           </a>
@@ -245,8 +233,6 @@
         <li class="menu-item menu-item-电影">
           <a href="/movies" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-video-camera"></i> <br />
-            
             电影
           </a>
         </li>
@@ -254,8 +240,6 @@
         
         <li class="menu-item menu-item-相册">
           <a href="https://www.instagram.com/xooglexls/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-instagram"></i> <br />
             
             相册
           </a>
@@ -267,8 +251,6 @@
           
             <a href="javascript:;" class="popup-trigger">
           
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
             搜索
           </a>
@@ -440,17 +422,17 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： ==数据检查点== 和 ==记录数据的更新== 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
-<p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，==RDD只支持粗粒度转换==，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称==“血统(Lineage)”容错==）记录下来，以便恢复丢失的分区。 </p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
+<p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称“血统(Lineage)”容错）记录下来，以便恢复丢失的分区。 </p>
 <p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。</p>
 <a id="more"></a>
 <h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2><h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
-<h3 id="两种依赖关系"><a href="#两种依赖关系" class="headerlink" title="两种依赖关系"></a>两种依赖关系</h3><p>RDD在Lineage依赖方面分为两种：==窄依赖(Narrow Dependencies)==与==宽依赖(Wide Dependencies==,源码中称为Shuffle Dependencies)，用来解决数据容错的高效性。</p>
+<h3 id="两种依赖关系"><a href="#两种依赖关系" class="headerlink" title="两种依赖关系"></a>两种依赖关系</h3><p>RDD在Lineage依赖方面分为两种：窄依赖(Narrow Dependencies)与宽依赖(Wide Dependencies,源码中称为Shuffle Dependencies)，用来解决数据容错的高效性。</p>
 <ul>
-<li>==窄依赖==：是指父RDD的每一个分区最多被一个子RDD的分区所用，表现为一个父RDD的分区对应于一个子RDD的分区，或多个父RDD的分区对应于一个子RDD的分区，也就是说一个父RDD的一个分区不可能对应一个子RDD的多个分区。 1个父RDD分区对应1个子RDD分区，这其中又分两种情况：1个子RDD分区对应1个父RDD分区（如map、filter等算子），1个子RDD分区对应N个父RDD分区（如co-paritioned（协同划分）过的Join）。</li>
-<li>==宽依赖==：是指子RDD的分区依赖于父RDD的多个分区或所有分区，即存在一个父RDD的一个分区对应一个子RDD的多个分区。 1个父RDD分区对应多个子RDD分区，这其中又分两种情况：1个父RDD对应所有子RDD分区（未经协同划分的Join）或者1个父RDD对应非全部的多个RDD分区（如groupByKey）。 </li>
+<li>窄依赖：是指父RDD的每一个分区最多被一个子RDD的分区所用，表现为一个父RDD的分区对应于一个子RDD的分区，或多个父RDD的分区对应于一个子RDD的分区，也就是说一个父RDD的一个分区不可能对应一个子RDD的多个分区。 1个父RDD分区对应1个子RDD分区，这其中又分两种情况：1个子RDD分区对应1个父RDD分区（如map、filter等算子），1个子RDD分区对应N个父RDD分区（如co-paritioned（协同划分）过的Join）。</li>
+<li>宽依赖：是指子RDD的分区依赖于父RDD的多个分区或所有分区，即存在一个父RDD的一个分区对应一个子RDD的多个分区。 1个父RDD分区对应多个子RDD分区，这其中又分两种情况：1个父RDD对应所有子RDD分区（未经协同划分的Join）或者1个父RDD对应非全部的多个RDD分区（如groupByKey）。 </li>
 </ul>
-<h3 id="本质理解"><a href="#本质理解" class="headerlink" title="本质理解"></a>本质理解</h3><p>根据父RDD分区是对应1个还是多个子RDD分区来区分==窄依赖（父分区对应一个子分区，多个父分区对应一个子分区）和宽依赖（父分区对应多个子分区）==。如果对应多个，则当容错重算分区时，因为父分区数据只有一部分是需要重算子分区的，其余数据重算就造成了冗余计算。</p>
+<h3 id="本质理解"><a href="#本质理解" class="headerlink" title="本质理解"></a>本质理解</h3><p>根据父RDD分区是对应1个还是多个子RDD分区来区分窄依赖（父分区对应一个子分区，多个父分区对应一个子分区）和宽依赖（父分区对应多个子分区）。如果对应多个，则当容错重算分区时，因为父分区数据只有一部分是需要重算子分区的，其余数据重算就造成了冗余计算。</p>
 <p>对于宽依赖，Stage计算的输入和输出在不同的节点上，对于输入节点完好，而输出节点死机的情况，通过重新计算恢复数据这种情况下，这种方法容错是有效的，否则无效，因为无法重试，需要向上追溯其祖先看是否可以重试（这就是lineage，血统的意思），窄依赖对于数据的重算开销要远小于宽依赖的数据重算开销。</p>
 <p>窄依赖和宽依赖的概念主要用在两个地方：一个是容错中相当于Redo日志的功能；另一个是在调度中构建DAG作为不同Stage的划分点。</p>
 <h3 id="依赖关系的特性"><a href="#依赖关系的特性" class="headerlink" title="依赖关系的特性"></a>依赖关系的特性</h3><p>第一，窄依赖可以在某个计算节点上直接通过计算父RDD的某块数据计算得到子RDD对应的某块数据；宽依赖则要等到父RDD所有数据都计算完成之后，并且父RDD的计算结果进行hash并传到对应节点上之后才能计算子RDD。 </p>
@@ -465,7 +447,7 @@
 </ol>
 <p>由于RDD是只读的，所以Spark的RDD计算中一致性不是主要关心的内容，内存相对容易管理，这也是设计者很有远见的地方，这样减少了框架的复杂性，提升了性能和可扩展性，为以后上层框架的丰富奠定了强有力的基础。 </p>
 <p>在RDD计算中，通过检查点机制进行容错，传统做检查点有两种方式：通过冗余数据和日志记录更新操作。在RDD中的doCheckPoint方法相当于通过冗余数据来缓存数据，而之前介绍的血统就是通过相当粗粒度的记录更新操作来实现容错的。</p>
-<p>==检查点==（本质是通过将RDD写入Disk做检查点）是为了通过lineage做容错的辅助，lineage过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果之后有节点出现问题而丢失分区，从做检查点的RDD开始重做Lineage，就会减少开销。</p>
+<p>检查点（本质是通过将RDD写入Disk做检查点）是为了通过lineage做容错的辅助，lineage过长会造成容错成本过高，这样就不如在中间阶段做检查点容错，如果之后有节点出现问题而丢失分区，从做检查点的RDD开始重做Lineage，就会减少开销。</p>
 
       
     </div>
@@ -555,8 +537,8 @@
     
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/10/27/火之意志/" rel="prev" title="火之意志">
-                火之意志 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/30/SparkSQL-Catalyst优化理解/" rel="prev" title="SparkSQL-Catalyst优化理解">
+                SparkSQL-Catalyst优化理解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -643,7 +625,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +647,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -793,7 +775,7 @@
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>
