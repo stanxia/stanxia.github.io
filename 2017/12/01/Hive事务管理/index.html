@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121068364921.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg">
-<meta property="og:updated_time" content="2017-12-01T06:03:39.000Z">
+<meta property="og:updated_time" content="2017-12-01T06:29:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive事务管理">
 <meta name="twitter:description" content="简介Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用">
@@ -505,18 +505,14 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> test_notransaction <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'peach1'</span>),(<span class="number">2</span>,<span class="string">'peach2'</span>),(<span class="number">3</span>, <span class="string">'peach3'</span>),(<span class="number">4</span>, <span class="string">'peach4'</span>);</div></pre></td></tr></table></figure>
 <p>查看插入的数据：</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121055789375.jpg" alt=""></p>
-<h4 id="开启Concurrency"><a href="#开启Concurrency" class="headerlink" title="开启Concurrency"></a>开启Concurrency</h4><ol>
-<li>对catalog_sales表进行并发select操作</li>
-</ol>
+<h4 id="开启Concurrency"><a href="#开启Concurrency" class="headerlink" title="开启Concurrency"></a>开启Concurrency</h4><p>1、对catalog_sales表进行并发select操作</p>
 <p>执行的sql语句：select count(*) from catalog_sales;</p>
 <p>执行单条sql查询时，获取一个共享锁（S），sql语句正常执行</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121056449113.jpg" alt=""></p>
 <p>同时执行两条sql查询是，获取两个共享锁，并且sql语句均正常执行</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121056652164.jpg" alt=""></p>
 <p><strong>分析</strong>：由此对比可得出hive在执行sql查询时获取Share锁，在并发的情况下可获取多个共享锁。</p>
-<ol>
-<li>对test表进行并发Insert操作</li>
-</ol>
+<p>2、对test表进行并发Insert操作</p>
 <p>创建表：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span>(<span class="keyword">name</span> <span class="keyword">string</span>, <span class="keyword">id</span> <span class="built_in">int</span>);</div></pre></td></tr></table></figure>
 <p>执行sql语句：</p>
@@ -525,9 +521,7 @@
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121057731335.jpg" alt=""></p>
 <p>同时执行两条insert语句时，只能获取一个test表X锁，第一条insert语句正常执行，第二条insert语句处于等待状态，在第一条insert语句释放test表的X锁，第二条sql语句正常执行.</p>
 <p><strong>分析</strong>：由此对比可得出hive在执行insert操作时，只能获取一个X锁且锁不能共享，只能在sql执行完成释放锁后，后续sql方可继续执行。</p>
-<ol>
-<li>对test表执行select的同时执行insert操作</li>
-</ol>
+<p>3、对test表执行select的同时执行insert操作</p>
 <p>执行sql语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select count(*) from test; </div><div class="line">insert into test values(&quot;test123&quot;,123);</div></pre></td></tr></table></figure>
 <p>步骤：</p>
@@ -539,9 +533,7 @@
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121058724922.jpg" alt=""></p>
 <p><strong>分析</strong>： 由上述操作可得出，hive中一个表只能有一个排它锁(X)且锁不能共享，在获取排它锁时，表上不能有其它锁包括共享锁(S)，只有在表上所有的锁都释放后，insert操作才能继续，否则处于等待状态。</p>
 <p>对注意部分进行参数调整，将hive.lock.sleep.between.retries设置为10s，再次进行测试发现，在select语句执行完成后，大概过6s左右insert语句开始执行,通过两次测试发现，等待时间均在10s以内，由此可以得出此参数影响sql操作获取锁的间隔（在未获取到锁的情况下），如果此时未到获取锁触发周期，执行其它sql则，该sql会优于等待的sql执行。</p>
-<ol>
-<li>对test表执行insert的同时执行select操作</li>
-</ol>
+<p>4、对test表执行insert的同时执行select操作</p>
 <p>执行sql语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">insert into test values(&quot;test123&quot;,123); </div><div class="line">select count(*) from test;</div></pre></td></tr></table></figure>
 <p>操作步骤：</p>
@@ -551,9 +543,7 @@
 <p>3) 在insert语句执行完成后，观察select语句开始正常执行，此时查看test表锁状态为共享锁（S），之前的insert操作获取的排它锁（X）已被释放</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121059320973.jpg" alt=""></p>
 <p><strong>分析</strong>：在test表锁状态为排它锁(X)时，所有的操作均被阻塞处于等待状态，只有在排它锁(X)释放其它操作可继续进行。</p>
-<ol>
-<li>测试update和delete修改test表数据</li>
-</ol>
+<p>5、测试update和delete修改test表数据</p>
 <p>sql语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">update test set name=&apos;aaaa&apos; where id=1252; </div><div class="line">delete test set name=&apos;bbbb&apos; where id=123;</div></pre></td></tr></table></figure>
 <p>1) 表中数据，更新前</p>
@@ -585,7 +575,7 @@
 <p>在未配置hive的Transaction和ACID时，不支持update操作。</p>
 <p>5、执行delete操作，将表中user_id为1信息删除</p>
 <p>sql语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">delete from test_notransaction where user_id=1;</div><div class="line">``` </div><div class="line">执行delete操作，执行结果如下：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121061713652.jpg)</div><div class="line"></div><div class="line">hive未配置Transaction和ACID，不支持delete操作。</div><div class="line"></div><div class="line">6、查看表获取锁类型</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">delete from test_notransaction where user_id=1;</div><div class="line">``` </div><div class="line"></div><div class="line">执行delete操作，执行结果如下：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121061713652.jpg)</div><div class="line"></div><div class="line">hive未配置Transaction和ACID，不支持delete操作。</div><div class="line"></div><div class="line">6、查看表获取锁类型</div></pre></td></tr></table></figure>
 <p>show locks;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">无法正常执行；</div><div class="line"></div><div class="line">### Hive的事务</div><div class="line">#### Hive的事务配置</div><div class="line">Hive从0.13开始加入了事务支持，在行级别提供完整的ACID特性，Hive在0.14时加入了对INSERT...VALUES,UPDATE,and DELETE的支持。对于在Hive中使用ACID和Transactions，主要有以下限制：</div><div class="line"></div><div class="line">* 不支持BEGIN,COMMIT和ROLLBACK</div><div class="line">* 只支持ORC文件格式</div><div class="line">* 表必须分桶</div><div class="line">* 不允许从一个非ACID连接写入/读取ACID表</div><div class="line"></div><div class="line">为了使Hive支持事务操作，需将以下参数加入到hive-site.xml文件中。</div></pre></td></tr></table></figure></p>
 <p><property></property></p>
 <p><name>hive.support.concurrency</name></p>
@@ -815,7 +805,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
