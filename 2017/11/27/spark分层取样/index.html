@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,源码,取样," />
+  <meta name="keywords" content="spark,取样,源码," />
 
 
 
@@ -87,13 +87,11 @@
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在spark.mllib中，用key来分层。
 与存在于spark.mllib中的其它统计函数不同，分层采样方法sampleByKey和sampleByKeyExact可以在key-value对的RDD上执行。在分层采样中，可以认为key是一个标签，value是特定的属性。例如">
-<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15118547764129.jpg">
-<meta property="og:updated_time" content="2017-11-30T08:16:06.000Z">
+<meta property="og:updated_time" content="2017-12-05T03:34:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark分层取样">
 <meta name="twitter:description" content="先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在spark.mllib中，用key来分层。
 与存在于spark.mllib中的其它统计函数不同，分层采样方法sampleByKey和sampleByKeyExact可以在key-value对的RDD上执行。在分层采样中，可以认为key是一个标签，value是特定的属性。例如">
-<meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15118547764129.jpg">
 
 
 
@@ -393,17 +391,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/27/spark分层取样/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/27/spark分层取样/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/27/spark分层取样/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -440,10 +437,10 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15118547764129.jpg" alt=""><br>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><p>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
 <p>与存在于<code>spark.mllib</code>中的其它统计函数不同，分层采样方法<code>sampleByKey</code>和<code>sampleByKeyExact</code>可以在<code>key-value</code>对的<code>RDD</code>上执行。在分层采样中，可以认为<code>key</code>是一个标签，<br><code>value</code>是特定的属性。例如，<code>key</code>可以是男人或者女人或者文档<code>id</code>,它相应的<code>value</code>可能是一组年龄或者是文档中的词。<code>sampleByKey</code>方法通过掷硬币的方式决定是否采样一个观察数据，<br>因此它需要我们传递（<code>pass over</code>）数据并且提供期望的数据大小(<code>size</code>)。<code>sampleByKeyExact</code>比每层使用<code>sampleByKey</code>随机抽样需要更多的有意义的资源，但是它能使样本大小的准确性达到了<code>99.99%</code>。</p>
-<a id="more"></a>
 <p><a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="external">sampleByKeyExact()</a>允许用户准确抽取<code>f_k * n_k</code>个样本，<br>这里<code>f_k</code>表示期望获取键为<code>k</code>的样本的比例，<code>n_k</code>表示键为<code>k</code>的键值对的数量。下面是一个使用的例子：</p>
+<a id="more"></a>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.rdd.<span class="type">PairRDDFunctions</span></div><div class="line"><span class="keyword">val</span> sc: <span class="type">SparkContext</span> = ...</div><div class="line"><span class="keyword">val</span> data = ... <span class="comment">// an RDD[(K, V)] of any key value pairs</span></div><div class="line"><span class="keyword">val</span> fractions: <span class="type">Map</span>[<span class="type">K</span>, <span class="type">Double</span>] = ... <span class="comment">// specify the exact fraction desired from each key</span></div><div class="line"><span class="comment">// Get an exact sample from each stratum</span></div><div class="line"><span class="keyword">val</span> approxSample = data.sampleByKey(withReplacement = <span class="literal">false</span>, fractions)</div><div class="line"><span class="keyword">val</span> exactSample = data.sampleByKeyExact(withReplacement = <span class="literal">false</span>, fractions)</div></pre></td></tr></table></figure>
 <p>当<code>withReplacement</code>为<code>true</code>时，采用<code>PoissonSampler</code>取样器，当<code>withReplacement</code>为<code>false</code>使，采用<code>BernoulliSampler</code>取样器。</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sampleByKey</span></span>(withReplacement: <span class="type">Boolean</span>,</div><div class="line">      fractions: <span class="type">Map</span>[<span class="type">K</span>, <span class="type">Double</span>],</div><div class="line">      seed: <span class="type">Long</span> = <span class="type">Utils</span>.random.nextLong): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)] = self.withScope &#123;</div><div class="line">    <span class="keyword">val</span> samplingFunc = <span class="keyword">if</span> (withReplacement) &#123;</div><div class="line">      <span class="type">StratifiedSamplingUtils</span>.getPoissonSamplingFunction(self, fractions, <span class="literal">false</span>, seed)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="type">StratifiedSamplingUtils</span>.getBernoulliSamplingFunction(self, fractions, <span class="literal">false</span>, seed)</div><div class="line">    &#125;</div><div class="line">    self.mapPartitionsWithIndex(samplingFunc, preservesPartitioning = <span class="literal">true</span>)</div><div class="line">  &#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sampleByKeyExact</span></span>(</div><div class="line">      withReplacement: <span class="type">Boolean</span>,</div><div class="line">      fractions: <span class="type">Map</span>[<span class="type">K</span>, <span class="type">Double</span>],</div><div class="line">      seed: <span class="type">Long</span> = <span class="type">Utils</span>.random.nextLong): <span class="type">RDD</span>[(<span class="type">K</span>, <span class="type">V</span>)] = self.withScope &#123;</div><div class="line">    <span class="keyword">val</span> samplingFunc = <span class="keyword">if</span> (withReplacement) &#123;</div><div class="line">      <span class="type">StratifiedSamplingUtils</span>.getPoissonSamplingFunction(self, fractions, <span class="literal">true</span>, seed)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="type">StratifiedSamplingUtils</span>.getBernoulliSamplingFunction(self, fractions, <span class="literal">true</span>, seed)</div><div class="line">    &#125;</div><div class="line">    self.mapPartitionsWithIndex(samplingFunc, preservesPartitioning = <span class="literal">true</span>)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
@@ -524,9 +521,9 @@
           
             <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
           
-            <a href="/tags/源码/" rel="tag"><i class="fa fa-tag"></i> 源码</a>
-          
             <a href="/tags/取样/" rel="tag"><i class="fa fa-tag"></i> 取样</a>
+          
+            <a href="/tags/源码/" rel="tag"><i class="fa fa-tag"></i> 源码</a>
           
         </div>
       
@@ -582,7 +579,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -932,34 +934,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/11/27/spark分层取样/';
+          this.page.identifier = '2017/11/27/spark分层取样/';
+          this.page.title = 'spark分层取样';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/27/spark分层取样/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

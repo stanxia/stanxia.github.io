@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
+<meta name="description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。
+
+JavaRDD1234567891011121314151617181920package org.apache.spark.api.javaprivate[spark] abstract class AbstractJavaRDDLike[T, Thi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaRDDLike.scala">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
-<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg">
-<meta property="og:updated_time" content="2017-11-23T02:01:42.000Z">
+<meta property="og:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。
+
+JavaRDD1234567891011121314151617181920package org.apache.spark.api.javaprivate[spark] abstract class AbstractJavaRDDLike[T, Thi">
+<meta property="og:updated_time" content="2017-12-05T03:32:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaRDDLike.scala">
-<meta name="twitter:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。">
-<meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg">
+<meta name="twitter:description" content="使用Java开发Spark程序，JavaRDD的功能算子中英文注释JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。
+
+JavaRDD1234567891011121314151617181920package org.apache.spark.api.javaprivate[spark] abstract class AbstractJavaRDDLike[T, Thi">
 
 
 
@@ -390,17 +394,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/21/JavaRDDLike-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/21/JavaRDDLike-scala/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/21/JavaRDDLike-scala/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -437,9 +440,10 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg" alt=""><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div><br><a id="more"></a></p>
+        <script src="/assets/js/DPlayer.min.js"> </script><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div>
 <!--请开始装逼-->
 <h2 id="JavaRDD"><a href="#JavaRDD" class="headerlink" title="JavaRDD"></a>JavaRDD</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.apache.spark.api.java</div><div class="line"></div><div class="line"><span class="keyword">private</span>[spark] <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractJavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]]</span></div><div class="line">  <span class="keyword">extends</span> <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Defines operations common to several Java RDD implementations.</div><div class="line">  *</div><div class="line">  * 定义几个Java RDD实现的常见操作。</div><div class="line">  *</div><div class="line">  * @note This trait is not intended to be implemented by user code.</div><div class="line">  *</div><div class="line">  *       该特性不打算由用户代码实现。</div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]] <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">wrapRDD</span></span>(rdd: <span class="type">RDD</span>[<span class="type">T</span>]): <span class="type">This</span></div><div class="line"></div><div class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> classTag: <span class="type">ClassTag</span>[<span class="type">T</span>]</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">rdd</span></span>: <span class="type">RDD</span>[<span class="type">T</span>]</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="partitions"><a href="#partitions" class="headerlink" title="partitions"></a>partitions</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** Set of partitions in this RDD.</span></div><div class="line">  * 在这个RDD中设置的分区。</div><div class="line">  * */</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">partitions</span></span>: <span class="type">JList</span>[<span class="type">Partition</span>] = rdd.partitions.toSeq.asJava</div></pre></td></tr></table></figure>
 <h3 id="getNumPartitions"><a href="#getNumPartitions" class="headerlink" title="getNumPartitions"></a>getNumPartitions</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** Return the number of partitions in this RDD.</span></div><div class="line">  * 返回该RDD中的分区数。</div><div class="line">  * */</div><div class="line"><span class="meta">@Since</span>(<span class="string">"1.6.0"</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNumPartitions</span></span>: <span class="type">Int</span> = rdd.getNumPartitions</div></pre></td></tr></table></figure>
 <h3 id="partitioner"><a href="#partitioner" class="headerlink" title="partitioner"></a>partitioner</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** The partitioner of this RDD.</span></div><div class="line">  * 这个RDD的分区。</div><div class="line">  * */</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">partitioner</span></span>: <span class="type">Optional</span>[<span class="type">Partitioner</span>] = <span class="type">JavaUtils</span>.optionToOptional(rdd.partitioner)</div></pre></td></tr></table></figure>
@@ -624,7 +628,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -974,34 +983,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/';
+          this.page.identifier = '2017/11/21/JavaRDDLike-scala/';
+          this.page.title = 'JavaRDDLike.scala';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/21/JavaRDDLike-scala/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

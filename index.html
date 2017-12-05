@@ -470,17 +470,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/12/01/Hive事务管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/12/01/Hive事务管理/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/01/Hive事务管理/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -521,21 +520,6 @@
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
 <p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。</p>
 <h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2><p>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
-<h3 id="ACID说明"><a href="#ACID说明" class="headerlink" title="ACID说明"></a>ACID说明</h3><p>何为事务？就是一组单元化操作，这些操作要么都执行，要么都不执行，是一个不可分割的工作单位。</p>
-<p>事务（transaction）所应该具有的四个要素：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。这四个基本要素通常称为ACID特性。</p>
-<ol>
-<li>原子性（Atomicity）:一个事务是一个不可再分割的工作单位，事务中的所有操作要么都发生，要么都不发生。</li>
-<li>一致性（Consistency）:事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。</li>
-<li>隔离性（Isolation）:多个事务并发访问，事务之间是隔离的，一个事务不影响其它事务运行效果。这指的是在并发环境中，当不同的事务同时操作相同的数据时，每个事务都有各自完整的数据空间。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改后的状态，事务不会查看到中间状态的数据。事务之间的相应影响，分别为：脏读、不可重复读、幻读、丢失更新。</li>
-<li>持久性（Durability）:意味着在事务完成以后，该事务锁对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</li>
-</ol>
-<h3 id="ACID的实现原理"><a href="#ACID的实现原理" class="headerlink" title="ACID的实现原理"></a>ACID的实现原理</h3><p>事务可以保证ACID原则的操作，那么事务是如何保证这些原则的？解决ACID问题的两大技术点是：</p>
-<ol>
-<li>预写日志（Write-ahead logging）保证原子性和持久性</li>
-<li>锁（locking）保证隔离性</li>
-</ol>
-<p>这里并没有提到一致性，是因为一致性是应用相关的话题，它的定义一个由业务系统来定义，什么样的状态才是一致？而实现一致性的代码通常在业务逻辑的代码中得以体现。</p>
-<p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/01/Hive事务管理/#more" rel="contents">
@@ -660,17 +644,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/30/SparkSQL-Catalyst优化理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/30/SparkSQL-Catalyst优化理解/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/30/SparkSQL-Catalyst优化理解/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -839,17 +822,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/29/spark容错机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/29/spark容错机制/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/29/spark容错机制/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -890,6 +872,7 @@
           <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
 <p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称“血统(Lineage)”容错）记录下来，以便恢复丢失的分区。 </p>
 <p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。</p>
+<h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2><h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/29/spark容错机制/#more" rel="contents">
@@ -1014,17 +997,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/29/ORC与PARQUET文件类型的比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1189,17 +1171,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/27/spark分层取样/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/27/spark分层取样/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/27/spark分层取样/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1237,8 +1218,9 @@
     
       
         
-          <p><img src="http://oliji9s3j.bkt.clouddn.com/15118547764129.jpg" alt=""><br>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
+          <p>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
 <p>与存在于<code>spark.mllib</code>中的其它统计函数不同，分层采样方法<code>sampleByKey</code>和<code>sampleByKeyExact</code>可以在<code>key-value</code>对的<code>RDD</code>上执行。在分层采样中，可以认为<code>key</code>是一个标签，<br><code>value</code>是特定的属性。例如，<code>key</code>可以是男人或者女人或者文档<code>id</code>,它相应的<code>value</code>可能是一组年龄或者是文档中的词。<code>sampleByKey</code>方法通过掷硬币的方式决定是否采样一个观察数据，<br>因此它需要我们传递（<code>pass over</code>）数据并且提供期望的数据大小(<code>size</code>)。<code>sampleByKeyExact</code>比每层使用<code>sampleByKey</code>随机抽样需要更多的有意义的资源，但是它能使样本大小的准确性达到了<code>99.99%</code>。</p>
+<p><a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions">sampleByKeyExact()</a>允许用户准确抽取<code>f_k * n_k</code>个样本，<br>这里<code>f_k</code>表示期望获取键为<code>k</code>的样本的比例，<code>n_k</code>表示键为<code>k</code>的键值对的数量。下面是一个使用的例子：</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/27/spark分层取样/#more" rel="contents">
@@ -1363,17 +1345,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/23/Dataset-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/23/Dataset-scala/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/23/Dataset-scala/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1411,8 +1392,7 @@
     
       
         
-          <p><img src="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg" alt=""></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
 <blockquote>
 <p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p>
 </blockquote>
@@ -1547,17 +1527,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/21/JavaRDDLike-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/21/JavaRDDLike-scala/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/21/JavaRDDLike-scala/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1595,7 +1574,9 @@
     
       
         
-          <p><img src="http://oliji9s3j.bkt.clouddn.com/15113306611254.jpg" alt=""><div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div><br>
+          <div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div>
+<!--请开始装逼-->
+<h2 id="JavaRDD"><a href="#JavaRDD" class="headerlink" title="JavaRDD"></a>JavaRDD</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.apache.spark.api.java</div><div class="line"></div><div class="line"><span class="keyword">private</span>[spark] <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractJavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]]</span></div><div class="line">  <span class="keyword">extends</span> <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]</div><div class="line"></div><div class="line"><span class="comment">/**</div><div class="line">  * Defines operations common to several Java RDD implementations.</div><div class="line">  *</div><div class="line">  * 定义几个Java RDD实现的常见操作。</div><div class="line">  *</div><div class="line">  * @note This trait is not intended to be implemented by user code.</div><div class="line">  *</div><div class="line">  *       该特性不打算由用户代码实现。</div><div class="line">  */</span></div><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]] <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">wrapRDD</span></span>(rdd: <span class="type">RDD</span>[<span class="type">T</span>]): <span class="type">This</span></div><div class="line"></div><div class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> classTag: <span class="type">ClassTag</span>[<span class="type">T</span>]</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">rdd</span></span>: <span class="type">RDD</span>[<span class="type">T</span>]</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/21/JavaRDDLike-scala/#more" rel="contents">
@@ -1720,17 +1701,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/08/spark取样函数分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/08/spark取样函数分析/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/08/spark取样函数分析/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1768,7 +1748,10 @@
     
       
         
-          <p><img src="http://oliji9s3j.bkt.clouddn.com/15113319007022.jpg" alt=""><div class="note info"><p>Spark取样操作<br>无法获取随机样本的解决方案</p></div><br>
+          <div class="note info"><p>Spark取样操作<br>无法获取随机样本的解决方案</p></div>
+<!--请开始装逼-->
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Dataset中sample函数源码如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a user-supplied seed.</div><div class="line">  *</div><div class="line">  * 通过使用用户提供的种子，通过抽样的方式返回一个新的[[Dataset]]。</div><div class="line">  *</div><div class="line">  * @param withReplacement Sample with replacement or not.</div><div class="line">  *                        如果withReplacement=true的话表示有放回的抽样，采用泊松抽样算法实现.</div><div class="line">  *                        如果withReplacement=false的话表示无放回的抽样，采用伯努利抽样算法实现.</div><div class="line">  * @param fraction        Fraction of rows to generate.</div><div class="line">  *                        每一行数据被取样的概率.服从二项分布.当withReplacement=true的时候fraction&gt;=0,当withReplacement=false的时候 0 &lt; fraction &lt; 1.</div><div class="line">  * @param seed            Seed for sampling.</div><div class="line">  *                        取样种子（与随机数生成有关）</div><div class="line">  * @note This is NOT guaranteed to provide exactly the fraction of the count</div><div class="line">  *       of the given [[Dataset]].</div><div class="line">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</div><div class="line">  * @group typedrel</div><div class="line">  * @since 1.6.0</div><div class="line">  */</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>, seed: <span class="type">Long</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</div><div class="line">  require(fraction &gt;= <span class="number">0</span>,</div><div class="line">    <span class="string">s"Fraction must be nonnegative, but got <span class="subst">$&#123;fraction&#125;</span>"</span>)</div><div class="line"></div><div class="line">  withTypedPlan &#123;</div><div class="line">    <span class="type">Sample</span>(<span class="number">0.0</span>, fraction, withReplacement, seed, logicalPlan)()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</div><div class="line">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a random seed.</div><div class="line">  *</div><div class="line">  * 通过程序随机的种子，抽样返回新的DataSet</div><div class="line">  *</div><div class="line">  * @param withReplacement Sample with replacement or not.</div><div class="line">  *                        取样结果是否放回</div><div class="line">  * @param fraction        Fraction of rows to generate.</div><div class="line">  *                        每行数据被取样的概率</div><div class="line">  * @note This is NOT guaranteed to provide exactly the fraction of the total count</div><div class="line">  *       of the given [[Dataset]].</div><div class="line">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</div><div class="line">  * @group typedrel</div><div class="line">  * @since 1.6.0</div><div class="line">  */</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</div><div class="line">  sample(withReplacement, fraction, <span class="type">Utils</span>.random.nextLong)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/08/spark取样函数分析/#more" rel="contents">
@@ -1893,17 +1876,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/06/spark源码注释翻译/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/06/spark源码注释翻译/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/06/spark源码注释翻译/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -1942,6 +1924,8 @@
       
         
           <div class="note info"><p>版本：spark2.1.1<br>目的：方便中文用户阅读源码，把时间花在理解而不是翻译上</p></div>
+<!--请开始装逼-->
+<h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/06/spark源码注释翻译/#more" rel="contents">
@@ -2315,32 +2299,24 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

@@ -79,16 +79,22 @@
 
 
 
-<meta name="description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上">
+<meta name="description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上
+
+初衷开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark源码注释翻译">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/06/spark源码注释翻译/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上">
-<meta property="og:updated_time" content="2017-11-30T08:17:43.000Z">
+<meta property="og:description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上
+
+初衷开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。">
+<meta property="og:updated_time" content="2017-12-05T03:32:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark源码注释翻译">
-<meta name="twitter:description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上">
+<meta name="twitter:description" content="版本：spark2.1.1目的：方便中文用户阅读源码，把时间花在理解而不是翻译上
+
+初衷开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。">
 
 
 
@@ -388,17 +394,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/06/spark源码注释翻译/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/06/spark源码注释翻译/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/06/spark源码注释翻译/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -436,9 +441,9 @@
     
       
         <script src="/assets/js/DPlayer.min.js"> </script><div class="note info"><p>版本：spark2.1.1<br>目的：方便中文用户阅读源码，把时间花在理解而不是翻译上</p></div>
-<a id="more"></a>
 <!--请开始装逼-->
 <h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。</p>
+<a id="more"></a>
 <h2 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h2><p>已完成：</p>
 <p>正在作：spark core模块</p>
 <table>
@@ -682,7 +687,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -1032,34 +1042,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/11/06/spark源码注释翻译/';
+          this.page.identifier = '2017/11/06/spark源码注释翻译/';
+          this.page.title = 'spark源码注释翻译';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/06/spark源码注释翻译/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

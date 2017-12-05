@@ -81,22 +81,20 @@
 
 <meta name="description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
 
-转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dataset.scala">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/23/Dataset-scala/index.html">
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
 
-转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
-<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg">
-<meta property="og:updated_time" content="2017-11-27T02:51:26.000Z">
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
+<meta property="og:updated_time" content="2017-12-05T03:33:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dataset.scala">
 <meta name="twitter:description" content="前言Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。Dataset 上可用的操作分为转换和动作:
 
-转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计">
-<meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg">
+转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (groupBy).动作：触发计算">
 
 
 
@@ -396,17 +394,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/23/Dataset-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/23/Dataset-scala/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/23/Dataset-scala/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -443,8 +440,7 @@
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><p><img src="http://oliji9s3j.bkt.clouddn.com/15114010222879.jpg" alt=""></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
 <blockquote>
 <p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p>
 </blockquote>
@@ -660,7 +656,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -1010,34 +1011,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/11/23/Dataset-scala/';
+          this.page.identifier = '2017/11/23/Dataset-scala/';
+          this.page.title = 'Dataset.scala';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/23/Dataset-scala/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

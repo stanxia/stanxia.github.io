@@ -98,11 +98,27 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121060752594.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121060893595.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121061484874.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121061713652.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121063102376.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121063263012.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121064139828.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121064271722.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121065743030.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121065916525.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121066198138.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121066537536.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121066850801.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121067134496.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121067318880.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121067593291.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121067832545.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121068192695.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121068364921.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069199763.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069373565.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg">
-<meta property="og:updated_time" content="2017-12-01T06:29:01.000Z">
+<meta property="og:updated_time" content="2017-12-01T07:00:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive事务管理">
 <meta name="twitter:description" content="简介Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用">
@@ -406,17 +422,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/12/01/Hive事务管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/12/01/Hive事务管理/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/01/Hive事务管理/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -456,6 +471,7 @@
         <script src="/assets/js/DPlayer.min.js"> </script><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
 <p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。</p>
 <h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2><p>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
+<a id="more"></a>
 <h3 id="ACID说明"><a href="#ACID说明" class="headerlink" title="ACID说明"></a>ACID说明</h3><p>何为事务？就是一组单元化操作，这些操作要么都执行，要么都不执行，是一个不可分割的工作单位。</p>
 <p>事务（transaction）所应该具有的四个要素：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。这四个基本要素通常称为ACID特性。</p>
 <ol>
@@ -471,7 +487,6 @@
 </ol>
 <p>这里并没有提到一致性，是因为一致性是应用相关的话题，它的定义一个由业务系统来定义，什么样的状态才是一致？而实现一致性的代码通常在业务逻辑的代码中得以体现。</p>
 <p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。</p>
-<a id="more"></a>
 <h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><table>
 <thead>
 <tr>
@@ -575,36 +590,91 @@
 <p>在未配置hive的Transaction和ACID时，不支持update操作。</p>
 <p>5、执行delete操作，将表中user_id为1信息删除</p>
 <p>sql语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">delete from test_notransaction where user_id=1;</div><div class="line">``` </div><div class="line"></div><div class="line">执行delete操作，执行结果如下：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121061713652.jpg)</div><div class="line"></div><div class="line">hive未配置Transaction和ACID，不支持delete操作。</div><div class="line"></div><div class="line">6、查看表获取锁类型</div></pre></td></tr></table></figure>
-<p>show locks;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">无法正常执行；</div><div class="line"></div><div class="line">### Hive的事务</div><div class="line">#### Hive的事务配置</div><div class="line">Hive从0.13开始加入了事务支持，在行级别提供完整的ACID特性，Hive在0.14时加入了对INSERT...VALUES,UPDATE,and DELETE的支持。对于在Hive中使用ACID和Transactions，主要有以下限制：</div><div class="line"></div><div class="line">* 不支持BEGIN,COMMIT和ROLLBACK</div><div class="line">* 只支持ORC文件格式</div><div class="line">* 表必须分桶</div><div class="line">* 不允许从一个非ACID连接写入/读取ACID表</div><div class="line"></div><div class="line">为了使Hive支持事务操作，需将以下参数加入到hive-site.xml文件中。</div></pre></td></tr></table></figure></p>
-<p><property></property></p>
-<p><name>hive.support.concurrency</name></p>
-<p><value>true</value><br></p>
-<p><property></property></p>
-<p><name>hive.enforce.bucketing</name></p>
-<p><value>true</value><br></p>
-<p><property></property></p>
-<p><name>hive.exec.dynamic.partition.mode</name></p>
-<p><value>nonstrict</value><br></p>
-<p><property></property></p>
-<p><name>hive.txn.manager</name></p>
-<p><value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value><br></p>
-<p><property></property></p>
-<p><name>hive.compactor.initiator.on</name></p>
-<p><value>true</value><br></p>
-<p><property></property></p>
-<p><name>hive.compactor.worker.threads </name></p>
-<p><value>1</value><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">可以在Cloudera Manager进行以下配置：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121063102376.jpg)</div><div class="line"></div><div class="line">为了让beeline支持还需要配置：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121063263012.jpg)</div><div class="line"></div><div class="line">#### Hive事务测试</div><div class="line"></div><div class="line">##### 环境准备</div><div class="line"></div><div class="line">1、创建一个支持ACID的表</div><div class="line"></div><div class="line">建表语句：</div></pre></td></tr></table></figure></p>
-<p>create table test_trancaction<br>(user_id Int,name String)<br>clustered by (user_id) into 3 buckets stored as orc TBLPROPERTIES (‘transactional’=’true’);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">将表名修改为test_transaction</div></pre></td></tr></table></figure></p>
-<p>alter table test_trancaction rename to test_transaction;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2、准备测试数据，向数据库中插入数据</div></pre></td></tr></table></figure></p>
-<p>insert into test_transaction values(1,’peach’),(2,’peach2’),(3,’peach3’),(4,’peach4’),(5,’peach5’);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">##### 用例测试</div><div class="line"></div><div class="line">1、执行update操作，将user_id的name修改为peach_update</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>update test_transaction set name=’peach_update’ where user_id=1;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">执行修改操作，查看表获取锁类型</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121064139828.jpg)</div><div class="line"></div><div class="line">数据修改成功，且不影响其它数据。</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121064271722.jpg)</div><div class="line"></div><div class="line">2、同时修改同一条数据，将user_id为1的用户名字修改为peach，另一条sql将名字修改为peach_</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>update test_transaction set name=’peach’ where user_id=1;<br>update test<em>transaction set name=’peach</em>‘ where user_id=1;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sql执行顺序为peach，其次为peach_</div><div class="line"></div><div class="line">此时查看表获取到的锁</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121065743030.jpg)</div><div class="line"></div><div class="line">通过获取到锁分析，在同时修改同一条数据时，优先执行的sql获取到了SHARED_WRITE，而后执行的sql获取锁的状态为WAITING状态，表示还未获取到SHARED_WRITE锁，等待第一条sql执行结束后方可获取到锁对数据进行操作。</div><div class="line"></div><div class="line">通过上不执行操作分析，数据user_id为1的用户名字应被修改为peach_</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121065916525.jpg)</div><div class="line"></div><div class="line">3、同时修改不同数据，修改id为2的name为peachtest，修改id为3的name为peach_test</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>update test_transaction set name=’peachtest’ where user_id=2;<br>update test_transaction set name=’peach_test’ where user_id=3;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sql执行顺序为peachtest，其次为peach_test</div><div class="line"></div><div class="line">此时查看表获取到的锁</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121066198138.jpg)</div><div class="line"></div><div class="line">通过sql操作获取锁分析，在同时修改不同数据时，优先执行的sql获取到了SHARED_WRITE，而后执行的sql获取锁的状态为WAITING状态，表示还未获取到SHARED_WRITE锁，等待第一条sql执行结束后方可获取到锁对数据进行操作。</div><div class="line"></div><div class="line">4、执行select操作的同时执行insert操作</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>select count(*) from test_transaction;<br>insert into test_transaction values(3,’peach3’);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">步骤：</div><div class="line"></div><div class="line">先执行select操作，再执行insert操作，执行完成后查看表获取到的锁</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121066537536.jpg)</div><div class="line"></div><div class="line">由于select和insert操作均获取的是SHARED_READ锁，读锁为并行，所以select查询和insert同时执行，互不影响。</div><div class="line"></div><div class="line">5、update同一条数据的同时select该条数据</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>update test_transaction set name=’peach_update’ where user_id=1; select * from<br> test_transaction where user_id=1;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">步骤：</div><div class="line"></div><div class="line">先执行update操作，再执行select操作，获取此时表获取到的锁</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121066850801.jpg)</div><div class="line"></div><div class="line">通过获取锁的情况分析， 在update操作时，获取到SHARED_WRITE锁，执行select操作时获取到SHARED_READ锁，在进行修改数据时未阻塞select查询操作，update未执行完成时，select查询到的数据为未修改的数据。</div><div class="line"></div><div class="line">6、执行delete操作，将user_id为3的数据删除</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>delete from test_transaction where user_id=3;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">步骤：</div><div class="line"></div><div class="line">执行delete操作，获取此时表获取到的锁</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121067134496.jpg)</div><div class="line"></div><div class="line">删除操作获取到的是SHARED_WRITE锁</div><div class="line"></div><div class="line">执行成功后数据</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121067318880.jpg)</div><div class="line"></div><div class="line">7、同时delete同一条数据</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>delete from test_transaction where user_id=3;<br>delete from test_transaction where user_id=3;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">步骤：</div><div class="line"></div><div class="line">按顺序执行两条delete操作，查看此时表获取到的锁：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121067593291.jpg)</div><div class="line"></div><div class="line">通过查看delete操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的delete操作未获取到SHARED_WRITE锁，处于WAITING状态。</div><div class="line"></div><div class="line">执行删除后结果</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121067832545.jpg)</div><div class="line"></div><div class="line">8、同时delete两条不同的数据</div><div class="line"></div><div class="line">sql语句：</div><div class="line"></div><div class="line">```sql</div><div class="line">delete from test_transaction where user_id=1; </div><div class="line">delete from test_transaction where user_id=5;</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_notransaction <span class="keyword">where</span> user_id=<span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>执行delete操作，执行结果如下：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121061713652.jpg" alt=""></p>
+<p>hive未配置Transaction和ACID，不支持delete操作。</p>
+<p>6、查看表获取锁类型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> locks;</div></pre></td></tr></table></figure>
+<p>无法正常执行；</p>
+<h3 id="Hive的事务"><a href="#Hive的事务" class="headerlink" title="Hive的事务"></a>Hive的事务</h3><h4 id="Hive的事务配置"><a href="#Hive的事务配置" class="headerlink" title="Hive的事务配置"></a>Hive的事务配置</h4><p>Hive从0.13开始加入了事务支持，在行级别提供完整的ACID特性，Hive在0.14时加入了对INSERT…VALUES,UPDATE,and DELETE的支持。对于在Hive中使用ACID和Transactions，主要有以下限制：</p>
+<ul>
+<li>不支持BEGIN,COMMIT和ROLLBACK</li>
+<li>只支持ORC文件格式</li>
+<li>表必须分桶</li>
+<li>不允许从一个非ACID连接写入/读取ACID表</li>
+</ul>
+<p>为了使Hive支持事务操作，需将以下参数加入到hive-site.xml文件中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.support.concurrency<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.enforce.bucketing<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.dynamic.partition.mode<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>nonstrict<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.txn.manager<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.compactor.initiator.on<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.compactor.worker.threads <span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>可以在Cloudera Manager进行以下配置：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121063102376.jpg" alt=""></p>
+<p>为了让beeline支持还需要配置：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121063263012.jpg" alt=""></p>
+<h4 id="Hive事务测试"><a href="#Hive事务测试" class="headerlink" title="Hive事务测试"></a>Hive事务测试</h4><h5 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h5><p>1、创建一个支持ACID的表</p>
+<p>建表语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_trancaction </div><div class="line">(user_id <span class="built_in">Int</span>,<span class="keyword">name</span> <span class="keyword">String</span>) </div><div class="line">clustered <span class="keyword">by</span> (user_id) <span class="keyword">into</span> <span class="number">3</span> buckets <span class="keyword">stored</span> <span class="keyword">as</span> orc TBLPROPERTIES (<span class="string">'transactional'</span>=<span class="string">'true'</span>);</div></pre></td></tr></table></figure>
+<p>将表名修改为test_transaction</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> test_trancaction <span class="keyword">rename</span> <span class="keyword">to</span> test_transaction;</div></pre></td></tr></table></figure>
+<p>2、准备测试数据，向数据库中插入数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> test_transaction <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'peach'</span>),(<span class="number">2</span>,<span class="string">'peach2'</span>),(<span class="number">3</span>,<span class="string">'peach3'</span>),(<span class="number">4</span>,<span class="string">'peach4'</span>),(<span class="number">5</span>,<span class="string">'peach5'</span>);</div></pre></td></tr></table></figure>
+<h5 id="用例测试"><a href="#用例测试" class="headerlink" title="用例测试"></a>用例测试</h5><p>1、执行update操作，将user_id的name修改为peach_update</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peach_update'</span> <span class="keyword">where</span> user_id=<span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>执行修改操作，查看表获取锁类型</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121064139828.jpg" alt=""></p>
+<p>数据修改成功，且不影响其它数据。</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121064271722.jpg" alt=""></p>
+<p>2、同时修改同一条数据，将user<em>id为1的用户名字修改为peach，另一条sql将名字修改为peach</em></p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peach'</span> <span class="keyword">where</span> user_id=<span class="number">1</span>;</div><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peach_'</span> <span class="keyword">where</span> user_id=<span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>sql执行顺序为peach，其次为peach_</p>
+<p>此时查看表获取到的锁</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121065743030.jpg" alt=""></p>
+<p>通过获取到锁分析，在同时修改同一条数据时，优先执行的sql获取到了SHARED_WRITE，而后执行的sql获取锁的状态为WAITING状态，表示还未获取到SHARED_WRITE锁，等待第一条sql执行结束后方可获取到锁对数据进行操作。</p>
+<p>通过上不执行操作分析，数据user<em>id为1的用户名字应被修改为peach</em></p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121065916525.jpg" alt=""></p>
+<p>3、同时修改不同数据，修改id为2的name为peachtest，修改id为3的name为peach_test</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peachtest'</span> <span class="keyword">where</span> user_id=<span class="number">2</span>; </div><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peach_test'</span> <span class="keyword">where</span> user_id=<span class="number">3</span>;</div></pre></td></tr></table></figure>
+<p>sql执行顺序为peachtest，其次为peach_test</p>
+<p>此时查看表获取到的锁</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121066198138.jpg" alt=""></p>
+<p>通过sql操作获取锁分析，在同时修改不同数据时，优先执行的sql获取到了SHARED_WRITE，而后执行的sql获取锁的状态为WAITING状态，表示还未获取到SHARED_WRITE锁，等待第一条sql执行结束后方可获取到锁对数据进行操作。</p>
+<p>4、执行select操作的同时执行insert操作</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> test_transaction; </div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> test_transaction <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'peach3'</span>);</div></pre></td></tr></table></figure>
+<p>步骤：</p>
+<p>先执行select操作，再执行insert操作，执行完成后查看表获取到的锁</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121066537536.jpg" alt=""></p>
+<p>由于select和insert操作均获取的是SHARED_READ锁，读锁为并行，所以select查询和insert同时执行，互不影响。</p>
+<p>5、update同一条数据的同时select该条数据</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'peach_update'</span> <span class="keyword">where</span> user_id=<span class="number">1</span>; <span class="keyword">select</span> * <span class="keyword">from</span></div><div class="line"> test_transaction <span class="keyword">where</span> user_id=<span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>步骤：</p>
+<p>先执行update操作，再执行select操作，获取此时表获取到的锁</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121066850801.jpg" alt=""></p>
+<p>通过获取锁的情况分析， 在update操作时，获取到SHARED_WRITE锁，执行select操作时获取到SHARED_READ锁，在进行修改数据时未阻塞select查询操作，update未执行完成时，select查询到的数据为未修改的数据。</p>
+<p>6、执行delete操作，将user_id为3的数据删除</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">3</span>;</div></pre></td></tr></table></figure>
+<p>步骤：</p>
+<p>执行delete操作，获取此时表获取到的锁</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121067134496.jpg" alt=""></p>
+<p>删除操作获取到的是SHARED_WRITE锁</p>
+<p>执行成功后数据</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121067318880.jpg" alt=""></p>
+<p>7、同时delete同一条数据</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">3</span>;</div><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">3</span>;</div></pre></td></tr></table></figure>
+<p>步骤：</p>
+<p>按顺序执行两条delete操作，查看此时表获取到的锁：</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121067593291.jpg" alt=""></p>
+<p>通过查看delete操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的delete操作未获取到SHARED_WRITE锁，处于WAITING状态。</p>
+<p>执行删除后结果</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121067832545.jpg" alt=""></p>
+<p>8、同时delete两条不同的数据</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">1</span>; </div><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">5</span>;</div></pre></td></tr></table></figure>
 <p>步骤：</p>
 <p>按顺序执行两条delete操作，查看此时表获取到的锁：</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121068192695.jpg" alt=""></p>
@@ -613,9 +683,17 @@
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121068364921.jpg" alt=""></p>
 <p>9、执行delete的同时对删除的数据进行update操作</p>
 <p>sql语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">delete from test_transaction where user_id=3; </div><div class="line">update test_transaction set name=&apos;test&apos; where user_id=3;</div><div class="line">``` </div><div class="line">步骤：</div><div class="line"></div><div class="line">按顺序执行两条sql，查看此时获取到表的锁：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121068639301.jpg)</div><div class="line"></div><div class="line">通过查看delete和update操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的操作未获取到SHARED_WRITE锁，处于WAITING状态。</div><div class="line"></div><div class="line">执行delete和update后结果</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121068852336.jpg)</div><div class="line"></div><div class="line">**注意**：此处在delete优先于update执行，但执行结果为update的结果，执行异常。</div><div class="line"></div><div class="line">10、执行delete的同时对不同的数据进行update操作</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure>
-<p>delete from test_transaction where user_id=2;<br>update test_transaction set name=’test’ where user_id=4;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">步骤：</div><div class="line"></div><div class="line">按顺序执行上面两条sql，查看表锁获取情况</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121069199763.jpg)</div><div class="line"></div><div class="line">通过查看delete和update操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的操作未获取到SHARED_WRITE锁，处于WAITING状态。</div><div class="line"></div><div class="line">执行delete和update后结果,执行结果正常</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121069373565.jpg)</div><div class="line"></div><div class="line">11、执行delete的同时执行select操作</div><div class="line"></div><div class="line">sql语句：</div></pre></td></tr></table></figure></p>
-<p>delete from test_transaction where user_id=4;<br>select count(*) from test_transaction;<br>```<br>步骤：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">3</span>; </div><div class="line"><span class="keyword">update</span> test_transaction <span class="keyword">set</span> <span class="keyword">name</span>=<span class="string">'test'</span> <span class="keyword">where</span> user_id=<span class="number">3</span>;</div><div class="line">``` </div><div class="line">步骤：</div><div class="line"></div><div class="line">按顺序执行两条sql，查看此时获取到表的锁：</div><div class="line"></div><div class="line">![](http://oliji9s3j.bkt.clouddn.com/15121068639301.jpg)</div><div class="line"></div><div class="line">通过查看<span class="keyword">delete</span>和<span class="keyword">update</span>操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的操作未获取到SHARED_WRITE锁，处于WAITING状态。</div><div class="line"></div><div class="line">执行<span class="keyword">delete</span>和<span class="keyword">update</span>后结果</div><div class="line"></div><div class="line">![](<span class="keyword">http</span>://oliji9s3j.bkt.clouddn.com/<span class="number">15121068852336.</span>jpg)</div><div class="line"></div><div class="line">**注意**：此处在<span class="keyword">delete</span>优先于<span class="keyword">update</span>执行，但执行结果为<span class="keyword">update</span>的结果，执行异常。</div><div class="line"></div><div class="line"><span class="number">10</span>、执行<span class="keyword">delete</span>的同时对不同的数据进行<span class="keyword">update</span>操作</div><div class="line"></div><div class="line"><span class="keyword">sql</span>语句：</div><div class="line"></div><div class="line"><span class="string">``</span><span class="string">`sql</span></div><div class="line">delete from test_transaction where user_id=2; </div><div class="line">update test_transaction set name='test' where user_id=4;</div></pre></td></tr></table></figure>
+<p>步骤：</p>
+<p>按顺序执行上面两条sql，查看表锁获取情况</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121069199763.jpg" alt=""></p>
+<p>通过查看delete和update操作获取到的锁，优先执行的操作获取到SHARED_WRITE锁，后执行的操作未获取到SHARED_WRITE锁，处于WAITING状态。</p>
+<p>执行delete和update后结果,执行结果正常</p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15121069373565.jpg" alt=""></p>
+<p>11、执行delete的同时执行select操作</p>
+<p>sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> test_transaction <span class="keyword">where</span> user_id=<span class="number">4</span>; </div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> test_transaction;</div></pre></td></tr></table></figure>
+<p>步骤：</p>
 <p>按顺序执行上面两条sql，查看表锁获取情况</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg" alt=""></p>
 <p>在操作delete的同时执行select操作，两个操作均同时获取到SHARED_RED和SHARED_WRITE锁，操作并行进行未出现阻塞。</p>
@@ -750,7 +828,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -928,7 +1011,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID与实现原理"><span class="nav-number">2.</span> <span class="nav-text">ACID与实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID说明"><span class="nav-number">2.1.</span> <span class="nav-text">ACID说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID的实现原理"><span class="nav-number">2.2.</span> <span class="nav-text">ACID的实现原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试环境"><span class="nav-number">3.</span> <span class="nav-text">测试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive的ACID测试"><span class="nav-number">4.</span> <span class="nav-text">Hive的ACID测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive中的锁（不开启事务）"><span class="nav-number">4.1.</span> <span class="nav-text">Hive中的锁（不开启事务）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启Concurrency"><span class="nav-number">4.1.1.</span> <span class="nav-text">开启Concurrency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭Concurrency"><span class="nav-number">4.1.2.</span> <span class="nav-text">关闭Concurrency</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结对比"><span class="nav-number">5.</span> <span class="nav-text">总结对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive事务使用建议"><span class="nav-number">6.</span> <span class="nav-text">Hive事务使用建议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID与实现原理"><span class="nav-number">2.</span> <span class="nav-text">ACID与实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID说明"><span class="nav-number">2.1.</span> <span class="nav-text">ACID说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID的实现原理"><span class="nav-number">2.2.</span> <span class="nav-text">ACID的实现原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试环境"><span class="nav-number">3.</span> <span class="nav-text">测试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive的ACID测试"><span class="nav-number">4.</span> <span class="nav-text">Hive的ACID测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive中的锁（不开启事务）"><span class="nav-number">4.1.</span> <span class="nav-text">Hive中的锁（不开启事务）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启Concurrency"><span class="nav-number">4.1.1.</span> <span class="nav-text">开启Concurrency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭Concurrency"><span class="nav-number">4.1.2.</span> <span class="nav-text">关闭Concurrency</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive的事务"><span class="nav-number">4.2.</span> <span class="nav-text">Hive的事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive的事务配置"><span class="nav-number">4.2.1.</span> <span class="nav-text">Hive的事务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive事务测试"><span class="nav-number">4.2.2.</span> <span class="nav-text">Hive事务测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#环境准备"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用例测试"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">用例测试</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结对比"><span class="nav-number">5.</span> <span class="nav-text">总结对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive事务使用建议"><span class="nav-number">6.</span> <span class="nav-text">Hive事务使用建议</span></a></li></ol></div>
             
 
           </div>
@@ -1100,34 +1183,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/12/01/Hive事务管理/';
+          this.page.identifier = '2017/12/01/Hive事务管理/';
+          this.page.title = 'Hive事务管理';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/12/01/Hive事务管理/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 

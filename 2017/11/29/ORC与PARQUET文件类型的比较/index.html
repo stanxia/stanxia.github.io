@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,orc,parquet," />
+  <meta name="keywords" content="orc,parquet,spark," />
 
 
 
@@ -402,17 +402,16 @@
     
           
             
-            <!--noindex-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/29/ORC与PARQUET文件类型的比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
             
           
     
@@ -633,11 +632,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
-          
             <a href="/tags/orc/" rel="tag"><i class="fa fa-tag"></i> orc</a>
           
             <a href="/tags/parquet/" rel="tag"><i class="fa fa-tag"></i> parquet</a>
+          
+            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
           
         </div>
       
@@ -693,7 +692,12 @@
 
   
     <div class="comments" id="comments">
-      <div id="hypercomments_widget"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -1043,34 +1047,36 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/';
+          this.page.identifier = '2017/11/29/ORC与PARQUET文件类型的比较/';
+          this.page.title = 'ORC与PARQUET文件类型的比较';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
 
 
 
-	
-
-		<script type="text/javascript">
-		_hcwp = window._hcwp || [];
-
-		_hcwp.push({widget:"Bloggerstream", widget_id: 97107, selector:".hc-comment-count", label: "{\%COUNT%\}" });
-
-		
-		_hcwp.push({widget:"Stream", widget_id: 97107, xid: "2017/11/29/ORC与PARQUET文件类型的比较/"});
-		
-
-		(function() {
-		if("HC_LOAD_INIT" in window)return;
-		HC_LOAD_INIT = true;
-		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/97107/"+lang+"/widget.js";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hcc, s.nextSibling);
-		})();
-		</script>
 
 	
 
 
+
+
+
+  
 
 
 
