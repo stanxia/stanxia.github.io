@@ -1956,7 +1956,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #719a01;
+  background: #17fffb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3060,9 +3060,13 @@ hr {
     text-align: center;
   }
 }
-div#footer {
+#footer {
   display: none;
 }
-div#placement-bottom {
+#placement-bottom {
   display: none;
+}
+.footer-inner {
+  margin: 0 auto;
+  text-align: center;
 }
