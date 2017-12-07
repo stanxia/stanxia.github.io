@@ -79,18 +79,14 @@
 
 
 
-<meta name="description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。
-SQL优化器核心执行策略主要分为两个大的方向：
-
-基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
+<meta name="description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。 SQL优化器核心执行策略主要分为两个大的方向：  基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
+<meta name="keywords" content="spark,sparkSQL,catalyst">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SparkSQL-Catalyst优化理解">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/30/SparkSQL-Catalyst优化理解/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。
-SQL优化器核心执行策略主要分为两个大的方向：
-
-基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
+<meta property="og:description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。 SQL优化器核心执行策略主要分为两个大的方向：  基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120193767483.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120194433988.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120194660866.jpg">
@@ -105,13 +101,10 @@ SQL优化器核心执行策略主要分为两个大的方向：
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120199915140.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120200455737.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15120200683962.jpg">
-<meta property="og:updated_time" content="2017-11-30T05:34:31.000Z">
+<meta property="og:updated_time" content="2017-12-07T14:36:57.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkSQL-Catalyst优化理解">
-<meta name="twitter:description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。
-SQL优化器核心执行策略主要分为两个大的方向：
-
-基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
+<meta name="twitter:description" content="前言本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。 SQL优化器核心执行策略主要分为两个大的方向：  基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心">
 <meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15120193767483.jpg">
 
 
@@ -376,7 +369,7 @@ SQL优化器核心执行策略主要分为两个大的方向：
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T11:32:26+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T11:32:26+00:00">
                 2017-11-30
               </time>
             
@@ -458,7 +451,7 @@ SQL优化器核心执行策略主要分为两个大的方向：
       
     
       
-        <script src="/assets/js/DPlayer.min.js"> </script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
 <p>SQL优化器核心执行策略主要分为两个大的方向：</p>
 <ol>
 <li>基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心优化算子Join却显得有点力不从心。</li>
@@ -806,7 +799,7 @@ SQL优化器核心执行策略主要分为两个大的方向：
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-amp-Rule"><span class="nav-number">2.</span> <span class="nav-text">Tree&Rule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catalyst工作流程"><span class="nav-number">3.</span> <span class="nav-text">Catalyst工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parser"><span class="nav-number">3.1.</span> <span class="nav-text">Parser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analyzer"><span class="nav-number">3.2.</span> <span class="nav-text">Analyzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimizer"><span class="nav-number">3.3.</span> <span class="nav-text">Optimizer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看SparkSQL执行计划"><span class="nav-number">4.</span> <span class="nav-text">查看SparkSQL执行计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看逻辑执行计划"><span class="nav-number">4.1.</span> <span class="nav-text">查看逻辑执行计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看物理执行计划"><span class="nav-number">4.2.</span> <span class="nav-text">查看物理执行计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-WebUI进行查看"><span class="nav-number">4.3.</span> <span class="nav-text">Spark WebUI进行查看</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-amp-Rule"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Tree-amp-Rule" class="headerlink" title="Tree&amp;Rule"></a>Tree&amp;Rule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catalyst工作流程"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Catalyst&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;" class="headerlink" title="Catalyst&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;"></a>Catalyst&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parser"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analyzer"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#Analyzer" class="headerlink" title="Analyzer"></a>Analyzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimizer"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看SparkSQL执行计划"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;SparkSQL&#x6267;&#x884C;&#x8BA1;&#x5212;" class="headerlink" title="&#x67E5;&#x770B;SparkSQL&#x6267;&#x884C;&#x8BA1;&#x5212;"></a>&#x67E5;&#x770B;SparkSQL&#x6267;&#x884C;&#x8BA1;&#x5212;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看逻辑执行计划"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;&#x903B;&#x8F91;&#x6267;&#x884C;&#x8BA1;&#x5212;" class="headerlink" title="&#x67E5;&#x770B;&#x903B;&#x8F91;&#x6267;&#x884C;&#x8BA1;&#x5212;"></a>&#x67E5;&#x770B;&#x903B;&#x8F91;&#x6267;&#x884C;&#x8BA1;&#x5212;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看物理执行计划"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x67E5;&#x770B;&#x7269;&#x7406;&#x6267;&#x884C;&#x8BA1;&#x5212;" class="headerlink" title="&#x67E5;&#x770B;&#x7269;&#x7406;&#x6267;&#x884C;&#x8BA1;&#x5212;"></a>&#x67E5;&#x770B;&#x7269;&#x7406;&#x6267;&#x884C;&#x8BA1;&#x5212;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-WebUI进行查看"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#Spark-WebUI&#x8FDB;&#x884C;&#x67E5;&#x770B;" class="headerlink" title="Spark WebUI&#x8FDB;&#x884C;&#x67E5;&#x770B;"></a>Spark WebUI&#x8FDB;&#x884C;&#x67E5;&#x770B;</span></a></li></ol></li></ol></div>
             
 
           </div>
