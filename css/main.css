@@ -1956,7 +1956,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #17fffb;
+  background: #d4dfff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3060,10 +3060,10 @@ hr {
     text-align: center;
   }
 }
-#footer {
+.discovery-main {
   display: none;
 }
-#placement-bottom {
+.disqus-footer__wrapper {
   display: none;
 }
 .footer-inner {
