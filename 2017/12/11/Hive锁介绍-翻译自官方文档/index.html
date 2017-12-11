@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="hive," />
 
 
 
@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="采菊东篱下，悠然见南山">
-<meta property="og:type" content="website">
-<meta property="og:title" content="东篱下">
-<meta property="og:url" content="https://stanxia.github.io/tags/acid/index.html">
+<meta name="description" content="在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。 12共享(S)独占(X) 顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。兼容性矩阵如下:对于某些操作，锁在本质上是分层的">
+<meta name="keywords" content="hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive锁介绍-翻译自官方文档">
+<meta property="og:url" content="https://stanxia.github.io/2017/12/11/Hive锁介绍-翻译自官方文档/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="采菊东篱下，悠然见南山">
+<meta property="og:description" content="在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。 12共享(S)独占(X) 顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。兼容性矩阵如下:对于某些操作，锁在本质上是分层的">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15129575385061.jpg">
+<meta property="og:updated_time" content="2017-12-11T02:39:15.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="东篱下">
-<meta name="twitter:description" content="采菊东篱下，悠然见南山">
+<meta name="twitter:title" content="Hive锁介绍-翻译自官方文档">
+<meta name="twitter:description" content="在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。 12共享(S)独占(X) 顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。兼容性矩阵如下:对于某些操作，锁在本质上是分层的">
+<meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/tags/acid/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/11/Hive锁介绍-翻译自官方文档/"/>
 
 
 
 
 
-  <title>标签: acid | 东篱下</title>
+  <title>Hive锁介绍-翻译自官方文档 | 东篱下</title>
   
 
 
@@ -143,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -309,54 +314,264 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>acid<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/11/Hive锁介绍-翻译自官方文档/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
         
-            <a class="post-title-link" href="/2017/12/01/Hive事务管理/" itemprop="url">
-              
-                <span itemprop="name">Hive事务管理</span>
-              
-            </a>
         
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-01T11:30:06+00:00"
-              content="2017-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+          <h1 class="post-title" itemprop="name headline">Hive锁介绍-翻译自官方文档</h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T09:58:58+00:00">
+                2017-12-11
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index">
+                    <span itemprop="name">hive</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/11/Hive锁介绍-翻译自官方文档/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/11/Hive锁介绍-翻译自官方文档/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/12/11/Hive锁介绍-翻译自官方文档/" class="leancloud_visitors" data-flag-title="Hive锁介绍-翻译自官方文档">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        <p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享(S)</span><br><span class="line">独占(X)</span><br></pre></td></tr></table></figure>
+<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>锁定模式下获取的合理性如下:</p>
+<p>对于非分区表，锁模式非常直观。读取表时，获取一个S锁，而所有其他操作(插入表、alter table等其他操作)获得一个X锁。</p>
+<p>对于分区表，其思想如下:</p>
+<p>在执行读操作时，获取表和相关分区的 ‘S’ 锁。对于所有其他操作，在分区上执行“X”锁。但是，如果更改只适用于较新的分区，则在表上获得“S”锁，而如果更改适用于所有分区，则在表上获得“X”锁。因此，旧分区可以被读取和写入，而新的分区则被转换为RCFile。每当一个分区被锁定在任何模式时，它的所有父级都被锁在“S”模式中。</p>
+<p>基于此，为操作获得的锁如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129575385061.jpg" alt=""></p>
+<p>为了避免死锁，这里提出了一个非常简单的方案。所有要锁定的对象都是按字母顺序排序的，然后获取所需的模式锁。请注意，在某些情况下，可能不知道对象列表——例如，在动态分区的情况下，正在修改的分区列表在编译时是未知的——因此，列表的生成是保守的。由于分区的数量可能不知道，所以应该将一个专用锁(但目前不是由于hive -3509 bug)放在表上，或者是已知的前缀。</p>
+<p>将添加两个新的可配置参数来决定锁的重试次数和每次重试之间的等待时间。如果重试的次数真的很高，它会导致一个活锁。看看ZooKeeper，看看如何使用ZooKeeper api实现读写锁。请注意，锁请求将被拒绝，而不是等待。现有的锁将被释放，所有的锁将在重试间隔后重试。</p>
+<p>上面列出的不会按照指定的方式工作，因为锁的等级性。</p>
+<p>表T的“S”锁指定如下:</p>
+<ul>
+<li>调用create()创建具有路径名的节点“/ warehouse/T/ read—”。这是协议后面使用的锁节点。确保设置顺序和临时标志。</li>
+<li>在锁定节点上调用getChildren()，而无需设置观察标志。</li>
+<li>如果有一个以“write -”开头的路径名的孩子，以及一个较低的序列数，那么这个锁就不能被获取。删除第一步中创建的节点并返回。</li>
+<li>否则，锁就被授予了。</li>
+</ul>
+<p>表T的“X”锁定如下:</p>
+<ul>
+<li>调用create()创建具有路径名的节点“/ warehouse/T/ write—”。这是协议后面使用的锁节点。确保设置顺序和临时标志。</li>
+<li>在锁定节点上调用getChildren()，而无需设置观察标志。</li>
+<li>如果有一个以“读-”或“写-”开头的路径名的孩子，并以较低的序列号开始，就不能获得锁。删除第一步中创建的节点并返回。</li>
+<li>否则，锁就被授予了。</li>
+</ul>
+<p>默认的Hive行为不会更改，并发也不受支持。<br>您可以通过将以下变量设置为false来关闭并发性: hive.support.concurrency.</p>
+<p>您可以通过发出以下命令查看表中的锁:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt;;</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">EXTENDED</span>;</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">PARTITION</span> (&lt;PARTITION_DESC&gt;);</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">PARTITION</span> (&lt;PARTITION_DESC&gt;) <span class="keyword">EXTENDED</span>;</span><br></pre></td></tr></table></figure>
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Locking" target="_blank" rel="noopener">点我了解Hive锁定的配置属性</a></p>
 
       
     </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+        <div>
+<div>
 
+
+
+<div style="text-align:center;color: #ccc;font-size:14px;">
+
+-------------THE<i class="fa fa-paw"></i>END-------------</div>
+
+
+
+</div>
+</div>
+      
+    </div>
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>交个朋友～～</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hive/" rel="tag"><i class="fa fa-tag"></i> hive</a>
+          
+        </div>
+      
+    
+      
+      
+      
+    
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/" rel="next" title="Hexo + AppVeyor 持续集成">
+                <i class="fa fa-chevron-left"></i> Hexo + AppVeyor 持续集成
+              </a>
+            
+          </div>
+    
+          <span class="post-nav-divider"></span>
+    
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/11/Hive报错集/" rel="prev" title="Hive报错集">
+                Hive报错集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +579,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -643,6 +872,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -660,6 +893,18 @@
       <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/12/11/Hive锁介绍-翻译自官方文档/';
+          this.page.identifier = '2017/12/11/Hive锁介绍-翻译自官方文档/';
+          this.page.title = 'Hive锁介绍-翻译自官方文档';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

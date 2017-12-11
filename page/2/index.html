@@ -324,6 +324,355 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/21/JavaRDDLike-scala/" itemprop="url">JavaRDDLike.scala</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T14:21:23+00:00">
+                2017-11-21
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/21/JavaRDDLike-scala/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/21/JavaRDDLike-scala/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/21/JavaRDDLike-scala/" class="leancloud_visitors" data-flag-title="JavaRDDLike.scala">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div>
+<!--请开始装逼-->
+<h2 id="JavaRDD"><a href="#JavaRDD" class="headerlink" title="JavaRDD"></a>JavaRDD</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.spark.api.java</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>[spark] <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractJavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]]</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">/**</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">Defines</span> <span class="title">operations</span> <span class="title">common</span> <span class="title">to</span> <span class="title">several</span> <span class="title">Java</span> <span class="title">RDD</span> <span class="title">implementations</span>.</span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">定义几个Java</span> <span class="title">RDD实现的常见操作。</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">@note</span> <span class="title">This</span> <span class="title">trait</span> <span class="title">is</span> <span class="title">not</span> <span class="title">intended</span> <span class="title">to</span> <span class="title">be</span> <span class="title">implemented</span> <span class="title">by</span> <span class="title">user</span> <span class="title">code</span>.</span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span>       <span class="title">该特性不打算由用户代码实现。</span></span></span><br><span class="line"><span class="class">  <span class="title">*/</span></span></span><br><span class="line"><span class="class"><span class="title">trait</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]] <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">wrapRDD</span></span>(rdd: <span class="type">RDD</span>[<span class="type">T</span>]): <span class="type">This</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> classTag: <span class="type">ClassTag</span>[<span class="type">T</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">rdd</span></span>: <span class="type">RDD</span>[<span class="type">T</span>]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/21/JavaRDDLike-scala/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/08/spark取样函数分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/spark取样函数分析/" itemprop="url">spark取样函数分析</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T17:30:25+00:00">
+                2017-11-08
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/08/spark取样函数分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/08/spark取样函数分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/08/spark取样函数分析/" class="leancloud_visitors" data-flag-title="spark取样函数分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>Spark取样操作<br>无法获取随机样本的解决方案</p></div>
+<!--请开始装逼-->
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Dataset中sample函数源码如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a user-supplied seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过使用用户提供的种子，通过抽样的方式返回一个新的[[Dataset]]。</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=true的话表示有放回的抽样，采用泊松抽样算法实现.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=false的话表示无放回的抽样，采用伯努利抽样算法实现.</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每一行数据被取样的概率.服从二项分布.当withReplacement=true的时候fraction&gt;=0,当withReplacement=false的时候 0 &lt; fraction &lt; 1.</span></span><br><span class="line"><span class="comment">  * @param seed            Seed for sampling.</span></span><br><span class="line"><span class="comment">  *                        取样种子（与随机数生成有关）</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>, seed: <span class="type">Long</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  require(fraction &gt;= <span class="number">0</span>,</span><br><span class="line">    <span class="string">s"Fraction must be nonnegative, but got <span class="subst">$&#123;fraction&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">  withTypedPlan &#123;</span><br><span class="line">    <span class="type">Sample</span>(<span class="number">0.0</span>, fraction, withReplacement, seed, logicalPlan)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a random seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过程序随机的种子，抽样返回新的DataSet</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        取样结果是否放回</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每行数据被取样的概率</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the total count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  sample(withReplacement, fraction, <span class="type">Utils</span>.random.nextLong)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/08/spark取样函数分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/06/spark源码注释翻译/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1703,356 +2052,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/28/这个杀手不太冷/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/28/这个杀手不太冷/" itemprop="url">这个杀手不太冷</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T01:18:04+00:00">
-                2017-10-28
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/movie/" itemprop="url" rel="index">
-                    <span itemprop="name">movie</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/28/这个杀手不太冷/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/28/这个杀手不太冷/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/10/28/这个杀手不太冷/" class="leancloud_visitors" data-flag-title="这个杀手不太冷">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><p>Is life always this hard,or is it just when you’re a kid?<br>Always like this.</p></div>
-<p><img src="http://oliji9s3j.bkt.clouddn.com/15114113550802.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/28/这个杀手不太冷/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/28/mac使用小技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/28/mac使用小技巧/" itemprop="url">mac使用小技巧</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T01:13:44+00:00">
-                2017-10-28
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/28/mac使用小技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/28/mac使用小技巧/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/10/28/mac使用小技巧/" class="leancloud_visitors" data-flag-title="mac使用小技巧">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><p>记录mac使用的小技巧<br>持续更新ing </p></div>
-<!--请开始装逼-->
-<h2 id="开启充电提示音（类似于iphone充电提示音，默认关闭）"><a href="#开启充电提示音（类似于iphone充电提示音，默认关闭）" class="headerlink" title="开启充电提示音（类似于iphone充电提示音，默认关闭）"></a>开启充电提示音（类似于iphone充电提示音，默认关闭）</h2><p>终端输入（开启）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;</span><br></pre></td></tr></table></figure>
-<p>关闭：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool false;killall PowerChime</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/28/mac使用小技巧/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2107,7 +2106,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2129,7 +2128,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
