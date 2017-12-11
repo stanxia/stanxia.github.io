@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。 报错集关键词：Error rolling back详情：Error rolling back: Can&amp;#39;t call rollback when autocommit=true 解决方案：vim conf/hive-site.xml 不要加这个配置！！！！  1234&amp;lt;property&amp;gt;&amp;">
+<meta name="description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 <meta name="keywords" content="hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive报错集">
 <meta property="og:url" content="https://stanxia.github.io/2017/12/11/Hive报错集/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="前言以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。 报错集关键词：Error rolling back详情：Error rolling back: Can&amp;#39;t call rollback when autocommit=true 解决方案：vim conf/hive-site.xml 不要加这个配置！！！！  1234&amp;lt;property&amp;gt;&amp;">
+<meta property="og:description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-11T02:39:15.220Z">
+<meta property="og:updated_time" content="2017-12-11T07:02:54.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive报错集">
-<meta name="twitter:description" content="前言以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。 报错集关键词：Error rolling back详情：Error rolling back: Can&amp;#39;t call rollback when autocommit=true 解决方案：vim conf/hive-site.xml 不要加这个配置！！！！  1234&amp;lt;property&amp;gt;&amp;">
+<meta name="twitter:description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 
 
 
@@ -436,8 +436,9 @@
       
     
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。</p>
-<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="关键词：Error-rolling-back"><a href="#关键词：Error-rolling-back" class="headerlink" title="关键词：Error rolling back"></a>关键词：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
+<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
 <h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><code>vim conf/hive-site.xml</code></p>
 <p>不要加这个配置！！！！ </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.in.test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -723,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错集"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x62A5;&#x9519;&#x96C6;" class="headerlink" title="&#x62A5;&#x9519;&#x96C6;"></a>&#x62A5;&#x9519;&#x96C6;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键词：Error-rolling-back"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x5173;&#x952E;&#x8BCD;&#xFF1A;Error-rolling-back" class="headerlink" title="&#x5173;&#x952E;&#x8BCD;&#xFF1A;Error rolling back"></a>&#x5173;&#x952E;&#x8BCD;&#xFF1A;Error rolling back</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#详情："><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x8BE6;&#x60C5;&#xFF1A;" class="headerlink" title="&#x8BE6;&#x60C5;&#xFF1A;"></a>&#x8BE6;&#x60C5;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案："><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;" class="headerlink" title="&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;"></a>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错集"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x62A5;&#x9519;&#x96C6;" class="headerlink" title="&#x62A5;&#x9519;&#x96C6;"></a>&#x62A5;&#x9519;&#x96C6;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1：Error-rolling-back"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;1&#xFF1A;Error-rolling-back" class="headerlink" title="&#x95EE;&#x9898;1&#xFF1A;Error rolling back"></a>&#x95EE;&#x9898;1&#xFF1A;Error rolling back</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#详情："><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x8BE6;&#x60C5;&#xFF1A;" class="headerlink" title="&#x8BE6;&#x60C5;&#xFF1A;"></a>&#x8BE6;&#x60C5;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案："><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;" class="headerlink" title="&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;"></a>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

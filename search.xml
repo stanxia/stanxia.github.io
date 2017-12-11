@@ -29,8 +29,9 @@
     <entry>
       <title><![CDATA[Hive报错集]]></title>
       <url>https://stanxia.github.io/2017/12/11/Hive%E6%8A%A5%E9%94%99%E9%9B%86/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。</p>
-<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="关键词：Error-rolling-back"><a href="#关键词：Error-rolling-back" class="headerlink" title="关键词：Error rolling back"></a>关键词：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
+      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
+<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
 <h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><code>vim conf/hive-site.xml</code></p>
 <p>不要加这个配置！！！！ </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.in.test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -56,7 +57,7 @@
       <url>https://stanxia.github.io/2017/12/11/Hive%E9%94%81%E4%BB%8B%E7%BB%8D-%E7%BF%BB%E8%AF%91%E8%87%AA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</url>
       <content type="html"><![CDATA[<p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享(S)</span><br><span class="line">独占(X)</span><br></pre></td></tr></table></figure>
-<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>锁定模式下获取的合理性如下:</p>
+<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br><a id="more"></a><br>锁定模式下获取的合理性如下:</p>
 <p>对于非分区表，锁模式非常直观。读取表时，获取一个S锁，而所有其他操作(插入表、alter table等其他操作)获得一个X锁。</p>
 <p>对于分区表，其思想如下:</p>
 <p>在执行读操作时，获取表和相关分区的 ‘S’ 锁。对于所有其他操作，在分区上执行“X”锁。但是，如果更改只适用于较新的分区，则在表上获得“S”锁，而如果更改适用于所有分区，则在表上获得“X”锁。因此，旧分区可以被读取和写入，而新的分区则被转换为RCFile。每当一个分区被锁定在任何模式时，它的所有父级都被锁在“S”模式中。</p>
@@ -653,11 +654,11 @@
         
         <tags>
             
+            <tag> spark </tag>
+            
             <tag> orc </tag>
             
             <tag> parquet </tag>
-            
-            <tag> spark </tag>
             
         </tags>
         
@@ -1136,9 +1137,9 @@
         
         <tags>
             
-            <tag> parquet </tag>
-            
             <tag> spark </tag>
+            
+            <tag> parquet </tag>
             
         </tags>
         
@@ -1262,11 +1263,11 @@
       <url>https://stanxia.github.io/2017/10/30/spark%E6%8A%A5%E9%94%99%E9%9B%86/</url>
       <content type="html"><![CDATA[<h2 id="有话要说"><a href="#有话要说" class="headerlink" title="有话要说"></a>有话要说</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
 <p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
-<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="关键词：spark-hive-classes-are-not-found"><a href="#关键词：spark-hive-classes-are-not-found" class="headerlink" title="关键词：spark-hive classes are not found"></a>关键词：spark-hive classes are not found</h3><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</span><br></pre></td></tr></table></figure>
+<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="问题1：spark-hive-classes-are-not-found"><a href="#问题1：spark-hive-classes-are-not-found" class="headerlink" title="问题1：spark-hive classes are not found"></a>问题1：spark-hive classes are not found</h3><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</span><br></pre></td></tr></table></figure>
 <h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><p>在本地调试spark程序，连接虚拟机上的集群，尝试执行sparkSQL时，启动任务就报错。</p>
 <h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>缺少sparkSQL连接hive的必要和依赖jar包，添加相应的依赖包即可。</p>
 <h4 id="办法："><a href="#办法：" class="headerlink" title="办法："></a>办法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在项目／模块的pom.xml中添加相关的spark-hive依赖jar包。</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive_2.11 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">重新编译项目／模块即可。</span><br></pre></td></tr></table></figure>
-<h3 id="关键词：Spark-Local-模式写-Hive，user-xialinsheng"><a href="#关键词：Spark-Local-模式写-Hive，user-xialinsheng" class="headerlink" title="关键词：Spark Local 模式写 Hive，user=xialinsheng"></a>关键词：Spark Local 模式写 Hive，user=xialinsheng</h3><h4 id="概述：-1"><a href="#概述：-1" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: org.apache.hadoop.security.AccessControlException: Permission denied: user=xialinsheng, access=WRITE, inode=&quot;/user/hive/warehouse/xls002&quot;:hadoop:supergroup:drwxr-xr-x</span><br></pre></td></tr></table></figure>
+<h3 id="问题2：Spark-Local-模式写-Hive，user-xialinsheng"><a href="#问题2：Spark-Local-模式写-Hive，user-xialinsheng" class="headerlink" title="问题2：Spark Local 模式写 Hive，user=xialinsheng"></a>问题2：Spark Local 模式写 Hive，user=xialinsheng</h3><h4 id="概述：-1"><a href="#概述：-1" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: org.apache.hadoop.security.AccessControlException: Permission denied: user=xialinsheng, access=WRITE, inode=&quot;/user/hive/warehouse/xls002&quot;:hadoop:supergroup:drwxr-xr-x</span><br></pre></td></tr></table></figure>
 <h4 id="场景：-1"><a href="#场景：-1" class="headerlink" title="场景："></a>场景：</h4><p>Spark Local 模式连接集群，对 Hadoop 无操作权限。</p>
 <h4 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h4><p>Spark 在 Local 模式时，如果在本地机器没有设定 HADOOP_USER_NAME ，程序会使用本地的机器名作为 HADOOP_USER_NAME ，这就导致在 Hadoop 集群中无法识别该用户名，从而没权限操作 Hadoop 。</p>
 <p>获取 HADOOP_USER_NAME 的核心源码如下：</p>
@@ -1274,7 +1275,7 @@
 <p>从源码可知，要想解决该问题，只要在本机的环境变量中添加 <em>HADOOP_USER_NAME = Hadoop</em> （对 Hadoop 集群有操作权限的用户，具体视自身情况而定。）<br><a href="http://www.huqiwen.com/2013/07/18/hdfs-permission-denied/" target="_blank" rel="noopener">参考博客：点我了解更多</a></p>
 <h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>因为我的需求只是在测试的时候会使用 Local 模式连接集群上的 Hive 表，因而我的处理方式则是在程序代码中指定 ：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"HADOOP_USER_NAME"</span>,<span class="string">"Hadoop有权限的用户名"</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="关键词：javax-servlet-FilterRegistration"><a href="#关键词：javax-servlet-FilterRegistration" class="headerlink" title="关键词：javax.servlet.FilterRegistration"></a>关键词：javax.servlet.FilterRegistration</h3><h4 id="概述：-2"><a href="#概述：-2" class="headerlink" title="概述："></a>概述：</h4><p>在idea上运行spark程序时，出现以下信息：</p>
+<h3 id="问题3：javax-servlet-FilterRegistration"><a href="#问题3：javax-servlet-FilterRegistration" class="headerlink" title="问题3：javax.servlet.FilterRegistration"></a>问题3：javax.servlet.FilterRegistration</h3><h4 id="概述：-2"><a href="#概述：-2" class="headerlink" title="概述："></a>概述：</h4><p>在idea上运行spark程序时，出现以下信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Spark error class &quot;javax.servlet.FilterRegistration&quot;&apos;s signer information does not match signer information of other classes in the same package</span><br></pre></td></tr></table></figure>
 <p>如图：</p>
 <p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg" alt="1"></p>

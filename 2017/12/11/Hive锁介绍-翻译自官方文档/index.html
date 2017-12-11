@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15129575385061.jpg">
-<meta property="og:updated_time" content="2017-12-11T02:39:15.220Z">
+<meta property="og:updated_time" content="2017-12-11T07:02:54.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive锁介绍-翻译自官方文档">
 <meta name="twitter:description" content="在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。 12共享(S)独占(X) 顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。兼容性矩阵如下:对于某些操作，锁在本质上是分层的">
@@ -441,7 +441,7 @@
       
         <p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享(S)</span><br><span class="line">独占(X)</span><br></pre></td></tr></table></figure>
-<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>锁定模式下获取的合理性如下:</p>
+<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br><a id="more"></a><br>锁定模式下获取的合理性如下:</p>
 <p>对于非分区表，锁模式非常直观。读取表时，获取一个S锁，而所有其他操作(插入表、alter table等其他操作)获得一个X锁。</p>
 <p>对于分区表，其思想如下:</p>
 <p>在执行读操作时，获取表和相关分区的 ‘S’ 锁。对于所有其他操作，在分区上执行“X”锁。但是，如果更改只适用于较新的分区，则在表上获得“S”锁，而如果更改适用于所有分区，则在表上获得“X”锁。因此，旧分区可以被读取和写入，而新的分区则被转换为RCFile。每当一个分区被锁定在任何模式时，它的所有父级都被锁在“S”模式中。</p>

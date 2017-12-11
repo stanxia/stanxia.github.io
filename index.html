@@ -518,14 +518,15 @@
     
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以此文章记录在程序中遇到的 Hive 的异常处理情况。尽量将所遇到的问题都总结归纳。</p>
-<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="关键词：Error-rolling-back"><a href="#关键词：Error-rolling-back" class="headerlink" title="关键词：Error rolling back"></a>关键词：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
-<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><code>vim conf/hive-site.xml</code></p>
-<p>不要加这个配置！！！！ </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.in.test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-          
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/11/Hive报错集/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -690,37 +691,16 @@
     
       
         
-          
-            <p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
+          <p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享(S)</span><br><span class="line">独占(X)</span><br></pre></td></tr></table></figure>
-<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>锁定模式下获取的合理性如下:</p>
-<p>对于非分区表，锁模式非常直观。读取表时，获取一个S锁，而所有其他操作(插入表、alter table等其他操作)获得一个X锁。</p>
-<p>对于分区表，其思想如下:</p>
-<p>在执行读操作时，获取表和相关分区的 ‘S’ 锁。对于所有其他操作，在分区上执行“X”锁。但是，如果更改只适用于较新的分区，则在表上获得“S”锁，而如果更改适用于所有分区，则在表上获得“X”锁。因此，旧分区可以被读取和写入，而新的分区则被转换为RCFile。每当一个分区被锁定在任何模式时，它的所有父级都被锁在“S”模式中。</p>
-<p>基于此，为操作获得的锁如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129575385061.jpg" alt=""></p>
-<p>为了避免死锁，这里提出了一个非常简单的方案。所有要锁定的对象都是按字母顺序排序的，然后获取所需的模式锁。请注意，在某些情况下，可能不知道对象列表——例如，在动态分区的情况下，正在修改的分区列表在编译时是未知的——因此，列表的生成是保守的。由于分区的数量可能不知道，所以应该将一个专用锁(但目前不是由于hive -3509 bug)放在表上，或者是已知的前缀。</p>
-<p>将添加两个新的可配置参数来决定锁的重试次数和每次重试之间的等待时间。如果重试的次数真的很高，它会导致一个活锁。看看ZooKeeper，看看如何使用ZooKeeper api实现读写锁。请注意，锁请求将被拒绝，而不是等待。现有的锁将被释放，所有的锁将在重试间隔后重试。</p>
-<p>上面列出的不会按照指定的方式工作，因为锁的等级性。</p>
-<p>表T的“S”锁指定如下:</p>
-<ul>
-<li>调用create()创建具有路径名的节点“/ warehouse/T/ read—”。这是协议后面使用的锁节点。确保设置顺序和临时标志。</li>
-<li>在锁定节点上调用getChildren()，而无需设置观察标志。</li>
-<li>如果有一个以“write -”开头的路径名的孩子，以及一个较低的序列数，那么这个锁就不能被获取。删除第一步中创建的节点并返回。</li>
-<li>否则，锁就被授予了。</li>
-</ul>
-<p>表T的“X”锁定如下:</p>
-<ul>
-<li>调用create()创建具有路径名的节点“/ warehouse/T/ write—”。这是协议后面使用的锁节点。确保设置顺序和临时标志。</li>
-<li>在锁定节点上调用getChildren()，而无需设置观察标志。</li>
-<li>如果有一个以“读-”或“写-”开头的路径名的孩子，并以较低的序列号开始，就不能获得锁。删除第一步中创建的节点并返回。</li>
-<li>否则，锁就被授予了。</li>
-</ul>
-<p>默认的Hive行为不会更改，并发也不受支持。<br>您可以通过将以下变量设置为false来关闭并发性: hive.support.concurrency.</p>
-<p>您可以通过发出以下命令查看表中的锁:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt;;</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">EXTENDED</span>;</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">PARTITION</span> (&lt;PARTITION_DESC&gt;);</span><br><span class="line"><span class="keyword">SHOW</span> LOCKS &lt;TABLE_NAME&gt; <span class="keyword">PARTITION</span> (&lt;PARTITION_DESC&gt;) <span class="keyword">EXTENDED</span>;</span><br></pre></td></tr></table></figure>
-<p><a href="https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Locking" target="_blank" rel="noopener">点我了解Hive锁定的配置属性</a></p>
-
-          
+<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt=""><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/11/Hive锁介绍-翻译自官方文档/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
