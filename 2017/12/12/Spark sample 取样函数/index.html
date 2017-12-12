@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spark," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="采菊东篱下，悠然见南山">
-<meta property="og:type" content="website">
-<meta property="og:title" content="图库">
-<meta property="og:url" content="https://stanxia.github.io/galleries/index.html">
+<meta name="description" content="Spark取样操作无法获取随机样本的解决方案  背景Dataset中sample函数源码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445/**  * Returns a new [[Dataset]] by sampling a fraction of rows, using">
+<meta name="keywords" content="spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark取样函数分析">
+<meta property="og:url" content="https://stanxia.github.io/2017/12/12/Spark sample 取样函数/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="采菊东篱下，悠然见南山">
+<meta property="og:description" content="Spark取样操作无法获取随机样本的解决方案  背景Dataset中sample函数源码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445/**  * Returns a new [[Dataset]] by sampling a fraction of rows, using">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-12T03:17:27.029Z">
+<meta property="og:updated_time" content="2017-12-12T03:17:27.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图库">
-<meta name="twitter:description" content="采菊东篱下，悠然见南山">
+<meta name="twitter:title" content="spark取样函数分析">
+<meta name="twitter:description" content="Spark取样操作无法获取随机样本的解决方案  背景Dataset中sample函数源码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445/**  * Returns a new [[Dataset]] by sampling a fraction of rows, using">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/galleries/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/12/Spark sample 取样函数/"/>
 
 
 
 
 
-  <title>图库 | 东篱下</title>
+  <title>spark取样函数分析 | 东篱下</title>
   
 
 
@@ -312,33 +313,242 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/12/Spark sample 取样函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
     
     
-    <div class="post-block page">
       <header class="post-header">
-
-	<h1 class="post-title" itemprop="name headline">图库</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
+    
         
         
+          <h1 class="post-title" itemprop="name headline">spark取样函数分析</h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T17:30:25+00:00">
+                2017-12-12
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
           
-        
-      </div>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/12/Spark sample 取样函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/12/Spark sample 取样函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/12/12/Spark sample 取样函数/" class="leancloud_visitors" data-flag-title="spark取样函数分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
       
       
+    
+      
+        <div class="note info"><p>Spark取样操作<br>无法获取随机样本的解决方案</p></div>
+<!--请开始装逼-->
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Dataset中sample函数源码如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a user-supplied seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过使用用户提供的种子，通过抽样的方式返回一个新的[[Dataset]]。</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=true的话表示有放回的抽样，采用泊松抽样算法实现.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=false的话表示无放回的抽样，采用伯努利抽样算法实现.</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每一行数据被取样的概率.服从二项分布.当withReplacement=true的时候fraction&gt;=0,当withReplacement=false的时候 0 &lt; fraction &lt; 1.</span></span><br><span class="line"><span class="comment">  * @param seed            Seed for sampling.</span></span><br><span class="line"><span class="comment">  *                        取样种子（与随机数生成有关）</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>, seed: <span class="type">Long</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  require(fraction &gt;= <span class="number">0</span>,</span><br><span class="line">    <span class="string">s"Fraction must be nonnegative, but got <span class="subst">$&#123;fraction&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">  withTypedPlan &#123;</span><br><span class="line">    <span class="type">Sample</span>(<span class="number">0.0</span>, fraction, withReplacement, seed, logicalPlan)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a random seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过程序随机的种子，抽样返回新的DataSet</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        取样结果是否放回</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每行数据被取样的概率</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the total count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  sample(withReplacement, fraction, <span class="type">Utils</span>.random.nextLong)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>结果数据的行数一般在（fraction*总数）左右。没有一个固定的值，如果需要得到固定行数的随机数据的话不建议采用该方法。</p>
+<h2 id="办法"><a href="#办法" class="headerlink" title="办法"></a>办法</h2><p>获取随机取样的替代方法：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df.createOrReplaceTempView(<span class="string">"test_sample"</span>); <span class="comment">// 生成临时表</span></span><br><span class="line">df.sqlContext() <span class="comment">// 添加随机数列，并根据其进行排序</span></span><br><span class="line">  .sql(<span class="string">"select * ,rand() as random from test_sample order by random"</span>)</span><br><span class="line">  .limit(<span class="number">2</span>) <span class="comment">// 根据参数的fraction计算需要获取的取样结果</span></span><br><span class="line">  .drop(<span class="string">"random"</span>) <span class="comment">// 删除掉添加的随机列</span></span><br><span class="line">  .show();</span><br></pre></td></tr></table></figure>
+<!--对不起，到时间了，请停止装逼-->
+
       
     </div>
     
     
     
+    
+    
+    
+    <div>
+      
+        <div>
+<div>
+
+
+
+<div style="text-align:center;color: #ccc;font-size:14px;">
+
+-------------THE<i class="fa fa-paw"></i>END-------------</div>
+
+
+
+</div>
+</div>
+      
+    </div>
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>交个朋友～～</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
+          
+        </div>
+      
+    
+      
+      
+      
+    
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/11/Hive报错集/" rel="next" title="Hive报错集">
+                <i class="fa fa-chevron-left"></i> Hive报错集
+              </a>
+            
+          </div>
+    
+          <span class="post-nav-divider"></span>
+    
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/10/27/火之意志/" rel="prev" title="火之意志">
+                火之意志 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -381,8 +591,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,6 +717,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x80CC;&#x666F;" class="headerlink" title="&#x80CC;&#x666F;"></a>&#x80CC;&#x666F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;" class="headerlink" title="&#x95EE;&#x9898;"></a>&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#办法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x529E;&#x6CD5;" class="headerlink" title="&#x529E;&#x6CD5;"></a>&#x529E;&#x6CD5;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
 
@@ -664,9 +899,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://stanxia.github.io/galleries/index.html';
-          this.page.identifier = 'galleries/index.html';
-          this.page.title = '图库';
+          this.page.url = 'https://stanxia.github.io/2017/12/12/Spark sample 取样函数/';
+          this.page.identifier = '2017/12/12/Spark sample 取样函数/';
+          this.page.title = 'spark取样函数分析';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://astan.disqus.com/embed.js';
