@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,报错集," />
+  <meta name="keywords" content="hive," />
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
-<meta name="keywords" content="spark,报错集">
+<meta name="description" content="ACID简介 ACID代表数据库事务的四个特性:  原子性（Atomicity）:一个事务是一个不可再分割的工作单位，事务中的所有操作要么都发生，要么都不发生。 一致性（Consistency）:事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。 隔离性（Isolation）:多个事务并发访问，事务之间是隔离的，一个事务不影响">
+<meta name="keywords" content="hive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark报错集">
-<meta property="og:url" content="https://stanxia.github.io/2017/10/30/spark报错集/index.html">
+<meta property="og:title" content="Hive事务-翻译自官方文档">
+<meta property="og:url" content="https://stanxia.github.io/2017/12/13/Hive事务-翻译自官方文档/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
+<meta property="og:description" content="ACID简介 ACID代表数据库事务的四个特性:  原子性（Atomicity）:一个事务是一个不可再分割的工作单位，事务中的所有操作要么都发生，要么都不发生。 一致性（Consistency）:事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。 隔离性（Isolation）:多个事务并发访问，事务之间是隔离的，一个事务不影响">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg">
-<meta property="og:image" content="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5amqp9jcj21ak0hu425.jpg">
-<meta property="og:updated_time" content="2017-12-13T09:24:53.532Z">
+<meta property="og:updated_time" content="2017-12-13T09:24:53.516Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark报错集">
-<meta name="twitter:description" content="有话要说针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。">
-<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg">
+<meta name="twitter:title" content="Hive事务-翻译自官方文档">
+<meta name="twitter:description" content="ACID简介 ACID代表数据库事务的四个特性:  原子性（Atomicity）:一个事务是一个不可再分割的工作单位，事务中的所有操作要么都发生，要么都不发生。 一致性（Consistency）:事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。 隔离性（Isolation）:多个事务并发访问，事务之间是隔离的，一个事务不影响">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/10/30/spark报错集/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/13/Hive事务-翻译自官方文档/"/>
 
 
 
 
 
-  <title>spark报错集 | 东篱下</title>
+  <title>Hive事务-翻译自官方文档 | 东篱下</title>
   
 
 
@@ -328,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/30/spark报错集/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/13/Hive事务-翻译自官方文档/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -345,7 +342,7 @@
     
         
         
-          <h1 class="post-title" itemprop="name headline">spark报错集</h1>
+          <h1 class="post-title" itemprop="name headline">Hive事务-翻译自官方文档</h1>
         
     
         <div class="post-meta">
@@ -357,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T13:58:58+00:00">
-                2017-10-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T16:34:17+00:00">
+                2017-12-13
               </time>
             
     
@@ -380,8 +377,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/hive/" itemprop="url" rel="index">
+                    <span itemprop="name">hive</span>
                   </a>
                 </span>
     
@@ -398,9 +395,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/30/spark报错集/#comments" itemprop="discussionUrl">
+                <a href="/2017/12/13/Hive事务-翻译自官方文档/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/30/spark报错集/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/12/13/Hive事务-翻译自官方文档/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -408,7 +405,7 @@
     
           
           
-             <span id="/2017/10/30/spark报错集/" class="leancloud_visitors" data-flag-title="spark报错集">
+             <span id="/2017/12/13/Hive事务-翻译自官方文档/" class="leancloud_visitors" data-flag-title="Hive事务-翻译自官方文档">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -439,37 +436,88 @@
       
     
       
-        <h2 id="有话要说"><a href="#有话要说" class="headerlink" title="有话要说"></a>有话要说</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
-<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
-<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h3 id="问题1：spark-hive-classes-are-not-found"><a href="#问题1：spark-hive-classes-are-not-found" class="headerlink" title="问题1：spark-hive classes are not found"></a>问题1：spark-hive classes are not found</h3><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unable to instantiate SparkSession with Hive support because Hive classes are not found.</span><br></pre></td></tr></table></figure>
-<h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><p>在本地调试spark程序，连接虚拟机上的集群，尝试执行sparkSQL时，启动任务就报错。</p>
-<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>缺少sparkSQL连接hive的必要和依赖jar包，添加相应的依赖包即可。</p>
-<h4 id="办法："><a href="#办法：" class="headerlink" title="办法："></a>办法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在项目／模块的pom.xml中添加相关的spark-hive依赖jar包。</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive_2.11 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">重新编译项目／模块即可。</span><br></pre></td></tr></table></figure>
-<h3 id="问题2：Spark-Local-模式写-Hive，user-xialinsheng"><a href="#问题2：Spark-Local-模式写-Hive，user-xialinsheng" class="headerlink" title="问题2：Spark Local 模式写 Hive，user=xialinsheng"></a>问题2：Spark Local 模式写 Hive，user=xialinsheng</h3><h4 id="概述：-1"><a href="#概述：-1" class="headerlink" title="概述："></a>概述：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: org.apache.hadoop.security.AccessControlException: Permission denied: user=xialinsheng, access=WRITE, inode=&quot;/user/hive/warehouse/xls002&quot;:hadoop:supergroup:drwxr-xr-x</span><br></pre></td></tr></table></figure>
-<h4 id="场景：-1"><a href="#场景：-1" class="headerlink" title="场景："></a>场景：</h4><p>Spark Local 模式连接集群，对 Hadoop 无操作权限。</p>
-<h4 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h4><p>Spark 在 Local 模式时，如果在本地机器没有设定 HADOOP_USER_NAME ，程序会使用本地的机器名作为 HADOOP_USER_NAME ，这就导致在 Hadoop 集群中无法识别该用户名，从而没权限操作 Hadoop 。</p>
-<p>获取 HADOOP_USER_NAME 的核心源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!isSecurityEnabled() &amp;&amp; (user == <span class="keyword">null</span>)) &#123;</span><br><span class="line">  String envUser = System.getenv(HADOOP_USER_NAME);</span><br><span class="line">  <span class="keyword">if</span> (envUser == <span class="keyword">null</span>) &#123;</span><br><span class="line">    envUser = System.getProperty(HADOOP_USER_NAME);</span><br><span class="line">  &#125;</span><br><span class="line">  user = envUser == <span class="keyword">null</span> ? <span class="keyword">null</span> : <span class="keyword">new</span> User(envUser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从源码可知，要想解决该问题，只要在本机的环境变量中添加 <em>HADOOP_USER_NAME = Hadoop</em> （对 Hadoop 集群有操作权限的用户，具体视自身情况而定。）<br><a href="http://www.huqiwen.com/2013/07/18/hdfs-permission-denied/" target="_blank" rel="noopener">参考博客：点我了解更多</a></p>
-<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>因为我的需求只是在测试的时候会使用 Local 模式连接集群上的 Hive 表，因而我的处理方式则是在程序代码中指定 ：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"HADOOP_USER_NAME"</span>,<span class="string">"Hadoop有权限的用户名"</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="问题3：javax-servlet-FilterRegistration"><a href="#问题3：javax-servlet-FilterRegistration" class="headerlink" title="问题3：javax.servlet.FilterRegistration"></a>问题3：javax.servlet.FilterRegistration</h3><h4 id="概述：-2"><a href="#概述：-2" class="headerlink" title="概述："></a>概述：</h4><p>在idea上运行spark程序时，出现以下信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Spark error class &quot;javax.servlet.FilterRegistration&quot;&apos;s signer information does not match signer information of other classes in the same package</span><br></pre></td></tr></table></figure>
-<p>如图：</p>
-<p><img src="http://wx3.sinaimg.cn/mw1024/6aae3cf3gy1fd5a3imie6j21kw09oq96.jpg" alt="1"></p>
-<h4 id="原理：-2"><a href="#原理：-2" class="headerlink" title="原理："></a>原理：</h4><p>包冲突导致。</p>
-<h4 id="解决：-1"><a href="#解决：-1" class="headerlink" title="解决："></a>解决：</h4><p>按照以下步骤操作：</p>
-<ol>
-<li>右键模块项目</li>
-<li>Open Module Settings</li>
-<li>选择Dependencies</li>
-<li>找到 javax.servlet:servlet-api:xx</li>
-<li>移动到列表的最末端</li>
-<li>Apply，Ok</li>
-</ol>
-<p>如下图：</p>
-<p><img src="http://wx4.sinaimg.cn/mw1024/6aae3cf3gy1fd5amqp9jcj21ak0hu425.jpg" alt="2"></p>
-<!--对不起，到时间了，请停止装逼-->
+        <div class="note info"><h2 id="ACID简介"><a href="#ACID简介" class="headerlink" title="ACID简介"></a>ACID简介</h2></div>
+<p>ACID代表数据库事务的四个特性:</p>
+<ul>
+<li>原子性（Atomicity）:一个事务是一个不可再分割的工作单位，事务中的所有操作要么都发生，要么都不发生。</li>
+<li>一致性（Consistency）:事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。</li>
+<li>隔离性（Isolation）:多个事务并发访问，事务之间是隔离的，一个事务不影响其它事务运行效果。这指的是在并发环境中，当不同的事务同时操作相同的数据时，每个事务都有各自完整的数据空间。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改后的状态，事务不会查看到中间状态的数据。事务之间的相应影响，分别为：脏读、不可重复读、幻读、丢失更新。</li>
+<li>持久性（Durability）:意味着在事务完成以后，该事务锁对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</li>
+</ul>
+<p>在Hive0.13中添加事务之后，在分区级别上提供了原子性、一致性和持久性。可以通过打开可用的锁定机制(ZooKeeper或内存)来提供隔离。现在可以在行级别上提供完整的ACID语义，这样一个应用程序可以添加行，而另一个应用程序可以在相同的分区上读取，而不会相互干扰。<br><a id="more"></a><br>使用ACID语义的事务被添加到Hive中，以解决以下用例:</p>
+<ul>
+<li>流数据的接入。许多用户都使用 Apache Flume, Apache Storm, or Apache Kafka 将流式数据导入Hadoop集群。 这些工具都是每秒百万行级的数据写入，而Hive只能每十五分钟到一个小时添加一次分区。快速的增加分区会对表中的分区数量形成压力。当然可以事先创建好分区再将数据导入，但这样会引起脏读，而且目录下生成的小文件会对namenode造成很大的压力。而新特性可以很好的解决上述问题</li>
+<li>维度表的缓慢变化：在典型的星型架构数据仓库中，维度表随时间慢慢变化。例如，零售商将会打开新的商店，这些商店需要被添加到商店的表中，或者现有的商店可能会改变它的平方英尺或其他一些被跟踪的特性。这些更改会导致插入单个记录或更新记录(取决于所选择的策略)。Hive从0.14开始支持。</li>
+<li>数据更新。从Hive 0.14开始，可以 INSERT, UPDATE, 和 DELETE。</li>
+<li>使用SQL MERGE语句进行批量更新。</li>
+</ul>
+<div class="note info"><h2 id="事务限制"><a href="#事务限制" class="headerlink" title="事务限制"></a>事务限制</h2></div>
+<ul>
+<li>BEGIN, COMMIT, and ROLLBACK还不支持。所有操作都是自动提交的。该计划将在未来的版本中提供支持。</li>
+<li>现目前只支持ORC文件格式。已经构建了这样的功能，可以通过任何存储格式来使用事务，以确定更新或删除如何应用于基本记录(基本上，具有显式或隐式行id)，但到目前为止，集成工作还只是用于ORC。</li>
+<li>事务默认为关闭的。</li>
+<li>表必须要分桶才能支持事务。因为外部表不受分桶的控制，因而外部表并不支持事务。</li>
+<li>从一个 non_ACID 表读写 ACID 表 是不允许的。事务管理器必须设置为：org.apache.hadoop.hive.ql.lockmgr.DbTxnManager 。</li>
+<li>目前只支持快照级别的隔离。</li>
+<li>现有的ZooKeeper和内存中的锁管理器与事务不兼容。</li>
+<li>ACID表不支持使用ALTER TABLE的模式更改。</li>
+<li>使用 ORACLE 作为元数据库，”datanucleus.connectionPoolingType=BONECP” 可能会出现：”No such lock..” 和 “No such transaction…”等错误。请设置为：”datanucleus.connectionPoolingType=DBCP” 。</li>
+<li>事务表不支持 ：LOAD DATA…  语法。</li>
+</ul>
+<div class="note info"><h2 id="流-APIs"><a href="#流-APIs" class="headerlink" title="流 APIs"></a>流 APIs</h2></div>
+<p>Hive 提供数据 流式插入和流式更新的 APIs:</p>
+<ul>
+<li>Hive HCatalog Streaming API</li>
+<li>HCatalog Streaming Mutation API (Hive 2.0.0 及以上可用)</li>
+</ul>
+<div class="note info"><h2 id="语法修改"><a href="#语法修改" class="headerlink" title="语法修改"></a>语法修改</h2></div>
+<p>从Hive 0.14. 开始，INSERT…VALUES, UPDATE, and DELETE 已经添加进 SQL 语法。几个新命令已经添加进 Hive 的 DDL 支持 ACID 和 事务, 并修改一些已经存在的 DDL 。  </p>
+<p>新命令：</p>
+<ul>
+<li>SHOW TRANSACTIONS </li>
+<li>SHOW COMPACTIONS </li>
+<li>ABORT TRANSACTIONS </li>
+</ul>
+<p>修改的命令：</p>
+<ul>
+<li>SHOW LOCKS  :提供与事务相关的新锁的信息。如果正在使用 ZooKeeper 或者内存锁管理，命令的输出将有不同。</li>
+<li>ALTER TABLE :添加新功能，请求表或分区的压缩。 一般来说，用户不需要请求压缩，因为系统将检测到对它们的需求并启动压缩。 然而，如果对一个表关闭了压缩，或者用户希望在系统不选择的时候压缩表, ALTER TABLE 可用于启动压缩。为了观察压缩的进度，用户可以使用 SHOW COMPACTIONS 。</li>
+</ul>
+<div class="note info"><h2 id="基础设计"><a href="#基础设计" class="headerlink" title="基础设计"></a>基础设计</h2></div>
+<p>HDFS 不支持对文件进行就地修改。也不提供读的一致性，并且当有数据追加到文件，HDFS 不对读数据的用户提供一致性的。为了在 HDFS 上提供这些特性，我们遵循了其他数据仓库工具中使用的标准方法。 表或分区的数据存储在一组 base 文件中。 新的记录、更新和删除存储在 delta 文件中。每个改变表或分区的事务产生一组新的 delta 文件 。读的时候，合并 base 和 delta 文件, 应用所有的更新和删除。</p>
+<h3 id="Base-和-Delta-目录"><a href="#Base-和-Delta-目录" class="headerlink" title="Base 和 Delta 目录"></a>Base 和 Delta 目录</h3><p>一个分区或一个非分区表的所有文件都在同一个目录下。有更新的时候，任何 ACID 的分区（或非分区表）都有一个 base 文件目录，和一个 delta 文件目录。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">hive&gt;</span> dfs -ls -R /user/hive/warehouse/t;</span><br><span class="line">drwxr-xr-x   - ekoifman staff          0 2016-06-09 17:03 /user/hive/warehouse/t/base_0000022</span><br><span class="line">-rw-r--r--   1 ekoifman staff        602 2016-06-09 17:03 /user/hive/warehouse/t/base_0000022/bucket_00000</span><br><span class="line">drwxr-xr-x   - ekoifman staff          0 2016-06-09 17:06 /user/hive/warehouse/t/delta_0000023_0000023_0000</span><br><span class="line">-rw-r--r--   1 ekoifman staff        611 2016-06-09 17:06 /user/hive/warehouse/t/delta_0000023_0000023_0000/bucket_00000</span><br><span class="line">drwxr-xr-x   - ekoifman staff          0 2016-06-09 17:07 /user/hive/warehouse/t/delta_0000024_0000024_0000</span><br><span class="line">-rw-r--r--   1 ekoifman staff        610 2016-06-09 17:07 /user/hive/warehouse/t/delta_0000024_0000024_0000/bucket_00000</span><br></pre></td></tr></table></figure>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>合并是一组运行在 Metastore中支持 ACID 系统的后台程序。包含 Initiator, Worker, Cleaner, AcidHouseKeeperServiceis 和一些其他的。</p>
+<h4 id="Delta-文件合并"><a href="#Delta-文件合并" class="headerlink" title="Delta 文件合并"></a>Delta 文件合并</h4><p>随着修改的操作，越来越多的delta文件被创建，需要合并以保持足够的性能。有两种类型的合并，minor和major。</p>
+<ul>
+<li>Minor 合并 ：在每一个 bucket ，将一组已经存在的 delta 文件合并重写到一个单独的 delta 文件中。</li>
+<li>Major 合并 ：在每一个 bucket ，将一个或多个 delta 文件和 bucket 的 base 文件合并重写到一个新的 base 文件中.  Major 合并效率高但花销大。</li>
+</ul>
+<p>所有的合并都在后台完成，并且不妨碍对数据当前的读和写。 合并完所有的旧文件之后，就删除掉这些旧文件。</p>
+<h4 id="Initiator-初始化器"><a href="#Initiator-初始化器" class="headerlink" title="Initiator 初始化器"></a>Initiator 初始化器</h4><p>这个模块负责发现哪些表或分区应该被合并。  通过设置：hive.compactor.initiator.on 开启。每个合并任务处理一个分区 (或一个非分区表).  如果连续合并失败次数超过 hive.compactor.initiator.failed.compacts.threshold 设定的值，该分区的自动合并调度将会被停止。</p>
+<h4 id="Worker-工作执行器"><a href="#Worker-工作执行器" class="headerlink" title="Worker 工作执行器"></a>Worker 工作执行器</h4><p>每个 worker 处理一个单独的合并任务.  合并是 MapReduce job，名字是: <hostname>-compactor-<db>.<table>.<partition>. 每一个worker 提交 job 到集群上 (通过定义的 hive.compactor.job.queue) 并等着任务完成。hive.compactor.worker.threads 决定了每个 Metastore 中 Workers 的数量。Hive 仓库中的 Workers 的总数决定了当前合并任务的最大值。</partition></table></db></hostname></p>
+<h4 id="Cleaner-清除器"><a href="#Cleaner-清除器" class="headerlink" title="Cleaner 清除器"></a>Cleaner 清除器</h4><p>该程序的职责：删除合并后不再需要的 delta 文件.</p>
+<h4 id="AcidHouseKeeperService-ACID管家服务"><a href="#AcidHouseKeeperService-ACID管家服务" class="headerlink" title="AcidHouseKeeperService ACID管家服务"></a>AcidHouseKeeperService ACID管家服务</h4><p>寻找在 hive.txn.timeout 时间内没有心跳的事务，并将其终止。该系统假定发起事务的客户机停止了心跳，而锁定的资源应该被释放。</p>
+<h4 id="SHOW-COMPACTIONS-查看合并"><a href="#SHOW-COMPACTIONS-查看合并" class="headerlink" title="SHOW COMPACTIONS 查看合并"></a>SHOW COMPACTIONS 查看合并</h4><p>这个命令显示目前正在运行的合并信息，和最近的合并历史 (配置的时间范围内)。 从 HIV-12353 开始支持历史显示。</p>
+<h3 id="事务／锁-管理器"><a href="#事务／锁-管理器" class="headerlink" title="事务／锁 管理器"></a>事务／锁 管理器</h3><p>添加了一个名为“事务管理器”的新逻辑实体，它包含了以前的“数据库/表/分区锁管理器”概念。(hive.lock.manager with default of org.apache.hadoop.hive.ql.lockmgr.zookeeper.ZooKeeperHiveLockManager). 事务管理器现在还负责管理事务锁。默认的 DummyTxnManager 模拟了老版本 Hive 的行为: 没有事务和使用 hive.lock.manager 属性用来为表，分区，数据库创建锁管理器。在 Hive metastore 中新添加的 DbTxnManager 管理所有的锁/事务和 DbLockManager (在服务器出现故障时，事务和锁是持久的). 这意味着在启用事务时，以前锁定ZooKeeper的行为不再存在。 从 lock 持有者和事务 initiators 到 metastore 的心跳连接，如果心跳超时，则这个锁或事务将被舍弃。</p>
+<p>从hive 1.30起，DbLockManger 持续获取锁的周期可以通过 hive.lock.numretires 和 hive.lock.sleep.between.retries. 两个属性设置。如果DbLockManger 获取锁失败，过一段时间之后会进行重试。为了支持短查询同时不对metastore造成负担，DbLockManger 在每次重试后加倍等待时长。</p>
+<p>注意：DbTxnManager 可以获取所有的表的锁，即便那些没有设置transactional=true属性的表。默认对一个非事务表的插入操会获取一个排他锁从而阻止其他的插入和读取。技术上正确的，但是这背离了hive之前的工作方式。为了向后兼容，可以设置hive.txn.strict.locking.mode 属性来使锁管理器在对非事务表的插入操作时，获取共享锁。保留之前的语义，还有一个好处就是能防止表在读取是被删除。而对于事务表，插入总是获取的共享锁。是因为这些表实现了MVCC的架构，在存储的底层实现了很强的读一致性（快照隔离的方式），甚至能应对并发的修改操作。</p>
+<ul>
+<li>共享锁【S锁】:又称读锁，若事务T对数据对象A加上S锁，则事务T可以读A但不能修改A，其他事务只能再对A加S锁，而不能加X锁，直到T释放A上的S锁。这保证了其他事务可以读A，但在T释放A上的S锁之前不能对A做任何修改。</li>
+<li>排他锁【X锁】:又称写锁。若事务T对数据对象A加上X锁，事务T可以读A也可以修改A，其他事务不能再对A加任何锁，直到T释放A上的锁。这保证了其他事务在T释放A上的锁之前不能再读取和修改A。）</li>
+</ul>
+<div class="note info"><h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2></div>
+<p>为了开启hive的事务支持，以下是需要开启的最少的hive配置：</p>
+<p>客户端：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive.support.concurrency – true</span><br><span class="line">hive.enforce.bucketing – true (Not required as of Hive 2.0)</span><br><span class="line">hive.exec.dynamic.partition.mode – nonstrict</span><br><span class="line">hive.txn.manager – org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</span><br></pre></td></tr></table></figure>
+<p>服务端： (Metastore)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive.compactor.initiator.on – true (See table below for more details)</span><br><span class="line">hive.compactor.worker.threads – a positive number on at least one instance of the Thrift metastore service</span><br></pre></td></tr></table></figure>
+<p>详细配置信息请看：<a href="https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions" target="_blank" rel="noopener">hive事务配置信息</a></p>
+<div class="note info"><h2 id="表属性"><a href="#表属性" class="headerlink" title="表属性"></a>表属性</h2></div>
+<p>如果表要使用 ACID ，则必须指定： <code>&quot;transactional=true&quot;</code> 。如果该表被设置为 ACID 表，则不能转换为非 ACID 表，设置 <code>&quot;transactional&quot;=&quot;false&quot;</code> 也是不行的。在 hive-site.xml 中必须设置：<br><code>hive.txn.manager = org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</code></p>
+<p>如果需希望系统自动进行合并，则可以设置： <code>&quot;NO_AUTO_COMPACTION&quot;</code> ,也可以通过<code>Alter Table/Partition Compact</code> 语法来设置。</p>
+<figure class="highlight plain"><figcaption><span>[Example: Set compaction options in TBLPROPERTIES at table level]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name (</span><br><span class="line">  id                int,</span><br><span class="line">  name              string</span><br><span class="line">)</span><br><span class="line">CLUSTERED BY (id) INTO 2 BUCKETS STORED AS ORC</span><br><span class="line">TBLPROPERTIES (&quot;transactional&quot;=&quot;true&quot;,</span><br><span class="line">  &quot;compactor.mapreduce.map.memory.mb&quot;=&quot;2048&quot;,     -- specify compaction map job properties</span><br><span class="line">  &quot;compactorthreshold.hive.compactor.delta.num.threshold&quot;=&quot;4&quot;,  -- trigger minor compaction if there are more than 4 delta directories</span><br><span class="line">  &quot;compactorthreshold.hive.compactor.delta.pct.threshold&quot;=&quot;0.5&quot; -- trigger major compaction if the ratio of size of delta files to</span><br><span class="line">                                                                   -- size of base files is greater than 50%</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>[Example: Set compaction options in TBLPROPERTIES at request level]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name COMPACT &apos;minor&apos; </span><br><span class="line">   WITH OVERWRITE TBLPROPERTIES (&quot;compactor.mapreduce.map.memory.mb&quot;=&quot;3072&quot;);  -- specify compaction map job properties</span><br><span class="line">ALTER TABLE table_name COMPACT &apos;major&apos;</span><br><span class="line">   WITH OVERWRITE TBLPROPERTIES (&quot;tblprops.orc.compress.size&quot;=&quot;8192&quot;);         -- change any other Hive table properties</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -529,9 +577,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
-          
-            <a href="/tags/报错集/" rel="tag"><i class="fa fa-tag"></i> 报错集</a>
+            <a href="/tags/hive/" rel="tag"><i class="fa fa-tag"></i> hive</a>
           
         </div>
       
@@ -544,8 +590,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/29/life/" rel="next" title="life">
-                <i class="fa fa-chevron-left"></i> life
+              <a href="/2017/12/13/GitHub使用指南/" rel="next" title="GitHub使用指南">
+                <i class="fa fa-chevron-left"></i> GitHub使用指南
               </a>
             
           </div>
@@ -554,8 +600,8 @@
     
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/手把手搭建vps和shadowsocks/" rel="prev" title="手把手搭建vps和shadowsocks">
-                手把手搭建vps和shadowsocks <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/27/火之意志/" rel="prev" title="火之意志">
+                火之意志 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -736,7 +782,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有话要说"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x6709;&#x8BDD;&#x8981;&#x8BF4;" class="headerlink" title="&#x6709;&#x8BDD;&#x8981;&#x8BF4;"></a>&#x6709;&#x8BDD;&#x8981;&#x8BF4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题汇总"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;&#x6C47;&#x603B;" class="headerlink" title="&#x95EE;&#x9898;&#x6C47;&#x603B;"></a>&#x95EE;&#x9898;&#x6C47;&#x603B;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1：spark-hive-classes-are-not-found"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;1&#xFF1A;spark-hive-classes-are-not-found" class="headerlink" title="&#x95EE;&#x9898;1&#xFF1A;spark-hive classes are not found"></a>&#x95EE;&#x9898;1&#xFF1A;spark-hive classes are not found</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述："><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x6982;&#x8FF0;&#xFF1A;" class="headerlink" title="&#x6982;&#x8FF0;&#xFF1A;"></a>&#x6982;&#x8FF0;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景："><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x573A;&#x666F;&#xFF1A;" class="headerlink" title="&#x573A;&#x666F;&#xFF1A;"></a>&#x573A;&#x666F;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理："><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#&#x539F;&#x7406;&#xFF1A;" class="headerlink" title="&#x539F;&#x7406;&#xFF1A;"></a>&#x539F;&#x7406;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#办法："><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#&#x529E;&#x6CD5;&#xFF1A;" class="headerlink" title="&#x529E;&#x6CD5;&#xFF1A;"></a>&#x529E;&#x6CD5;&#xFF1A;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2：Spark-Local-模式写-Hive，user-xialinsheng"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;2&#xFF1A;Spark-Local-&#x6A21;&#x5F0F;&#x5199;-Hive&#xFF0C;user-xialinsheng" class="headerlink" title="&#x95EE;&#x9898;2&#xFF1A;Spark Local &#x6A21;&#x5F0F;&#x5199; Hive&#xFF0C;user=xialinsheng"></a>&#x95EE;&#x9898;2&#xFF1A;Spark Local &#x6A21;&#x5F0F;&#x5199; Hive&#xFF0C;user=xialinsheng</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述：-1"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x6982;&#x8FF0;&#xFF1A;-1" class="headerlink" title="&#x6982;&#x8FF0;&#xFF1A;"></a>&#x6982;&#x8FF0;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-1"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x573A;&#x666F;&#xFF1A;-1" class="headerlink" title="&#x573A;&#x666F;&#xFF1A;"></a>&#x573A;&#x666F;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-1"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x539F;&#x7406;&#xFF1A;-1" class="headerlink" title="&#x539F;&#x7406;&#xFF1A;"></a>&#x539F;&#x7406;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决："><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#xFF1A;" class="headerlink" title="&#x89E3;&#x51B3;&#xFF1A;"></a>&#x89E3;&#x51B3;&#xFF1A;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题3：javax-servlet-FilterRegistration"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x95EE;&#x9898;3&#xFF1A;javax-servlet-FilterRegistration" class="headerlink" title="&#x95EE;&#x9898;3&#xFF1A;javax.servlet.FilterRegistration"></a>&#x95EE;&#x9898;3&#xFF1A;javax.servlet.FilterRegistration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述：-2"><span class="nav-number">2.3.1.</span> <span class="nav-text"><a href="#&#x6982;&#x8FF0;&#xFF1A;-2" class="headerlink" title="&#x6982;&#x8FF0;&#xFF1A;"></a>&#x6982;&#x8FF0;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-2"><span class="nav-number">2.3.2.</span> <span class="nav-text"><a href="#&#x539F;&#x7406;&#xFF1A;-2" class="headerlink" title="&#x539F;&#x7406;&#xFF1A;"></a>&#x539F;&#x7406;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决：-1"><span class="nav-number">2.3.3.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#xFF1A;-1" class="headerlink" title="&#x89E3;&#x51B3;&#xFF1A;"></a>&#x89E3;&#x51B3;&#xFF1A;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID简介"><span class="nav-number">1.</span> <span class="nav-text"><a href="#ACID&#x7B80;&#x4ECB;" class="headerlink" title="ACID&#x7B80;&#x4ECB;"></a>ACID&#x7B80;&#x4ECB;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务限制"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x9650;&#x5236;" class="headerlink" title="&#x4E8B;&#x52A1;&#x9650;&#x5236;"></a>&#x4E8B;&#x52A1;&#x9650;&#x5236;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流-APIs"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x6D41;-APIs" class="headerlink" title="&#x6D41; APIs"></a>&#x6D41; APIs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法修改"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x8BED;&#x6CD5;&#x4FEE;&#x6539;" class="headerlink" title="&#x8BED;&#x6CD5;&#x4FEE;&#x6539;"></a>&#x8BED;&#x6CD5;&#x4FEE;&#x6539;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础设计"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x57FA;&#x7840;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x57FA;&#x7840;&#x8BBE;&#x8BA1;"></a>&#x57FA;&#x7840;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Base-和-Delta-目录"><span class="nav-number">5.1.</span> <span class="nav-text"><a href="#Base-&#x548C;-Delta-&#x76EE;&#x5F55;" class="headerlink" title="Base &#x548C; Delta &#x76EE;&#x5F55;"></a>Base &#x548C; Delta &#x76EE;&#x5F55;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并"><span class="nav-number">5.2.</span> <span class="nav-text"><a href="#&#x5408;&#x5E76;" class="headerlink" title="&#x5408;&#x5E76;"></a>&#x5408;&#x5E76;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Delta-文件合并"><span class="nav-number">5.2.1.</span> <span class="nav-text"><a href="#Delta-&#x6587;&#x4EF6;&#x5408;&#x5E76;" class="headerlink" title="Delta &#x6587;&#x4EF6;&#x5408;&#x5E76;"></a>Delta &#x6587;&#x4EF6;&#x5408;&#x5E76;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Initiator-初始化器"><span class="nav-number">5.2.2.</span> <span class="nav-text"><a href="#Initiator-&#x521D;&#x59CB;&#x5316;&#x5668;" class="headerlink" title="Initiator &#x521D;&#x59CB;&#x5316;&#x5668;"></a>Initiator &#x521D;&#x59CB;&#x5316;&#x5668;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Worker-工作执行器"><span class="nav-number">5.2.3.</span> <span class="nav-text"><a href="#Worker-&#x5DE5;&#x4F5C;&#x6267;&#x884C;&#x5668;" class="headerlink" title="Worker &#x5DE5;&#x4F5C;&#x6267;&#x884C;&#x5668;"></a>Worker &#x5DE5;&#x4F5C;&#x6267;&#x884C;&#x5668;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cleaner-清除器"><span class="nav-number">5.2.4.</span> <span class="nav-text"><a href="#Cleaner-&#x6E05;&#x9664;&#x5668;" class="headerlink" title="Cleaner &#x6E05;&#x9664;&#x5668;"></a>Cleaner &#x6E05;&#x9664;&#x5668;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AcidHouseKeeperService-ACID管家服务"><span class="nav-number">5.2.5.</span> <span class="nav-text"><a href="#AcidHouseKeeperService-ACID&#x7BA1;&#x5BB6;&#x670D;&#x52A1;" class="headerlink" title="AcidHouseKeeperService ACID&#x7BA1;&#x5BB6;&#x670D;&#x52A1;"></a>AcidHouseKeeperService ACID&#x7BA1;&#x5BB6;&#x670D;&#x52A1;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SHOW-COMPACTIONS-查看合并"><span class="nav-number">5.2.6.</span> <span class="nav-text"><a href="#SHOW-COMPACTIONS-&#x67E5;&#x770B;&#x5408;&#x5E76;" class="headerlink" title="SHOW COMPACTIONS &#x67E5;&#x770B;&#x5408;&#x5E76;"></a>SHOW COMPACTIONS &#x67E5;&#x770B;&#x5408;&#x5E76;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务／锁-管理器"><span class="nav-number">5.3.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#xFF0F;&#x9501;-&#x7BA1;&#x7406;&#x5668;" class="headerlink" title="&#x4E8B;&#x52A1;&#xFF0F;&#x9501; &#x7BA1;&#x7406;&#x5668;"></a>&#x4E8B;&#x52A1;&#xFF0F;&#x9501; &#x7BA1;&#x7406;&#x5668;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置信息"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x4FE1;&#x606F;" class="headerlink" title="&#x914D;&#x7F6E;&#x4FE1;&#x606F;"></a>&#x914D;&#x7F6E;&#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表属性"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x8868;&#x5C5E;&#x6027;" class="headerlink" title="&#x8868;&#x5C5E;&#x6027;"></a>&#x8868;&#x5C5E;&#x6027;</span></a></li></ol></div>
             
 
           </div>
@@ -908,9 +954,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://stanxia.github.io/2017/10/30/spark报错集/';
-          this.page.identifier = '2017/10/30/spark报错集/';
-          this.page.title = 'spark报错集';
+          this.page.url = 'https://stanxia.github.io/2017/12/13/Hive事务-翻译自官方文档/';
+          this.page.identifier = '2017/12/13/Hive事务-翻译自官方文档/';
+          this.page.title = 'Hive事务-翻译自官方文档';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://astan.disqus.com/embed.js';
