@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="简介Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用">
+<meta name="description" content="简介 Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应">
 <meta name="keywords" content="hive,acid">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive事务管理">
 <meta property="og:url" content="https://stanxia.github.io/2017/12/01/Hive事务管理/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="简介Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用">
+<meta property="og:description" content="简介 Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121055789375.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121056449113.jpg">
@@ -122,10 +122,10 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069373565.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg">
-<meta property="og:updated_time" content="2017-12-13T06:55:57.857Z">
+<meta property="og:updated_time" content="2017-12-13T07:21:03.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive事务管理">
-<meta name="twitter:description" content="简介Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用">
+<meta name="twitter:description" content="简介 Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应">
 <meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15121055789375.jpg">
 
 
@@ -472,9 +472,9 @@
       
     
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
-<p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。</p>
-<h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2><p>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
+        <div class="note info"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2></div>
+<p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
+<p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。<br><div class="note info"><h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2></div><br>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
 <a id="more"></a>
 <h3 id="ACID说明"><a href="#ACID说明" class="headerlink" title="ACID说明"></a>ACID说明</h3><p>何为事务？就是一组单元化操作，这些操作要么都执行，要么都不执行，是一个不可分割的工作单位。</p>
 <p>事务（transaction）所应该具有的四个要素：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。这四个基本要素通常称为ACID特性。</p>
@@ -490,8 +490,8 @@
 <li>锁（locking）保证隔离性</li>
 </ol>
 <p>这里并没有提到一致性，是因为一致性是应用相关的话题，它的定义一个由业务系统来定义，什么样的状态才是一致？而实现一致性的代码通常在业务逻辑的代码中得以体现。</p>
-<p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。</p>
-<h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><table>
+<p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。<br><div class="note info"><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2></div></p>
+<table>
 <thead>
 <tr>
 <th>操作系统</th>
@@ -517,7 +517,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Hive的ACID测试"><a href="#Hive的ACID测试" class="headerlink" title="Hive的ACID测试"></a>Hive的ACID测试</h2><h3 id="Hive中的锁（不开启事务）"><a href="#Hive中的锁（不开启事务）" class="headerlink" title="Hive中的锁（不开启事务）"></a>Hive中的锁（不开启事务）</h3><p>Hive中定义了两种锁的模式：共享锁（S）和排它锁（X），顾名思义，多个共享锁(S)可以同时获取，但是排它锁(X)会阻塞其它所有锁。在本次测试中，CDH5.9的Concurrency参数是默认开启的（hive.support.concurrency=true），以下分别对开启Concurrency和关闭进行相关测试。</p>
+<div class="note info"><h2 id="Hive的ACID测试"><a href="#Hive的ACID测试" class="headerlink" title="Hive的ACID测试"></a>Hive的ACID测试</h2></div>
+<h3 id="Hive中的锁（不开启事务）"><a href="#Hive中的锁（不开启事务）" class="headerlink" title="Hive中的锁（不开启事务）"></a>Hive中的锁（不开启事务）</h3><p>Hive中定义了两种锁的模式：共享锁（S）和排它锁（X），顾名思义，多个共享锁(S)可以同时获取，但是排它锁(X)会阻塞其它所有锁。在本次测试中，CDH5.9的Concurrency参数是默认开启的（hive.support.concurrency=true），以下分别对开启Concurrency和关闭进行相关测试。</p>
 <p>首先在测试之前，创建一个普通的hive表：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_notransaction(user_id <span class="built_in">Int</span>,<span class="keyword">name</span> <span class="keyword">String</span>);</span><br></pre></td></tr></table></figure>
 <p>向test_transaction表中插入测试数据：</p>
@@ -710,9 +711,8 @@
 <p>步骤：</p>
 <p>按顺序执行上面两条sql，查看表锁获取情况</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg" alt=""></p>
-<p>在操作delete的同时执行select操作，两个操作均同时获取到SHARED_RED和SHARED_WRITE锁，操作并行进行未出现阻塞。</p>
-<h2 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h2><p><img src="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg" alt=""></p>
-<h2 id="Hive事务使用建议"><a href="#Hive事务使用建议" class="headerlink" title="Hive事务使用建议"></a>Hive事务使用建议</h2><ol>
+<p>在操作delete的同时执行select操作，两个操作均同时获取到SHARED_RED和SHARED_WRITE锁，操作并行进行未出现阻塞。<br><div class="note info"><h2 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h2></div><br><img src="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg" alt=""><br><div class="note info"><h2 id="Hive事务使用建议"><a href="#Hive事务使用建议" class="headerlink" title="Hive事务使用建议"></a>Hive事务使用建议</h2></div></p>
+<ol>
 <li>传统数据库中有三种模型隐式事务、显示事务和自动事务。在目前Hive对事务仅支持自动事务，因此Hive无法通过显示事务的方式对一个操作序列进行事务控制。</li>
 <li>传统数据库事务在遇到异常情况可自动进行回滚，目前Hive无法支持ROLLBACK。</li>
 <li>传统数据库中支持事务并发，而Hive对事务无法做到完全并发控制,多个操作均需要获取WRITE的时候则这些操作为串行模式执行（在测试用例中”delete同一条数据的同时update该数据”，操作是串行的且操作完成后数据未被删除且数据被修改）未保证数据一致性。</li>

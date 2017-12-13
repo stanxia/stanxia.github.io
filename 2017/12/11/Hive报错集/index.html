@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
+<meta name="description" content="前言 针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 <meta name="keywords" content="hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive报错集">
 <meta property="og:url" content="https://stanxia.github.io/2017/12/11/Hive报错集/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
+<meta property="og:description" content="前言 针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-13T06:55:57.857Z">
+<meta property="og:updated_time" content="2017-12-13T07:21:03.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive报错集">
-<meta name="twitter:description" content="前言针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
+<meta name="twitter:description" content="前言 针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。 总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。">
 
 
 
@@ -436,9 +436,10 @@
       
     
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
-<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
-<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
+        <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a><br><div class="note info"><h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2></div></p>
+<h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
 <h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><code>vim conf/hive-site.xml</code></p>
 <p>不要加这个配置！！！！ </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.in.test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>

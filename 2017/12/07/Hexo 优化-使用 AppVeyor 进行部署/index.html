@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="前言今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
+<meta name="description" content="前言 今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
 <meta name="keywords" content="hexo,appveyor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo + AppVeyor 持续集成">
 <meta property="og:url" content="https://stanxia.github.io/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="前言今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
+<meta property="og:description" content="前言 今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15126603949109.png">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15126607179064.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15126613031226.png">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15126617970902.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15126623258862.jpg">
-<meta property="og:updated_time" content="2017-12-13T06:55:57.838Z">
+<meta property="og:updated_time" content="2017-12-13T07:21:03.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo + AppVeyor 持续集成">
-<meta name="twitter:description" content="前言今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
+<meta name="twitter:description" content="前言 今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。 看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有">
 <meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/15126603949109.png">
 
 
@@ -442,9 +442,10 @@
       
     
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。</p>
-<p>看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有 hexo -clean ,hexo -g ,hexo -d 三步，但现在完全在后台自动部署），另一方面也可以解决博客源码多电脑书写的局限性（之前只能在一台电脑上进行博客的创作，面临着项目备份的问题），现在将项目完全托管在 GitHub上，无需担心电脑换了，或是磁盘损坏造成的数据丢失，也无需使用云备份工具费时费力的维护项目。</p>
-<h2 id="核心步骤"><a href="#核心步骤" class="headerlink" title="核心步骤"></a>核心步骤</h2><h3 id="新建代码仓库"><a href="#新建代码仓库" class="headerlink" title="新建代码仓库"></a>新建代码仓库</h3><p>首先我们先确定，将项目托管在 GitHub 上，这里有两种方案，一种是在存放博客静态代码的仓库（如：xxx.github.io）中新添加分支;另一种则是新建一个仓库用于存放项目。我这里使用的第二种方式，新建了一个仓库：hexo-github-source 。</p>
+        <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。</p>
+<p>看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有 hexo -clean ,hexo -g ,hexo -d 三步，但现在完全在后台自动部署），另一方面也可以解决博客源码多电脑书写的局限性（之前只能在一台电脑上进行博客的创作，面临着项目备份的问题），现在将项目完全托管在 GitHub上，无需担心电脑换了，或是磁盘损坏造成的数据丢失，也无需使用云备份工具费时费力的维护项目。<br><div class="note info"><h2 id="核心步骤"><a href="#核心步骤" class="headerlink" title="核心步骤"></a>核心步骤</h2></div></p>
+<h3 id="新建代码仓库"><a href="#新建代码仓库" class="headerlink" title="新建代码仓库"></a>新建代码仓库</h3><p>首先我们先确定，将项目托管在 GitHub 上，这里有两种方案，一种是在存放博客静态代码的仓库（如：xxx.github.io）中新添加分支;另一种则是新建一个仓库用于存放项目。我这里使用的第二种方式，新建了一个仓库：hexo-github-source 。</p>
 <a id="more"></a>
 <h3 id="配置-AppVeyor"><a href="#配置-AppVeyor" class="headerlink" title="配置 AppVeyor"></a>配置 AppVeyor</h3><p><a href="https://www.appveyor.com/" target="_blank" rel="noopener">点我进入AppVeyor官网</a><br><img src="http://oliji9s3j.bkt.clouddn.com/15126603949109.png" alt=""><br>添加你的GitHub项目，这里要注意添加的是你的Source Repo（hexo-github-source），而不是Content Repo（xxx.github.io.git）。<br><img src="http://oliji9s3j.bkt.clouddn.com/15126607179064.jpg" alt=""></p>
 <h3 id="配置-appveyor-yml"><a href="#配置-appveyor-yml" class="headerlink" title="配置 appveyor.yml"></a>配置 appveyor.yml</h3><p>回到 GitHub 页面，在新建的 hexo-github-source 仓库的根目录下面新建 appveyor.yml 文件。<br>配置如下：</p>
@@ -455,7 +456,8 @@
 <li>GIT_USER_EMAIL ：GitHub邮箱</li>
 <li>GIT_USER_NAME ：GitHub用户名</li>
 <li>STATIC_SITE_REPO ：Content Repo地址（<a href="https://github.com/xxx/xxx.github.io.git）" target="_blank" rel="noopener">https://github.com/xxx/xxx.github.io.git）</a></li>
-<li>TARGET_BRANCH ：保留默认的 master<br>如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15126617970902.jpg" alt=""><h2 id="测试与问题"><a href="#测试与问题" class="headerlink" title="测试与问题"></a>测试与问题</h2>经过一番折腾，终于越过无数的坑之后，完美的运行成功。<h3 id="坑一：push-到仓库时提示空文件夹"><a href="#坑一：push-到仓库时提示空文件夹" class="headerlink" title="坑一：push 到仓库时提示空文件夹"></a>坑一：push 到仓库时提示空文件夹</h3>提示 themes/next 为空文件夹，提交失败（ GitHub 无法提交空文件夹），可问题是明明不是空文件啊，为什么会判定为空的？原来我这是 next 主题直接 git clone 下来的，因而在 next 文件夹的根目录下面有一个 .git 的隐藏文件，就是这导致的无法提交。既然找到了原因，那就好整了，直接删掉，完美解决问题。<h3 id="坑二：-AppVeyor-提示-Bug"><a href="#坑二：-AppVeyor-提示-Bug" class="headerlink" title="坑二： AppVeyor 提示 Bug"></a>坑二： AppVeyor 提示 Bug</h3>将项目 push 到新建的仓库中，查看 AppVeyor 的运行日志，看是否提示 Bug ，我在测试的过程中很不幸，就出现过问题，原因是 hexo 的一个插件目录过长，导致程序失败，解决方法是不用把 hexo 文件夹备份到仓库中，因而完美的<del>解决</del>（避开）问题。<br>备份到仓库的项目结构如下：（多余的都可去掉，仅保留核心）<br><img src="http://oliji9s3j.bkt.clouddn.com/15126623258862.jpg" alt=""></li>
+<li>TARGET_BRANCH ：保留默认的 master<br>如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15126617970902.jpg" alt=""><div class="note info"><h2 id="测试与问题"><a href="#测试与问题" class="headerlink" title="测试与问题"></a>测试与问题</h2></div>
+经过一番折腾，终于越过无数的坑之后，完美的运行成功。<h3 id="坑一：push-到仓库时提示空文件夹"><a href="#坑一：push-到仓库时提示空文件夹" class="headerlink" title="坑一：push 到仓库时提示空文件夹"></a>坑一：push 到仓库时提示空文件夹</h3>提示 themes/next 为空文件夹，提交失败（ GitHub 无法提交空文件夹），可问题是明明不是空文件啊，为什么会判定为空的？原来我这是 next 主题直接 git clone 下来的，因而在 next 文件夹的根目录下面有一个 .git 的隐藏文件，就是这导致的无法提交。既然找到了原因，那就好整了，直接删掉，完美解决问题。<h3 id="坑二：-AppVeyor-提示-Bug"><a href="#坑二：-AppVeyor-提示-Bug" class="headerlink" title="坑二： AppVeyor 提示 Bug"></a>坑二： AppVeyor 提示 Bug</h3>将项目 push 到新建的仓库中，查看 AppVeyor 的运行日志，看是否提示 Bug ，我在测试的过程中很不幸，就出现过问题，原因是 hexo 的一个插件目录过长，导致程序失败，解决方法是不用把 hexo 文件夹备份到仓库中，因而完美的<del>解决</del>（避开）问题。<br>备份到仓库的项目结构如下：（多余的都可去掉，仅保留核心）<br><img src="http://oliji9s3j.bkt.clouddn.com/15126623258862.jpg" alt=""></li>
 </ul>
 
       

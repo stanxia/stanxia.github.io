@@ -62,11 +62,12 @@
       <title><![CDATA[spark取样函数分析]]></title>
       <url>https://stanxia.github.io/2017/12/12/Spark%20sample%20%E5%8F%96%E6%A0%B7%E5%87%BD%E6%95%B0/</url>
       <content type="html"><![CDATA[<!--请开始装逼-->
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Spark取样操作，无法获取随机样本的解决方案。Dataset中sample函数源码如下：</p>
+<div class="note info"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2></div>
+<p>Spark取样操作，无法获取随机样本的解决方案。Dataset中sample函数源码如下：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a user-supplied seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过使用用户提供的种子，通过抽样的方式返回一个新的[[Dataset]]。</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=true的话表示有放回的抽样，采用泊松抽样算法实现.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=false的话表示无放回的抽样，采用伯努利抽样算法实现.</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每一行数据被取样的概率.服从二项分布.当withReplacement=true的时候fraction&gt;=0,当withReplacement=false的时候 0 &lt; fraction &lt; 1.</span></span><br><span class="line"><span class="comment">  * @param seed            Seed for sampling.</span></span><br><span class="line"><span class="comment">  *                        取样种子（与随机数生成有关）</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>, seed: <span class="type">Long</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  require(fraction &gt;= <span class="number">0</span>,</span><br><span class="line">    <span class="string">s"Fraction must be nonnegative, but got <span class="subst">$&#123;fraction&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">  withTypedPlan &#123;</span><br><span class="line">    <span class="type">Sample</span>(<span class="number">0.0</span>, fraction, withReplacement, seed, logicalPlan)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a random seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过程序随机的种子，抽样返回新的DataSet</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        取样结果是否放回</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每行数据被取样的概率</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the total count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  sample(withReplacement, fraction, <span class="type">Utils</span>.random.nextLong)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>结果数据的行数一般在（fraction*总数）左右。没有一个固定的值，如果需要得到固定行数的随机数据的话不建议采用该方法。</p>
-<h2 id="办法"><a href="#办法" class="headerlink" title="办法"></a>办法</h2><p>获取随机取样的替代方法：</p>
+<div class="note info"><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2></div>
+<p>结果数据的行数一般在（fraction*总数）左右。没有一个固定的值，如果需要得到固定行数的随机数据的话不建议采用该方法。<br><div class="note info"><h2 id="办法"><a href="#办法" class="headerlink" title="办法"></a>办法</h2></div><br>获取随机取样的替代方法：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df.createOrReplaceTempView(<span class="string">"test_sample"</span>); <span class="comment">// 生成临时表</span></span><br><span class="line">df.sqlContext() <span class="comment">// 添加随机数列，并根据其进行排序</span></span><br><span class="line">  .sql(<span class="string">"select * ,rand() as random from test_sample order by random"</span>)</span><br><span class="line">  .limit(<span class="number">2</span>) <span class="comment">// 根据参数的fraction计算需要获取的取样结果</span></span><br><span class="line">  .drop(<span class="string">"random"</span>) <span class="comment">// 删除掉添加的随机列</span></span><br><span class="line">  .show();</span><br></pre></td></tr></table></figure>
 <!--对不起，到时间了，请停止装逼-->
 ]]></content>
@@ -89,9 +90,10 @@
     <entry>
       <title><![CDATA[Hive报错集]]></title>
       <url>https://stanxia.github.io/2017/12/11/Hive%E6%8A%A5%E9%94%99%E9%9B%86/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
-<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a></p>
-<h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2><h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
+      <content type="html"><![CDATA[<div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br><a id="more"></a><br><div class="note info"><h2 id="报错集"><a href="#报错集" class="headerlink" title="报错集"></a>报错集</h2></div></p>
+<h3 id="问题1：Error-rolling-back"><a href="#问题1：Error-rolling-back" class="headerlink" title="问题1：Error rolling back"></a>问题1：Error rolling back</h3><h4 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h4><p><code>Error rolling back: Can&#39;t call rollback when autocommit=true</code></p>
 <h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><code>vim conf/hive-site.xml</code></p>
 <p>不要加这个配置！！！！ </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.in.test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -163,9 +165,10 @@
     <entry>
       <title><![CDATA[Hexo + AppVeyor 持续集成]]></title>
       <url>https://stanxia.github.io/2017/12/07/Hexo%20%E4%BC%98%E5%8C%96-%E4%BD%BF%E7%94%A8%20AppVeyor%20%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。</p>
-<p>看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有 hexo -clean ,hexo -g ,hexo -d 三步，但现在完全在后台自动部署），另一方面也可以解决博客源码多电脑书写的局限性（之前只能在一台电脑上进行博客的创作，面临着项目备份的问题），现在将项目完全托管在 GitHub上，无需担心电脑换了，或是磁盘损坏造成的数据丢失，也无需使用云备份工具费时费力的维护项目。</p>
-<h2 id="核心步骤"><a href="#核心步骤" class="headerlink" title="核心步骤"></a>核心步骤</h2><h3 id="新建代码仓库"><a href="#新建代码仓库" class="headerlink" title="新建代码仓库"></a>新建代码仓库</h3><p>首先我们先确定，将项目托管在 GitHub 上，这里有两种方案，一种是在存放博客静态代码的仓库（如：xxx.github.io）中新添加分支;另一种则是新建一个仓库用于存放项目。我这里使用的第二种方式，新建了一个仓库：hexo-github-source 。</p>
+      <content type="html"><![CDATA[<div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。</p>
+<p>看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有 hexo -clean ,hexo -g ,hexo -d 三步，但现在完全在后台自动部署），另一方面也可以解决博客源码多电脑书写的局限性（之前只能在一台电脑上进行博客的创作，面临着项目备份的问题），现在将项目完全托管在 GitHub上，无需担心电脑换了，或是磁盘损坏造成的数据丢失，也无需使用云备份工具费时费力的维护项目。<br><div class="note info"><h2 id="核心步骤"><a href="#核心步骤" class="headerlink" title="核心步骤"></a>核心步骤</h2></div></p>
+<h3 id="新建代码仓库"><a href="#新建代码仓库" class="headerlink" title="新建代码仓库"></a>新建代码仓库</h3><p>首先我们先确定，将项目托管在 GitHub 上，这里有两种方案，一种是在存放博客静态代码的仓库（如：xxx.github.io）中新添加分支;另一种则是新建一个仓库用于存放项目。我这里使用的第二种方式，新建了一个仓库：hexo-github-source 。</p>
 <a id="more"></a>
 <h3 id="配置-AppVeyor"><a href="#配置-AppVeyor" class="headerlink" title="配置 AppVeyor"></a>配置 AppVeyor</h3><p><a href="https://www.appveyor.com/" target="_blank" rel="noopener">点我进入AppVeyor官网</a><br><img src="http://oliji9s3j.bkt.clouddn.com/15126603949109.png" alt=""><br>添加你的GitHub项目，这里要注意添加的是你的Source Repo（hexo-github-source），而不是Content Repo（xxx.github.io.git）。<br><img src="http://oliji9s3j.bkt.clouddn.com/15126607179064.jpg" alt=""></p>
 <h3 id="配置-appveyor-yml"><a href="#配置-appveyor-yml" class="headerlink" title="配置 appveyor.yml"></a>配置 appveyor.yml</h3><p>回到 GitHub 页面，在新建的 hexo-github-source 仓库的根目录下面新建 appveyor.yml 文件。<br>配置如下：</p>
@@ -176,7 +179,8 @@
 <li>GIT_USER_EMAIL ：GitHub邮箱</li>
 <li>GIT_USER_NAME ：GitHub用户名</li>
 <li>STATIC_SITE_REPO ：Content Repo地址（<a href="https://github.com/xxx/xxx.github.io.git）" target="_blank" rel="noopener">https://github.com/xxx/xxx.github.io.git）</a></li>
-<li>TARGET_BRANCH ：保留默认的 master<br>如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15126617970902.jpg" alt=""><h2 id="测试与问题"><a href="#测试与问题" class="headerlink" title="测试与问题"></a>测试与问题</h2>经过一番折腾，终于越过无数的坑之后，完美的运行成功。<h3 id="坑一：push-到仓库时提示空文件夹"><a href="#坑一：push-到仓库时提示空文件夹" class="headerlink" title="坑一：push 到仓库时提示空文件夹"></a>坑一：push 到仓库时提示空文件夹</h3>提示 themes/next 为空文件夹，提交失败（ GitHub 无法提交空文件夹），可问题是明明不是空文件啊，为什么会判定为空的？原来我这是 next 主题直接 git clone 下来的，因而在 next 文件夹的根目录下面有一个 .git 的隐藏文件，就是这导致的无法提交。既然找到了原因，那就好整了，直接删掉，完美解决问题。<h3 id="坑二：-AppVeyor-提示-Bug"><a href="#坑二：-AppVeyor-提示-Bug" class="headerlink" title="坑二： AppVeyor 提示 Bug"></a>坑二： AppVeyor 提示 Bug</h3>将项目 push 到新建的仓库中，查看 AppVeyor 的运行日志，看是否提示 Bug ，我在测试的过程中很不幸，就出现过问题，原因是 hexo 的一个插件目录过长，导致程序失败，解决方法是不用把 hexo 文件夹备份到仓库中，因而完美的<del>解决</del>（避开）问题。<br>备份到仓库的项目结构如下：（多余的都可去掉，仅保留核心）<br><img src="http://oliji9s3j.bkt.clouddn.com/15126623258862.jpg" alt=""></li>
+<li>TARGET_BRANCH ：保留默认的 master<br>如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15126617970902.jpg" alt=""><div class="note info"><h2 id="测试与问题"><a href="#测试与问题" class="headerlink" title="测试与问题"></a>测试与问题</h2></div>
+经过一番折腾，终于越过无数的坑之后，完美的运行成功。<h3 id="坑一：push-到仓库时提示空文件夹"><a href="#坑一：push-到仓库时提示空文件夹" class="headerlink" title="坑一：push 到仓库时提示空文件夹"></a>坑一：push 到仓库时提示空文件夹</h3>提示 themes/next 为空文件夹，提交失败（ GitHub 无法提交空文件夹），可问题是明明不是空文件啊，为什么会判定为空的？原来我这是 next 主题直接 git clone 下来的，因而在 next 文件夹的根目录下面有一个 .git 的隐藏文件，就是这导致的无法提交。既然找到了原因，那就好整了，直接删掉，完美解决问题。<h3 id="坑二：-AppVeyor-提示-Bug"><a href="#坑二：-AppVeyor-提示-Bug" class="headerlink" title="坑二： AppVeyor 提示 Bug"></a>坑二： AppVeyor 提示 Bug</h3>将项目 push 到新建的仓库中，查看 AppVeyor 的运行日志，看是否提示 Bug ，我在测试的过程中很不幸，就出现过问题，原因是 hexo 的一个插件目录过长，导致程序失败，解决方法是不用把 hexo 文件夹备份到仓库中，因而完美的<del>解决</del>（避开）问题。<br>备份到仓库的项目结构如下：（多余的都可去掉，仅保留核心）<br><img src="http://oliji9s3j.bkt.clouddn.com/15126623258862.jpg" alt=""></li>
 </ul>
 ]]></content>
       
@@ -200,9 +204,9 @@
     <entry>
       <title><![CDATA[Hive事务管理]]></title>
       <url>https://stanxia.github.io/2017/12/01/Hive%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</url>
-      <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
-<p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。</p>
-<h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2><p>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
+      <content type="html"><![CDATA[<div class="note info"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2></div>
+<p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
+<p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。<br><div class="note info"><h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2></div><br>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
 <a id="more"></a>
 <h3 id="ACID说明"><a href="#ACID说明" class="headerlink" title="ACID说明"></a>ACID说明</h3><p>何为事务？就是一组单元化操作，这些操作要么都执行，要么都不执行，是一个不可分割的工作单位。</p>
 <p>事务（transaction）所应该具有的四个要素：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。这四个基本要素通常称为ACID特性。</p>
@@ -218,8 +222,8 @@
 <li>锁（locking）保证隔离性</li>
 </ol>
 <p>这里并没有提到一致性，是因为一致性是应用相关的话题，它的定义一个由业务系统来定义，什么样的状态才是一致？而实现一致性的代码通常在业务逻辑的代码中得以体现。</p>
-<p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。</p>
-<h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><table>
+<p>注：锁是指在并发环境中通过读写锁来保证操作的互斥性。根据隔离程度不同，锁的运用也不同。<br><div class="note info"><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2></div></p>
+<table>
 <thead>
 <tr>
 <th>操作系统</th>
@@ -245,7 +249,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Hive的ACID测试"><a href="#Hive的ACID测试" class="headerlink" title="Hive的ACID测试"></a>Hive的ACID测试</h2><h3 id="Hive中的锁（不开启事务）"><a href="#Hive中的锁（不开启事务）" class="headerlink" title="Hive中的锁（不开启事务）"></a>Hive中的锁（不开启事务）</h3><p>Hive中定义了两种锁的模式：共享锁（S）和排它锁（X），顾名思义，多个共享锁(S)可以同时获取，但是排它锁(X)会阻塞其它所有锁。在本次测试中，CDH5.9的Concurrency参数是默认开启的（hive.support.concurrency=true），以下分别对开启Concurrency和关闭进行相关测试。</p>
+<div class="note info"><h2 id="Hive的ACID测试"><a href="#Hive的ACID测试" class="headerlink" title="Hive的ACID测试"></a>Hive的ACID测试</h2></div>
+<h3 id="Hive中的锁（不开启事务）"><a href="#Hive中的锁（不开启事务）" class="headerlink" title="Hive中的锁（不开启事务）"></a>Hive中的锁（不开启事务）</h3><p>Hive中定义了两种锁的模式：共享锁（S）和排它锁（X），顾名思义，多个共享锁(S)可以同时获取，但是排它锁(X)会阻塞其它所有锁。在本次测试中，CDH5.9的Concurrency参数是默认开启的（hive.support.concurrency=true），以下分别对开启Concurrency和关闭进行相关测试。</p>
 <p>首先在测试之前，创建一个普通的hive表：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_notransaction(user_id <span class="built_in">Int</span>,<span class="keyword">name</span> <span class="keyword">String</span>);</span><br></pre></td></tr></table></figure>
 <p>向test_transaction表中插入测试数据：</p>
@@ -438,9 +443,8 @@
 <p>步骤：</p>
 <p>按顺序执行上面两条sql，查看表锁获取情况</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15121069645501.jpg" alt=""></p>
-<p>在操作delete的同时执行select操作，两个操作均同时获取到SHARED_RED和SHARED_WRITE锁，操作并行进行未出现阻塞。</p>
-<h2 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h2><p><img src="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg" alt=""></p>
-<h2 id="Hive事务使用建议"><a href="#Hive事务使用建议" class="headerlink" title="Hive事务使用建议"></a>Hive事务使用建议</h2><ol>
+<p>在操作delete的同时执行select操作，两个操作均同时获取到SHARED_RED和SHARED_WRITE锁，操作并行进行未出现阻塞。<br><div class="note info"><h2 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h2></div><br><img src="http://oliji9s3j.bkt.clouddn.com/15121077401844.jpg" alt=""><br><div class="note info"><h2 id="Hive事务使用建议"><a href="#Hive事务使用建议" class="headerlink" title="Hive事务使用建议"></a>Hive事务使用建议</h2></div></p>
+<ol>
 <li>传统数据库中有三种模型隐式事务、显示事务和自动事务。在目前Hive对事务仅支持自动事务，因此Hive无法通过显示事务的方式对一个操作序列进行事务控制。</li>
 <li>传统数据库事务在遇到异常情况可自动进行回滚，目前Hive无法支持ROLLBACK。</li>
 <li>传统数据库中支持事务并发，而Hive对事务无法做到完全并发控制,多个操作均需要获取WRITE的时候则这些操作为串行模式执行（在测试用例中”delete同一条数据的同时update该数据”，操作是串行的且操作完成后数据未被删除且数据被修改）未保证数据一致性。</li>
@@ -470,7 +474,8 @@
     <entry>
       <title><![CDATA[SparkSQL-Catalyst优化理解]]></title>
       <url>https://stanxia.github.io/2017/11/30/SparkSQL-Catalyst%E4%BC%98%E5%8C%96%E7%90%86%E8%A7%A3/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
+      <content type="html"><![CDATA[<div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
 <p>SQL优化器核心执行策略主要分为两个大的方向：</p>
 <ol>
 <li>基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心优化算子Join却显得有点力不从心。</li>
@@ -478,11 +483,9 @@
 </ol>
 <p>举个简单的例子，两个表执行Join到底应该使用BroadcastHashJoin还是SortMergeJoin？当前SparkSQL的方式是通过手工设定参数来确定，如果一个表的数据量小于这个值就使用BroadcastHashJoin，但是这种方案显得很不优雅，很不灵活。基于代价优化就是为了解决这类问题，它会针对每个Join评估当前两张表使用每种Join策略的代价，根据代价估算确定一种代价最小的方案。</p>
 <a id="more"></a>
-<p><img src="http://oliji9s3j.bkt.clouddn.com/15120193767483.jpg" alt=""></p>
-<h2 id="Tree-amp-Rule"><a href="#Tree-amp-Rule" class="headerlink" title="Tree&amp;Rule"></a>Tree&amp;Rule</h2><p>在介绍SQL优化器工作原理之前，有必要首先介绍两个重要的数据结构：Tree和Rule。SQL语法树就是SQL语句通过编译器之后会被解析成一棵树状结构。这棵树会包含很多节点对象，每个节点都拥有特定的数据类型，同时会有0个或多个孩子节点（节点对象在代码中定义为TreeNode对象），下图是个简单的示例：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194433988.jpg" alt=""><br>如上图所示，箭头左边表达式有3种数据类型（Literal表示常量、Attribute表示变量、Add表示动作），表示x+(1+2)。映射到右边树状结构后，每一种数据类型就会变成一个节点。另外，Tree还有一个非常重要的特性，可以通过一定的规则进行等价变换，如下图：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194660866.jpg" alt=""></p>
+<p><img src="http://oliji9s3j.bkt.clouddn.com/15120193767483.jpg" alt=""><br><div class="note info"><h2 id="Tree-amp-Rule"><a href="#Tree-amp-Rule" class="headerlink" title="Tree&amp;Rule"></a>Tree&amp;Rule</h2></div><br>在介绍SQL优化器工作原理之前，有必要首先介绍两个重要的数据结构：Tree和Rule。SQL语法树就是SQL语句通过编译器之后会被解析成一棵树状结构。这棵树会包含很多节点对象，每个节点都拥有特定的数据类型，同时会有0个或多个孩子节点（节点对象在代码中定义为TreeNode对象），下图是个简单的示例：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194433988.jpg" alt=""><br>如上图所示，箭头左边表达式有3种数据类型（Literal表示常量、Attribute表示变量、Add表示动作），表示x+(1+2)。映射到右边树状结构后，每一种数据类型就会变成一个节点。另外，Tree还有一个非常重要的特性，可以通过一定的规则进行等价变换，如下图：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120194660866.jpg" alt=""></p>
 <p>上图定义了一个等价变换规则(Rule)：两个Integer类型的常量相加可以等价转换为一个Integer常量，这个规则其实很简单，对于上文中提到的表达式x+(1+2)来说就可以转变为x+3。对于程序来讲，如何找到两个Integer常量呢？其实就是简单的二叉树遍历算法，每遍历到一个节点，就模式匹配当前节点为Add、左右子节点是Integer常量的结构，定位到之后将此三个节点替换为一个Literal类型的节点。</p>
-<p>上面用一个最简单的示例来说明等价变换规则以及如何将规则应用于语法树。在任何一个SQL优化器中，通常会定义大量的Rule（后面会讲到），SQL优化器会遍历语法树中每个节点，针对遍历到的节点模式匹配所有给定规则（Rule），如果有匹配成功的，就进行相应转换，如果所有规则都匹配失败，就继续遍历下一个节点。</p>
-<h2 id="Catalyst工作流程"><a href="#Catalyst工作流程" class="headerlink" title="Catalyst工作流程"></a>Catalyst工作流程</h2><p>任何一个优化器工作原理都大同小异：SQL语句首先通过Parser模块被解析为语法树，此棵树称为Unresolved Logical Plan；Unresolved Logical Plan通过Analyzer模块借助于数据元数据解析为Logical Plan；此时再通过各种基于规则的优化策略进行深入优化，得到Optimized Logical Plan；优化后的逻辑执行计划依然是逻辑的，并不能被Spark系统理解，此时需要将此逻辑执行计划转换为Physical Plan；为了更好的对整个过程进行理解，下文通过一个简单示例进行解释。</p>
+<p>上面用一个最简单的示例来说明等价变换规则以及如何将规则应用于语法树。在任何一个SQL优化器中，通常会定义大量的Rule（后面会讲到），SQL优化器会遍历语法树中每个节点，针对遍历到的节点模式匹配所有给定规则（Rule），如果有匹配成功的，就进行相应转换，如果所有规则都匹配失败，就继续遍历下一个节点。<br><div class="note info"><h2 id="Catalyst工作流程"><a href="#Catalyst工作流程" class="headerlink" title="Catalyst工作流程"></a>Catalyst工作流程</h2></div><br>任何一个优化器工作原理都大同小异：SQL语句首先通过Parser模块被解析为语法树，此棵树称为Unresolved Logical Plan；Unresolved Logical Plan通过Analyzer模块借助于数据元数据解析为Logical Plan；此时再通过各种基于规则的优化策略进行深入优化，得到Optimized Logical Plan；优化后的逻辑执行计划依然是逻辑的，并不能被Spark系统理解，此时需要将此逻辑执行计划转换为Physical Plan；为了更好的对整个过程进行理解，下文通过一个简单示例进行解释。</p>
 <h3 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h3><p>Parser简单来说是将SQL字符串切分成一个一个Token，再根据一定语义规则解析为一棵语法树。Parser模块目前基本都使用第三方类库ANTLR进行实现，比如Hive、 Presto、SparkSQL等。下图是一个示例性的SQL语句（有两张表，其中people表主要存储用户基本信息，score表存储用户的各种成绩），通过Parser解析后的AST语法树如图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120196105832.jpg" alt=""></p>
 <h3 id="Analyzer"><a href="#Analyzer" class="headerlink" title="Analyzer"></a>Analyzer</h3><p>通过解析后的逻辑执行计划基本有了骨架，但是系统并不知道score、sum这些都是些什么鬼，此时需要基本的元数据信息来表达这些词素，最重要的元数据信息主要包括两部分：表的Scheme和基本函数信息，表的scheme主要包括表的基本定义（列名、数据类型）、表的数据格式（Json、Text）、表的物理位置等，基本函数信息主要指类信息。</p>
 <p>Analyzer会再次遍历整个语法树，对树上的每个节点进行数据类型绑定以及函数绑定，比如people词素会根据元数据表信息解析为包含age、id以及name三列的表，people.age会被解析为数据类型为int的变量，sum会被解析为特定的聚合函数，如下图所示：<br><img src="http://oliji9s3j.bkt.clouddn.com/15120196532182.jpg" alt=""></p>
@@ -504,8 +507,7 @@
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15120198495604.jpg" alt=""></p>
 <p>至此，逻辑执行计划已经得到了比较完善的优化，然而，逻辑执行计划依然没办法真正执行，他们只是逻辑上可行，实际上Spark并不知道如何去执行这个东西。比如Join只是一个抽象概念，代表两个表根据相同的id进行合并，然而具体怎么实现这个合并，逻辑执行计划并没有说明。</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15120198739726.jpg" alt=""></p>
-<p>此时就需要将逻辑执行计划转换为物理执行计划，将逻辑上可行的执行计划变为Spark可以真正执行的计划。比如Join算子，Spark根据不同场景为该算子制定了不同的算法策略，有BroadcastHashJoin、ShuffleHashJoin以及SortMergeJoin等（可以将Join理解为一个接口，BroadcastHashJoin是其中一个具体实现），物理执行计划实际上就是在这些具体实现中挑选一个耗时最小的算法实现，这个过程涉及到基于代价优化策略。</p>
-<h2 id="查看SparkSQL执行计划"><a href="#查看SparkSQL执行计划" class="headerlink" title="查看SparkSQL执行计划"></a>查看SparkSQL执行计划</h2><p>至此，通过一个简单的示例完整的介绍了Catalyst的整个工作流程，包括Parser阶段、Analyzer阶段、Optimize阶段以及Physical Planning阶段。有同学可能会比较感兴趣Spark环境下如何查看一条具体的SQL的整个过程，在此介绍两种方法：</p>
+<p>此时就需要将逻辑执行计划转换为物理执行计划，将逻辑上可行的执行计划变为Spark可以真正执行的计划。比如Join算子，Spark根据不同场景为该算子制定了不同的算法策略，有BroadcastHashJoin、ShuffleHashJoin以及SortMergeJoin等（可以将Join理解为一个接口，BroadcastHashJoin是其中一个具体实现），物理执行计划实际上就是在这些具体实现中挑选一个耗时最小的算法实现，这个过程涉及到基于代价优化策略。<br><div class="note info"><h2 id="查看SparkSQL执行计划"><a href="#查看SparkSQL执行计划" class="headerlink" title="查看SparkSQL执行计划"></a>查看SparkSQL执行计划</h2></div><br>至此，通过一个简单的示例完整的介绍了Catalyst的整个工作流程，包括Parser阶段、Analyzer阶段、Optimize阶段以及Physical Planning阶段。有同学可能会比较感兴趣Spark环境下如何查看一条具体的SQL的整个过程，在此介绍两种方法：</p>
 <h3 id="查看逻辑执行计划"><a href="#查看逻辑执行计划" class="headerlink" title="查看逻辑执行计划"></a>查看逻辑执行计划</h3><p>使用queryExecution方法查看逻辑执行计划，如下所示：</p>
 <p><img src="http://oliji9s3j.bkt.clouddn.com/15120199915140.jpg" alt=""></p>
 <h3 id="查看物理执行计划"><a href="#查看物理执行计划" class="headerlink" title="查看物理执行计划"></a>查看物理执行计划</h3><p>使用explain方法查看物理执行计划：</p>
@@ -535,10 +537,11 @@
     <entry>
       <title><![CDATA[spark容错机制]]></title>
       <url>https://stanxia.github.io/2017/11/29/spark%E5%AE%B9%E9%94%99%E6%9C%BA%E5%88%B6/</url>
-      <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
+      <content type="html"><![CDATA[<div class="note info"><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2></div>
+<p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
 <p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称“血统(Lineage)”容错）记录下来，以便恢复丢失的分区。 </p>
-<p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。</p>
-<h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2><h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
+<p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。<br><div class="note info"><h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2></div></p>
+<h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
 <a id="more"></a>
 <h3 id="两种依赖关系"><a href="#两种依赖关系" class="headerlink" title="两种依赖关系"></a>两种依赖关系</h3><p>RDD在Lineage依赖方面分为两种：窄依赖(Narrow Dependencies)与宽依赖(Wide Dependencies,源码中称为Shuffle Dependencies)，用来解决数据容错的高效性。</p>
 <ul>
