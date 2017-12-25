@@ -88,7 +88,7 @@
 <meta property="og:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。 查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg">
-<meta property="og:updated_time" content="2017-12-14T14:20:28.359Z">
+<meta property="og:updated_time" content="2017-12-25T08:31:37.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark关于parquet的优化">
 <meta name="twitter:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。 查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
@@ -231,18 +231,18 @@
         </li>
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-            首页
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/aboutme/" rel="section">
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
           </a>
         </li>
       
@@ -642,9 +642,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -733,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Parquet&#x7684;&#x4F18;&#x52BF;" class="headerlink" title="Parquet&#x7684;&#x4F18;&#x52BF;"></a>Parquet&#x7684;&#x4F18;&#x52BF;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x5B58;&#x50A8;&#x65B9;&#x9762;" class="headerlink" title="&#x5B58;&#x50A8;&#x65B9;&#x9762;"></a>&#x5B58;&#x50A8;&#x65B9;&#x9762;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#&#x67E5;&#x8BE2;&#x65B9;&#x9762;" class="headerlink" title="&#x67E5;&#x8BE2;&#x65B9;&#x9762;"></a>&#x67E5;&#x8BE2;&#x65B9;&#x9762;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#&#x5B9E;&#x4F8B;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x5B9E;&#x4F8B;&#x6D4B;&#x8BD5;"></a>&#x5B9E;&#x4F8B;&#x6D4B;&#x8BD5;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Parquet&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="Parquet&#x7684;&#x4F7F;&#x7528;"></a>Parquet&#x7684;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet-的问题"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Parquet-&#x7684;&#x95EE;&#x9898;" class="headerlink" title="Parquet &#x7684;&#x95EE;&#x9898;"></a>Parquet &#x7684;&#x95EE;&#x9898;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的优势"><span class="nav-number">1.</span> <span class="nav-text">Parquet的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储方面"><span class="nav-number">1.1.</span> <span class="nav-text">存储方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询方面"><span class="nav-number">1.2.</span> <span class="nav-text">查询方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例测试"><span class="nav-number">1.3.</span> <span class="nav-text">实例测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet的使用"><span class="nav-number">2.</span> <span class="nav-text">Parquet的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parquet-的问题"><span class="nav-number">3.</span> <span class="nav-text">Parquet 的问题</span></a></li></ol></div>
             
 
           </div>

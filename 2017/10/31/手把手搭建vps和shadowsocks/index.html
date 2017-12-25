@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-001-2.png">
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-002.png">
 <meta property="og:image" content="https://www.vultr.net.cn/resources/images/rs-003.png">
-<meta property="og:updated_time" content="2017-12-14T14:20:28.374Z">
+<meta property="og:updated_time" content="2017-12-25T08:31:37.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手搭建vps和shadowsocks">
 <meta name="twitter:description" content="记性不好，做个记录，日后有需要时难得费神。 名词解释了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。 vpsVPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。 vultrVultr 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等多地的">
@@ -253,18 +253,18 @@
         </li>
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-            首页
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/aboutme/" rel="section">
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
           </a>
         </li>
       
@@ -694,9 +694,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -785,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x540D;&#x8BCD;&#x89E3;&#x91CA;" class="headerlink" title="&#x540D;&#x8BCD;&#x89E3;&#x91CA;"></a>&#x540D;&#x8BCD;&#x89E3;&#x91CA;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vps"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#vps" class="headerlink" title="vps"></a>vps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vultr"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#vultr" class="headerlink" title="vultr"></a>vultr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#linux" class="headerlink" title="linux"></a>linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shadowsocks"><span class="nav-number">1.5.</span> <span class="nav-text"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建vps"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x642D;&#x5EFA;vps" class="headerlink" title="&#x642D;&#x5EFA;vps"></a>&#x642D;&#x5EFA;vps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x6CE8;&#x518C;" class="headerlink" title="&#x6CE8;&#x518C;"></a>&#x6CE8;&#x518C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#购买"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x8D2D;&#x4E70;" class="headerlink" title="&#x8D2D;&#x4E70;"></a>&#x8D2D;&#x4E70;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x8FDC;&#x7A0B;&#x767B;&#x5F55;" class="headerlink" title="&#x8FDC;&#x7A0B;&#x767B;&#x5F55;"></a>&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署shadowsocks"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x90E8;&#x7F72;shadowsocks" class="headerlink" title="&#x90E8;&#x7F72;shadowsocks"></a>&#x90E8;&#x7F72;shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置锐意加速"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x9510;&#x610F;&#x52A0;&#x901F;" class="headerlink" title="&#x914D;&#x7F6E;&#x9510;&#x610F;&#x52A0;&#x901F;"></a>&#x914D;&#x7F6E;&#x9510;&#x610F;&#x52A0;&#x901F;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vps"><span class="nav-number">1.1.</span> <span class="nav-text">vps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vultr"><span class="nav-number">1.2.</span> <span class="nav-text">vultr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux"><span class="nav-number">1.3.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">1.4.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shadowsocks"><span class="nav-number">1.5.</span> <span class="nav-text">shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建vps"><span class="nav-number">2.</span> <span class="nav-text">搭建vps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册"><span class="nav-number">2.1.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#购买"><span class="nav-number">2.2.</span> <span class="nav-text">购买</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录"><span class="nav-number">3.</span> <span class="nav-text">远程登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署shadowsocks"><span class="nav-number">4.</span> <span class="nav-text">部署shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置锐意加速"><span class="nav-number">5.</span> <span class="nav-text">配置锐意加速</span></a></li></ol></div>
             
 
           </div>

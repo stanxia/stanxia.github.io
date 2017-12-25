@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="引言 一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。 但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-14T14:20:28.374Z">
+<meta property="og:updated_time" content="2017-12-25T08:31:37.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark容错机制">
 <meta name="twitter:description" content="引言 一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。 但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后">
@@ -229,18 +229,18 @@
         </li>
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-            首页
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/aboutme/" rel="section">
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
           </a>
         </li>
       
@@ -629,9 +629,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -720,7 +720,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5F15;&#x8A00;" class="headerlink" title="&#x5F15;&#x8A00;"></a>&#x5F15;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lineage机制"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Lineage&#x673A;&#x5236;" class="headerlink" title="Lineage&#x673A;&#x5236;"></a>Lineage&#x673A;&#x5236;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lineage简介"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#Lineage&#x7B80;&#x4ECB;" class="headerlink" title="Lineage&#x7B80;&#x4ECB;"></a>Lineage&#x7B80;&#x4ECB;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种依赖关系"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x4E24;&#x79CD;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;" class="headerlink" title="&#x4E24;&#x79CD;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;"></a>&#x4E24;&#x79CD;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质理解"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x672C;&#x8D28;&#x7406;&#x89E3;" class="headerlink" title="&#x672C;&#x8D28;&#x7406;&#x89E3;"></a>&#x672C;&#x8D28;&#x7406;&#x89E3;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖关系的特性"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x7279;&#x6027;" class="headerlink" title="&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x7279;&#x6027;"></a>&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x7279;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容错原理"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#&#x5BB9;&#x9519;&#x539F;&#x7406;" class="headerlink" title="&#x5BB9;&#x9519;&#x539F;&#x7406;"></a>&#x5BB9;&#x9519;&#x539F;&#x7406;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkpoint机制"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Checkpoint&#x673A;&#x5236;" class="headerlink" title="Checkpoint&#x673A;&#x5236;"></a>Checkpoint&#x673A;&#x5236;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lineage机制"><span class="nav-number">2.</span> <span class="nav-text">Lineage机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lineage简介"><span class="nav-number">2.1.</span> <span class="nav-text">Lineage简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种依赖关系"><span class="nav-number">2.2.</span> <span class="nav-text">两种依赖关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质理解"><span class="nav-number">2.3.</span> <span class="nav-text">本质理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖关系的特性"><span class="nav-number">2.4.</span> <span class="nav-text">依赖关系的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容错原理"><span class="nav-number">2.5.</span> <span class="nav-text">容错原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkpoint机制"><span class="nav-number">3.</span> <span class="nav-text">Checkpoint机制</span></a></li></ol></div>
             
 
           </div>
