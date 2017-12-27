@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1281.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/323.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/161.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/atom.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="phoenix," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="二级索引是从主访问路径访问数据的正交方式。在 HBase 中，您有一个索引按字典顺序排序在主键行上。以不同于主要行的方式访问记录需要扫描表中的所有行，以针对您的过滤器对其进行测试。通过二级索引，您索引的列或表达式形成一个备用行键，以允许沿着这个新轴进行点查找和范围扫描。 Covered Indexes 覆盖索引 Phoenix 是特别强大的，因为我们提供覆盖索引 - 一旦找到索引条目，我们不需要返">
+<meta name="keywords" content="phoenix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Phoenix Secondary Indexing">
+<meta property="og:url" content="https://stanxia.github.io/2017/12/27/Phoenix-Secondary-Indexing/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="二级索引是从主访问路径访问数据的正交方式。在 HBase 中，您有一个索引按字典顺序排序在主键行上。以不同于主要行的方式访问记录需要扫描表中的所有行，以针对您的过滤器对其进行测试。通过二级索引，您索引的列或表达式形成一个备用行键，以允许沿着这个新轴进行点查找和范围扫描。 Covered Indexes 覆盖索引 Phoenix 是特别强大的，因为我们提供覆盖索引 - 一旦找到索引条目，我们不需要返">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-27T09:45:56.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Phoenix Secondary Indexing">
+<meta name="twitter:description" content="二级索引是从主访问路径访问数据的正交方式。在 HBase 中，您有一个索引按字典顺序排序在主键行上。以不同于主要行的方式访问记录需要扫描表中的所有行，以针对您的过滤器对其进行测试。通过二级索引，您索引的列或表达式形成一个备用行键，以允许沿着这个新轴进行点查找和范围扫描。 Covered Indexes 覆盖索引 Phoenix 是特别强大的，因为我们提供覆盖索引 - 一旦找到索引条目，我们不需要返">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/27/Phoenix-Secondary-Indexing/"/>
+
+
+
+
+
+  <title>Phoenix Secondary Indexing | 东篱下</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东篱下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">斯坦@森</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-paper">
+          <a href="/tags/paper/" rel="section">
+            
+            PAPER
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-ml">
+          <a href="/tags/ml/" rel="section">
+            
+            ML
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-spark">
+          <a href="/tags/spark/" rel="section">
+            
+            SPARK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-hive">
+          <a href="/tags/hive/" rel="section">
+            
+            HIVE
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-gem">
+          <a href="/gem/" rel="section">
+            
+            GEM
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+            BOOKS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/aboutme/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/27/Phoenix-Secondary-Indexing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">Phoenix Secondary Indexing</h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T16:48:35+00:00">
+                2017-12-27
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/phoenix/" itemprop="url" rel="index">
+                    <span itemprop="name">phoenix</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/27/Phoenix-Secondary-Indexing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/27/Phoenix-Secondary-Indexing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/12/27/Phoenix-Secondary-Indexing/" class="leancloud_visitors" data-flag-title="Phoenix Secondary Indexing">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        <p>二级索引是从主访问路径访问数据的正交方式。在 HBase 中，您有一个索引按字典顺序排序在主键行上。以不同于主要行的方式访问记录需要扫描表中的所有行，以针对您的过滤器对其进行测试。通过二级索引，您索引的列或表达式形成一个备用行键，以允许沿着这个新轴进行点查找和范围扫描。</p>
+<div class="note info"><h2 id="Covered-Indexes-覆盖索引"><a href="#Covered-Indexes-覆盖索引" class="headerlink" title="Covered Indexes 覆盖索引"></a>Covered Indexes 覆盖索引</h2></div>
+<p>Phoenix 是特别强大的，因为我们提供覆盖索引 - 一旦找到索引条目，我们不需要返回主表。相反，我们将我们关心的数据绑定到索引行，节省了读取时间的开销。</p>
+<p>例如，以下内容将在v1和v2列上创建索引，并在索引中包含v3列以防止从数据表中获取该列：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table (v1,v2) <span class="keyword">INCLUDE</span>(v3)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<div class="note info"><h2 id="Functional-Indexes-函数索引"><a href="#Functional-Indexes-函数索引" class="headerlink" title="Functional Indexes 函数索引"></a>Functional Indexes 函数索引</h2></div>
+<p>函数索引（在4.3和更高版本中可用）允许您不仅在列上而且在任意表达式上创建索引。然后，当一个查询使用该表达式时，索引可以用来检索结果而不是数据表。例如，您可以在 UPPER（FIRST_NAME ||’’|| LAST_NAME）上创建一个索引，以允许您对组合的名字和姓氏进行不区分大小写的搜索。</p>
+<p>例如，下面将创建这个功能索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> UPPER_NAME_IDX <span class="keyword">ON</span> EMP (<span class="keyword">UPPER</span>(FIRST_NAME||<span class="string">' '</span>||LAST_NAME))</span><br></pre></td></tr></table></figure>
+<p>有了这个索引，发出下面的查询时，将使用索引而不是数据表来检索结果：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> EMP_ID <span class="keyword">FROM</span> EMP <span class="keyword">WHERE</span> <span class="keyword">UPPER</span>(FIRST_NAME||<span class="string">' '</span>||LAST_NAME)=<span class="string">'JOHN DOE'</span></span><br></pre></td></tr></table></figure></p>
+<p>Phoenix 支持两种索引技术：全局索引和本地索引。每个在不同的情况下都很有用，并且有自己的故障概况和性能特点。</p>
+<div class="note info"><h2 id="Global-Indexes-全局索引"><a href="#Global-Indexes-全局索引" class="headerlink" title="Global Indexes 全局索引"></a>Global Indexes 全局索引</h2></div>
+<p>全局索引目标是重度读操作用例。使用全局索引，索引的所有性能损失都是在写入时发生的。我们拦截数据表更新写（DELETE，UPSERT VALUES和UPSERT SELECT），建立索引更新，然后发送任何必要的更新到所有感兴趣的索引表。在读的时候，Phoenix 会选择使用的索引表，这将产生最快的查询时间，并直接扫描它，就像任何其他的 HBase 表一样。默认情况下，除非暗示，否则索引不会用于引用不属于索引的列的查询。</p>
+<div class="note info"><h2 id="Local-Indexes-本地索引"><a href="#Local-Indexes-本地索引" class="headerlink" title="Local Indexes 本地索引"></a>Local Indexes 本地索引</h2></div>
+<p>本地索引目标针对重度写操作，空间受限的用例。就像全局索引一样，Phoenix 会在查询时自动选择是否使用本地索引。使用本地索引，索引数据和表数据共同驻留在同一台服务器上，防止写入期间的任何网络开销。即使查询没有完全覆盖，也可以使用本地索引（即，Phoenix 自动检索不在索引中的列，通过与数据表相对应的索引）。与全局索引不同，表中的所有本地索引都存储在4.8.0版之前的单独的共享表中。从4.8.0开始，我们将所有本地索引数据存储在相同数据表中的单独的影子列族中。在读取本地索引时，由于不能确定索引数据的确切区域位置，所以必须检查每个区域的数据。因此在读取时会发生一些开销。</p>
+<div class="note info"><h2 id="Index-Population"><a href="#Index-Population" class="headerlink" title="Index Population"></a>Index Population</h2></div>
+<p>默认情况下，创建索引时，会在 CREATE INDEX 调用期间同步填充该索引。根据数据表的当前大小，这可能是不可行的。从4.5开始，可以通过在索引创建 DDL 语句中包含 ASYNC 关键字来异步完成索引的填充：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> async_index <span class="keyword">ON</span> my_schema.my_table (v) ASYNC</span><br></pre></td></tr></table></figure></p>
+<p>必须通过 HBase 命令行单独启动填充索引表的 map-reduce 作业，如下所示：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>&#123;HBASE_HOME&#125;/bin/hbase org.apache.phoenix.mapreduce.index.IndexTool</span><br><span class="line">  --schema MY_SCHEMA --data-table MY_TABLE --index-table ASYNC_IDX</span><br><span class="line">  --output-path ASYNC_IDX_HFILES</span><br></pre></td></tr></table></figure></p>
+<p>只有 map-reduce 作业完成后，索引才会被激活并开始在查询中使用。这项工作对于退出的客户端是有弹性的。输出路径选项用于指定用于写入 HFile 的 HDFS 目录。</p>
+<div class="note info"><h2 id="Index-Usage-索引使用"><a href="#Index-Usage-索引使用" class="headerlink" title="Index Usage 索引使用"></a>Index Usage 索引使用</h2></div>
+<p>Phoenix 自动使用索引来服务一个查询，当它确定更有效的时候。但是，除非查询中引用的所有列都包含在索引中，否则不会使用全局索引。例如，以下查询不会使用索引，因为在查询中引用了v2，但未包含在索引中：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> v2 <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> v1 = <span class="string">'foo'</span></span><br></pre></td></tr></table></figure></p>
+<p>在这种情况下，有三种获取索引的方法：</p>
+<p>1.通过在索引中包含v2来创建一个覆盖索引：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table (v1) <span class="keyword">INCLUDE</span> (v2)</span><br></pre></td></tr></table></figure></p>
+<p>这将导致v2列值被复制到索引中，并随着更改而保持同步。这显然会增加索引的大小。</p>
+<p>2.提示查询强制它使用索引：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="comment">/*+ INDEX(my_table my_index) */</span> v2 <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> v1 = <span class="string">'foo'</span></span><br></pre></td></tr></table></figure></p>
+<p>这将导致在遍历索引时找到每个数据行以找到缺少的v2列值。这个提示只有在你知道索引有很好的选择性的时候才可以使用（例如，在这个例子中有少量的表格行的值是’foo’），否则你可以通过默认的行为来获得更好的性能全表扫描。</p>
+<p>3.创建一个本地索引：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">LOCAL</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table (v1)</span><br></pre></td></tr></table></figure></p>
+<p>与全局索引不同，即使查询中引用的所有列都不包含在索引中，本地索引也将使用索引。这是默认为本地索引完成的，因为我们知道在同一个区域服务器上的表和索引数据coreside确保查找是本地的。</p>
+<div class="note info"><h2 id="Index-Removal-索引移除"><a href="#Index-Removal-索引移除" class="headerlink" title="Index Removal 索引移除"></a>Index Removal 索引移除</h2></div>
+<p>要删除索引，使用以下语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table</span><br></pre></td></tr></table></figure></p>
+<p>如果索引列在数据表中被删除，索引将自动被删除。另外，如果在数据表中删除一个被覆盖的列，它也会自动从索引中删除。</p>
+<div class="note info"><h2 id="Index-Properties-索引属性"><a href="#Index-Properties-索引属性" class="headerlink" title="Index Properties 索引属性"></a>Index Properties 索引属性</h2></div>
+<p>就像使用CREATE TABLE语句一样，CREATE INDEX语句可以通过属性应用到底层的HBase表，包括对其进行限制的能力:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table (v2 <span class="keyword">DESC</span>, v1) <span class="keyword">INCLUDE</span> (v3)</span><br><span class="line">    SALT_BUCKETS=<span class="number">10</span>, DATA_BLOCK_ENCODING=<span class="string">'NONE'</span></span><br></pre></td></tr></table></figure></p>
+<p>请注意，如果主表是加盐的，则对于全局索引，该索引将以相同的方式自动被加盐。另外，相对于主索引表与索引表的大小，索引的MAX_FILESIZE向下调整。欲了解更多信息，请参阅<a href="http://phoenix.apache.org/salted.html" target="_blank" rel="noopener">这里</a>。另一方面，使用本地索引时，不允许指定SALT_BUCKETS。</p>
+<div class="note info"><h2 id="Consistency-Guarantees-一致性保证"><a href="#Consistency-Guarantees-一致性保证" class="headerlink" title="Consistency Guarantees 一致性保证"></a>Consistency Guarantees 一致性保证</h2></div>
+<p>在提交后成功返回到客户端，所有数据保证写入所有相关的索引和主表。换句话说，索引更新与HBase提供的相同强一致性保证是同步的。</p>
+<p>但是，由于索引存储在与数据表不同的表中，因此根据表的属性和索引的类型，表和索引之间的一致性会因服务器端崩溃而失败。这是您的需求和使用案例驱动的重要设计考虑因素。</p>
+<p>下面概述了各种一致性保证的不同选项。</p>
+<h3 id="Transactional-Tables-事务表"><a href="#Transactional-Tables-事务表" class="headerlink" title="Transactional Tables 事务表"></a>Transactional Tables 事务表</h3><p>通过将您的表声明为事务性的，您可以实现表和索引之间最高级别的一致性保证。在这种情况下，您的表突变和相关索引更新的提交是具有强 ACID 保证的原子。如果提交失败，那么您的数据（表或索引）都不会更新，从而确保您的表和索引始终保持同步。</p>
+<p>为什么不总是把你的表声明为事务性的？这可能很好，特别是如果你的表被声明为不可变的，因为在这种情况下事务开销非常小。但是，如果您的数据是可变的，请确保与事务性表发生冲突检测相关的开销和运行事务管理器的运行开销是可以接受的。此外，具有二级索引的事务表可能会降低写入数据表的可用性，因为数据表及其辅助索引表必须可用，否则写入将失败。</p>
+<h3 id="Immutable-Tables-不可变表"><a href="#Immutable-Tables-不可变表" class="headerlink" title="Immutable Tables 不可变表"></a>Immutable Tables 不可变表</h3><p>对于其中数据只写入一次而从不更新的表，可以进行某些优化以减少增量维护的写入时间开销。这是常见的时间序列数据，如日志或事件数据，一旦写入行，它将永远不会被更新。要利用这些优化，通过将 IMMUTABLE_ROWS = true 属性添加到您的 DDL 语句中，将您的表声明为不可变：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> my_table (k <span class="built_in">VARCHAR</span> PRIMARY <span class="keyword">KEY</span>, v <span class="built_in">VARCHAR</span>) IMMUTABLE_ROWS=<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 IMMUTABLE_ROWS = true 声明的表上的所有索引都被认为是不可变的（请注意，默认情况下表被认为是可变的）。对于全局不可变索引，索引完全在客户端维护，索引表是在数据表发生更改时生成的。另一方面，本地不可变索引在服务器端保持不变。请注意，没有任何保护措施可以强制执行，声明为不可变的表实际上不会改变数据（因为这会否定所达到的性能增益）。如果发生这种情况，索引将不再与表同步。</p>
+<p>如果您有一个现有的表，您想从不可变索引切换到可变索引，请使用ALTER TABLE命令，如下所示：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> my_table <span class="keyword">SET</span> IMMUTABLE_ROWS=<span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<p>非事务性，不可变表的索引没有自动处理提交失败的机制。保持表和索引之间的一致性留给客户端处理。因为更新是幂等的，所以最简单的解决方案是客户端继续重试一批突变，直到它们成功。</p>
+<h3 id="Mutable-Tables-可变表"><a href="#Mutable-Tables-可变表" class="headerlink" title="Mutable Tables 可变表"></a>Mutable Tables 可变表</h3><p>对于非事务性可变表，我们通过将索引更新添加到主表行的预写日志（WAL）条目来维护索引更新持久性。只有在WAL条目成功同步到磁盘后，我们才会尝试更新索引/主表。我们默认并行编写索引更新，从而导致非常高的吞吐量。如果服务器在我们写索引更新的时候崩溃了，我们会重播所有索引更新到WAL恢复过程中的索引表，并依赖更新的幂等性来确保正确性。因此，非事务性可变表上的索引只是主表背后的一批编辑。</p>
+<p>重要的是要注意几点：</p>
+<ul>
+<li>对于非事务性表，您可以看到索引表与主表不同步。</li>
+<li>如上所述，这是可以的，因为我们在很短的时间内只有很小的一部分，并且不同步</li>
+<li>每个数据行及其索引行都保证被写入或丢失 - 我们从来没有看到部分更新，因为这是HBase原子性保证的一部分。</li>
+<li>首先将数据写入表中，然后写入索引表（如果禁用WAL，则反之亦然）。</li>
+</ul>
+<h4 id="Singular-Write-Path"><a href="#Singular-Write-Path" class="headerlink" title="Singular Write Path"></a>Singular Write Path</h4><p>有一个保证失败属性的写入路径。所有写入HRegion的内容都被我们的协处理器拦截。然后，我们根据挂起更新（或更新，如果是批处理）构建索引更新。然后这些更新被附加到原始更新的WAL条目。</p>
+<p>如果在此之前我们遇到任何问题，我们会将失败返回给客户端，并且没有任何数据被持久化或者不可见。</p>
+<p>一旦WAL被写入，我们确保即使在失败的情况下，索引和主表数据也将变得可见。</p>
+<ul>
+<li>如果服务器发生崩溃，我们会使用通常的WAL重播机制重播索引更新。</li>
+<li>如果服务器没有崩溃，我们只是将索引更新插入到它们各自的表中。<ul>
+<li>如果索引更新失败，下面概述了保持一致性的各种方法。</li>
+<li>如果Phoenix系统目录表发生故障时无法到达，我们强制服务器立即中止并失败，请在JVM上调用System.exit，强制服务器死机。通过杀死服务器，我们确保WAL将在恢复时重播，将索引更新重播到相应的表中。这确保了二级索引在知道无效状态时不会继续使用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="禁止表写入，直到可变的索引是一致的"><a href="#禁止表写入，直到可变的索引是一致的" class="headerlink" title="禁止表写入，直到可变的索引是一致的"></a>禁止表写入，直到可变的索引是一致的</h4><p>在非事务性表和索引之间保持一致性的最高级别是声明在更新索引失败的情况下应暂时禁止写入数据表。在此一致性模式下，表和索引将保留在发生故障之前的时间戳，写入数据表将被禁止，直到索引重新联机并与数据表同步。该索引将保持活动状态，并像往常一样继续使用查询。</p>
+<p>以下服务器端配置控制此行为：</p>
+<ul>
+<li>phoenix.index.failure.block.write必须为true，以便在发生提交失败时写入数据表以失败，直到可以使用数据表追上索引。</li>
+<li>phoenix.index.failure.handling.rebuild必须为true（默认值），以便在发生提交失败的情况下在后台重建可变索引。</li>
+</ul>
+<h4 id="写入失败时禁用可变索引，直到一致性恢复"><a href="#写入失败时禁用可变索引，直到一致性恢复" class="headerlink" title="写入失败时禁用可变索引，直到一致性恢复"></a>写入失败时禁用可变索引，直到一致性恢复</h4><p>如果在提交时写入失败，具有可变索引的默认行为是将索引标记为禁用,在后台部分重建它们，然后在恢复一致性时再次将其标记为活动状态。在这种一致性模式下，在重建二级索引时，写入数据表不会被阻塞。但是，在重建过程中，二级索引不会被查询使用。</p>
+<p>以下服务器端配置控制此行为：</p>
+<ul>
+<li>phoenix.index.failure.handling.rebuild必须为true（缺省值），以便在发生提交失败的情况下在后台重建可变索引。</li>
+<li>phoenix.index.failure.handling.rebuild.interval控制服务器检查是否需要部分重建可变索引以赶上数据表更新的毫秒频率。默认值是10000或10秒。</li>
+<li>phoenix.index.failure.handling.rebuild.overlap.time控制执行部分重建时从发生故障的时间戳开始返回的毫秒数。默认值是1。</li>
+</ul>
+<h4 id="写入失败时禁用可变索引，需要手动重建"><a href="#写入失败时禁用可变索引，需要手动重建" class="headerlink" title="写入失败时禁用可变索引，需要手动重建"></a>写入失败时禁用可变索引，需要手动重建</h4><p>这是可变二级索引的最低一致性水平。在这种情况下，当写入二级索引失败时，索引将被标记为禁用，并且手动重建所需的索引以使其再次被查询使用。</p>
+<p>以下服务器端配置控制此行为：</p>
+<ul>
+<li>如果提交失败，phoenix.index.failure.handling.rebuild必须设置为false，以禁止在后台重建可变索引。</li>
+</ul>
+<div class="note info"><h2 id="Setup-设置"><a href="#Setup-设置" class="headerlink" title="Setup 设置"></a>Setup 设置</h2></div>
+<p>非事务性，可变索引需要在区域服务器和主服务器上运行特殊的配置选项 - Phoenix确保在表上启用可变索引时，它们已正确设置;如果未设置正确的属性，则将无法使用辅助索引。将这些设置添加到您的hbase-site.xml后，您需要重启集群。</p>
+<p>您将需要将以下参数添加到每个区域服务器上的hbase-site.xml：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.regionserver.wal.codec<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hbase.regionserver.wal.IndexedWALEditCodec<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的属性使定制的WAL编辑能够被写入，确保索引更新的正确写入/重播。这个编解码器支持通常的主机WALEdit选项，最显着的是WALEdit压缩。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.region.server.rpc.scheduler.factory.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hbase.ipc.PhoenixRpcSchedulerFactory<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Factory to create the Phoenix RPC Scheduler that uses separate queues for index and metadata updates<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rpc.controllerfactory.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hbase.ipc.controller.ServerRpcControllerFactory<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Factory to create the Phoenix RPC Scheduler that uses separate queues for index and metadata updates<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过确保索引更新的优先级高于数据更新，上述属性可防止在全局索引（HBase 0.98.4+和Phoenix 4.3.1+）的索引维护过程中发生死锁。它还通过确保元数据rpc调用比数据rpc调用具有更高的优先级来防止死锁。</p>
+<p>从Phoenix 4.8.0开始，不需要更改配置就可以使用本地索引。在Phoenix 4.7及更低版本中，主服务器节点和区域服务器节点上的服务器端hbase-site.xml需要进行以下配置更改：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.master.loadbalancer.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.phoenix.hbase.index.balancer.IndexLoadBalancer<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.coprocessor.master.classes<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.phoenix.hbase.index.master.IndexMasterObserver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.coprocessor.regionserver.classes<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hbase.regionserver.LocalIndexMerger<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="升级4-8-0之前创建的本地索引"><a href="#升级4-8-0之前创建的本地索引" class="headerlink" title="升级4.8.0之前创建的本地索引"></a>升级4.8.0之前创建的本地索引</h3><p>在服务器上将Phoenix升级到4.8.0以上版本时，如果存在，请从hbase-site.xml中除去以上三个与本地索引相关的配置。从客户端，我们支持在线（在初始化来自4.8.0+版本的phoenix客户端的连接时）和离线（使用psql工具）在4.8.0之前创建的本地索引的升级。作为升级的一部分，我们以ASYNC模式重新创建本地索引。升级后用户需要使用IndexTool建立索引。</p>
+<p>在升级之后使用客户端配置。</p>
+<ol>
+<li>phoenix.client.localIndexUpgrade<ul>
+<li>值为 true 则表示在线升级, false 表示离线升级。</li>
+<li>默认为 true 。</li>
+</ul>
+</li>
+</ol>
+<p>命令使用psql工具$ psql [zookeeper] -l运行离线升级。</p>
+<div class="note info"><h2 id="Tuning"><a href="#Tuning" class="headerlink" title="Tuning"></a>Tuning</h2></div>
+<p>索引是相当快的。但是，要优化您的特定环境和工作负载，可以调整一些属性。</p>
+<p>以下所有参数必须在hbase-site.xml中设置 - 对于整个集群和所有索引表，以及在同一台服务器上的所有区域上都是如此（例如，一台服务器也不会一次写入许多不同的索引表）。</p>
+<ol>
+<li>index.builder.threads.max<ul>
+<li>用于从主表更新构建索引更新的线程数</li>
+<li>增加此值克服了从底层HRegion读取当前行状态的瓶颈。调整这个值太高，只会增加HRegion瓶颈，因为它将无法处理太多的并发扫描请求，以及一般的线程交换问题。</li>
+<li>Default: 10</li>
+</ul>
+</li>
+<li>index.builder.threads.keepalivetime<ul>
+<li>在构建器线程池中使线程过期后的时间（以秒为单位）。</li>
+<li>未使用的线程会在这段时间后立即释放，而不会保留核心线程</li>
+<li>Default: 60</li>
+</ul>
+</li>
+<li>index.writer.threads.max<ul>
+<li>Number of threads to use when writing to the target index tables.</li>
+<li>The first level of parallelization, on a per-table basis - it should roughly correspond to the number of index tables</li>
+<li>Default: 10</li>
+</ul>
+</li>
+<li>index.writer.threads.keepalivetime<ul>
+<li>Amount of time in seconds after we expire threads in the writer thread pool.</li>
+<li>Unused threads are immediately released after this amount of time and not core threads are retained (though this last is a small concern as tables are expected to sustain a fairly constant write load), but simultaneously allows us to drop threads if we are not seeing the expected load.</li>
+<li>Default: 60</li>
+</ul>
+</li>
+<li>hbase.htable.threads.max<ul>
+<li>Number of threads each index HTable can use for writes.</li>
+<li>Increasing this allows more concurrent index updates (for instance across batches), leading to high overall throughput.</li>
+<li>Default: 2,147,483,647</li>
+</ul>
+</li>
+<li>hbase.htable.threads.keepalivetime<ul>
+<li>Amount of time in seconds after we expire threads in the HTable’s thread pool.</li>
+<li>Using the “direct handoff” approach, new threads will only be created if it is necessary and will grow unbounded. This could be bad but HTables only create as many Runnables as there are region servers; therefore, it also scales when new region servers are added.</li>
+<li>Default: 60</li>
+</ul>
+</li>
+<li>index.tablefactory.cache.size<ul>
+<li>Number of index HTables we should keep in cache.</li>
+<li>Increasing this number ensures that we do not need to recreate an HTable for each attempt to write to an index table. Conversely, you could see memory pressure if this value is set too high.</li>
+<li>Default: 10</li>
+</ul>
+</li>
+<li>org.apache.phoenix.regionserver.index.priority.min<ul>
+<li>Value to specify to bottom (inclusive) of the range in which index priority may lie.</li>
+<li>Default: 1000</li>
+</ul>
+</li>
+<li>org.apache.phoenix.regionserver.index.priority.max<ul>
+<li>Value to specify to top (exclusive) of the range in which index priority may lie.</li>
+<li>Higher priorites within the index min/max range do not means updates are processed sooner.</li>
+<li>Default: 1050</li>
+</ul>
+</li>
+<li>org.apache.phoenix.regionserver.index.handler.count<ul>
+<li>Number of threads to use when serving index write requests for global index maintenance.</li>
+<li>Though the actual number of threads is dictated by the Max(number of call queues, handler count), where the number of call queues is determined by standard HBase configuration. To further tune the queues, you can adjust the standard rpc queue length parameters (currently, there are no special knobs for the index queues), specifically ipc.server.max.callqueue.length and ipc.server.callqueue.handler.factor. See the HBase Reference Guide for more details.</li>
+<li>Default: 30</li>
+</ul>
+</li>
+</ol>
+<div class="note info"><h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2></div>   
+<p>We track secondary index performance via our performance framework. This is a generic test of performance based on defaults - your results will vary based on hardware specs as well as you individual configuration.</p>
+<p>That said, we have seen secondary indexing (both immutable and mutable) go as quickly as &lt; 2x the regular write path on a small, (3 node) desktop-based cluster. This is actually pretty reasonable as we have to write to multiple tables as well as build the index update.</p>
+<div class="note info"><h2 id="Index-Scrutiny-Tool"><a href="#Index-Scrutiny-Tool" class="headerlink" title="Index Scrutiny Tool"></a>Index Scrutiny Tool</h2></div>
+<p>With Phoenix 4.12, there is now a tool to run a MapReduce job to verify that an index table is valid against its data table. The only way to find orphaned rows in either table is to scan over all rows in the table and do a lookup in the other table for the corresponding row. For that reason, the tool can run with either the data or index table as the “source” table, and the other as the “target” table. The tool writes all invalid rows it finds either to file or to an output table PHOENIX_INDEX_SCRUTINY. An invalid row is a source row that either has no corresponding row in the target table, or has an incorrect value in the target table (i.e. covered column value).</p>
+<p>The tool has job counters that track its status. VALID_ROW_COUNT, INVALID_ROW_COUNT, BAD_COVERED_COL_VAL_COUNT. Note that invalid rows - bad col val rows = number of orphaned rows. These counters are written to the table PHOENIX_INDEX_SCRUTINY_METADATA, along with other job metadata.</p>
+<p>The Index Scrutiny Tool can be launched via the hbase command (in hbase/bin) as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase org.apache.phoenix.mapreduce.index.IndexScrutinyTool -dt my_table -it my_index -o</span><br></pre></td></tr></table></figure>
+<p>It can also be run from Hadoop using either the phoenix-core or phoenix-server jar as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HADOOP_CLASSPATH=$(hbase mapredcp) hadoop jar phoenix-&lt;version&gt;-server.jar org.apache.phoenix.mapreduce.index.IndexScrutinyTool -dt my_table -it my_index -o</span><br></pre></td></tr></table></figure>
+<p>By default two mapreduce jobs are launched, one with the data table as the source table and one with the index table as the source table.</p>
+<p>The following parameters can be used with the Index Scrutiny Tool:</p>
+<p>翻译自:<a href="http://phoenix.apache.org/secondary_indexing.html" target="_blank" rel="noopener">secondary_indexing</a></p>
+
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+        <div>
+<div>
+
+
+
+<div style="text-align:center;color: #ccc;font-size:14px;">
+
+-------------THE<i class="fa fa-paw"></i>END-------------</div>
+
+
+
+</div>
+</div>
+      
+    </div>
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>交个朋友～～</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/phoenix/" rel="tag"><i class="fa fa-tag"></i> phoenix</a>
+          
+        </div>
+      
+    
+      
+      
+      
+    
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/Google-Bigtable-中文版/" rel="next" title="Google Bigtable 中文版">
+                <i class="fa fa-chevron-left"></i> Google Bigtable 中文版
+              </a>
+            
+          </div>
+    
+          <span class="post-nav-divider"></span>
+    
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/10/27/火之意志/" rel="prev" title="火之意志">
+                火之意志 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="森" />
+            
+              <p class="site-author-name" itemprop="name">森</p>
+              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/stanxia" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/stillstan1" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                书签
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.infoq.com/cn/spark1" title="InfoQ" target="_blank">InfoQ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/caesar0301/awesome-public-datasets#finance" title="公共数据集" target="_blank">公共数据集</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Covered-Indexes-覆盖索引"><span class="nav-number">1.</span> <span class="nav-text">Covered Indexes 覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functional-Indexes-函数索引"><span class="nav-number">2.</span> <span class="nav-text">Functional Indexes 函数索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-Indexes-全局索引"><span class="nav-number">3.</span> <span class="nav-text">Global Indexes 全局索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Local-Indexes-本地索引"><span class="nav-number">4.</span> <span class="nav-text">Local Indexes 本地索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Population"><span class="nav-number">5.</span> <span class="nav-text">Index Population</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Usage-索引使用"><span class="nav-number">6.</span> <span class="nav-text">Index Usage 索引使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Removal-索引移除"><span class="nav-number">7.</span> <span class="nav-text">Index Removal 索引移除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Properties-索引属性"><span class="nav-number">8.</span> <span class="nav-text">Index Properties 索引属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consistency-Guarantees-一致性保证"><span class="nav-number">9.</span> <span class="nav-text">Consistency Guarantees 一致性保证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactional-Tables-事务表"><span class="nav-number">9.1.</span> <span class="nav-text">Transactional Tables 事务表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immutable-Tables-不可变表"><span class="nav-number">9.2.</span> <span class="nav-text">Immutable Tables 不可变表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutable-Tables-可变表"><span class="nav-number">9.3.</span> <span class="nav-text">Mutable Tables 可变表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Singular-Write-Path"><span class="nav-number">9.3.1.</span> <span class="nav-text">Singular Write Path</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#禁止表写入，直到可变的索引是一致的"><span class="nav-number">9.3.2.</span> <span class="nav-text">禁止表写入，直到可变的索引是一致的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入失败时禁用可变索引，直到一致性恢复"><span class="nav-number">9.3.3.</span> <span class="nav-text">写入失败时禁用可变索引，直到一致性恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入失败时禁用可变索引，需要手动重建"><span class="nav-number">9.3.4.</span> <span class="nav-text">写入失败时禁用可变索引，需要手动重建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup-设置"><span class="nav-number">10.</span> <span class="nav-text">Setup 设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#升级4-8-0之前创建的本地索引"><span class="nav-number">10.1.</span> <span class="nav-text">升级4.8.0之前创建的本地索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuning"><span class="nav-number">11.</span> <span class="nav-text">Tuning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance"><span class="nav-number">12.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Scrutiny-Tool"><span class="nav-number">13.</span> <span class="nav-text">Index Scrutiny Tool</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-paw"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">森</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+    
+    
+    
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://astan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://stanxia.github.io/2017/12/27/Phoenix-Secondary-Indexing/';
+          this.page.identifier = '2017/12/27/Phoenix-Secondary-Indexing/';
+          this.page.title = 'Phoenix Secondary Indexing';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://astan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("f8AHUn2FOKCWoFzJTLrnSt4A-gzGzoHsz", "dOlRTKgDWf3Ut87VDHex4Wks");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+
+<!-- 页面点击小红心 -->
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html>
