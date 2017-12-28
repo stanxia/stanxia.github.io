@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="记录mac使用的小技巧持续更新ing   开启充电提示音（类似于iphone充电提示音，默认关闭）终端输入（开启）： 1defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;amp; 关闭： 1defaults writ">
+<meta name="description" content="记录mac使用的小技巧和一些问题。文件损坏的解决办法在安装一些网上下载的应用时，如果报错显示：文件已经损坏，请移至废纸篓。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下： 第一步：打开系统偏好设置中的 安全性与隐私 ，解开锁，选择 任何来源 ，完成。 第二步：在这里关键是很多朋友没找到这个 任何来">
 <meta name="keywords" content="mac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mac使用小技巧">
 <meta property="og:url" content="https://stanxia.github.io/2017/10/28/mac使用小技巧/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="记录mac使用的小技巧持续更新ing   开启充电提示音（类似于iphone充电提示音，默认关闭）终端输入（开启）： 1defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;amp; 关闭： 1defaults writ">
+<meta property="og:description" content="记录mac使用的小技巧和一些问题。文件损坏的解决办法在安装一些网上下载的应用时，如果报错显示：文件已经损坏，请移至废纸篓。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下： 第一步：打开系统偏好设置中的 安全性与隐私 ，解开锁，选择 任何来源 ，完成。 第二步：在这里关键是很多朋友没找到这个 任何来">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T09:45:56.938Z">
+<meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/aqwt.png">
+<meta property="og:updated_time" content="2017-12-28T06:13:56.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac使用小技巧">
-<meta name="twitter:description" content="记录mac使用的小技巧持续更新ing   开启充电提示音（类似于iphone充电提示音，默认关闭）终端输入（开启）： 1defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;amp; 关闭： 1defaults writ">
+<meta name="twitter:description" content="记录mac使用的小技巧和一些问题。文件损坏的解决办法在安装一些网上下载的应用时，如果报错显示：文件已经损坏，请移至废纸篓。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下： 第一步：打开系统偏好设置中的 安全性与隐私 ，解开锁，选择 任何来源 ，完成。 第二步：在这里关键是很多朋友没找到这个 任何来">
+<meta name="twitter:image" content="http://oliji9s3j.bkt.clouddn.com/aqwt.png">
 
 
 
@@ -428,18 +430,36 @@
       
     
       
-        <div class="note info"><p>记录mac使用的小技巧<br>持续更新ing </p></div>
-<!--请开始装逼-->
-<h2 id="开启充电提示音（类似于iphone充电提示音，默认关闭）"><a href="#开启充电提示音（类似于iphone充电提示音，默认关闭）" class="headerlink" title="开启充电提示音（类似于iphone充电提示音，默认关闭）"></a>开启充电提示音（类似于iphone充电提示音，默认关闭）</h2><p>终端输入（开启）：</p>
+        <p>记录mac使用的小技巧和一些问题。<br><!--请开始装逼--><br><div class="note info"><h2 id="文件损坏的解决办法"><a href="#文件损坏的解决办法" class="headerlink" title="文件损坏的解决办法"></a>文件损坏的解决办法</h2></div><br>在安装一些网上下载的应用时，如果报错显示：<color red="">文件已经损坏，请移至废纸篓</color>。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下：</p>
+<p>第一步：打开系统偏好设置中的 <code>安全性与隐私</code> ，<code>解开锁</code>，选择 <code>任何来源</code> ，完成。</p>
+<p>第二步：在这里关键是很多朋友没找到这个 <code>任何来源</code> ，不要着急，咱们接着往来下，打开 <code>终端</code>，输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure>
+<p>成功输入以上命令，再去执行第一步操作，完成，现在可以去开心的安装应用了。<br><img src="http://oliji9s3j.bkt.clouddn.com/aqwt.png" alt="aqwt"></p>
+<a id="more"></a>
+<div class="note info"><h2 id="终端-command-not-found-问题"><a href="#终端-command-not-found-问题" class="headerlink" title="终端 command not found 问题"></a>终端 command not found 问题</h2></div>
+<p>在初次使用 mac 终端的时候，终端除了能执行 <code>cd</code> 命令，其余的貌似都不得行，会报 <code>command not found</code> 的问题，下面给出解决方案。</p>
+<p>原因：出现该问题的原因是没有将这些命令添加进环境变量中，导致系统无法识别。</p>
+<p>第一步：先设置临时的环境变量，以使我们能继续进行下面的操作。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/bin:/usr/sbin:/bin:/sbin</span><br></pre></td></tr></table></figure>
+<p>第二步：进入到用户的目录，并打开存储环境变量的文件 <code>.bash_profile</code> , <code>vi</code> 是操作文件的利器，如果没有文件会新建文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vi .bash_profile</span><br></pre></td></tr></table></figure>
+<p>第三步：在打开的文件页面，输入 <code>i</code>  执行编辑操作，可看到页面的左下角有个 <code>insert</code> 的字样即可，然后添加环境变量信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/bin:/usr/sbin:/bin:/sbin</span><br></pre></td></tr></table></figure>
+<p>添加完以上信息之后，按 <code>esc</code> 键退出编辑模式，然后输入 <code>:wq</code> 保存并退出编辑页面。</p>
+<p>第四步：使刚才编辑的环境变量文件生效。 <code>source</code> 命令即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+<p>完成之后则可以重启 <code>终端</code> ，并执行如 <code>ls</code> 等 Linux 操作，验证是否成功。<br><div class="note info"><h2 id="开启充电提示音（类似于iphone充电提示音，默认关闭）"><a href="#开启充电提示音（类似于iphone充电提示音，默认关闭）" class="headerlink" title="开启充电提示音（类似于iphone充电提示音，默认关闭）"></a>开启充电提示音（类似于iphone充电提示音，默认关闭）</h2></div><br>终端输入（开启）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;</span><br></pre></td></tr></table></figure>
 <p>关闭：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool false;killall PowerChime</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="隐藏文件夹"><a href="#隐藏文件夹" class="headerlink" title="隐藏文件夹"></a>隐藏文件夹</h2><p>更好的保护学习资料，有时候需要设置隐藏文件夹：</p>
+<div class="note info"><h2 id="隐藏文件夹"><a href="#隐藏文件夹" class="headerlink" title="隐藏文件夹"></a>隐藏文件夹</h2></div>
+<p>更好的保护学习资料，有时候需要设置隐藏文件夹：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv foldername .foldername</span><br></pre></td></tr></table></figure>
-<h2 id="查看隐藏文件夹"><a href="#查看隐藏文件夹" class="headerlink" title="查看隐藏文件夹"></a>查看隐藏文件夹</h2><p>mac最新版本：</p>
+<div class="note info"><h2 id="查看隐藏文件夹"><a href="#查看隐藏文件夹" class="headerlink" title="查看隐藏文件夹"></a>查看隐藏文件夹</h2></div>
+<p>mac最新版本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">⌘⇧.(Command + Shift + .)  #隐藏 和显示</span><br></pre></td></tr></table></figure>
-<h2 id="Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"><a href="#Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用" class="headerlink" title="Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"></a>Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo nvram boot-args="iog=0x0" #(10.10以前版本)</span><br><span class="line">sudo nvram boot-args="niog=1" #(10.10及以后版本)这个命令的意思就是外接显示器时关闭自身屏幕，重启生效</span><br></pre></td></tr></table></figure>
+<div class="note info"><h2 id="Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"><a href="#Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用" class="headerlink" title="Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"></a>Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用</h2></div>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo nvram boot-args="iog=0x0" #(10.10以前版本)</span><br><span class="line">sudo nvram boot-args="niog=1" #(10.10及以后版本)这个命令的意思就是外接显示器时关闭自身屏幕，重启生效</span><br></pre></td></tr></table></figure>
 <p>开机流程：连上电源和外接显示器，按开机键，立即合盖，等外接显示器有信号时开盖即可如果报错 (已知 10.11/10.12 会报错)<br>nvram: Error setting variable - ‘boot-args’: (iokit/common) general error<br><div class="note info"><ol>
 <li>重启，按住command + r 进入恢复界面</li>
 <li>左上角菜单里面找到终端，输入nvram boot-args=”niog=1”，回车问题解决。重启生效</li>
@@ -709,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启充电提示音（类似于iphone充电提示音，默认关闭）"><span class="nav-number">1.</span> <span class="nav-text">开启充电提示音（类似于iphone充电提示音，默认关闭）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏文件夹"><span class="nav-number">2.</span> <span class="nav-text">隐藏文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看隐藏文件夹"><span class="nav-number">3.</span> <span class="nav-text">查看隐藏文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"><span class="nav-number">4.</span> <span class="nav-text">Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件损坏的解决办法"><span class="nav-number">1.</span> <span class="nav-text">文件损坏的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终端-command-not-found-问题"><span class="nav-number">2.</span> <span class="nav-text">终端 command not found 问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启充电提示音（类似于iphone充电提示音，默认关闭）"><span class="nav-number">3.</span> <span class="nav-text">开启充电提示音（类似于iphone充电提示音，默认关闭）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏文件夹"><span class="nav-number">4.</span> <span class="nav-text">隐藏文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看隐藏文件夹"><span class="nav-number">5.</span> <span class="nav-text">查看隐藏文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Macbook-Pro-用外接显示器时，如何关闭笔记本屏幕，同时开盖使用"><span class="nav-number">6.</span> <span class="nav-text">Macbook Pro 用外接显示器时，如何关闭笔记本屏幕，同时开盖使用</span></a></li></ol></div>
             
 
           </div>

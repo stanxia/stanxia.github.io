@@ -1646,12 +1646,11 @@
     
       
         
-          <div class="note info"><p>记录mac使用的小技巧<br>持续更新ing </p></div>
-<!--请开始装逼-->
-<h2 id="开启充电提示音（类似于iphone充电提示音，默认关闭）"><a href="#开启充电提示音（类似于iphone充电提示音，默认关闭）" class="headerlink" title="开启充电提示音（类似于iphone充电提示音，默认关闭）"></a>开启充电提示音（类似于iphone充电提示音，默认关闭）</h2><p>终端输入（开启）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app &amp;</span><br></pre></td></tr></table></figure>
-<p>关闭：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.PowerChime ChimeOnAllHardware -bool false;killall PowerChime</span><br></pre></td></tr></table></figure>
+          <p>记录mac使用的小技巧和一些问题。<br><!--请开始装逼--><br><div class="note info"><h2 id="文件损坏的解决办法"><a href="#文件损坏的解决办法" class="headerlink" title="文件损坏的解决办法"></a>文件损坏的解决办法</h2></div><br>在安装一些网上下载的应用时，如果报错显示：<color red="">文件已经损坏，请移至废纸篓</color>。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下：</p>
+<p>第一步：打开系统偏好设置中的 <code>安全性与隐私</code> ，<code>解开锁</code>，选择 <code>任何来源</code> ，完成。</p>
+<p>第二步：在这里关键是很多朋友没找到这个 <code>任何来源</code> ，不要着急，咱们接着往来下，打开 <code>终端</code>，输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure>
+<p>成功输入以上命令，再去执行第一步操作，完成，现在可以去开心的安装应用了。<br><img src="http://oliji9s3j.bkt.clouddn.com/aqwt.png" alt="aqwt"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/28/mac使用小技巧/#more" rel="contents">
