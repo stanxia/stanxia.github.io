@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/1281.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="paper," />
+  <meta name="keywords" content="paper,">
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15133942643148.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15133943363496.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15133944195571.jpg">
-<meta property="og:updated_time" content="2017-12-28T09:44:21.482Z">
+<meta property="og:updated_time" content="2019-04-16T06:56:36.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Bigtable 中文版">
 <meta name="twitter:description" content="摘要 Bigtable 是一个分布式的结构化数据存储系统，它被设计用来处理海量数据:通常是分布在数千台普通服务器上的 PB 级的数据。 Google 的很多项目使用 Bigtable 存储数据，包括 Web 索引、Google Earth、Google Finance。这些应用对 Bigtable 提出的要求差异非常大，无论是在数据量上(从 URL 到网页到卫星图像)还是在响应速度上(从后端的批量">
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/12/25/Google-Bigtable-中文版/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/25/Google-Bigtable-中文版/">
 
 
 
@@ -161,7 +161,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">东篱下</span>
         <span class="logo-line-after"><i></i></span>
@@ -285,9 +285,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -328,7 +326,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
     
@@ -364,7 +362,7 @@
           </span>
     
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -395,8 +393,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/12/25/Google-Bigtable-中文版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/25/Google-Bigtable-中文版/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/25/Google-Bigtable-中文版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -449,7 +446,7 @@
 <p>第 8 节提供了 BigTable 的性能数据;</p>
 <p>第 9 节讲述了几个 Google 内部使用 BigTable 的例子;</p>
 <p>第 10 节是我们在设计和后期支持过程中得到一些经验和教训; </p>
-<p>最后，在第 11 节列出我们的相关研究工作，第 12 节是我们的结论。<br><div class="note info"><h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2></div><br>Bigtable 是一个稀疏的、分布式的、持久化存储的多维度排序 Map。Map 的索引是行关键字、列关键字以及时间戳;Map 中的每个 value 都是一个未经解析的 byte 数组。<br><code>(row:string, column:string,time:int64)-&gt;string</code><br>我们在仔细分析了一个类似 Bigtable 的系统的种种潜在用途之后，决定使用这个数据模型。我们先举个具体的例子，这个例子促使我们做了很多设计决策;假设我们想要存储海量的网页及相关信息，这些数据可以用于很多不同的项目，我们姑且称这个特殊的表为 Webtable。在 Webtable 里，我们使用 URL 作为行关键字，使用网页的某些属性作为列名，网页的内容存在“contents:”列中，并用获取该网页的时间戳作为标识,如图一所示。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133933609014.jpg" alt=""><br>行名是一个反向 URL。contents 列族存放的是网页的内容，anchor 列族存放引用该网页的锚链接文本。 CNN 的主页被 Sports Illustrator 和 MY-look 的主页引用，因此该行包含了名为“anchor:cnnsi.com”和 “anchhor:my.look.ca”的列。每个锚链接只有一个版本;而 contents 列则有三个版本，分别由时间戳 t3，t5，和 t6 标识。 </p>
+<p>最后，在第 11 节列出我们的相关研究工作，第 12 节是我们的结论。<br><div class="note info"><h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2></div><br>Bigtable 是一个稀疏的、分布式的、持久化存储的多维度排序 Map。Map 的索引是行关键字、列关键字以及时间戳;Map 中的每个 value 都是一个未经解析的 byte 数组。<br><code>(row:string, column:string,time:int64)-&gt;string</code><br>我们在仔细分析了一个类似 Bigtable 的系统的种种潜在用途之后，决定使用这个数据模型。我们先举个具体的例子，这个例子促使我们做了很多设计决策;假设我们想要存储海量的网页及相关信息，这些数据可以用于很多不同的项目，我们姑且称这个特殊的表为 Webtable。在 Webtable 里，我们使用 URL 作为行关键字，使用网页的某些属性作为列名，网页的内容存在“contents:”列中，并用获取该网页的时间戳作为标识,如图一所示。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133933609014.jpg" alt><br>行名是一个反向 URL。contents 列族存放的是网页的内容，anchor 列族存放引用该网页的锚链接文本。 CNN 的主页被 Sports Illustrator 和 MY-look 的主页引用，因此该行包含了名为“anchor:cnnsi.com”和 “anchhor:my.look.ca”的列。每个锚链接只有一个版本;而 contents 列则有三个版本，分别由时间戳 t3，t5，和 t6 标识。 </p>
 <h3 id="行"><a href="#行" class="headerlink" title="行"></a>行</h3><p>表中的行关键字可以是任意的字符串(目前支持最大 64KB 的字符串，但是对大多数用户，10-100 个字 节就足够了)。对同一个行关键字的读或者写操作都是原子的(不管读或者写这一行里多少个不同列)，这个 设计决策能够使用户很容易的理解程序在对同一个行进行并发更新操作时的行为。</p>
 <p>Bigtable 通过行关键字的字典顺序来组织数据。表中的每个行都可以动态分区。每个分区叫做一个”Tablet”， Tablet 是数据分布和负载均衡调整的最小单位。这样做的结果是，当操作只读取行中很少几列的数据时效率很 高，通常只需要很少几次机器间的通信即可完成。用户可以通过选择合适的行关键字，在数据访问时有效利 用数据的位置相关性，从而更好的利用这个特性。举例来说，在 Webtable 里，通过反转 URL 中主机名的方 式，可以把同一个域名下的网页聚集起来组织成连续的行。具体来说，我们可以把 maps.google.com/index.html 的数据存放在关键字 com.google.maps/index.html 下。把相同的域中的网页存储在连续的区域可以让基于主机 和域名的分析更加有效。</p>
 <h3 id="列族"><a href="#列族" class="headerlink" title="列族"></a>列族</h3><p>列关键字组成的集合叫做“列族“，列族是访问控制的基本单位。存放在同一列族下的所有数据通常都 属于同一个类型(我们可以把同一个列族下的数据压缩在一起)。列族在使用之前必须先创建，然后才能在列 族中任何的列关键字下存放数据;列族创建后，其中的任何一个列关键字下都可以存放数据。根据我们的设 计意图，一张表中的列族不能太多(最多几百个)，并且列族在运行期间很少改变。与之相对应的，一张表可 以有无限多个列。</p>
@@ -466,7 +463,7 @@ r1.Set(“anchor:www.c-span.org”, “CNN”);
 r1.Delete(“anchor:www.abc.com”);
 Operation op;
 Apply(&amp;op, &amp;r1);
-</code></pre><p>客户程序可以对 Bigtable 进行如下的操作:写入或者删除 Bigtable 中的值、从每个行中查找值、或者遍历表中的一个数据子集。图 2 中的C++代码使用 RowMutation 抽象对象进行了一系列的更新操作。(为了保持 示例代码的简洁，我们忽略了一些细节相关代码)。调用 Apply 函数对Webtable 进行了一个原子修改操作:它为 www.cnn.com 增加了一个锚点，同时删除了另外一个锚点。</p>
+</code></pre><p>客户程序可以对 Bigtable 进行如下的操作:写入或者删除 Bigtable 中的值、从每个行中查找值、或者遍历表中的一个数据子集。图 2 中的C++代码使用 RowMutation 抽象对象进行了一系列的更新操作。(为了保持 示例代码的简洁，我们忽略了一些细节相关代码)。调用 Apply 函数对Webtable 进行了一个原子修改操作:它为 <a href="http://www.cnn.com" target="_blank" rel="noopener">www.cnn.com</a> 增加了一个锚点，同时删除了另外一个锚点。</p>
 <pre><code class="python">Scanner scanner(T);
 ScanStream *stream;
 stream = scanner.FetchColumnFamily(“anchor”); 
@@ -498,7 +495,7 @@ stream-&gt;Value());
 <p>每个 Tablet 服务器都管理一个 Tablet 的集合(通常每个服务器有大约数十个至上千个 Tablet)。每个 Tablet 服务器负责处理它所加载的 Tablet 的读写操作，以及在 Tablets 过大时，对其进行分割。</p>
 <p>和很多 Single-Master 类型的分布式存储系统【17.21】类似，客户端读取的数据都不经过 Master 服务器: 客户程序直接和 Tablet 服务器通信进行读写操作。由于 BigTable 的客户程序不必通过 Master 服务器来获取 Tablet 的位置信息，因此，大多数客户程序甚至完全不需要和 Master 服务器通信。在实际应用中，Master 服 务器的负载是很轻的。</p>
 <p>一个 BigTable 集群存储了很多表，每个表包含了一个 Tablet 的集合，而每个 Tablet 包含了某个范围内的 行的所有相关数据。初始状态下，一个表只有一个 Tablet。随着表中数据的增长，它被自动分割成多个 Tablet， 缺省情况下，每个 Tablet 的尺寸大约是 100MB 到 200MB。</p>
-<h3 id="Tablet-的位置"><a href="#Tablet-的位置" class="headerlink" title="Tablet 的位置"></a>Tablet 的位置</h3><p>我们使用一个三层的、类似B+树[10]的结构存储 Tablet 的位置信息(如图 4)。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133938470317.jpg" alt=""><br>第一层是一个存储在 Chubby 中的文件，它包含了 Root Tablet 的位置信息。Root Tablet 包含了一个特殊 的 METADATA 表里所有的 Tablet 的位置信息。METADATA 表的每个 Tablet 包含了一个用户 Tablet 的集合。 Root Tablet 实际上是 METADATA 表的第一个 Tablet，只不过对它的处理比较特殊 — Root Tablet 永远不会被 分割 — 这就保证了 Tablet 的位置信息存储结构不会超过三层。</p>
+<h3 id="Tablet-的位置"><a href="#Tablet-的位置" class="headerlink" title="Tablet 的位置"></a>Tablet 的位置</h3><p>我们使用一个三层的、类似B+树[10]的结构存储 Tablet 的位置信息(如图 4)。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133938470317.jpg" alt><br>第一层是一个存储在 Chubby 中的文件，它包含了 Root Tablet 的位置信息。Root Tablet 包含了一个特殊 的 METADATA 表里所有的 Tablet 的位置信息。METADATA 表的每个 Tablet 包含了一个用户 Tablet 的集合。 Root Tablet 实际上是 METADATA 表的第一个 Tablet，只不过对它的处理比较特殊 — Root Tablet 永远不会被 分割 — 这就保证了 Tablet 的位置信息存储结构不会超过三层。</p>
 <p>在 METADATA 表里面，每个 Tablet 的位置信息都存放在一个行关键字下面，而这个行关键字是由 Tablet 所在的表的标识符和 Tablet 的最后一行编码而成的。METADATA 的每一行都存储了大约 1KB 的内存数据。 在一个大小适中的、容量限制为 128MB 的 METADATA Tablet 中，采用这种三层结构的存储模式，可以标识 2^34 个 Tablet 的地址(如果每个 Tablet 存储 128MB 数据，那么一共可以存储 2^61 字节数据)。 </p>
 <p>客户程序使用的库会缓存 Tablet 的位置信息。如果客户程序没有缓存某个 Tablet 的地址信息，或者发现 它缓存的地址信息不正确，客户程序就在树状的存储结构中递归的查询 Tablet 位置信息;如果客户端缓存是 空的，那么寻址算法需要通过三次网络来回通信寻址，这其中包括了一次 Chubby 读操作;如果客户端缓存的 地址信息过期了，那么寻址算法可能需要最多6次网络来回通信才能更新数据，因为只有在缓存中没有查到 数据的时候才能发现数据过期11。尽管 Tablet 的地址信息是存放在内存里的，对它的操作不必访问 GFS 文件 系统，但是，通常我们会通过预取 Tablet 地址来进一步的减少访问的开销:每次需要从 METADATA 表中读取一个 Tablet 的元数据的时候，它都会多读取几个 Tablet 的元数据。</p>
 <p>在 METADATA 表中还存储了次级信息12，包括每个 Tablet 的事件日志(例如，什么时候一个服务器开始<br>为该 Tablet 提供服务)。这些信息有助于排查错误和性能分析。 </p>
@@ -515,7 +512,7 @@ stream-&gt;Value());
 <p>在扫描的过程中，当 Master 服务器发现了一个还没有分配的 Tablet，Master 服务器就将这个 Tablet 加入未分配的 Tablet 集合等待合适的时机分配。</p>
 <p>可能会遇到一种复杂的情况:在 METADATA 表的 Tablet 还没有被分配之前是不能够扫描它的。因此，<br>在开始扫描之前(步骤 4)，如果在第三步的扫描过程中发现 Root Tablet 还没有分配，Master 服务器就把 Root Tablet 加入到未分配的 Tablet 集合。这个附加操作确保了 Root Tablet 会被分配。由于 Root Tablet 包括了所有 METADATA 的 Tablet 的名字，因此 Master 服务器扫描完 Root Tablet 以后，就得到了所有的 METADATA 表 的 Tablet 的名字了。</p>
 <p>保存现有 Tablet 的集合只有在以下事件发生时才会改变:建立了一个新表或者删除了一个旧表、两个 Tablet 被合并了、或者一个 Tablet 被分割成两个小的 Tablet。Master 服务器可以跟踪记录所有这些事件，因为 除了最后一个事件外的两个事件都是由它启动的。Tablet 分割事件需要特殊处理，因为它是由 Tablet 服务器启 动。在分割操作完成之后，Tablet 服务器通过在 METADATA 表中记录新的 Tablet 的信息来提交这个操作;当 分割操作提交之后，Tablet 服务器会通知 Master 服务器。如果分割操作已提交的信息没有通知到 Master 服务 器(可能两个服务器中有一个宕机了)，Master 服务器在要求 Tablet 服务器装载已经被分割的子表的时候会发现一个新的 Tablet。通过对比 METADATA 表中 Tablet 的信息，Tablet 服务器会发现 Master 服务器要求其装载的 Tablet 并不完整，因此，Tablet 服务器会重新向 Master 服务器发送通知信息。 </p>
-<h3 id="Tablet-服务"><a href="#Tablet-服务" class="headerlink" title="Tablet 服务"></a>Tablet 服务</h3><p><img src="http://oliji9s3j.bkt.clouddn.com/15133939829985.jpg" alt=""><br>如图 5 所示，Tablet 的持久化状态信息保存在 GFS 上。更新操作提交到 REDO 日志中14。在这些更新操 作中，最近提交的那些存放在一个排序的缓存中，我们称这个缓存为 memtable;较早的更新存放在一系列 SSTable 中。为了恢复一个 Tablet，Tablet 服务器首先从 METADATA 表中读取它的元数据。Tablet 的元数据包 含了组成这个 Tablet 的 SSTable 的列表，以及一系列的 Redo Point15，这些 Redo Point 指向可能含有该 Tablet 数据的已提交的日志记录。Tablet 服务器把 SSTable 的索引读进内存，之后通过重复 Redo Point 之后提交的更 新来重建 memtable。</p>
+<h3 id="Tablet-服务"><a href="#Tablet-服务" class="headerlink" title="Tablet 服务"></a>Tablet 服务</h3><p><img src="http://oliji9s3j.bkt.clouddn.com/15133939829985.jpg" alt><br>如图 5 所示，Tablet 的持久化状态信息保存在 GFS 上。更新操作提交到 REDO 日志中14。在这些更新操 作中，最近提交的那些存放在一个排序的缓存中，我们称这个缓存为 memtable;较早的更新存放在一系列 SSTable 中。为了恢复一个 Tablet，Tablet 服务器首先从 METADATA 表中读取它的元数据。Tablet 的元数据包 含了组成这个 Tablet 的 SSTable 的列表，以及一系列的 Redo Point15，这些 Redo Point 指向可能含有该 Tablet 数据的已提交的日志记录。Tablet 服务器把 SSTable 的索引读进内存，之后通过重复 Redo Point 之后提交的更 新来重建 memtable。</p>
 <p>当对 Tablet 服务器进行写操作时，Tablet 服务器首先要检查这个操作格式是否正确、操作发起者是否有执 行这个操作的权限。权限验证的方法是通过从一个 Chubby 文件里读取出来的具有写权限的操作者列表来进行 验证(这个文件几乎一定会存放在 Chubby 客户缓存里)。成功的修改操作会记录在提交日志里。可以采用批 量提交方式16来提高包含大量小的修改操作的应用程序的吞吐量【13，16】。当一个写操作提交后，写的内容 插入到 memtable 里面。</p>
 <p>当对 Tablet 服务器进行读操作时，Tablet 服务器会作类似的完整性和权限检查。一个有效的读操作在一个 由一系列 SSTable 和 memtable 合并的视图里执行。由于 SSTable 和 memtable 是按字典排序的数据结构，因此 可以高效生成合并视图。</p>
 <p>当进行 Tablet 的合并和分割时，正在进行的读写操作能够继续进行。 </p>
@@ -541,7 +538,7 @@ stream-&gt;Value());
 <p>在序列写的基准测试中，我们使用的列关键字的范围是 0 到 R-1。这个范围又被划分为 10N 个大小相同 的区间。核心调度程序把这些区间分配给 N 个客户端，分配方式是:只要客户程序处理完上一个区间的数据， 调度程序就把后续的、尚未处理的区间分配给它。这种动态分配的方式有助于减少客户机上同时运行的其它 进程对性能的影响。我们在每个列关键字下写入一个单独的字符串。每个字符串都是随机生成的、因此也没 有被压缩26。另外，不同列关键字下的字符串也是不同的，因此也就不存在跨行的压缩。随机写入基准测试采 用类似的方法，除了行关键字在写入前先做 Hash，Hash 采用按 R 取模的方式，这样就保证了在整个基准测 试持续的时间内，写入的工作负载均匀的分布在列存储空间内。</p>
 <p>序列读的基准测试生成列关键字的方式与序列写相同，不同于序列写在列关键字下写入字符串的是，序 列读是读取列关键字下的字符串(这些字符串由之前序列写基准测试程序写入)。同样的，随机读的基准测试 和随机写是类似的。</p>
 <p>扫描基准测试和序列读类似，但是使用的是 BigTable 提供的、从一个列范围内扫描所有的 value 值的 API。 由于一次 RPC 调用就从一个 Tablet 服务器取回了大量的 Value 值，因此，使用扫描方式的基准测试程序可以 减少 RPC 调用的次数。</p>
-<p>随机读(内存)基准测试和随机读类似，除了包含基准测试数据的局部性群组被设置为“in-memory”， 因此，读操作直接从 Tablet 服务器的内存中读取数据，不需要从 GFS 读取数据。针对这个测试，我们把每台<br>Tablet 服务器存储的数据从 1GB 减少到 100MB，这样就可以把数据全部加载到 Tablet 服务器的内存中了。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133942643148.jpg" alt=""><br>图 6 中有两个视图，显示了我们的基准测试的性能;图中的数据和曲线是读/写 1000-byte value 值时取得 的。图中的表格显示了每个 Tablet 服务器每秒钟进行的操作的次数;图中的曲线显示了每秒种所有的 Tablet 服务器上操作次数的总和。</p>
+<p>随机读(内存)基准测试和随机读类似，除了包含基准测试数据的局部性群组被设置为“in-memory”， 因此，读操作直接从 Tablet 服务器的内存中读取数据，不需要从 GFS 读取数据。针对这个测试，我们把每台<br>Tablet 服务器存储的数据从 1GB 减少到 100MB，这样就可以把数据全部加载到 Tablet 服务器的内存中了。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133942643148.jpg" alt><br>图 6 中有两个视图，显示了我们的基准测试的性能;图中的数据和曲线是读/写 1000-byte value 值时取得 的。图中的表格显示了每个 Tablet 服务器每秒钟进行的操作的次数;图中的曲线显示了每秒种所有的 Tablet 服务器上操作次数的总和。</p>
 <h3 id="单个-Tablet-服务器的性能"><a href="#单个-Tablet-服务器的性能" class="headerlink" title="单个 Tablet 服务器的性能"></a>单个 Tablet 服务器的性能</h3><p>我们首先分析下单个 Tablet 服务器的性能。随机读的性能比其它操作慢一个数量级或以上27。 每个随机 读操作都要通过网络从 GFS 传输 64KB 的 SSTable 到 Tablet 服务器，而我们只使用其中大小是 1000 byte 的一 个 value 值。Tablet 服务器每秒大约执行 1200 次读操作，也就是每秒大约从 GFS 读取 75MB 的数据。这个传 输带宽足以占满 Tablet 服务器的 CPU 时间，因为其中包括了网络协议栈的消耗、SSTable 解析、以及 BigTable 代码执行;这个带宽也足以占满我们系统中网络的链接带宽。大多数采用这种访问模式 BigTable 应用程序会 减小 Block 的大小，通常会减到 8KB。</p>
 <p>内存中的随机读操作速度快很多，原因是，所有 1000-byte 的读操作都是从 Tablet 服务器的本地内存中读 取数据，不需要从 GFS 读取 64KB 的 Block。</p>
 <p>随机和序列写操作的性能比随机读要好些，原因是每个 Tablet 服务器直接把写入操作的内容追加到一个 Commit 日志文件的尾部，并且采用批量提交的方式，通过把数据以流的方式写入到 GFS 来提高性能。随机 写和序列写在性能上没有太大的差异，这两种方式的写操作实际上都是把操作内容记录到同一个 Tablet 服务 器的 Commit 日志文件中。</p>
@@ -549,7 +546,7 @@ stream-&gt;Value());
 <p>扫描的性能更高，这是由于客户程序每一次 RPC 调用都会返回大量的 value 的数据，所以，RPC 调用的 消耗基本抵消了。</p>
 <h3 id="性能提升"><a href="#性能提升" class="headerlink" title="性能提升"></a>性能提升</h3><p>随着我们将系统中的 Tablet 服务器从 1 台增加到 500 台，系统的整体吞吐量有了梦幻般的增长，增长的 倍率超过了 100。比如，随着 Tablet 服务器的数量增加了 500 倍，内存中的随机读操作的性能增加了 300 倍。 之所以会有这样的性能提升，主要是因为这个基准测试的瓶颈是单台 Tablet 服务器的 CPU。</p>
 <p>尽管如此，性能的提升还不是线性的。在大多数的基准测试中我们看到，当 Tablet 服务器的数量从 1 台 增加到 50 台时，每台服务器的吞吐量会有一个明显的下降。这是由于多台服务器间的负载不均衡造成的，大 多数情况下是由于其它的程序抢占了 CPU。 我们负载均衡的算法会尽量避免这种不均衡，但是基于两个主要 原因，这个算法并不能完美的工作:一个是尽量减少 Tablet 的移动导致重新负载均衡能力受限(如果 Tablet 被移动了，那么在短时间内 — 一般是 1 秒内 — 这个 Tablet 是不可用的)，另一个是我们的基准测试程序产 生的负载会有波动28。</p>
-<p>随机读基准测试的测试结果显示，随机读的性能随 Tablet 服务器数量增加的提升幅度最小(整体吞吐量 只提升了 100 倍，而服务器的数量却增加了 500 倍)。这是因为每个 1000-byte 的读操作都会导致一个 64KB 大的 Block 在网络上传输。这样的网络传输量消耗了我们网络中各种共享的 1GB 的链路，结果导致随着我们 增加服务器的数量，每台服务器上的吞吐量急剧下降。<br><div class="note info"><h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2></div><br><img src="http://oliji9s3j.bkt.clouddn.com/15133943363496.jpg" alt=""><br>截止到 2006 年 8 月，Google 内部一共有 388 个非测试用的 Bigtable 集群运行在各种各样的服务器集群上， 合计大约有 24500 个 Tablet 服务器。表 1 显示了每个集群上 Tablet 服务器的大致分布情况。这些集群中，许 多用于开发目的，因此会有一段时期比较空闲。通过观察一个由 14 个集群、8069 个 Tablet 服务器组成的集群 组，我们看到整体的吞吐量超过了每秒 1200000 次请求，发送到系统的 RPC 请求导致的网络负载达到了 741MB/s，系统发出的 RPC 请求网络负载大约是 16GB/s。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133944195571.jpg" alt=""><br>表 2 提供了一些目前正在使用的表的相关数据。一些表存储的是用户相关的数据，另外一些存储的则是 用于批处理的数据;这些表在总的大小、 每个数据项的平均大小、从内存中读取的数据的比例、表的 Schema 的复杂程度上都有很大的差别。本节的其余部分，我们将主要描述三个产品研发团队如何使用 Bigtable 的。</p>
+<p>随机读基准测试的测试结果显示，随机读的性能随 Tablet 服务器数量增加的提升幅度最小(整体吞吐量 只提升了 100 倍，而服务器的数量却增加了 500 倍)。这是因为每个 1000-byte 的读操作都会导致一个 64KB 大的 Block 在网络上传输。这样的网络传输量消耗了我们网络中各种共享的 1GB 的链路，结果导致随着我们 增加服务器的数量，每台服务器上的吞吐量急剧下降。<br><div class="note info"><h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2></div><br><img src="http://oliji9s3j.bkt.clouddn.com/15133943363496.jpg" alt><br>截止到 2006 年 8 月，Google 内部一共有 388 个非测试用的 Bigtable 集群运行在各种各样的服务器集群上， 合计大约有 24500 个 Tablet 服务器。表 1 显示了每个集群上 Tablet 服务器的大致分布情况。这些集群中，许 多用于开发目的，因此会有一段时期比较空闲。通过观察一个由 14 个集群、8069 个 Tablet 服务器组成的集群 组，我们看到整体的吞吐量超过了每秒 1200000 次请求，发送到系统的 RPC 请求导致的网络负载达到了 741MB/s，系统发出的 RPC 请求网络负载大约是 16GB/s。<br><img src="http://oliji9s3j.bkt.clouddn.com/15133944195571.jpg" alt><br>表 2 提供了一些目前正在使用的表的相关数据。一些表存储的是用户相关的数据，另外一些存储的则是 用于批处理的数据;这些表在总的大小、 每个数据项的平均大小、从内存中读取的数据的比例、表的 Schema 的复杂程度上都有很大的差别。本节的其余部分，我们将主要描述三个产品研发团队如何使用 Bigtable 的。</p>
 <h3 id="Google-Analytics"><a href="#Google-Analytics" class="headerlink" title="Google Analytics"></a>Google Analytics</h3><p>Google Analytics 是用来帮助 Web 站点的管理员分析他们网站的流量模式的服务。它提供了整体状况的统 计数据，比如每天的独立访问的用户数量、每天每个 URL 的浏览次数;它还提供了用户使用网站的行为报告， 比如根据用户之前访问的某些页面，统计出几成的用户购买了商品。</p>
 <p>为了使用这个服务，Web 站点的管理员只需要在他们的 Web 页面中嵌入一小段 JavaScript 脚本就可以了。 这个 Javascript 程序在页面被访问的时候调用。它记录了各种 Google Analytics 需要使用的信息，比如用户的 标识、获取的网页的相关信息。Google Analytics 汇总这些数据，之后提供给 Web 站点的管理员。</p>
 <p>我们粗略的描述一下 Google Analytics 使用的两个表。Row Click 表(大约有 200TB 数据)的每一行存放 了一个最终用户的会话。行的名字是一个包含 Web 站点名字以及用户会话创建时间的元组。这种模式保证了 对同一个 Web 站点的访问会话是顺序的，会话按时间顺序存储。这个表可以压缩到原来尺寸的 14%。</p>
@@ -559,7 +556,7 @@ stream-&gt;Value());
 <p>Imagery 表的每一行都代表了一个单独的地理区域。行都有名称，以确保毗邻的区域存储在了一起。 Imagery 表中有一个列族用来记录每个区域的数据源。这个列族包含了大量的列:基本上市每个列对应一个原 始图片的数据。由于每个地理区域都是由很少的几张图片构成的，因此这个列族是非常稀疏的。</p>
 <p>数据预处理流水线高度依赖运行在 Bigtable 上的 MapReduce 任务传输数据。在运行某些 MapReduce 任务 的时候，整个系统中每台 Tablet 服务器的数据处理速度是 1MB/s。</p>
 <p>这个服务系统使用一个表来索引 GFS 中的数据。这个表相对较小(大约是 500GB)，但是这个表必须在 保证较低的响应延时的前提下，针对每个数据中心，每秒处理几万个查询请求。 因此，这个表必须在上百个 Tablet 服务器上存储数据，并且使用 in-memory 的列族。</p>
-<h3 id="个性化查询"><a href="#个性化查询" class="headerlink" title="个性化查询"></a>个性化查询</h3><p>个性化查询(www.google.com/psearch)是一个双向服务;这个服务记录用户的查询和点击，涉及到各种 Google 的服务，比如 Web 查询、图像和新闻。用户可以浏览他们查询的历史，重复他们之前的查询和点击; 用户也可以定制基于 Google 历史使用习惯模式的个性化查询结果。</p>
+<h3 id="个性化查询"><a href="#个性化查询" class="headerlink" title="个性化查询"></a>个性化查询</h3><p>个性化查询(<a href="http://www.google.com/psearch)是一个双向服务;这个服务记录用户的查询和点击，涉及到各种" target="_blank" rel="noopener">www.google.com/psearch)是一个双向服务;这个服务记录用户的查询和点击，涉及到各种</a> Google 的服务，比如 Web 查询、图像和新闻。用户可以浏览他们查询的历史，重复他们之前的查询和点击; 用户也可以定制基于 Google 历史使用习惯模式的个性化查询结果。</p>
 <p>个性化查询使用 Bigtable 存储每个用户的数据。每个用户都有一个唯一的用户 id，每个用户 id 和一个列 名绑定。一个单独的列族被用来存储各种类型的行为(比如，有个列族可能是用来存储所有的 Web 查询的)。 每个数据项都被用作 Bigtable 的时间戳，记录了相应的用户行为发生的时间。个性化查询使用以 Bigtable 为 存储的 MapReduce 任务生成用户的数据图表。这些用户数据图表用来个性化当前的查询结果。</p>
 <p>个性化查询的数据会复制到几个 Bigtable 的集群上，这样就增强了数据可用性，同时减少了由客户端和 Bigtable 集群间的“距离”造成的延时。个性化查询的开发团队最初建立了一个基于 Bigtable 的、“客户侧” 的复制机制为所有的复制节点提供一致性保障。现在的系统则使用了内建的复制子系统。</p>
 <p>个性化查询存储系统的设计允许其它的团队在它们自己的列中加入新的用户数据，因此，很多 Google 服 务使用个性化查询存储系统保存用户级的配置参数和设置。在多个团队之间分享数据的结果是产生了大量的 列族。为了更好的支持数据共享，我们加入了一个简单的配额机制29限制用户在共享表中使用的空间;配额也 为使用个性化查询系统存储用户级信息的产品团体提供了隔离机制。</p>
@@ -582,7 +579,7 @@ stream-&gt;Value());
 <p>我们已经讲述完了 Bigtable，Google 的一个分布式的结构化数据存储系统。Bigtable 的集群从 2005 年 4 月开始已经投入使用了，在此之前，我们花了大约 7 人年设计和实现这个系统。截止到 2006 年 4 月，已经有 超过 60 个项目使用 Bigtable 了。我们的用户对 Bigtable 提供的高性能和高可用性很满意，随着时间的推移， 他们可以根据自己的系统对资源的需求增加情况，通过简单的增加机器，扩展系统的承载能力。</p>
 <p>由于 Bigtable 提供的编程接口并不常见，一个有趣的问题是:我们的用户适应新的接口有多难?新的使 用者有时不太确定使用 Bigtable 接口的最佳方法，特别是在他们已经习惯于使用支持通用事务的关系型数据 库的接口的情况下。但是，Google 内部很多产品都成功的使用了 Bigtable 的事实证明了，我们的设计在实践 中行之有效。</p>
 <p>我们现在正在对 Bigtable 加入一些新的特性，比如支持二级索引，以及支持多 Master 节点的、跨数据中心复制的 Bigtable 的基础构件。我们现在已经开始将 Bigtable 部署为服务供其它的产品团队使用，这样不同 的产品团队就不需要维护他们自己的 Bigtable 集群了。随着服务集群的扩展，我们需要在 Bigtable 系统内部处理更多的关于资源共享的问题了【3，5】。</p>
-<p>最后，我们发现，建设 Google 自己的存储解决方案带来了很多优势。通过为 Bigtable 设计我们自己的数据模型，是我们的系统极具灵活性。另外，由于我们全面控制着 Bigtable 的实现过程，以及 Bigtable 使用到 的其它的 Google 的基础构件，这就意味着我们在系统出现瓶颈或效率低下的情况时，能够快速的解决这些问 题。<br><div class="note info"><h2 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h2></div><br>We thank the anonymous reviewers, David Nagle, and our shepherd Brad Calder, for their feedback on this paper.The Bigtable system has benefited greatly from the feedback of our many users within Google. In addition,we thank the following people for their contributions to Bigtable: Dan Aguayo, Sameer Ajmani, Zhifeng Chen,Bill Coughran, Mike Epstein, Healfdene Goguen, Robert Griesemer, Jeremy Hylton, Josh Hyman, Alex Khesin,<br>Joanna Kulik, Alberto Lerner, Sherry Listgarten, Mike Maloney, Eduardo Pinheiro, Kathy Polizzi, Frank Yellin,and Arthur Zwiegincew.<br><div class="note info"><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2></div><br>[1] ABADI, D. J., MADDEN, S. R., AND FERREIRA, M. C. Integrating compression and execution in columnoriented database systems. Proc. of SIGMOD (2006).<br>[2] AILAMAKI, A., DEWITT, D. J., HILL, M. D., AND SKOUNAKIS, M. Weaving relations for cache performance.In The VLDB Journal (2001), pp. 169-180.<br>[3] BANGA, G., DRUSCHEL, P., AND MOGUL, J. C. Resource containers: A new facility for resource management in server systems. In Proc. of the 3rd OSDI (Feb. 1999), pp. 45-58.<br>[4] BARU, C. K., FECTEAU, G., GOYAL, A., HSIAO, H., JHINGRAN, A., PADMANABHAN, S., COPELAND,G. P., AND WILSON, W. G. DB2 parallel edition. IBM Systems Journal 34, 2 (1995), 292-322.<br>[5] BAVIER, A., BOWMAN, M., CHUN, B., CULLER, D., KARLIN, S., PETERSON, L., ROSCOE, T., SPALINK, T., AND WAWRZONIAK, M. Operating system support for planetary-scale network services. In Proc. of the 1st NSDI(Mar. 2004), pp. 253-266.<br>[6] BENTLEY, J. L., AND MCILROY, M. D. Data compression using long common strings. In Data Compression Conference (1999), pp. 287-295.<br>[7] BLOOM, B. H. Space/time trade-offs in hash coding with allowable errors. CACM 13, 7 (1970), 422-426.<br>[8] BURROWS, M. The Chubby lock service for looselycoupled distributed systems. In Proc. of the 7th OSDI (Nov. 2006).<br>[9] CHANDRA, T., GRIESEMER, R., AND REDSTONE, J.Paxos made live ? An engineering perspective. In Proc. of PODC (2007).<br>[10] COMER, D. Ubiquitous B-tree. Computing Surveys 11, 2 (June 1979), 121-137.<br>[11] COPELAND, G. P., ALEXANDER, W., BOUGHTER, E. E., AND KELLER, T. W. Data placement in Bubba. In Proc. of SIGMOD (1988), pp. 99-108.<br>[12] DEAN, J., AND GHEMAWAT, S. MapReduce: Simplified data processing on large clusters. In Proc. of the 6th OSDI (Dec. 2004), pp. 137-150.<br>[13] DEWITT, D., KATZ, R., OLKEN, F., SHAPIRO, L., STONEBRAKER, M., AND WOOD, D. Implementation techniques for main memory database systems. In Proc. of SIGMOD (June 1984), pp. 1-8.<br>[14] DEWITT, D. J., AND GRAY, J. Parallel database systems: The future of high performance database systems. CACM 35, 6 (June 1992), 85-98.<br>[15] FRENCH, C. D. One size ts all database architectures do not work for DSS. In Proc. of SIGMOD (May 1995), pp. 449-450.<br>[16] GAWLICK, D., AND KINKADE, D. Varieties of concurrency control in IMS/VS fast path. Database Engineering Bulletin 8, 2 (1985), 3-10.<br>[17] GHEMAWAT, S., GOBIOFF, H., AND LEUNG, S.-T. The Google file system. In Proc. of the 19th ACM SOSP (Dec.2003), pp. 29-43.<br>[18] GRAY, J. Notes on database operating systems. In Operating Systems ? An Advanced Course, vol. 60 of Lecture Notes in Computer Science. Springer-Verlag, 1978.<br>[19] GREER, R. Daytona and the fourth-generation language Cymbal. In Proc. of SIGMOD (1999), pp. 525-526.<br>[20] HAGMANN, R. Reimplementing the Cedar file system using logging and group commit. In Proc. of the 11th SOSP (Dec. 1987), pp. 155-162.<br>[21] HARTMAN, J. H., AND OUSTERHOUT, J. K. The Zebra striped network file system. In Proc. of the 14th SOSP(Asheville, NC, 1993), pp. 29-43.<br>[22] KX.COM. kx.com/products/database.php. Product page.<br>[23] LAMPORT, L. The part-time parliament. ACM TOCS 16,2 (1998), 133-169.<br>[24] MACCORMICK, J., MURPHY, N., NAJORK, M., THEKKATH, C. A., AND ZHOU, L.Boxwood:Abstractions as the foundation for storage infrastructure. In Proc. of the 6th OSDI (Dec. 2004), pp. 105-120.<br>[25] MCCARTHY, J. Recursive functions of symbolic expressions and their computation by machine. CACM 3,4 (Apr. 1960), 184-195.<br>[26] O’NEIL, P., CHENG, E., GAWLICK, D., AND O’NEIL, E. The log-structured merge-tree (LSM-tree).Acta Inf. 33, 4 (1996), 351-385.<br>[27] ORACLE.COM. www.oracle.com/technology/products/database/clustering/index.html. Product page.<br>[28] PIKE, R., DORWARD, S., GRIESEMER, R., AND QUINLAN, S. Interpreting the data: Parallel analysiswith Sawzall. Scientific Programming Journal 13, 4 (2005), 227-298.<br>[29] RATNASAMY, S., FRANCIS, P., HANDLEY, M., KARP, R., AND SHENKER, S. A scalablecontent-addressable network. In Proc. of SIGCOMM (Aug. 2001), pp. 161-172.<br>[30] ROWSTRON, A., AND DRUSCHEL, P. Pastry: Scalable, distributed object location and routing forlargescale peer-to-peer systems. In Proc. of Middleware 2001(Nov. 2001), pp. 329-350.<br>[31] SENSAGE.COM. sensage.com/products-sensage.htm. Product page.<br>[32] STOICA, I., MORRIS, R., KARGER, D., KAASHOEK, M. F., AND BALAKRISHNAN, H. Chord: Ascalable peer-to-peer lookup service for Internet applications. In Proc. of SIGCOMM (Aug. 2001), pp. 149-160.<br>[33] STONEBRAKER, M. The case for shared nothing. Database Engineering Bulletin 9, 1 (Mar. 1986), 4-9. [34] STONEBRAKER,M., ABADI, D. J., BATKIN, A., CHEN, X., CHERNIACK, M., FERREIRA, M., LAU,E., LIN, A., MADDEN, S., O’NEIL, E., O’NEIL, P., RASIN, A., TRAN, N., AND ZDONIK, S. C-Store: A columnoriented DBMS. In Proc. of VLDB (Aug. 2005), pp. 553-564.<br>[35] STONEBRAKER, M., AOKI, P. M., DEVINE, R., LITWIN, W., AND OLSON, M. A. Mariposa: A new architecture for distributed data. In Proc. of the Tenth ICDE(1994), IEEE Computer Society, pp. 54-65.<br>[36] SYBASE.COM. www.sybase.com/products/databaseservers/sybaseiq. Product page.<br>[37] ZHAO, B. Y., KUBIATOWICZ, J., AND JOSEPH, A. D. Tapestry: An infrastructure for fault-tolerant wide-area location and routing. Tech. Rep. UCB/CSD-01-1141, CS Division, UC Berkeley, Apr. 2001.<br>[38] ZUKOWSKI, M., BONCZ, P. A., NES, N., AND HEMAN, S. MonetDB/X100 ?A DBMS in the CPU cache. IEEE Data Eng. Bull. 28, 2 (2005), 17-22.</p>
+<p>最后，我们发现，建设 Google 自己的存储解决方案带来了很多优势。通过为 Bigtable 设计我们自己的数据模型，是我们的系统极具灵活性。另外，由于我们全面控制着 Bigtable 的实现过程，以及 Bigtable 使用到 的其它的 Google 的基础构件，这就意味着我们在系统出现瓶颈或效率低下的情况时，能够快速的解决这些问 题。<br><div class="note info"><h2 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h2></div><br>We thank the anonymous reviewers, David Nagle, and our shepherd Brad Calder, for their feedback on this paper.The Bigtable system has benefited greatly from the feedback of our many users within Google. In addition,we thank the following people for their contributions to Bigtable: Dan Aguayo, Sameer Ajmani, Zhifeng Chen,Bill Coughran, Mike Epstein, Healfdene Goguen, Robert Griesemer, Jeremy Hylton, Josh Hyman, Alex Khesin,<br>Joanna Kulik, Alberto Lerner, Sherry Listgarten, Mike Maloney, Eduardo Pinheiro, Kathy Polizzi, Frank Yellin,and Arthur Zwiegincew.<br><div class="note info"><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2></div><br>[1] ABADI, D. J., MADDEN, S. R., AND FERREIRA, M. C. Integrating compression and execution in columnoriented database systems. Proc. of SIGMOD (2006).<br>[2] AILAMAKI, A., DEWITT, D. J., HILL, M. D., AND SKOUNAKIS, M. Weaving relations for cache performance.In The VLDB Journal (2001), pp. 169-180.<br>[3] BANGA, G., DRUSCHEL, P., AND MOGUL, J. C. Resource containers: A new facility for resource management in server systems. In Proc. of the 3rd OSDI (Feb. 1999), pp. 45-58.<br>[4] BARU, C. K., FECTEAU, G., GOYAL, A., HSIAO, H., JHINGRAN, A., PADMANABHAN, S., COPELAND,G. P., AND WILSON, W. G. DB2 parallel edition. IBM Systems Journal 34, 2 (1995), 292-322.<br>[5] BAVIER, A., BOWMAN, M., CHUN, B., CULLER, D., KARLIN, S., PETERSON, L., ROSCOE, T., SPALINK, T., AND WAWRZONIAK, M. Operating system support for planetary-scale network services. In Proc. of the 1st NSDI(Mar. 2004), pp. 253-266.<br>[6] BENTLEY, J. L., AND MCILROY, M. D. Data compression using long common strings. In Data Compression Conference (1999), pp. 287-295.<br>[7] BLOOM, B. H. Space/time trade-offs in hash coding with allowable errors. CACM 13, 7 (1970), 422-426.<br>[8] BURROWS, M. The Chubby lock service for looselycoupled distributed systems. In Proc. of the 7th OSDI (Nov. 2006).<br>[9] CHANDRA, T., GRIESEMER, R., AND REDSTONE, J.Paxos made live ? An engineering perspective. In Proc. of PODC (2007).<br>[10] COMER, D. Ubiquitous B-tree. Computing Surveys 11, 2 (June 1979), 121-137.<br>[11] COPELAND, G. P., ALEXANDER, W., BOUGHTER, E. E., AND KELLER, T. W. Data placement in Bubba. In Proc. of SIGMOD (1988), pp. 99-108.<br>[12] DEAN, J., AND GHEMAWAT, S. MapReduce: Simplified data processing on large clusters. In Proc. of the 6th OSDI (Dec. 2004), pp. 137-150.<br>[13] DEWITT, D., KATZ, R., OLKEN, F., SHAPIRO, L., STONEBRAKER, M., AND WOOD, D. Implementation techniques for main memory database systems. In Proc. of SIGMOD (June 1984), pp. 1-8.<br>[14] DEWITT, D. J., AND GRAY, J. Parallel database systems: The future of high performance database systems. CACM 35, 6 (June 1992), 85-98.<br>[15] FRENCH, C. D. One size ts all database architectures do not work for DSS. In Proc. of SIGMOD (May 1995), pp. 449-450.<br>[16] GAWLICK, D., AND KINKADE, D. Varieties of concurrency control in IMS/VS fast path. Database Engineering Bulletin 8, 2 (1985), 3-10.<br>[17] GHEMAWAT, S., GOBIOFF, H., AND LEUNG, S.-T. The Google file system. In Proc. of the 19th ACM SOSP (Dec.2003), pp. 29-43.<br>[18] GRAY, J. Notes on database operating systems. In Operating Systems ? An Advanced Course, vol. 60 of Lecture Notes in Computer Science. Springer-Verlag, 1978.<br>[19] GREER, R. Daytona and the fourth-generation language Cymbal. In Proc. of SIGMOD (1999), pp. 525-526.<br>[20] HAGMANN, R. Reimplementing the Cedar file system using logging and group commit. In Proc. of the 11th SOSP (Dec. 1987), pp. 155-162.<br>[21] HARTMAN, J. H., AND OUSTERHOUT, J. K. The Zebra striped network file system. In Proc. of the 14th SOSP(Asheville, NC, 1993), pp. 29-43.<br>[22] KX.COM. kx.com/products/database.php. Product page.<br>[23] LAMPORT, L. The part-time parliament. ACM TOCS 16,2 (1998), 133-169.<br>[24] MACCORMICK, J., MURPHY, N., NAJORK, M., THEKKATH, C. A., AND ZHOU, L.Boxwood:Abstractions as the foundation for storage infrastructure. In Proc. of the 6th OSDI (Dec. 2004), pp. 105-120.<br>[25] MCCARTHY, J. Recursive functions of symbolic expressions and their computation by machine. CACM 3,4 (Apr. 1960), 184-195.<br>[26] O’NEIL, P., CHENG, E., GAWLICK, D., AND O’NEIL, E. The log-structured merge-tree (LSM-tree).Acta Inf. 33, 4 (1996), 351-385.<br>[27] ORACLE.COM. <a href="http://www.oracle.com/technology/products/database/clustering/index.html" target="_blank" rel="noopener">www.oracle.com/technology/products/database/clustering/index.html</a>. Product page.<br>[28] PIKE, R., DORWARD, S., GRIESEMER, R., AND QUINLAN, S. Interpreting the data: Parallel analysiswith Sawzall. Scientific Programming Journal 13, 4 (2005), 227-298.<br>[29] RATNASAMY, S., FRANCIS, P., HANDLEY, M., KARP, R., AND SHENKER, S. A scalablecontent-addressable network. In Proc. of SIGCOMM (Aug. 2001), pp. 161-172.<br>[30] ROWSTRON, A., AND DRUSCHEL, P. Pastry: Scalable, distributed object location and routing forlargescale peer-to-peer systems. In Proc. of Middleware 2001(Nov. 2001), pp. 329-350.<br>[31] SENSAGE.COM. sensage.com/products-sensage.htm. Product page.<br>[32] STOICA, I., MORRIS, R., KARGER, D., KAASHOEK, M. F., AND BALAKRISHNAN, H. Chord: Ascalable peer-to-peer lookup service for Internet applications. In Proc. of SIGCOMM (Aug. 2001), pp. 149-160.<br>[33] STONEBRAKER, M. The case for shared nothing. Database Engineering Bulletin 9, 1 (Mar. 1986), 4-9. [34] STONEBRAKER,M., ABADI, D. J., BATKIN, A., CHEN, X., CHERNIACK, M., FERREIRA, M., LAU,E., LIN, A., MADDEN, S., O’NEIL, E., O’NEIL, P., RASIN, A., TRAN, N., AND ZDONIK, S. C-Store: A columnoriented DBMS. In Proc. of VLDB (Aug. 2005), pp. 553-564.<br>[35] STONEBRAKER, M., AOKI, P. M., DEVINE, R., LITWIN, W., AND OLSON, M. A. Mariposa: A new architecture for distributed data. In Proc. of the Tenth ICDE(1994), IEEE Computer Society, pp. 54-65.<br>[36] SYBASE.COM. <a href="http://www.sybase.com/products/databaseservers/sybaseiq" target="_blank" rel="noopener">www.sybase.com/products/databaseservers/sybaseiq</a>. Product page.<br>[37] ZHAO, B. Y., KUBIATOWICZ, J., AND JOSEPH, A. D. Tapestry: An infrastructure for fault-tolerant wide-area location and routing. Tech. Rep. UCB/CSD-01-1141, CS Division, UC Berkeley, Apr. 2001.<br>[38] ZUKOWSKI, M., BONCZ, P. A., NES, N., AND HEMAN, S. MonetDB/X100 ?A DBMS in the CPU cache. IEEE Data Eng. Bull. 28, 2 (2005), 17-22.</p>
 
       
     </div>
@@ -621,7 +618,7 @@ stream-&gt;Value());
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付">
         <p>微信支付</p>
       </div>
     
@@ -743,9 +740,7 @@ stream-&gt;Value());
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="森" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
               <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
@@ -758,7 +753,7 @@ stream-&gt;Value());
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -769,7 +764,7 @@ stream-&gt;Value());
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -780,7 +775,7 @@ stream-&gt;Value());
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -867,7 +862,7 @@ stream-&gt;Value());
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>

@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/1281.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="paper," />
+  <meta name="keywords" content="paper,">
 
 
 
@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15132336885895.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15132337130589.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15132337429406.jpg">
-<meta property="og:updated_time" content="2017-12-28T09:44:21.482Z">
+<meta property="og:updated_time" content="2019-04-16T06:56:36.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google File System 中文版">
 <meta name="twitter:description" content="摘要 我们设计并实现了 Google GFS 文件系统，一个面向大规模数据密集型应用的、可伸缩的分布式文件系统。GFS 虽然运行在廉价的普遍硬件设备上，但是它依然了提供灾难冗余的能力，为大量客户机提供了高性能的服务。 虽然 GFS 的设计目标与许多传统的分布式文件系统有很多相同之处，但是，我们的设计还是以我们对自己的应用的负载情况和技术环境的分析为基础的，不管现在还是将来，GFS 和早期的分布式文">
@@ -130,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/12/14/Google-File-System-中文版/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/12/14/Google-File-System-中文版/">
 
 
 
@@ -164,7 +164,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">东篱下</span>
         <span class="logo-line-after"><i></i></span>
@@ -288,9 +288,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -331,7 +329,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
     
@@ -367,7 +365,7 @@
           </span>
     
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -398,8 +396,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/12/14/Google-File-System-中文版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/14/Google-File-System-中文版/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/14/Google-File-System-中文版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -456,7 +453,7 @@
 <p>高性能的稳定网络带宽远比低延迟重要。我们的目标程序绝大部分要求能够高速率的、大批量的处理数<br>据，极少有程序对单一的读写操作有严格的响应时间要求。</p>
 <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>GFS 提供了一套类似传统文件系统的 API 接口函数，虽然并不是严格按照 POSIX 等标准 API 的形式实现的。文件以分层目录的形式组织，用路径名来标识。我们支持常用的操作，如创建新文件、删除文件、打开文件、关闭文件、读和写文件。</p>
 <p>另外，GFS 提供了快照和记录追加操作。快照以很低的成本创建一个文件或者目录树的拷贝。记录追加操作允许多个客户端同时对一个文件进行数据追加操作，同时保证每个客户端的追加操作都是原子性的。这对于实现多路结果合并，以及“生产者-消费者”队列非常有用，多个客户端可以在不需要额外的同步锁定的情况下，同时对一个文件追加数据。我们发现这些类型的文件对于构建大型分布应用是非常重要的。快照和记录追加操作将在 3.4 和 3.3 节分别讨论。</p>
-<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p>一个 GFS 集群包含一个单独的 Master 节点（<em>这里的一个单独的 Master 节点的含义是 GFS 系统中只存在一个逻辑上的 Master 组件。后面我们还会提到 Master 节点复制，因此，为了理解方便，我们把 Master 节点视为一个逻辑上的概念，一个逻辑的 Master 节点包括两台物理主机</em>）、多台 Chunk 服务器，并且同时被多个客户端访问，如图 1所示。所有的这些机器通常都是普通的 Linux 机器，运行着用户级别(user-level)的服务进程。我们可以很容易的把 Chunk 服务器和客户端都放在同一台机器上，前提是机器资源允许，并且我们能够接受不可靠的应用程序代码带来的稳定性降低的风险。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132301300998.jpg" alt=""><br>GFS 存储的文件都被分割成固定大小的 Chunk。在 Chunk 创建的时候，Master 服务器会给每个 Chunk 分配一个不变的、全球唯一的 64 位的 Chunk 标识。Chunk 服务器把 Chunk 以 Linux 文件的形式保存在本地硬盘上，并且根据指定的 Chunk 标识和字节范围来读写块数据。出于可靠性的考虑，每个块都会复制到多个块服务器上。缺省情况下，我们使用 3 个存储复制节点，不过用户可以为不同的文件命名空间设定不同的复制级别。</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p>一个 GFS 集群包含一个单独的 Master 节点（<em>这里的一个单独的 Master 节点的含义是 GFS 系统中只存在一个逻辑上的 Master 组件。后面我们还会提到 Master 节点复制，因此，为了理解方便，我们把 Master 节点视为一个逻辑上的概念，一个逻辑的 Master 节点包括两台物理主机</em>）、多台 Chunk 服务器，并且同时被多个客户端访问，如图 1所示。所有的这些机器通常都是普通的 Linux 机器，运行着用户级别(user-level)的服务进程。我们可以很容易的把 Chunk 服务器和客户端都放在同一台机器上，前提是机器资源允许，并且我们能够接受不可靠的应用程序代码带来的稳定性降低的风险。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132301300998.jpg" alt><br>GFS 存储的文件都被分割成固定大小的 Chunk。在 Chunk 创建的时候，Master 服务器会给每个 Chunk 分配一个不变的、全球唯一的 64 位的 Chunk 标识。Chunk 服务器把 Chunk 以 Linux 文件的形式保存在本地硬盘上，并且根据指定的 Chunk 标识和字节范围来读写块数据。出于可靠性的考虑，每个块都会复制到多个块服务器上。缺省情况下，我们使用 3 个存储复制节点，不过用户可以为不同的文件命名空间设定不同的复制级别。</p>
 <p>Master 节点管理所有的文件系统元数据。这些元数据包括名字空间、访问控制信息、文件和 Chunk 的映射信息、以及当前 Chunk 的位置信息。Master 节点还管理着系统范围内的活动，比如，Chunk 租用管理（<em>BDB 也有关于 lease 的描述，不知道是否相同</em>）、孤儿 Chunk（<em>原文：orphaned chunks</em>）的回收、以及 Chunk 在 Chunk 服务器之间的迁移。Master 节点使用心跳信息周期地和每个 Chunk服务器通讯，发送指令到各个 Chunk 服务器并接收 Chunk 服务器的状态信息。</p>
 <p>GFS 客户端代码以库的形式被链接到客户程序里。客户端代码实现了 GFS 文件系统的 API 接口函数、应用程序与 Master 节点和 Chunk 服务器通讯、以及对数据进行读写操作。客户端和 Master 节点的通信只获取元数据，所有的数据操作都是由客户端直接和 Chunk 服务器进行交互的。我们不提供 POSIX 标准的 API 的功能，因此，GFS API 调用不需要深入到 Linux vnode 级别。</p>
 <p>无论是客户端还是 Chunk 服务器都不需要缓存文件数据。客户端缓存数据几乎没有什么用处，因为大部分程序要么以流的方式读取一个巨大文件，要么工作集太大根本无法被缓存。无需考虑缓存相关的问题也简化了客户端和整个系统的设计和实现（<em>注：不过，客户端会缓存元数据。</em>）。Chunk 服务器不需要缓存文件数据的原因是，Chunk 以本地文件的方式保存，Linux 操作系统的文件系统缓存会把经常访问的数据缓存在内存中。</p>
@@ -480,7 +477,7 @@
 <p>由于创建一个 Checkpoint 文件需要一定的时间，所以 Master 服务器的内部状态被组织为一种格式，这种格式要确保在 Checkpoint 过程中不会阻塞正在进行的修改操作。Master 服务器使用独立的线程切换到新的日志文件和创建新的 Checkpoint 文件。新的 Checkpoint 文件包括切换前所有的修改。对于一个包含数百万个文件的集群，创建一个 Checkpoint 文件需要 1 分钟左右的时间。创建完成后，Checkpoint 文件会被写入在本地和远程的硬盘里。</p>
 <p>Master 服务器恢复只需要最新的 Checkpoint 文件和后续的日志文件。旧的 Checkpoint 文件和日志文件可以被删除，但是为了应对<code>灾难性的故障</code>(<em>catastrophes，数据备份相关文档中经常会遇到这个词，表示一种超出预期范围的灾难性事件</em>)，我们通常会多保存一些历史文件。Checkpoint 失败不会对正确性产生任何影响，因为恢复功能的代码可以检测并跳过没有完成的 Checkpoint 文件。</p>
 <h3 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h3><p>GFS 支持一个宽松的一致性模型，这个模型能够很好的支撑我们的高度分布的应用，同时还保持了相对简单且容易实现的优点。本节我们讨论 GFS 的一致性的保障机制，以及对应用程序的意义。我们也着重描述了 GFS 如何管理这些一致性保障机制，但是实现的细节将在本论文的其它部分讨论。</p>
-<h4 id="GFS-一致性保障机制"><a href="#GFS-一致性保障机制" class="headerlink" title="GFS 一致性保障机制"></a>GFS 一致性保障机制</h4><p>文件命名空间的修改（例如，文件创建）是原子性的。它们仅由 Master 节点的控制：命名空间锁提供了原子性和正确性（4.1 章）的保障；Master 节点的操作日志定义了这些操作在全局的顺序（2.6.3 章）。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132311656905.jpg" alt=""><br>数据修改后文件 region的状态取决于操作的类型、成功与否、以及是否同步修改。表 1 总结了各种操作的结果。</p>
+<h4 id="GFS-一致性保障机制"><a href="#GFS-一致性保障机制" class="headerlink" title="GFS 一致性保障机制"></a>GFS 一致性保障机制</h4><p>文件命名空间的修改（例如，文件创建）是原子性的。它们仅由 Master 节点的控制：命名空间锁提供了原子性和正确性（4.1 章）的保障；Master 节点的操作日志定义了这些操作在全局的顺序（2.6.3 章）。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132311656905.jpg" alt><br>数据修改后文件 region的状态取决于操作的类型、成功与否、以及是否同步修改。表 1 总结了各种操作的结果。</p>
 <p>如果所有客户端，无论从哪个副本读取，读到的数据都一样，那么我们认为文件 region 是“一致的”；如果对文件的数据修改之后，region 是一致的，并且客户端能够看到写入操作全部的内容，那么这个 region是“已定义的”。</p>
 <p>当一个数据修改操作成功执行，并且没有受到同时执行的其它写入操作的干扰，那么影响的 region 就是已定义的（隐含了一致性）：所有的客户端都可以看到写入的内容。并行修改操作成功完成之后，region 处于一致的、未定义的状态：所有的客户端看到同样的数据，但是无法读到任何一次写入操作写入的数据。通常情况下，文件 region 内包含了来自多个修改操作的、混杂的数据片段。失败的修改操作导致一个 region 处于不一致状态（同时也是未定义的）：不同的客户在不同的时间会看到不同的数据。后面我们将描述应用如何区分已定义和未定义的 region。应用程序没有必要再去细分未定义 region 的不同类型。</p>
 <p>数据修改操作分为写入或者记录追加两种。写入操作把数据写在应用程序指定的文件偏移位置上。即使<br>有多个修改操作并行执行时，记录追加操作至少可以把数据原子性的追加到文件中一次，但是偏移位置是由GFS 选择的（3.3 章）(<em>这句话有点费解，其含义是所有的追加写入都会成功，但是有可能被执行了多次，而且每次追加的文件偏移量由 GFS 自己计算。相比而言，通常说的追加操作写的偏移位置是文件的尾部</em>)。GFS 返回给客户端一个偏移量，表示了包含了写入记录的、已定义的 region 的起点。另外，GFS 可能会在文件中间插入填充数据或者重复记录。这些数据占据的文件 region 被认定是不一致的，这些数据通常比用户数据小的多。</p>
@@ -492,7 +489,7 @@
 <p>我们再来分析另一种典型的应用。许多应用程序并行的追加数据到同一个文件，比如进行结果的合并或<br>者是一个生产者-消费者队列。记录追加方式的“至少一次追加”的特性保证了 Writer 的输出。Readers 使用下面的方法来处理偶然性的填充数据和重复内容。Writers 在每条写入的记录中都包含了额外的信息，例如Checksum，用来验证它的有效性。Reader 可以利用 Checksum 识别和抛弃额外的填充数据和记录片段。如果应用不能容忍偶尔的重复内容(比如，如果这些重复数据触发了非幂等操作)，可以用记录的唯一标识符来过滤它们，这些唯一标识符通常用于命名程序中处理的实体对象，例如 web 文档。这些记录 I/O 功能(<em>These functionalities for record I/O，除了剔除重复数据的功能</em>)都包含在我们的程序共享的库中，并且适用于 Google 内部的其它的文件接口实现。所以，相同序列的记录，加上一些偶尔出现的重复数据，都被分发到 Reader 了。<br> <div class="note info"><h2 id="系统交互"><a href="#系统交互" class="headerlink" title="系统交互"></a>系统交互</h2></div><br>我们在设计这个系统时，一个重要的原则是最小化所有操作和 Master 节点的交互。带着这样的设计理念，我们现在描述一下客户机、Master 服务器和 Chunk 服务器如何进行交互，以实现数据修改操作、原子的记录追加操作以及快照功能。</p>
 <h3 id="租约（lease）和变更顺序"><a href="#租约（lease）和变更顺序" class="headerlink" title="租约（lease）和变更顺序"></a>租约（lease）和变更顺序</h3><p>变更是一个会改变 Chunk 内容或者元数据的操作，比如写入操作或者记录追加操作。变更操作会在 Chunk的所有副本上执行。我们使用租约（lease）机制来保持多个副本间变更顺序的一致性。Master 节点为 Chunk的一个副本建立一个租约，我们把这个副本叫做主 Chunk。主 Chunk 对 Chunk 的所有更改操作进行序列化。所有的副本都遵从这个序列进行修改操作。因此，修改操作全局的顺序首先由 Master 节点选择的租约的顺序决定，然后由租约中主 Chunk 分配的序列号决定。</p>
 <p>设计租约机制的目的是为了最小化 Master 节点的管理负担。租约的初始超时设置为 60 秒。不过，只要Chunk 被修改了，主 Chunk 就可以申请更长的租期，通常会得到 Master 节点的确认并收到租约延长的时间。这些租约延长请求和批准的信息通常都是附加在 Master 节点和 Chunk 服务器之间的心跳消息中来传递。有时Master 节点会试图提前取消租约（例如，Master 节点想取消在一个已经被改名的文件上的修改操作）。即使Master节点和主Chunk失去联系，它仍然可以安全地在旧的租约到期后和另外一个Chunk副本签订新的租约。</p>
-<p>在图 2 中，我们依据步骤编号，展现写入操作的控制流程。<br> <img src="http://oliji9s3j.bkt.clouddn.com/15132320505160.jpg" alt=""><br>客户机向 Master 节点询问哪一个 Chunk 服务器持有当前的租约，以及其它副本的位置。如果没有一个 Chunk 持有租约，Master 节点就选择其中一个副本建立一个租约(这个步骤在图上没有显示)。</p>
+<p>在图 2 中，我们依据步骤编号，展现写入操作的控制流程。<br> <img src="http://oliji9s3j.bkt.clouddn.com/15132320505160.jpg" alt><br>客户机向 Master 节点询问哪一个 Chunk 服务器持有当前的租约，以及其它副本的位置。如果没有一个 Chunk 持有租约，Master 节点就选择其中一个副本建立一个租约(这个步骤在图上没有显示)。</p>
 <p>Master 节点将主 Chunk 的标识符以及其它副本(又称为 secondary 副本、二级副本)的位置返回给客户 机。客户机缓存这些数据以便后续的操作。只有在主 Chunk 不可用，或者主 Chunk 回复信息表明它已不再持 有租约的时候，客户机才需要重新跟 Master 节点联系。</p>
 <p>客户机把数据推送到所有的副本上。客户机可以以任意的顺序推送数据。Chunk 服务器接收到数据并保 存在它的内部 LRU 缓存中，一直到数据被使用或者过期交换出去。由于数据流的网络传输负载非常高，通过 分离数据流和控制流，我们可以基于网络拓扑情况对数据流进行规划，提高系统性能，而不用去理会哪个 Chunk 服务器保存了主 Chunk。3.2 章节会进一步讨论这点。</p>
 <p>当所有的副本都确认接收到了数据，客户机发送写请求到主 Chunk 服务器。这个请求标识了早前推送到 所有副本的数据。主 Chunk 为接收到的所有操作分配连续的序列号，这些操作可能来自不同的客户机，序列 号保证了操作顺序执行。它以序列号的顺序把操作应用到它自己的本地状态中(alex 注:也就是在本地执行这些操作，这句话按字面翻译有点费解，也许应该翻译为“它顺序执行这些操作，并更新自己的状态”)。</p>
@@ -551,7 +548,7 @@
 <p>日志对性能的影响很小(远小于它带来的好处)，因为这些日志的写入方式是顺序的、异步的。最近发生 的事件日志保存在内存中，可用于持续不断的在线监控。<br> <div class="note info"><h2 id="度量"><a href="#度量" class="headerlink" title="度量"></a>度量</h2></div><br>本节中，我们将使用一些小规模基准测试来展现 GFS 系统架构和实现上的一些固有瓶颈，还有些来自<br>Google 内部使用的真实的 GFS 集群的基准数据。 </p>
 <h3 id="小规模基准测试"><a href="#小规模基准测试" class="headerlink" title="小规模基准测试"></a>小规模基准测试</h3><p>我们在一个包含 1 台 Master 服务器，2 台 Master 服务器复制节点，16 台 Chunk 服务器和 16 个客户机组 成的 GFS 集群上测量性能。注意，采用这样的集群配置方案只是为了易于测试。典型的 GFS 集群有数百个 Chunk 服务器和数百个客户机。</p>
 <p>所有机器的配置都一样:两个 PIII 1.4GHz 处理器，2GB 内存，两个 80G/5400rpm 的硬盘，以及 100Mbps 全双工以太网连接到一个 HP2524 交换机。GFS 集群中所有的 19 台服务器都连接在一个交换机，所有 16 台客户机连接到另一个交换机上。两个交换机之间使用 1Gbps 的线路连接。</p>
-<h4 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h4><p>N 个客户机从 GFS 文件系统同步读取数据。每个客户机从 320GB 的文件集合中随机读取 4MB region 的 内容。读取操作重复执行 256 次，因此，每个客户机最终都读取 1GB 的数据。所有的 Chunk 服务器加起来总 共只有 32GB 的内存，因此，我们预期只有最多 10%的读取请求命中 Linux 的文件系统缓冲。我们的测试结 果应该和一个在没有文件系统缓存的情况下读取测试的结果接近。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132331882908.jpg" alt=""><br>上边的曲线显示了我们网络拓扑下的合计理论吞吐量上限。下边的曲线显示了观测到的吞吐量。这个曲线有着 95%的可靠性，因为有时候测量会不够精确。</p>
+<h4 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h4><p>N 个客户机从 GFS 文件系统同步读取数据。每个客户机从 320GB 的文件集合中随机读取 4MB region 的 内容。读取操作重复执行 256 次，因此，每个客户机最终都读取 1GB 的数据。所有的 Chunk 服务器加起来总 共只有 32GB 的内存，因此，我们预期只有最多 10%的读取请求命中 Linux 的文件系统缓冲。我们的测试结 果应该和一个在没有文件系统缓存的情况下读取测试的结果接近。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132331882908.jpg" alt><br>上边的曲线显示了我们网络拓扑下的合计理论吞吐量上限。下边的曲线显示了观测到的吞吐量。这个曲线有着 95%的可靠性，因为有时候测量会不够精确。</p>
 <p>图 3(a)显示了 N 个客户机整体的读取速度以及这个速度的理论极限。当连接两个交换机的 1Gbps 的链路饱和时，整体读取速度达到理论的极限值是 125MB/S，或者说每个客户机配置的 100Mbps 网卡达到饱和时， 每个客户机读取速度的理论极限值是 12.5MB/s。实测结果是，当一个客户机读取的时候，读取的速度是 10MB/s， 也就是说达到客户机理论读取速度极限值的 80%。对于 16 个客户机，整体的读取速度达到了 94MB/s，大约 是理论整体读取速度极限值的 75%，也就是说每个客户机的读取速度是 6MB/s。读取效率从 80%降低到了 75%， 主要的原因是当读取的客户机增加时，多个客户机同时读取一个 Chunk 服务器的几率也增加了，导致整体的 读取效率下降。</p>
 <h4 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h4><p>N 个客户机同时向 N 个不同的文件中写入数据。每个客户机以每次 1MB 的速度连续写入 1GB 的数据。 图 3(b)显示了整体的写入速度和它们理论上的极限值。理论上的极限值是 67MB/s，因为我们需要把每一 byte 写入到 16 个 Chunk 服务器中的 3 个上，而每个 Chunk 服务器的输入连接速度是 12.5MB/s。</p>
 <p>一个客户机的写入速度是 6.3MB，大概是理论极限值的一半。导致这个结果的主要原因是我们的网络协 议栈。它与我们推送数据到 Chunk 服务器时采用的管道模式不相适应。从一个副本到另一个副本的数据传输延迟降低了整个的写入速度。</p>
@@ -559,13 +556,13 @@
 <p>写入的速度比我们想象的要慢。在实际应用中，这没有成为我们的主要问题，因为即使在单个客户机上 能够感受到延时，它也不会在有大量客户机的时候对整体的写入带宽造成显著的影响。</p>
 <h4 id="记录追加"><a href="#记录追加" class="headerlink" title="记录追加"></a>记录追加</h4><p>图 3(c)显示了记录追加操作的性能。N 个客户机同时追加数据到一个文件。记录追加操作的性能受限 于保存文件最后一个 Chunk 的 Chunk 服务器的带宽，而与客户机的数量无关。记录追加的速度由一个客户机 的 6.0MB/s 开始，下降到 16 个客户机的 4.8MB/s 为止，速度的下降主要是由于不同客户端的网络拥塞以及网 络传输速度的不同而导致的。</p>
 <p>我们的程序倾向于同时处理多个这样的文件。换句话说，即 N 个客户机同时追加数据到 M 个共享文件中， 这里 N 和 M 都是数十或者数百以上。所以，在我们的实际应用中，Chunk 服务器的网络拥塞并没有成为一个 严重问题，如果 Chunk 服务器的某个文件正在写入，客户机会去写另外一个文件。</p>
-<h3 id="实际应用中的集群"><a href="#实际应用中的集群" class="headerlink" title="实际应用中的集群"></a>实际应用中的集群</h3><p>我们现在来仔细评估一下 Google 内部正在使用的两个集群，它们具有一定的代表性。集群 A 通常被上百 个工程师用于研究和开发。典型的任务是被人工初始化后连续运行数个小时。它通常读取数 MB 到数 TB 的 数据，之后进行转化或者分析，最后把结果写回到集群中。集群 B 主要用于处理当前的生产数据。集群 B 的 任务持续的时间更长，在很少人工干预的情况下，持续的生成和处理数 TB 的数据集。在这两个案例中，一 个单独的“任务”都是指运行在多个机器上的多个进程，它们同时读取和写入多个文件。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132335583017.jpg" alt=""></p>
+<h3 id="实际应用中的集群"><a href="#实际应用中的集群" class="headerlink" title="实际应用中的集群"></a>实际应用中的集群</h3><p>我们现在来仔细评估一下 Google 内部正在使用的两个集群，它们具有一定的代表性。集群 A 通常被上百 个工程师用于研究和开发。典型的任务是被人工初始化后连续运行数个小时。它通常读取数 MB 到数 TB 的 数据，之后进行转化或者分析，最后把结果写回到集群中。集群 B 主要用于处理当前的生产数据。集群 B 的 任务持续的时间更长，在很少人工干预的情况下，持续的生成和处理数 TB 的数据集。在这两个案例中，一 个单独的“任务”都是指运行在多个机器上的多个进程，它们同时读取和写入多个文件。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132335583017.jpg" alt></p>
 <h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><p>如上表前五行所描述的，两个集群都由上百台 Chunk 服务器组成，支持数 TB 的硬盘空间;两个集群虽 然都存储了大量的数据，但是还有剩余的空间。“已用空间”包含了所有的 Chunk 副本。实际上所有的文件都 复制了三份。因此，集群实际上各存储了 18TB 和 52TB 的文件数据。</p>
 <p>两个集群存储的文件数量都差不多，但是集群 B 上有大量的死文件。所谓“死文件”是指文件被删除了 或者是被新版本的文件替换了，但是存储空间还没有来得及被回收。由于集群 B 存储的文件较大，因此它的 Chunk 数量也比较多。</p>
 <h4 id="元数据-1"><a href="#元数据-1" class="headerlink" title="元数据"></a>元数据</h4><p>Chunk 服务器总共保存了十几 GB 的元数据，大多数是来自用户数据的、64KB 大小的块的 Checksum。 保存在 Chunk 服务器上其它的元数据是 Chunk 的版本号信息，我们在 4.5 节描述过。</p>
 <p>在 Master 服务器上保存的元数据就小的多了，大约只有数十 MB，或者说平均每个文件 100 字节的元数 据。这和我们设想的是一样的，Master 服务器的内存大小在实际应用中并不会成为 GFS 系统容量的瓶颈。大 多数文件的元数据都是以前缀压缩模式存放的文件名。Master 服务器上存放的其它元数据包括了文件的所有 者和权限、文件到 Chunk 的映射关系，以及每一个 Chunk 的当前版本号。此外，针对每一个 Chunk，我们都 保存了当前的副本位置以及对它的引用计数，这个引用计数用于实现写时拷贝(即 COW，copy-on-write)。</p>
 <p>对于每一个单独的服务器，无论是 Chunk 服务器还是 Master 服务器，都只保存了 50MB 到 100MB 的元 数据。因此，恢复服务器是非常快速的:在服务器响应客户请求之前，只需要花几秒钟时间从磁盘上读取这 些数据就可以了。不过，Master 服务器会持续颠簸一段时间–通常是 30 到 60 秒–直到它完成轮询所有的 Chunk服务器，并获取到所有 Chunk 的位置信息。 </p>
-<h4 id="读写速率"><a href="#读写速率" class="headerlink" title="读写速率"></a>读写速率</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132336101847.jpg" alt=""><br>表三显示了不同时段的读写速率。在测试的时候，这两个集群都运行了一周左右的时间。(这两个集群最 近都因为升级新版本的 GFS 重新启动过了)。</p>
+<h4 id="读写速率"><a href="#读写速率" class="headerlink" title="读写速率"></a>读写速率</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132336101847.jpg" alt><br>表三显示了不同时段的读写速率。在测试的时候，这两个集群都运行了一周左右的时间。(这两个集群最 近都因为升级新版本的 GFS 重新启动过了)。</p>
 <p>集群重新启动后，平均写入速率小于 30MB/s。当我们提取性能数据的时候，集群 B 正进行大量的写入操 作，写入速度达到了 100MB/s，并且因为每个 Chunk 都有三个副本的原因，网络负载达到了 300MB/s。</p>
 <p>读取速率要比写入速率高的多。正如我们设想的那样，总的工作负载中，读取的比例远远高于写入的比 例。两个集群都进行着繁重的读取操作。特别是，集群 A 在一周时间内都维持了 580MB/s 的读取速度。集群 A 的网络配置可以支持 750MB/s 的速度，显然，它有效的利用了资源。集群 B 支持的峰值读取速度是 1300MB/s， 但是它的应用只用到了 380MB/s。</p>
 <h4 id="Master-服务器的负载"><a href="#Master-服务器的负载" class="headerlink" title="Master 服务器的负载"></a>Master 服务器的负载</h4><p>表 3 的数据显示了发送到 Master 服务器的操作请求大概是每秒钟 200 到 500 个。Master 服务器可以轻松 的应付这个请求速度，所以 Master 服务器的处理能力不是系统的瓶颈。</p>
@@ -576,13 +573,13 @@
 <h4 id="方法论和注意事项"><a href="#方法论和注意事项" class="headerlink" title="方法论和注意事项"></a>方法论和注意事项</h4><p>本章节列出的这些结果数据只包括客户机发起的原始请求，因此，这些结果能够反映我们的应用程序对 GFS 文件系统产生的全部工作负载。它们不包含那些为了实现客户端请求而在服务器间交互的请求，也不包 含 GFS 内部的后台活动相关的请求，比如前向转发的写操作，或者重新负载均衡等操作。</p>
 <p>我们从 GFS 服务器记录的真实的 RPC 请求日志中推导重建出关于 IO 操作的统计信息。例如，GFS 客 户程序可能会把一个读操作分成几个 RPC 请求来提高并行度，我们可以通过这些 RPC 请求推导出原始的读 操作。因为我们的访问模式是高度程式化，所以我们认为任何不符合的数据都是误差。<br>应用程序如果能够记 录更详尽的日志，就有可能提供更准确的诊断数据;但是为了这个目的去重新编译和重新启动数千个正在运 行的客户机是不现实的，而且从那么多客户机上收集结果也是个繁重的工作。</p>
 <p>应该避免从我们的工作负荷数据中过度的归纳出普遍的结论(<em>即不要把本节的数据作为基础的指导性数据</em>)。因为 Google 完全控制着 GFS 和使用 GFS 的应用程序，所以，应用程序都针对 GFS 做了优化，同时，GFS 也是为了这些应用程序而设计的。这样的相 互作用也可能存在于一般程序和文件系统中，但是在我们的案例中这样的作用影响可能更显著。</p>
-<h4 id="Chunk-服务器工作负荷"><a href="#Chunk-服务器工作负荷" class="headerlink" title="Chunk 服务器工作负荷"></a>Chunk 服务器工作负荷</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132336885895.jpg" alt=""><br>表 4 显示了操作按涉及的数据量大小的分布情况。读取操作按操作涉及的数据量大小呈现了双峰分布。 小的读取操作(小于 64KB)一般是由查找操作的客户端发起的，目的在于从巨大的文件中查找小块的数据。 大的读取操作(大于 512KB)一般是从头到尾顺序的读取整个文件。</p>
+<h4 id="Chunk-服务器工作负荷"><a href="#Chunk-服务器工作负荷" class="headerlink" title="Chunk 服务器工作负荷"></a>Chunk 服务器工作负荷</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132336885895.jpg" alt><br>表 4 显示了操作按涉及的数据量大小的分布情况。读取操作按操作涉及的数据量大小呈现了双峰分布。 小的读取操作(小于 64KB)一般是由查找操作的客户端发起的，目的在于从巨大的文件中查找小块的数据。 大的读取操作(大于 512KB)一般是从头到尾顺序的读取整个文件。</p>
 <p>在集群 Y 上，有相当数量的读操作没有返回任何的数据。在我们的应用中，尤其是在生产系统中，经常 使用文件作为生产者-消费者队列。生产者并行的向文件中追加数据，同时，消费者从文件的尾部读取数据。某些情况下，消费者读取的速度超过了生产者写入的速度，这就会导致没有读到任何数据的情况。集群 X 通 常用于短暂的数据分析任务，而不是长时间运行的分布式应用，因此，集群 X 很少出现这种情况。</p>
 <p>写操作按数据量大小也同样呈现为双峰分布。大的写操作(超过 256KB)通常是由于 Writer 使用了缓存 机制导致的。Writer 缓存较小的数据，通过频繁的 Checkpoint 或者同步操作，或者只是简单的统计小的写入 (小于 64KB)的数据量(alex 注:即汇集多次小的写入操作，当数据量达到一个阈值，一次写入)，之后批量 写入。</p>
-<p>再来观察一下记录追加操作。我们可以看到集群 Y 中大的记录追加操作所占比例比集群 X 多的多，这是 因为集群 Y 用于我们的生产系统，针对 GFS 做了更全面的调优。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132337130589.jpg" alt=""><br>表 5 显示了按操作涉及的数据量的大小统计出来的总数据传输量。在所有的操作中，大的操作(超过 256KB)占据了主要的传输量。小的读取(小于 64KB)虽然传输的数据量比较少，但是在读取的数据量中仍 占了相当的比例，这是因为在文件中随机 Seek 的工作负荷而导致的。</p>
+<p>再来观察一下记录追加操作。我们可以看到集群 Y 中大的记录追加操作所占比例比集群 X 多的多，这是 因为集群 Y 用于我们的生产系统，针对 GFS 做了更全面的调优。<br><img src="http://oliji9s3j.bkt.clouddn.com/15132337130589.jpg" alt><br>表 5 显示了按操作涉及的数据量的大小统计出来的总数据传输量。在所有的操作中，大的操作(超过 256KB)占据了主要的传输量。小的读取(小于 64KB)虽然传输的数据量比较少，但是在读取的数据量中仍 占了相当的比例，这是因为在文件中随机 Seek 的工作负荷而导致的。</p>
 <h4 id="记录追加-vs-写操作"><a href="#记录追加-vs-写操作" class="headerlink" title="记录追加 vs. 写操作"></a>记录追加 vs. 写操作</h4><p>记录追加操作在我们的生产系统中大量使用。对于集群 X，记录追加操作和普通写操作的比例按照字节 比是 108:1，按照操作次数比是 8:1。对于作为我们的生产系统的集群 Y 来说，这两个比例分别是 3.7:1 和 2.5:1。 更进一步，这一组数据说明在我们的两个集群上，记录追加操作所占比例都要比写操作要大。对于集群 X， 在整个测量过程中，记录追加操作所占比率都比较低，因此结果会受到一两个使用某些特定大小的 buffer 的 应用程序的影响。</p>
 <p>如同我们所预期的，我们的数据修改操作主要是记录追加操作而不是覆盖方式的写操作。我们测量了第 一个副本的数据覆盖写的情况。这近似于一个客户机故意覆盖刚刚写入的数据，而不是增加新的数据。对于 集群 X，覆盖写操作在写操作所占据字节上的比例小于 0.0001%，在所占据操作数量上的比例小于 0.0003%。 对于集群 Y，这两个比率都是 0.05%。虽然这只是某一片断的情况，但是仍然高于我们的预期。这是由于这 些覆盖写的操作，大部分是由于客户端在发生错误或者超时以后重试的情况。这在本质上应该不算作工作负 荷的一部分，而是重试机制产生的结果。</p>
-<h4 id="Master-的工作负荷"><a href="#Master-的工作负荷" class="headerlink" title="Master 的工作负荷"></a>Master 的工作负荷</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132337429406.jpg" alt=""><br>表 6 显示了 Master 服务器上的请求按类型区分的明细表。大部分的请求都是读取操作查询 Chunk 位置信 息(FindLocation)、以及修改操作查询 lease 持有者的信息(FindLease-Locker)。</p>
+<h4 id="Master-的工作负荷"><a href="#Master-的工作负荷" class="headerlink" title="Master 的工作负荷"></a>Master 的工作负荷</h4><p><img src="http://oliji9s3j.bkt.clouddn.com/15132337429406.jpg" alt><br>表 6 显示了 Master 服务器上的请求按类型区分的明细表。大部分的请求都是读取操作查询 Chunk 位置信 息(FindLocation)、以及修改操作查询 lease 持有者的信息(FindLease-Locker)。</p>
 <p>集群 X 和 Y 在删除请求的数量上有着明显的不同，因为集群 Y 存储了生产数据，一般会重新生成数据 以及用新版本的数据替换旧有的数据。数量上的差异也被隐藏在了 Open 请求中，因为旧版本的文件可能在以 重新写入的模式打开时，隐式的被删除了(类似 UNIX 的 open 函数中的“w”模式)。</p>
 <p>FindMatchingFiles 是一个模式匹配请求，支持“ls”以及其它类似的文件系统操作。不同于 Master 服务 器的其它请求，它可能会检索 namespace 的大部分内容，因此是非常昂贵的操作。集群 Y 的这类请求要多一 些，因为自动化数据处理的任务进程需要检查文件系统的各个部分，以便从全局上了解应用程序的状态。与 之不同的是，集群 X 的应用程序更加倾向于由单独的用户控制，通常预先知道自己所需要使用的全部文件的 名称。<br> <div class="note info"><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2></div><br>在建造和部署 GFS 的过程中，我们经历了各种各样的问题，有些是操作上的，有些是技术上的。起初，GFS 被设想为我们的生产系统的后端文件系统。随着时间推移，在 GFS 的使用中逐步的增加了对 研究和开发任务的支持。我们开始增加一些小的功能，比如权限和配额，到了现在，GFS 已经初步支持了这 些功能。虽然我们生产系统是严格受控的，但是用户层却不总是这样的。需要更多的基础架构来防止用户间 的相互干扰。</p>
 <p>我们最大的问题是磁盘以及和 Linux 相关的问题。很多磁盘都声称它们支持某个范围内的 Linux IDE 硬盘 驱动程序，但是实际应用中反映出来的情况却不是这样，它们只支持最新的驱动。因为协议版本很接近，所 以大部分磁盘都可以用，但是偶尔也会有由于协议不匹配，导致驱动和内核对于驱动器的状态判断失误。这会导致数据因为内核中的问题意外的被破坏了。这个问题促使我们使用 Checksum 来校验数据，同时我们也修改内核来处理这些因为协议不匹配带来的问题。</p>
@@ -638,7 +635,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付">
         <p>微信支付</p>
       </div>
     
@@ -760,9 +757,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="森" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
               <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
@@ -775,7 +770,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -786,7 +781,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -797,7 +792,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -884,7 +879,7 @@
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>

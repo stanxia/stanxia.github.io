@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/1281.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,parquet," />
+  <meta name="keywords" content="spark,parquet,">
 
 
 
@@ -88,7 +88,7 @@
 <meta property="og:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。 查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg">
-<meta property="og:updated_time" content="2017-12-28T09:44:21.498Z">
+<meta property="og:updated_time" content="2019-04-16T06:56:36.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark关于parquet的优化">
 <meta name="twitter:description" content="parquet是一种列式存储。可以提供面向列的存储和查询。 Parquet的优势在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。 存储方面因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。 查询方面在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。">
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/">
 
 
 
@@ -156,7 +156,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">东篱下</span>
         <span class="logo-line-after"><i></i></span>
@@ -280,9 +280,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -323,7 +321,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
     
@@ -359,7 +357,7 @@
           </span>
     
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -390,8 +388,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/01/spark关于parquet的优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/01/spark关于parquet的优化/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/01/spark关于parquet的优化/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -462,7 +459,7 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Encoders for most common types are automatically provided by importing spark.implicits._</span></span><br><span class="line"><span class="keyword">import</span> spark.implicits._</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> peopleDF = spark.read.json(<span class="string">"examples/src/main/resources/people.json"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// DataFrames can be saved as Parquet files, maintaining the schema information</span></span><br><span class="line">peopleDF.write.parquet(<span class="string">"people.parquet"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Read in the parquet file created above</span></span><br><span class="line"><span class="comment">// Parquet files are self-describing so the schema is preserved</span></span><br><span class="line"><span class="comment">// The result of loading a Parquet file is also a DataFrame</span></span><br><span class="line"><span class="keyword">val</span> parquetFileDF = spark.read.parquet(<span class="string">"people.parquet"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Parquet files can also be used to create a temporary view and then used in SQL statements</span></span><br><span class="line">parquetFileDF.createOrReplaceTempView(<span class="string">"parquetFile"</span>)</span><br><span class="line"><span class="keyword">val</span> namesDF = spark.sql(<span class="string">"SELECT name FROM parquetFile WHERE age BETWEEN 13 AND 19"</span>)</span><br><span class="line">namesDF.map(attributes =&gt; <span class="string">"Name: "</span> + attributes(<span class="number">0</span>)).show()</span><br><span class="line"><span class="comment">// +------------+</span></span><br><span class="line"><span class="comment">// |       value|</span></span><br><span class="line"><span class="comment">// +------------+</span></span><br><span class="line"><span class="comment">// |Name: Justin|</span></span><br><span class="line"><span class="comment">// +------------+</span></span><br></pre></td></tr></table></figure>
 <h2 id="Parquet-的问题"><a href="#Parquet-的问题" class="headerlink" title="Parquet 的问题"></a>Parquet 的问题</h2><p> spark 写入数据到 hive 中，使用 Parquet 存储格式，查询该表时报错如下：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Error</span>: java.io.<span class="type">IOException</span>: org.apache.parquet.io.<span class="type">ParquetDecodingException</span>: <span class="type">Can</span> not read value at <span class="number">0</span> in block <span class="number">-1</span> in file</span><br></pre></td></tr></table></figure>
-<p>当时设置的字段属性为：<br><img src="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg" alt=""></p>
+<p>当时设置的字段属性为：<br><img src="http://oliji9s3j.bkt.clouddn.com/15118606648730.jpg" alt></p>
 <p>经过比对，发现是 decimal 类型出了问题，查询 decimal 的字段时候就会报错，而查询其他的并不会报错。（这应该是 spark 引起的，因为在 hive 客户端执行 decimal 类型的操作时并不会出错。）</p>
 <p>查阅网上，也有些朋友遇到了类似的事情，应该是官方的 bug ，暂时的解决办法是:</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 将 <span class="type">Parquet</span> 的存储格式转换为 <span class="type">ORC</span> </span><br><span class="line"><span class="number">2.</span> 或将 decimal 换为 double 类型存储字段</span><br></pre></td></tr></table></figure>
@@ -505,7 +502,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付">
         <p>微信支付</p>
       </div>
     
@@ -541,7 +538,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/01/三步走战略/" rel="next" title="三步走战略">
+              <a href="/2017/11/01/2019 Marjorie Deane finance internship/" rel="next" title="三步走战略">
                 <i class="fa fa-chevron-left"></i> 三步走战略
               </a>
             
@@ -629,9 +626,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="森" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
               <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
@@ -644,7 +639,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -655,7 +650,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -666,7 +661,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -753,7 +748,7 @@
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>

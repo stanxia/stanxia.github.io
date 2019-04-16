@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/1281.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,orc,parquet," />
+  <meta name="keywords" content="spark,orc,parquet,">
 
 
 
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119243950348.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119244638287.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119245211902.jpg">
-<meta property="og:updated_time" content="2017-12-28T09:44:21.482Z">
+<meta property="og:updated_time" content="2019-04-16T06:56:36.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ORC与PARQUET文件类型的比较">
 <meta name="twitter:description" content="列式存储由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化： 123查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum">
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/"/>
+  <link rel="canonical" href="https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/">
 
 
 
@@ -165,7 +165,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">东篱下</span>
         <span class="logo-line-after"><i></i></span>
@@ -289,9 +289,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -332,7 +330,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
     
@@ -368,7 +366,7 @@
           </span>
     
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -399,8 +397,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/29/ORC与PARQUET文件类型的比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -441,11 +438,11 @@
       
         <h2 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h2><p>由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum等)，实现部分的谓词下推。</span><br><span class="line">由于每一列的成员都是同构的，可以针对不同的数据类型使用更高效的数据压缩算法，进一步减小I/O。</span><br><span class="line">由于每一列的成员的同构性，可以使用更加适合CPU pipeline的编码方式，减小CPU的缓存失效。</span><br></pre></td></tr></table></figure>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119228873171.jpg" alt=""></center><br><center>图1 行式存储VS列式存储</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119228873171.jpg" alt></center><br><center>图1 行式存储VS列式存储</center>
 
 <a id="more"></a>
 <h2 id="嵌套数据格式"><a href="#嵌套数据格式" class="headerlink" title="嵌套数据格式"></a>嵌套数据格式</h2><p>通常我们使用关系数据库存储结构化数据，而关系数据库支持的数据模型都是扁平式的，而遇到诸如List、Map和自定义Struct的时候就需要用户自己解析，但是在大数据环境下，数据的来源多种多样，例如埋点数据，很可能需要把程序中的某些对象内容作为输出的一部分，而每一个对象都可能是嵌套的，所以如果能够原生的支持这种数据，查询的时候就不需要额外的解析便能获得想要的结果。例如在Twitter，他们一个典型的日志对象（一条记录）有87个字段，其中嵌套了7层，如下图。</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119230522913.jpg" alt=""><br>图2 嵌套数据模型</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119230522913.jpg" alt><br>图2 嵌套数据模型</center>
 
 <p>随着嵌套格式的数据的需求日益增加，目前Hadoop生态圈中主流的查询引擎都支持更丰富的数据类型，例如Hive、SparkSQL、Impala等都原生的支持诸如struct、map、array这样的复杂数据类型，这样促使各种存储格式都需要支持嵌套数据格式。</p>
 <h2 id="Parquet存储格式"><a href="#Parquet存储格式" class="headerlink" title="Parquet存储格式"></a>Parquet存储格式</h2><p>Apache Parquet是Hadoop生态圈中一种新型列式存储格式，它可以兼容Hadoop生态圈中大多数计算框架(Mapreduce、Spark等)，被多种查询引擎支持（Hive、Impala、Drill等），并且它是语言和平台无关的。Parquet最初是由Twitter和Cloudera合作开发完成并开源，2015年5月从Apache的孵化器里毕业成为Apache顶级项目。</p>
@@ -453,7 +450,7 @@
 <h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>Parquet支持嵌套的数据模型，类似于Protocol Buffers，每一个数据模型的schema包含多个字段，每一个字段有三个属性：重复次数、数据类型和字段名，重复次数可以是以下三种：required(只出现1次)，repeated(出现0次或多次)，optional(出现0次或1次)。每一个字段的数据类型可以分成两种：group(复杂类型)和primitive(基本类型)。例如Dremel中提供的Document的schema示例，它的定义如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">message Document &#123;</span><br><span class="line">  required int64 DocId;</span><br><span class="line">  optional group Links &#123;</span><br><span class="line">    repeated int64 Backward;</span><br><span class="line">    repeated int64 Forward; </span><br><span class="line">  &#125;</span><br><span class="line">  repeated group Name &#123;</span><br><span class="line">    repeated group Language &#123;</span><br><span class="line">      required string Code;</span><br><span class="line">      optional string Country; </span><br><span class="line">     &#125;</span><br><span class="line">    optional string Url; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以把这个Schema转换成树状结构，根节点可以理解为repeated类型，如图3。</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119233145314.jpg" alt=""><br>图3 Parquet的schema结构</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119233145314.jpg" alt><br>图3 Parquet的schema结构</center>
 
 <p>可以看出在Schema中所有的基本类型字段都是叶子节点，在这个Schema中一共存在6个叶子节点，如果把这样的Schema转换成扁平式的关系模型，就可以理解为该表包含六个列。Parquet中没有Map、Array这样的复杂数据结构，但是可以通过repeated和group组合来实现的。由于一条记录中某一列可能出现零次或者多次，需要标示出哪些列的值构成一条完整的记录。这是由Striping/Assembly算法实现的。</p>
 <p>由于Parquet支持的数据模型比较松散，可能一条记录中存在比较深的嵌套关系，如果为每一条记录都维护一个类似的树状结可能会占用较大的存储空间，因此Dremel论文中提出了一种高效的对于嵌套数据格式的压缩算法：Striping/Assembly算法。它的原理是每一个记录中的每一个成员值有三部分组成：Value、Repetition level和Definition level。value记录了该成员的原始值，可以根据特定类型的压缩算法进行压缩，两个level值用于记录该值在整个记录中的位置。对于repeated类型的列，Repetition level值记录了当前值属于哪一条记录以及它处于该记录的什么位置；对于repeated和optional类型的列，可能一条记录中某一列是没有值的，假设我们不记录这样的值就会导致本该属于下一条记录的值被当做当前记录的一部分，从而造成数据的错误，因此对于这种情况需要一个占位符标示这种情况。</p>
@@ -467,7 +464,7 @@
 <li>页(Page)：每一个列块划分为多个页，一个页是最小的编码的单位，在同一个列块的不同页可能使用不同的编码方式。</li>
 </ol>
 <p>通常情况下，在存储Parquet数据的时候会按照HDFS的Block大小设置行组的大小，由于一般情况下每一个Mapper任务处理数据的最小单位是一个Block，这样可以把每一个行组由一个Mapper任务处理，增大任务执行并行度。Parquet文件的格式如下图所示。</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119234450484.jpg" alt=""><br>图4 Parquet文件结构</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119234450484.jpg" alt><br>图4 Parquet文件结构</center>
 
 <p>上图展示了一个Parquet文件的结构，一个文件中可以存储多个行组，文件的首位都是该文件的Magic Code，用于校验它是否是一个Parquet文件，Footer length存储了文件元数据的大小，通过该值和文件长度可以计算出元数据的偏移量，文件的元数据中包括每一个行组的元数据信息和当前文件的Schema信息。除了文件中每一个行组的元数据，每一页的开始都会存储该页的元数据，在Parquet中，有三种类型的页：数据页、字典页和索引页。数据页用于存储当前行组中该列的值，字典页存储该列值的编码字典，每一个列块中最多包含一个字典页，索引页用来存储当前行组下该列的索引，目前Parquet中还不支持索引页，但是在后面的版本中增加。</p>
 <h3 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h3><p>说到列式存储的优势，Project下推是无疑最突出的，它意味着在获取表中原始数据时只需要扫描查询中需要的列，由于每一列的所有值都是连续存储的，避免扫描整个表文件内容。</p>
@@ -476,7 +473,7 @@
 <h2 id="ORC文件格式"><a href="#ORC文件格式" class="headerlink" title="ORC文件格式"></a>ORC文件格式</h2><p>ORC文件格式是一种Hadoop生态圈中的列式存储格式，它的产生早在2013年初，最初产生自Apache Hive，用于降低Hadoop数据存储空间和加速Hive查询速度。和Parquet类似，它并不是一个单纯的列式存储格式，仍然是首先根据行组分割整个表，在每一个行组内进行按列存储。ORC文件是自描述的，它的元数据使用Protocol Buffers序列化，并且文件中的数据尽可能的压缩以降低存储空间的消耗，目前也被Spark SQL、Presto等查询引擎支持，但是Impala对于ORC目前没有支持，仍然使用Parquet作为主要的列式存储格式。2015年ORC项目被Apache项目基金会提升为Apache顶级项目。</p>
 <h3 id="数据模型-1"><a href="#数据模型-1" class="headerlink" title="数据模型"></a>数据模型</h3><p>和Parquet不同，ORC原生是不支持嵌套数据格式的，而是通过对复杂数据类型特殊处理的方式实现嵌套格式的支持，例如对于如下的hive表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `orcStructTable`(</span><br><span class="line">  `name` string,</span><br><span class="line">  `course` struct&lt;course:string,score:int&gt;,</span><br><span class="line">  `score` map&lt;string,int&gt;,</span><br><span class="line">  `work_locations` array&lt;string&gt;)</span><br></pre></td></tr></table></figure>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119238618712.jpg" alt=""><br>图5 ORC的schema结构</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119238618712.jpg" alt><br>图5 ORC的schema结构</center>
 
 <p>在ORC的结构中这个schema包含10个column，其中包含了复杂类型列和原始类型的列，前者包括LIST、STRUCT、MAP和UNION类型，后者包括BOOLEAN、整数、浮点数、字符串类型等，其中STRUCT的孩子节点包括它的成员变量，可能有多个孩子节点，MAP有两个孩子节点，分别为key和value，LIST包含一个孩子节点，类型为该LIST的成员类型，UNION一般不怎么用得到。每一个Schema树的根节点为一个Struct类型，所有的column按照树的中序遍历顺序编号。</p>
 <p>ORC只需要存储schema树中叶子节点的值，而中间的非叶子节点只是做一层代理，它们只需要负责孩子节点值得读取，只有真正的叶子节点才会读取数据，然后交由父节点封装成对应的数据结构返回。</p>
@@ -489,7 +486,7 @@
 <li>row group：索引的最小单位，一个stripe中包含多个row group，默认为10000个值组成。</li>
 <li>stream：一个stream表示文件中一段有效的数据，包括索引和数据两类。索引stream保存每一个row group的位置和统计信息，数据stream包括多种类型的数据，具体需要哪几种是由该列类型和编码方式决定。</li>
 </ol>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119239944085.jpg" alt=""><br><br>图6 ORC文件结构</center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119239944085.jpg" alt><br><br>图6 ORC文件结构</center>
 
 <p>在ORC文件中保存了三个层级的统计信息，分别为文件级别、stripe级别和row group级别的，他们都可以用来根据Search ARGuments（谓词下推条件）判断是否可以跳过某些数据，在统计信息中都包含成员数和是否有null值，并且对于不同类型的数据设置一些特定的统计信息。</p>
 <h3 id="数据访问-1"><a href="#数据访问-1" class="headerlink" title="数据访问"></a>数据访问</h3><p>读取ORC文件是从尾部开始的，第一次读取16KB的大小，尽可能的将Postscript和Footer数据都读入内存。文件的最后一个字节保存着PostScript的长度，它的长度不会超过256字节，PostScript中保存着整个文件的元数据信息，它包括文件的压缩格式、文件内部每一个压缩块的最大长度(每次分配内存的大小)、Footer长度，以及一些版本信息。在Postscript和Footer之间存储着整个文件的统计信息(上图中未画出)，这部分的统计信息包括每一个stripe中每一列的信息，主要统计成员数、最大值、最小值、是否有空值等。</p>
@@ -522,7 +519,7 @@
 <li>Parquet格式，默认压缩（Snappy），一共1800+个分区 ： 14.8 G</li>
 </ul>
 <p>查询测试结果：</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119243155587.jpg" alt=""></center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119243155587.jpg" alt></center>
 
 <h4 id="场景二：维度表和事实表join之后生成的宽表，只在一个表上做查询。"><a href="#场景二：维度表和事实表join之后生成的宽表，只在一个表上做查询。" class="headerlink" title="场景二：维度表和事实表join之后生成的宽表，只在一个表上做查询。"></a>场景二：维度表和事实表join之后生成的宽表，只在一个表上做查询。</h4><p>整个测试设置了四种场景，每一种场景下对比测试数据占用的存储空间的大小和相同查询执行消耗的时间对比，除了场景一基于原始的TPC-DS数据集外，其余的数据都需要进行数据导入，同时对比这几个场景的数据导入时间。选取数据模型中的store_sales, household_demographics, customer_address, date_dim, store表生成一个扁平式宽表(store_sales_wide_table)，基于这个表执行查询，由于场景一种选择的query大多数不能完全match到这个宽表，所以对场景1中的SQL进行部分改造。</p>
 <p>store_sales_wide_table表记录数：263,704,266，表大小为：</p>
@@ -532,7 +529,7 @@
 <li>PARQUET格式，默认压缩 ： 12.5 G</li>
 </ul>
 <p>查询测试结果：</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119243950348.jpg" alt=""><br></center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119243950348.jpg" alt><br></center>
 
 <h4 id="场景三：复杂的数据结构组成的宽表，struct、list、map等（1层）"><a href="#场景三：复杂的数据结构组成的宽表，struct、list、map等（1层）" class="headerlink" title="场景三：复杂的数据结构组成的宽表，struct、list、map等（1层）"></a>场景三：复杂的数据结构组成的宽表，struct、list、map等（1层）</h4><p>整个测试设置了四种场景，每一种场景下对比测试数据占用的存储空间的大小和相同查询执行消耗的时间对比，除了场景一基于原始的TPC-DS数据集外，其余的数据都需要进行数据导入，同时对比这几个场景的数据导入时间。在场景二的基础上，将维度表（除了store_sales表）转换成一个struct或者map对象，源store_sales表中的字段保持不变。生成有一层嵌套的新表（store_sales_wide_table_one_nested），使用的查询逻辑相同。</p>
 <p>store_sales_wide_table_one_nested表记录数：263,704,266，表大小为：</p>
@@ -542,7 +539,7 @@
 <li>PARQUET格式，默认压缩 ： 29.8 G</li>
 </ul>
 <p>查询测试结果：</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119244638287.jpg" alt=""><br></center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119244638287.jpg" alt><br></center>
 
 <h4 id="场景四：复杂的数据结构，多层嵌套。（3层）"><a href="#场景四：复杂的数据结构，多层嵌套。（3层）" class="headerlink" title="场景四：复杂的数据结构，多层嵌套。（3层）"></a>场景四：复杂的数据结构，多层嵌套。（3层）</h4><p>整个测试设置了四种场景，每一种场景下对比测试数据占用的存储空间的大小和相同查询执行消耗的时间对比，除了场景一基于原始的TPC-DS数据集外，其余的数据都需要进行数据导入，同时对比这几个场景的数据导入时间。在场景三的基础上，将部分维度表的struct内的字段再转换成struct或者map对象，只存在struct中嵌套map的情况，最深的嵌套为三层。生成一个多层嵌套的新表（store_sales_wide_table_more_nested），使用的查询逻辑相同。</p>
 <p>该场景中只涉及一个多层嵌套的宽表，没有任何分区字段，store_sales_wide_table_more_nested表记录数：263,704,266，表大小为：</p>
@@ -552,7 +549,7 @@
 <li>PARQUET格式，默认压缩 ： 23.1 G 比一层嵌套表store_sales_wide_table_one_nested要小？</li>
 </ul>
 <p>查询测试结果：</p>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119245211902.jpg" alt=""></center>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119245211902.jpg" alt></center>
 
 <h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>从上述测试结果来看，星状模型对于数据分析场景并不是很合适，多个表的join会大大拖慢查询速度，并且不能很好的利用列式存储带来的性能提升，在使用宽表的情况下，列式存储的性能提升明显，ORC文件格式在存储空间上要远优于Text格式，较之于PARQUET格式有一倍的存储空间提升，在导数据（insert into table select 这样的方式）方面ORC格式也要优于PARQUET，在最终的查询性能上可以看到，无论是无嵌套的扁平式宽表，或是一层嵌套表，还是多层嵌套的宽表，两者的查询性能相差不多，较之于Text格式有2到3倍左右的提升。</p>
 <p>另外，通过对比场景二和场景三的测试结果，可以发现扁平式的表结构要比嵌套式结构的查询性能有所提升，所以如果选择使用大宽表，则设计宽表的时候尽可能的将表设计的扁平化，减少嵌套数据。</p>
@@ -597,7 +594,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付"/>
+        <img id="wechat_qr" src="/images/pic/wechatpay.jpeg" alt="森 微信支付">
         <p>微信支付</p>
       </div>
     
@@ -723,9 +720,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="森" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
               <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
@@ -738,7 +733,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -749,7 +744,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -760,7 +755,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -847,7 +842,7 @@
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>
