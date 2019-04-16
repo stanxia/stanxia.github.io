@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="采菊东篱下，悠然见南山">
+<meta name="description" content="技术改变世界，阅读塑造人生">
 <meta property="og:type" content="website">
 <meta property="og:title" content="东篱下">
 <meta property="og:url" content="https://stanxia.github.io/page/2/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="采菊东篱下，悠然见南山">
+<meta property="og:description" content="技术改变世界，阅读塑造人生">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="东篱下">
-<meta name="twitter:description" content="采菊东篱下，悠然见南山">
+<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
 
 
 
@@ -314,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/12/Spark sample 取样函数/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/The fire in Notre Dame cathedral, and more from our daily podcast/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -333,7 +333,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/12/Spark sample 取样函数/" itemprop="url">spark取样函数分析</a></h1>
+                <a class="post-title-link" href="/2019/04/16/The fire in Notre Dame cathedral, and more from our daily podcast/" itemprop="url">The fire in Notre Dame cathedral, and more from our daily podcast</a></h1>
         
     
         <div class="post-meta">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T17:30:25+00:00">
-                2017-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T23:16:44+00:00">
+                2019-04-16
               </time>
             
     
@@ -368,8 +368,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/economist/" itemprop="url" rel="index">
+                    <span itemprop="name">economist</span>
                   </a>
                 </span>
     
@@ -386,8 +386,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/12/Spark sample 取样函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/12/Spark sample 取样函数/" itemprop="commentCount"></span>
+                <a href="/2019/04/16/The fire in Notre Dame cathedral, and more from our daily podcast/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/The fire in Notre Dame cathedral, and more from our daily podcast/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,7 +395,7 @@
     
           
           
-             <span id="/2017/12/12/Spark sample 取样函数/" class="leancloud_visitors" data-flag-title="spark取样函数分析">
+             <span id="/2019/04/16/The fire in Notre Dame cathedral, and more from our daily podcast/" class="leancloud_visitors" data-flag-title="The fire in Notre Dame cathedral, and more from our daily podcast">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -427,13 +427,1239 @@
     
       
         
-          <!--请开始装逼-->
-<div class="note info"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2></div>
-<p>Spark取样操作，无法获取随机样本的解决方案。Dataset中sample函数源码如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a user-supplied seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过使用用户提供的种子，通过抽样的方式返回一个新的[[Dataset]]。</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=true的话表示有放回的抽样，采用泊松抽样算法实现.</span></span><br><span class="line"><span class="comment">  *                        如果withReplacement=false的话表示无放回的抽样，采用伯努利抽样算法实现.</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每一行数据被取样的概率.服从二项分布.当withReplacement=true的时候fraction&gt;=0,当withReplacement=false的时候 0 &lt; fraction &lt; 1.</span></span><br><span class="line"><span class="comment">  * @param seed            Seed for sampling.</span></span><br><span class="line"><span class="comment">  *                        取样种子（与随机数生成有关）</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>, seed: <span class="type">Long</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  require(fraction &gt;= <span class="number">0</span>,</span><br><span class="line">    <span class="string">s"Fraction must be nonnegative, but got <span class="subst">$&#123;fraction&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">  withTypedPlan &#123;</span><br><span class="line">    <span class="type">Sample</span>(<span class="number">0.0</span>, fraction, withReplacement, seed, logicalPlan)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns a new [[Dataset]] by sampling a fraction of rows, using a random seed.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * 通过程序随机的种子，抽样返回新的DataSet</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param withReplacement Sample with replacement or not.</span></span><br><span class="line"><span class="comment">  *                        取样结果是否放回</span></span><br><span class="line"><span class="comment">  * @param fraction        Fraction of rows to generate.</span></span><br><span class="line"><span class="comment">  *                        每行数据被取样的概率</span></span><br><span class="line"><span class="comment">  * @note This is NOT guaranteed to provide exactly the fraction of the total count</span></span><br><span class="line"><span class="comment">  *       of the given [[Dataset]].</span></span><br><span class="line"><span class="comment">  *       不能保证准确的按照给定的分数取样。（一般结果会在概率值*总数左右）</span></span><br><span class="line"><span class="comment">  * @group typedrel</span></span><br><span class="line"><span class="comment">  * @since 1.6.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span></span>(withReplacement: <span class="type">Boolean</span>, fraction: <span class="type">Double</span>): <span class="type">Dataset</span>[<span class="type">T</span>] = &#123;</span><br><span class="line">  sample(withReplacement, fraction, <span class="type">Utils</span>.random.nextLong)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+            <h5 id="Also-counting-civilian-casualties-and-Cuba’s-sporting-export"><a href="#Also-counting-civilian-casualties-and-Cuba’s-sporting-export" class="headerlink" title="Also, counting civilian casualties and Cuba’s sporting export"></a>Also, counting civilian casualties and Cuba’s sporting export</h5><p><img src="https://cdn.static-economist.com/sites/default/files/the_intelligence_54.jpg" alt="image"></p>
+<blockquote>
+<p>Podcasts | Apr 16th 2019</p>
+</blockquote>
+<p>EMMANUEL MACRON, the president of France, was already dealing with national protests when a massive fire broke out at the Notre Dame cathedral, an 850-year old Parisian landmark. Can the tragedy, and Mr Macron’s leadership, bring the country together? America’s armed forces often don’t know how many civilians are killed in its air-strike campaigns—but that’s changing, thanks to pressure from the Pentagon’s loudest critics. And, though the Trump administration has cancelled a deal for Cuban baseball players, that won’t stop them making their way to the big leagues. Runtime: TK min.</p>
+<p>Listen on: Apple Podcasts | Spotify | Google | Stitcher | TuneIn</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/Cathedrals are neglected in much of Europe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/Cathedrals are neglected in much of Europe/" itemprop="url">Cathedrals are neglected in much of Europe</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T23:16:41+00:00">
+                2019-04-16
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/economist/" itemprop="url" rel="index">
+                    <span itemprop="name">economist</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/16/Cathedrals are neglected in much of Europe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/Cathedrals are neglected in much of Europe/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2019/04/16/Cathedrals are neglected in much of Europe/" class="leancloud_visitors" data-flag-title="Cathedrals are neglected in much of Europe">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <h5 id="Ancient-churches-are-the-greatest-glory-of-Europe’s-cities-and-a-headache-for-those-trying-to-look-after-them"><a href="#Ancient-churches-are-the-greatest-glory-of-Europe’s-cities-and-a-headache-for-those-trying-to-look-after-them" class="headerlink" title="Ancient churches are the greatest glory of Europe’s cities, and a headache for those trying to look after them"></a>Ancient churches are the greatest glory of Europe’s cities, and a headache for those trying to look after them</h5><p><img src="https://cdn.static-economist.com/sites/default/files/20190420_BLP507.jpg" alt="image"></p>
+<blockquote>
+<p>Erasmus | Apr 16th 2019</p>
+</blockquote>
+<p>THE CATHEDRAL of Notre Dame in Paris, and the vast outpouring of sorrow over its semi-destruction by fire on April 15th, epitomises the power of great houses of prayer to touch and inspire people. More palpably than any other kind of monument, they connect visitors with another world: one in which the finest composers, singers, sculptors, glass-makers, embroiderers and craft-workers of a given era joyfully mixed their energies in a vast, disinterested enterprise. </p>
+<p>To some degree, that enterprise continues as long as the building stands. That alone makes great historic churches a source of fascination, even for those with little interest in Christian worship. People want them to be there, even if they don’t wish to share the cost or join the prayers.  </p>
+<p>In almost every country in Europe, that creates an acute problem. The cost of maintaining the delicate stone fabric of a cathedral seems to rise geometrically, far out-stripping the ability of small congregations to sustain them. Governments and other secular bodies are minded to help but they also feel compelled, in most places, to respect the independence of the buildings’ historic stewards, in other words the churches.  </p>
+<p>In England, the established church boasts 42 cathedrals (technically defined as the seat of a bishop), of which 39 are listed as historic buildings whose preservation is both mandated by law and entitled to some public help. (About 12,000 of the 16,000 other places of worship controlled by the Church of England are also listed.) </p>
+<p>The Church of England likes to call the cathedrals one of its “success stories” with rising numbers of worshippers and visitors, and growing revenue. But as a recent report led by a bishop delicately put it, “recent failures of governance and management within a small number of cathedrals have highlighted vulnerabilities across the sector…” In plain language, at least two cathedrals have run into severe financial difficulties, which better stewardship might have avoided.</p>
+<p>English cathedrals are relatively independent bodies, run by a cleric known as a dean who relies on a group of advisers known as a chapter. They are free to raise money in many ways, from concerts to exhibitions to simply charging an admission fee, as about a quarter of them do. In recent weeks Derby Cathedral raised eyebrows by hosting films that included graphic sex scenes and depictions of paganism.</p>
+<p>Churches in Germany have an advantage. The system of religious taxes (under which people of Catholic or Lutheran heritage pay a levy to their respective denominations) has ensured an ample income stream. Germany’s religious masters have done better at hauling in revenue than at retaining worshippers, the figures would suggest.</p>
+<p>But a massive fund-raising effort, drawing in generous private-sector donors and ordinary well-wishers in Germany and Britain, was needed for one of the biggest church reconstruction projects of modern times: the rebuilding of the Frauenkirche in Dresden.</p>
+<p>This showpiece of German Baroque was destroyed, along with much of the city, in a British bombing raid in February 1945. The project, completed in 2005, was a complement to the erection in 1962 of a new cathedral in Coventry, replacing the one wrecked by a German air raid on the English Midlands.</p>
+<p>Most European states subsidise their historically dominant Christian denominations, directly or indirectly, while also leaving the sects’ religious masters relatively autonomous. In Italy, despite the notional separation of Catholic church and state, the two are deeply intertwined, through tax breaks and state help for maintaining the artistic heritage which is one of Italy’s greatest tourist draws. Belgium offers generous help to all its main religions, but Catholic cathedrals still charge stiff admission fees as though they were museums.</p>
+<p>In church-state relations, France is an outlier. Under the regime of laïcité, or strict secularism, municipalities took over formal responsibility for Catholic churches; clerics and their congregations are merely users. And clerics, in particular, are thin on the ground. In rural France, it is common for a priest to look after 30 old churches.</p>
+<p>That paucity of active users prompts municipal authorities to assign a low priority to conserving church buildings. In 2013 a huge neo-Gothic church in the northern French town of Abbeville was dramatically demolished by municipal leaders, who said the place was a safety hazard and too expensive to repair. Hundreds of other French churches may soon have a similar fate. Nor have France’s state authorities done very well at protecting houses of prayer from a wave of vandalism, including arson and desecration, that has afflicted them this year.</p>
+<p>Indeed, all over western Europe, churches are closing for lack of worshippers. In the Netherlands, a cardinal predicted in 2013 that two-thirds of the Roman Catholic churches in the country would shut by 2025.</p>
+<p>But a diametrically opposing trend is at work further east in Europe. Perhaps the most spectacular act of church reconstruction of recent times was the re-erection of Moscow’s Cathedral of Christ the Saviour, which was dynamited by Stalin in 1931 and thrown back up over five years starting in 1995. It was rebuilt in about a tenth of the time needed for the original construction.</p>
+<p>Elsewhere in Russia, under a crash building programme decreed by the Russian Orthodox church, at least three new churches are said to be opening per day. And in other parts of central and eastern Europe, from Serbia to Georgia, vast new Orthodox churches now adorn capital cities which were already endowed with many places of prayer.</p>
+<p>Indeed, the Russian church building spree extends far beyond the borders of the motherland. Anyone who takes a short walk along the banks of the Seine from the wreckage of Notre Dame will soon see a boldly modernistic structure, topped with onion domes: this “spiritual and cultural” centre, opened in 2016, was a pet project of President Vladimir Putin’s. It competes hard with an older Russian-style cathedral in Paris which the Muscovite authorities, to their frustration, do not control. </p>
+<p>As the Russian state media were eager to point out, western Europe is gaining some new Christian places of worship even as many others are destroyed, accidentally or otherwise.</p>
+<p>See alsoA terrible blaze devastates Notre Dame cathedral (April 15th 2019)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/Politics this week/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/Politics this week/" itemprop="url">Fire in the heart of Paris</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T18:15:21+00:00">
+                2019-04-16
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/economist/" itemprop="url" rel="index">
+                    <span itemprop="name">economist</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/16/Politics this week/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/Politics this week/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2019/04/16/Politics this week/" class="leancloud_visitors" data-flag-title="Fire in the heart of Paris">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <h6 id="Fire-in-the-heart-of-Paris"><a href="#Fire-in-the-heart-of-Paris" class="headerlink" title="Fire in the heart of Paris"></a>Fire in the heart of Paris</h6><h1 id="Politics-this-week"><a href="#Politics-this-week" class="headerlink" title="Politics this week"></a>Politics this week</h1><p><img src="https://cdn.static-economist.com/sites/default/files/images/print-edition/20190413_WWP004_0.jpg" alt="image"></p>
+<blockquote>
+<p>Apr 11th 2019</p>
+</blockquote>
+<p>Following months of mass protests in Sudan, it appeared that Omar al-Bashir had been ousted as president by the army. Mr al-Bashir had misruled since taking power in a coup in 1989. His civil war against non-Muslim black Africans ended with the secession of South Sudan. Separately, the International Criminal Court charged him with overseeing genocide in Darfur. See article. </p>
+<p>Binyamin Netanyahu won a record fifth term as prime minister of Israel. His Likud party tied with Blue and White, a centrist rival. But the right-wing and religious bloc, of which Likud is a part, won a majority of seats in the Knesset. In the final days of the campaign Mr Netanyahu vowed to begin annexing parts of the West Bank, further dimming the prospect of any peace with the Palestinians based on a two-state solution. See here and here. </p>
+<p>Khalifa Haftar, Libya’s most powerful warlord, attacked Tripoli, which is controlled by the UN-backed government. Dozens of people were killed in the fighting, as militias allied to the government rallied to defend the capital. A UN peace conference, scheduled for this month, was postponed. See article. </p>
+<p>Protests continued in Algeria, where crowds called for the resignation of Abdelkader Bensalah, the interim president. Mr Bensalah succeeded Abdelaziz Bouteflika, who resigned amid widespread anger at his regime after 20 years in charge. For the first time police used tear-gas to disperse the demonstrators. Mr Bensalah said the country would hold a presidential election on July 4th.</p>
+<p>Theresa May, Britain’s prime minister, attended a summit in Brussels to discuss another delay to Brexit. The European Union offered Britain six more months, pushing the deadline to October 31st, Halloween. That means Britain faces having to vote in elections to the European Parliament next month, though British MEPs will have to step down if Brexit actually happens. The president of the European Commission, Jean-Claude Juncker, joked that if there was another late-night meeting on the last day of the talks he might have to leave at midnight; his term ends on November 1st. See article. </p>
+<p>Julian Assange, a founder of WikiLeaks, was arrested by British police in the Ecuadorean embassy in London. Ecuador had granted Mr Assange refuge in 2012 after he had jumped bail while facing rape allegations. His relationship with his hosts soured after a change of government in Ecuador, where a leftist president was replaced by a more moderate one. Mr Assange has said he fears extradition to the United States, where WikiLeaks is not popular, having published reams of leaked American military secrets.</p>
+<p>Turkey’s ruling party demanded a fresh vote in Istanbul, where it narrowly lost the mayoralty in elections on March 31st.</p>
+<p>Italy’s deputy prime minister, Matteo Salvini, announced the formation of a new nationalist group within the European Parliament, to be called the European Alliance for People and Nations. However, none of the party leaders he hoped would attend from other countries turned up.</p>
+<p>The Trump administration cancelled a four-month-old agreement under which Cuban baseball players could join Major League teams in America without defecting from their country. The administration said the agreement would encourage human trafficking and help enrich Cuba’s communist government. See article. </p>
+<p>Jair Bolsonaro, Brazil’s president, sacked the education minister, Ricardo Vélez, who shared his socially conservative views. Mr Vélez had courted controversy by instructing schools to film classes singing the national anthem and repeating Mr Bolsonaro’s campaign slogan. His replacement, Abraham Weintraub, an economist, has said that crack cocaine was introduced to Brazil deliberately by the left. See here. </p>
+<p>Thanathorn Juangroongruangkit, the leader of the Future Forward party, was charged with sedition in relation to a protest against Thailand’s military junta in 2015. It is one of several repressive steps that has marred the country’s supposed return to democracy after an election last month. See article. </p>
+<p>Kassym Jomart Tokayev, Kazakhstan’s interim president following the sudden resignation of Nursultan Nazarbayev after three decades in power, called a snap election for June 9th. See article. </p>
+<p>South Korea’s constitutional court ruled that the government must end the country’s ban on abortion, in place since 1953, before the end of 2020. Doctors can currently be imprisoned if they perform the procedure. However, tens of thousands of abortions are carried out each year.</p>
+<p>Voting began in India’s seven-stage election. The final phase will take place on May 19th and the results for all seven stages will be announced on May 23rd. Polls suggest the ruling Bharatiya Janata Party will remain the biggest party. See article. </p>
+<p>A court in Hong Kong found nine people guilty of “public nuisance” charges relating to their leading roles in the Umbrella Movement of 2014, which involved weeks of sit-ins and demonstrations in busy commercial districts in support of democratic reform. Among the defendants were three founders of a group involved in the unrest. </p>
+<p>Kirstjen Nielsen resigned as the secretary of America’s Department of Homeland Security. Donald Trump is trying to replace the department’s top officials with people who will try harder to keep Mexicans out of the United States. Mr Trump has threatened to close the border entirely, despite advice that this would cause economic chaos. See article. </p>
+<p>Randolph Alles, the head of America’s Secret Service, is quitting. He had reportedly been asked to go before the recent security breach at Mr Trump’s private club, involving a Chinese woman with several thumb drives.</p>
+<p>Amnesty International’s annual report on the death penalty recorded a drop of nearly a third in known executions worldwide last year. There were 690 in 2018, down from 1,061 in 2015. The number of death sentences passed by courts also declined slightly, though in the Middle East and north Africa death sentences nearly doubled to 1,170. The region is responsible for two-thirds of the world’s known executions. (China is also thought to execute thousands of people every year, but keeps its figures secret.) Of the countries that release figures, Iran is by far the most avid executioner, putting 409 people to death each year on average for the past decade.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/“Fosse-Verdon” is a compelling examination of a creative partnership/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/“Fosse-Verdon” is a compelling examination of a creative partnership/" itemprop="url">未命名</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T15:35:09+00:00">
+                2019-04-16
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/16/“Fosse-Verdon” is a compelling examination of a creative partnership/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/“Fosse-Verdon” is a compelling examination of a creative partnership/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2019/04/16/“Fosse-Verdon” is a compelling examination of a creative partnership/" class="leancloud_visitors" data-flag-title>
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <hr>
+<p>title: “Fosse/Verdon” is a compelling examination of a creative partnership </p>
+<p>date: 2019-04-16 23:16:39 </p>
+<p>tags: economist </p>
+<p>categories: economist </p>
+<hr>
+<h5 id="Bob-Fosse-and-Gwen-Verdon-were-integral-to-some-of-the-20th-century’s-biggest-musicals"><a href="#Bob-Fosse-and-Gwen-Verdon-were-integral-to-some-of-the-20th-century’s-biggest-musicals" class="headerlink" title="Bob Fosse and Gwen Verdon were integral to some of the 20th century’s biggest musicals"></a>Bob Fosse and Gwen Verdon were integral to some of the 20th century’s biggest musicals</h5><p><img src="https://cdn.static-economist.com/sites/default/files/20190420_BKP503.jpg" alt="image"></p>
+<blockquote>
+<p>Prospero | Apr 16th 2019</p>
+</blockquote>
+<p>“FOSSE/VERDON”, a new mini-series about two Broadway legends, could have been a simple paean to the magic of the stage. Bob Fosse (Sam Rockwell), a director, and his wife Gwen Verdon (Michelle Williams), a dancer, helped to create hits such as “Damn Yankees!”, “Chicago” and “Cabaret”. There is plenty of exquisite choreography, as legs kick in perfect time and dazzling costumes shimmer on twisting bodies, plus a sparkling rendition of “Big Spender”. Elsewhere, in a fantasy scene, Fosse twirls effortlessly down a corridor, surrounded by colourful dancers.</p>
+<p>But the show turns out to be a surprisingly moving examination of the characters of Fosse and Verdon, as well as their extraordinary careers. It opens with the build-up to “Cabaret”, Fosse’s best-known film, which he directed and choreographed in 1971. The viewer is transported from Hollywood to damp, dark Munich, where it was shot, and the pressure is palpable. The film cannot afford to be “another $20m fiasco”, a producer warns, referring to one of Fosse’s previous misses. Fosse, in turn, takes it out on his crew. “I wanna see every muscle, every tendon,” he barks during exhausting rehearsals for “Mein Herr”, one of the nightclub songs. After seeing the first cut, he moans to his assistant that “it’s unwatchable”. On the night of the premiere, he paces in the auditorium rather than watching the film (it was a box-office triumph and would go on to win eight Oscars). His personal torment, and abject terror of failure, is clear. </p>
+<p>The programme dances back and forth in time. Title cards, such as “Hollywood: 19 years left” and “Gwen Verdon: 14 years after her last Tony award”, contextualise the scenes, which range across five decades. It allows the viewer to see patterns emerge. A flashback to Fosse’s childhood dance classes, for example—“don’t show me the effort, Bobby, don’t show me the sweat. All they wanna see is that smile”—helps to explain Fosse’s treatment of his own dancers. Depictions of his career highs jar with his descent into depression and alcoholism, as well as scenes of childhood abuse. His wild lifestyle of pills, sex, parties and more pills, is juxtaposed with images of Verdon feeding their daughter dinner and arranging child care. The effect is troubling, and powerful. </p>
+<p>Mr Rockwell’s thoughtful and pained performance elicits a surprising amount of sympathy for Fosse, even as he behaves appallingly. One excruciating scene shows a lead dancer refusing his sexual advances; she is subsequently fired. But the decision to give Verdon equal billing in the production was a wise one (the series was originally adapted from “Fosse”, a biography written in 2013, but the producers realised that this would result in a narrow, uneven story). She emerges as a quiet kind of hero, helped by an elegant performance by Ms Williams. </p>
+<p>Verdon, as well as being Fosse’s long-suffering wife, was his creative collaborator. Her career peaked in the 1950s, when she won a string of Tony awards, but she gradually lost her hold over Hollywood and was eventually eclipsed by her husband. Yet when “Cabaret” hits a crisis—the endless rehearsals are ruining the shooting schedule, and the budget—it is Verdon that Fosse needs, begging her to come and join him in Germany. She sweeps in, taking charge of hair and make-up and fine-tuning the dancing. Where Fosse had used the dancers as moving props, Verdon makes them into fleshed-out characters with backstories. As such, “Fosse/Verdon” reminds viewers that great feats are rarely accomplished alone (a theme that Lin-Manuel Miranda, an executive producer of the series, touched upon in “Hamilton”, his own musical hit). </p>
+<p>Tributes to Tinseltown and Broadway, such as “La La Land”, often focus on the glamour and romanticism of it all. “Fosse/Verdon” is all the better for lifting the stage curtain to look at the people behind it. The series understands that while show business projects an image of human perfection, its masters are as flawed as they are brilliant.</p>
+<p>“Fosse/Verdon” is showing on FX in America now. It will be released in Britain on BBC Two later this year</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/Tiger Woods made our golf model look silly Have we learned a lesson/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/Tiger Woods made our golf model look silly Have we learned a lesson/" itemprop="url">未命名</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T15:35:09+00:00">
+                2019-04-16
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/16/Tiger Woods made our golf model look silly Have we learned a lesson/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/Tiger Woods made our golf model look silly Have we learned a lesson/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2019/04/16/Tiger Woods made our golf model look silly Have we learned a lesson/" class="leancloud_visitors" data-flag-title>
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <hr>
+<p>title: Tiger Woods made our golf model look silly Have we learned a lesson</p>
+<p>date: 2019-04-16 23:16:43 </p>
+<p>tags: economist </p>
+<p>categories: economist </p>
+<hr>
+<h5 id="The-sport’s-most-beloved-star-was-very-good-at-Augusta—but-also-very-lucky"><a href="#The-sport’s-most-beloved-star-was-very-good-at-Augusta—but-also-very-lucky" class="headerlink" title="The sport’s most beloved star was very good at Augusta—but also very lucky"></a>The sport’s most beloved star was very good at Augusta—but also very lucky</h5><p><img src="https://cdn.static-economist.com/sites/default/files/20190420_BLP501_0.jpg" alt="image"></p>
+<blockquote>
+<p>Game theory | Apr 16th 2019</p>
+</blockquote>
+<p>FOR EVERY single week between August 2013 and September 2018, betting on Tiger Woods was a losing proposition. Owing to a series of injuries and over-use of pain-killing prescription drugs, golf’s biggest star went five years without winning a single tournament. So in hindsight, it looks like remarkably poor timing that the The Economist ran an article pouring cold water on Mr Woods’s chances of winning the Masters Tournament in precisely the week that he wound up ending his 11-year-long drought in major championships. “Our Masters forecast is lukewarm on Tiger Woods”, read the headline on the online version of the story, which ended by declaring it “more likely than not that he has let loose his last roar”.</p>
+<p>Before the tournament began, betting markets gave Mr Woods a 5% chance to win. That was more than twice the 2.2% estimate produced by EAGLE, our statistical golf prediction model. Did punters know something that the computer did not?</p>
+<p>EAGLE may well have under-estimated the probability that the man who once played the game better than anyone else in history would re-capture his mojo. However, close scrutiny of Mr Woods’s showing at the Masters suggests that rather than channelling vintage Tiger, he delivered a merely excellent tournament, not one for the ages. His performance was easily within the capacity of any top-ten golfer, and one that in general is not sufficient to win a major.</p>
+<p>In fact, Mr Woods’s four days in Georgia were not even his own best work at a major since he returned to action. Last year at the PGA Championship, Mr Woods played well enough to win, but was stymied by a competitor who was just a bit better. This time, in contrast, he put in nearly as good an effort, while all of the other contenders in a wide-open field made costly errors at crucial moments.</p>
+<p>The prodigal son returns Although EAGLE was far less bullish on Mr Woods than bettors were, the model was actually rather impressed by his comeback. After adjusting for course conditions and difficulty, Mr Woods’s average scores since he returned from injury in December 2017 were the tenth-best in the world during that period. EAGLE ranked him as the ninth-best golfer in this year’s Masters field, with an expected score of 0.36 strokes above par per round under standard conditions for a major tournament.</p>
+<p>There is so much round-to-round variability intrinsic to golf that over a mere 72 holes, the best player in the world at the start of a major tournament rarely emerges victorious. EAGLE regarded Dustin Johnson as the leader of the Masters pack by a comfortable margin, but still gave him just an 8% chance to win. (At the tail end of his peak, Mr Woods towered so far above the competition that he reached seemingly unthinkable victory odds around 25%. No one has approached that level since.) Instead, the champion usually emerges from the cluster of players ranked between fifth and 30th—though determining exactly which one of them fortune will smile upon is a fool’s errand. By EAGLE’s estimate, the current version of Mr Woods plays at almost exactly the average skill level of major winners. Then again, so do competitors like Paul Casey and Sergio García, who both wound up buried at the bottom of the Masters leaderboard.</p>
+<p>Rather than unfounded scepticism about Mr Woods’s ability, EAGLE’s estimate of his chances fell short of those of betting markets for two reasons. The first is that in the model’s calculation, punters tend to over-value all elite or well-known players, while under-estimating those of long-shots. The ranks of major champions include almost all of the greats, but also out-of-nowhere upstarts. In 2009 the unheralded Y.E. Yang rallied from a seven-stroke deficit to beat Mr Woods at the 2009 PGA Championship, which by EAGLE’s estimate was the most improbable major victory of the 21st century. Two years later, Darren Clarke was ranked 111th in the world when he won his first and only major at the Open Championship in England at the age of 42.</p>
+<p>Individually, each low-ranked competitor has only a slim chance of victory. Collectively, however, their probability tends to be greater—and thus, the chances of the favourites are lower—than the prices on peer-to-peer betting exchanges suggest. Based on EAGLE’s calculations, the most profitable bet ahead of the Masters was to wager on a stumble by Rory McIlroy, who was heavily favoured in betting markets to win the tournament. Mr McIlroy wound up finishing 21st, offering a healthy pay-out to doubters—including your correspondent—who took odds of 2.5-to-one (a 29% probability) or better that he would fail to make the top 20. EAGLE reckoned his chances of such a disappointing result were just under 50%.</p>
+<p>The second explanation for EAGLE’s relative pessimism is that unlike bettors, the model treats all players with similar scores over the past few years similarly—regardless of whether or not they happen to be named Tiger Woods. Punters priced Mr Woods as the third or fourth most likely player to win the tournament, a conclusion impossible to justify based solely on his record since 2017. The only way to arrive at such a lofty valuation was to bake in a significant probability that he would recover the form he last displayed nearly a decade ago. As prescient as that looks in hindsight, could it really have been justified in advance?</p>
+<p>EAGLE takes a straightforward approach to weighting historical scores: every day, each round result in its database loses about 0.25% of its impact. Scores from a week ago are counted about 98% as much as ones from today; those a month old are worth 93%; those a full year in the past get 41%; and those two years back are assigned 16%. On one hand, this “decay rate”, optimised to produce the most accurate forecasts over the model’s entire dataset of over 1m rounds, looks surprisingly gentle. Few analysts pay attention to scores from even six months ago, not to mention those from two years in the past. But given the length of Mr Woods’s decline phase and absences from the game, the weight EAGLE puts on scores from the last time he won a tournament in 2013 rounds to zero.</p>
+<p>For most golfers, ignoring results over six years old would be sensible. But Mr Woods, as always, is a special case. He was ailing during many of the rounds he did play in the intervening years, making those results poor predictors of how he might perform when healthy. Moreover, he might have needed to re-discover his touch during the first months of his comeback. In theory, a well-designed model would need to give him credit for his proven potential, while discounting the importance of scores recorded before he settled into form.</p>
+<p>In practice, however, the particulars of Mr Woods’s journey mitigate many of these concerns. Because he barely played in the two years to November 2017, EAGLE’s time-decay function already caused it to disregard the poor scores Mr Woods recorded before his time off. And rather than gaining ground incrementally once he came back en route to his climactic Masters triumph, the rejuvenated star emerged fully formed, like Athena springing from the head of Zeus, from the moment he resumed play. In the first six tournaments he played upon his return, he finished second, fifth, ninth, 12th and 23rd, with only one missed cut—a run that would make a golfer half his age proud. During the following year, he maintained that level of performance—one consistent with a top-ten player, rather than a top-five one—but did not improve upon it.</p>
+<p>Fans of Mr Woods will surely insist that this approach sells their hero short. So as a check on EAGLE’s method, consider a thought experiment. Suppose that back in 2009, when Mr Woods announced he would take a break from golf to repair his broken personal life, that hiatus had lasted for a decade rather than for just a few months. How might we have predicted him to perform in 2019, knowing nothing but how he had played at his peak?</p>
+<p>Ageing curves are far gentler in golf than in most other sports—no one blinks an eye when a 40-something golfer wins a tournament. But that does not mean that time exacts no toll at all. On the contrary, golfers generally play significantly better in their 30s than in their 40s.</p>
+<p>Since records for the Official World Golf Rankings (OWGR) began in 1986, there have been 16 players other than Mr Woods who were in the top ten just before turning 34—Mr Woods’s age when the scandal broke—and were still active at Mr Woods’s current age of 43 years and three and a half months. Just two of them, Phil Mickelson and Greg Norman, were still in the top ten nine years later, and only three more (Colin Montgomerie, Ernie Els and Jim Furyk) managed to stay in the top 25.</p>
+<p>Overall, after translating their world rankings into expected scores to par under typical conditions, the average member of this group lost 1.47 strokes per round between the ages of 34 and 43. And just before his infidelity scandal became public, Mr Woods was playing at a level of some 1.19 strokes below par per round. If you add on 1.47 strokes per round for nine years of ageing, you get an estimate of 0.28 strokes above par per 18 holes today—just a hair better than the rate of 0.36 EAGLE derived from Mr Woods’s scoring record during the past 16 months. In other words, Mr Woods’s ability has declined at almost exactly the same rate as that of comparable players from previous eras, albeit from a much higher starting point.</p>
+<p>Raining on Tiger’s parade No matter how you slice it, Mr Woods looked like a strong but not top-tier contender when the tournament began. But when the facts change, nimble forecasters change their minds. Now that Mr Woods has donned the Masters victor’s green jacket, surely we can proclaim him “back” and resume debate over how long Jack Nicklaus’s record of 18 major championships is likely to stand—right?</p>
+<p>Not so fast. A useful concept in sports forecasting, devised by Bill James, a baseball statistician, is “signature significance”—the notion that some achievements are so remarkable that only the elites can accomplish them, even in very small samples of data. A good example in golf would be beating the average score in a major over four rounds by more than 20 strokes. Since 1960, the two best players in history (Mr Woods and Mr Nicklaus) have each done so twice. Mr Woods broke the mark at the 2000 US Open and 1997 Masters, while Mr Nicklaus did at the 1965 Masters and the 1977 Open Championship in Scotland—the notorious “Duel in the Sun” that he somehow managed to lose. The only other golfers to surpass this threshold are the all-time greats Tom Watson (who beat Mr Nicklaus that day), Raymond Floyd, Arnold Palmer and Phil Mickelson—and one merely good player, Henrik Stenson, who had a great tournament when thwarting Mr Mickelson at the 2016 Open Championship.</p>
+<p>If Mr Woods had come anywhere close to exceeding the field average by 20 strokes, EAGLE would have immediately elevated him to the very top tier of its rankings. In fact, his score was quite pedestrian by the standards of major winners. All major victories may count the same, but not all of them are equally impressive. Sometimes, the champion dominates wire to wire, as Mr Woods did at the 2000 US Open, which he won by an astonishing margin of 15 strokes. But, just as often, a golfer sneaks to victory with a solid performance when his closest competitors stumble.</p>
+<p>All keen golf fans remember Mr Watson’s run at the 2009 Open Championship, when, at the age of 59, he led by a stroke with one hole to play, before bogeying and losing in a playoff to Stewart Cink. But the reason why the all-but-geriatric Mr Watson came that close to winning was that no one managed to beat the field average by even eight strokes. In the vast majority of tournaments, Mr Cink’s scorecard would not have come anywhere close to victory. But he had the good fortune to play somewhat better than average over four days when everyone else was off their game.</p>
+<p>Mr Woods’s recent Masters victory was not quite as underwhelming as Mr Cink’s, but it was not far off. Although his finishing score of 275 looks impressive, the average score among golfers making the cut was a three-under-par 285. Unsurprisingly, there were lots of strong players right on Mr Woods’s heels, all of whom had numerous opportunities to tie with or beat him.</p>
+<p>It would be hard to argue that Mr Woods’s scorecard at the 2019 Masters was more impressive than Mr Nicklaus’s losing effort at the Duel in the Sun, or Mr Mickelson’s runner-up showing to Mr Stenson in 2016. One way to quantify these differences is to take a player’s score above average, and then adjust it for tournament conditions and rules that cause scores either to spread out widely or to bunch closely together. (In general, the range of scores has grown more compressed over time, with the introduction of cut rules accelerating this trend. And events in which more players make the cut enable more mediocre golfers to post finishing scores, increasing the gap between the victor’s score and the field average.) This modified score above average can then be converted into a probability of winning a tournament. In general, players who beat the field average by 18 adjusted strokes go on to win about 95% of the time, those who exceed it by 13.5 strokes have a 50/50 chance, and ones who only surpass it by nine strokes are just under 5% to win.</p>
+<p>By this measure, Mr Woods’s career tally of major titles has generally hewed fairly closely to the probabilities suggested by his scorecards. He won all eight times his probability was 80% or higher, four of the six times it was between 50% and 80%, and two of the eight times it was between 10% and 50%.</p>
+<p>His showing at the 2019 Masters, however, is an extreme outlier. In general, players who amass his total of ten adjusted strokes better than the field average go on to win just 8.2% of the time. Mr Woods, of course, had to play well to put himself in contention. But on the final day, he also needed Francesco Molinari to deposit balls in the water on the 12th and 15th holes, Brooks Koepka to send a tee shot into Rae’s Creek on the 12th hole and miss a makeable birdie putt on the 18th, and Mr Johnson to see his furious charge on the back nine fall millimetres short of a final birdie on the 18th. The chances of all those misfortunes coming to pass at once were fairly low. As Mr Woods and Mr Molinari headed to the 12th hole on Sunday, EAGLE gave Mr Woods a 16% chance of emerging with the green jacket.</p>
+<p>None of this is intended to take away from Mr Woods’s stirring victory—or even to suggest that he has benefited from exceptionally good luck on the whole during his comeback. Before his triumph at Augusta, he had come up just short at the previous two majors: the Open Championship and PGA Championship of 2018. At the former, where he was also paired with Mr Molinari on the final day, Mr Woods briefly secured the lead all to himself before miscues undid him on the back nine—just as they would do to his rivals at this year’s Masters. Mr Molinari emerged as the victor. In the latter tournament, it was Mr Woods who mounted a late push on the last day, similar to Mr Johnson’s this past weekend. He fell just short, when Mr Koepka proved himself immune to the type of mistakes he would go on to commit eight months later at Augusta. Although Mr Woods ended up as the bridesmaid at the PGA Championship and the bride at the Masters, his scorecard at the earlier tournament actually gave him a slightly better chance to win. His score of 266 was 10.66 adjusted strokes above the field average, and gave him a 12.5% chance of victory.</p>
+<p>The second act goes on So where does that leave Mr Woods—and Mr Nicklaus’s record—going forward? If the last three majors are any guide, his most comparable players would be the other two champions in those events, both of whom Mr Woods has been in neck-and-neck races with on the final day: Mr Koepka and Mr Molinari. Mr Koepka has ascended to third in the OWGR, while Mr Molinari is seventh, one spot behind Mr Woods. All of those ranks are roughly consistent with a slight improvement on EAGLE’s take on Mr Woods before the Masters began: a top-ten player, but one below the top tier of Mr Johnson, Mr McIlroy and perhaps Justin Rose. That corresponds to a 2-4% chance of winning any given major, a 9% chance of winning another one this year, and a 50/50 chance of winning at least one more by the end of 2024—before accounting for the performance deterioration and greater risk of injury that ageing will inflict. In other words, Mr Nicklaus should probably rest easy. In all likelihood, Mr Woods was absent or injured for too many prime years to make a run at the all-time record.</p>
+<p>It may look like consummate stubbornness for us to continue preaching caution on Mr Woods’s future, just two days after he made a mockery of such counsel. But accurate forecasting methods require a sound process and validation over long time periods, not over-reaction to short-run fluctuations. Unsurprisingly, bettors already exuberant about Mr Woods have bid him up further following his Masters victory: he, Mr Johnson and Mr McIlroy are all trading as co-favourites to win the PGA Championship next month. If that continues, we will probably bet against him—and look forward to suffering the financial and reputational consequences when the Greatest Of All Time™ makes EAGLE look silly once again.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2019/04/16/Have Arthur Miller’s plays lost their edge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/Have Arthur Miller’s plays lost their edge/" itemprop="url">未命名</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T15:35:09+00:00">
+                2019-04-16
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/16/Have Arthur Miller’s plays lost their edge/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/16/Have Arthur Miller’s plays lost their edge/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2019/04/16/Have Arthur Miller’s plays lost their edge/" class="leancloud_visitors" data-flag-title>
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <hr>
+<p>title: Have Arthur Miller’s plays lost their edge</p>
+<p>date: 2019-04-16 23:16:48 </p>
+<p>tags: economist </p>
+<p>categories: economist </p>
+<hr>
+<h5 id="The-problem-often-lies-in-the-staging-not-the-works-themselves"><a href="#The-problem-often-lies-in-the-staging-not-the-works-themselves" class="headerlink" title="The problem often lies in the staging, not the works themselves"></a>The problem often lies in the staging, not the works themselves</h5><p><img src="https://cdn.static-economist.com/sites/default/files/20190420_BKP502.jpg" alt="image"></p>
+<blockquote>
+<p>Prospero | Apr 15th 2019</p>
+</blockquote>
+<p>ARTHUR MILLER did not aim to please his audiences. He reckoned that new ideas were a “humiliation” and an “affront” not only to people’s sensibilities but to their convictions, too. Like the ancient Greeks, Miller thought of drama as a “civic art”, a discipline that could contribute towards a state’s social and political progress. Unlike his contemporaries, he was not commercially minded. He said what no one else had the courage to, and his audiences would weep, or sit with their heads bowed. Irate patriots picketed theatres, and producers shied away from his work. Actors who appeared in his plays were shunned by their friends. </p>
+<p>Miller’s observations hold true in the 21st century, particularly about the fallacy of the American Dream. Many still think of material wealth and status as essential to happiness, as Willy Loman does in “Death of a Salesman”. “The American Clock”, which reflects on the Wall Street Crash and the Great Depression, is a reminder of the perils of short-termism. “The Price”, set 30 years later, focuses on the longer-term repercussions. In “All My Sons” Miller questions individualist thinking. “The Crucible” examines the destructive allure of ideologies.</p>
+<p>Those insights, far from alienating today’s audiences, are now Miller’s selling points. Productions of his work have increased since his death in 2005, according to Susan Abbotson, the president of the Arthur Miller Society. He has been among the ten most-performed playwrights in American theatres for the past four years. Six productions of his work are currently being staged in London, an unusually high number for any playwright other than William Shakespeare. Tickets in the West End sell for as much as £142 ($186), a sum Miller would no doubt have been uncomfortable with given his belief that theatre should be affordable. Does this popularity suggest that his plays have lost their subversive edge?</p>
+<p>Perhaps—time can dull even radical ideas. It is no longer shocking to hear that humans are doomed to repeat their mistakes. But Miller’s fashionableness also suggests that directors have stopped confronting their audiences, and have started pandering to them. A recent production at the Union Theatre of “An Enemy of the People”, Miller’s adaptation of Henrik Ibsen’s play, had an image of President Donald Trump on its poster. The action was set in a contemporary “small-town Republican” community. Mayor Stockmann, a manipulative politician, dresses in a red suit, grinning and waving to chants of “USA! USA!” Miller never assigned a political persuasion to the play’s characters—he saw himself as a mediator, showing disparate groups what they have in common—but the suggestion here was that only Republicans can succumb to populist rhetoric and misinformation. This version of “An Enemy of the People” reinforced divisions, and allowed its audience to leave feeling smug.</p>
+<p>Productions can also be too reverent of the source material. “The Price” (at Wyndham’s Theatre) strives for a historically accurate depiction of New York in the 1960s. The audience sees Gregory Solomon, a Russian-Jewish émigré, blessing his meagre lunch—a hard-boiled egg—in Hebrew. When the play was first performed in 1968, such details invited audiences to reflect on their city’s recent past, particularly the emotional fall-out from the boom and busts of the ‘20s and ‘30s. Now heightened for comic effect, they seem alien and strange. Miller wanted his plays to be relatable, not preserved in aspic—“there are museums for such activities,” he said—and so the setting must be familiar. In 2012 a production in Mumbai turned Solomon into a Muslim nonagenarian to great effect.</p>
+<p>Miller’s plays provoked because they were about the audience as much as for them. “The Crucible” (pictured, at the Yard Theatre) opens with the townspeople of Salem dressed in the same style of clothing—beanie hats, baggy t-shirts, cargo trousers—as the audience of this edgy North London theatre. They are invited to confront an uncomfortable truth: any society, no matter how educated or tolerant it believes itself to be, can submit to hysteria. Reactions ranged from brow-furrowed confusion to wide-eyed fascination.</p>
+<p>It is difficult for Miller’s plays to have the same effect today as when their themes were still unfamiliar, even taboo. Perhaps contemporary playwrights are better placed to touch modern nerves. But thoughtful stagings can continue to make audiences reflect on their own prejudices and shortcomings.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/28/IDEA 使用技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/28/IDEA 使用技巧/" itemprop="url">IDEA 使用技巧</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T09:34:44+00:00">
+                2017-12-28
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/idea/" itemprop="url" rel="index">
+                    <span itemprop="name">idea</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/28/IDEA 使用技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/28/IDEA 使用技巧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/12/28/IDEA 使用技巧/" class="leancloud_visitors" data-flag-title="IDEA 使用技巧">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          
+            <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
+<p>在生产中主力是使用 <code>IDEA</code> ，工欲善其事，必先利其器。因而总结一下在使用过程中的经验，为方便初学者更快的掌握这个神器。<br> <div class="note info"><h2 id="配置阿里云"><a href="#配置阿里云" class="headerlink" title="配置阿里云"></a>配置阿里云</h2></div><br>配置 <code>阿里云</code> 作为 <code>maven</code> 的仓库来源，原因大家都懂得，国外的仓库速度有时候很呵呵，国内的这方面还是靠谱点。</p>
+<p>第一步：打开 IDEA 左上角的偏好设置 <code>Preferences</code>，接连点击 <code>Build</code> &gt;&gt; <code>Build Tools</code> &gt;&gt; <code>Maven</code> ，在 <code>Maven home directory</code> 处选择 IDEA 自带的 <code>maven</code> 版本，在本地文件系统中找到该路径，找到并进入 <code>conf</code> 目录，打开编辑 <code>settings.xml</code> 。</p>
+<p>第二步：在 <code>settings.xml</code> 中搜索 <code>mirrors</code> ,将以下配置写入该处：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 阿里amven库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<font color="red">NOTE:注意将上述代码放入 <code>&lt;mirrors&gt;这里面&lt;/mirrors&gt;</code> 。</font>
+
+<p>第三步：回到 <code>Maven</code> 的配置界面，<code>User settings file</code> 处点击 <code>Override</code> ,选择刚才编辑的 <code>settings.xml</code> 文件全路径。</p>
+<p>第四步：<code>Apply</code> ,<code>OK</code>,完活。现在可以验证是否成功。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/27/Phoenix-Secondary-Indexing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/27/Phoenix-Secondary-Indexing/" itemprop="url">Phoenix Secondary Indexing</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T16:48:35+00:00">
+                2017-12-27
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/phoenix/" itemprop="url" rel="index">
+                    <span itemprop="name">phoenix</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/27/Phoenix-Secondary-Indexing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/27/Phoenix-Secondary-Indexing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/12/27/Phoenix-Secondary-Indexing/" class="leancloud_visitors" data-flag-title="Phoenix Secondary Indexing">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <p>二级索引是从主访问路径访问数据的正交方式。在 HBase 中，您有一个索引按字典顺序排序在主键行上。以不同于主要行的方式访问记录需要扫描表中的所有行，以针对您的过滤器对其进行测试。通过二级索引，您索引的列或表达式形成一个备用行键，以允许沿着这个新轴进行点查找和范围扫描。</p>
+<div class="note info"><h2 id="Covered-Indexes-覆盖索引"><a href="#Covered-Indexes-覆盖索引" class="headerlink" title="Covered Indexes 覆盖索引"></a>Covered Indexes 覆盖索引</h2></div>
+<p>Phoenix 是特别强大的，因为我们提供覆盖索引 - 一旦找到索引条目，我们不需要返回主表。相反，我们将我们关心的数据绑定到索引行，节省了读取时间的开销。</p>
+<p>例如，以下内容将在v1和v2列上创建索引，并在索引中包含v3列以防止从数据表中获取该列：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> my_index <span class="keyword">ON</span> my_table (v1,v2) <span class="keyword">INCLUDE</span>(v3)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/12/Spark sample 取样函数/#more" rel="contents">
+            <a class="btn" href="/2017/12/27/Phoenix-Secondary-Indexing/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -488,7 +1714,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/11/Hive报错集/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/25/Google-Bigtable-中文版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -507,7 +1733,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/11/Hive报错集/" itemprop="url">Hive报错集</a></h1>
+                <a class="post-title-link" href="/2017/12/25/Google-Bigtable-中文版/" itemprop="url">Google Bigtable 中文版</a></h1>
         
     
         <div class="post-meta">
@@ -519,8 +1745,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T13:58:58+00:00">
-                2017-12-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:48:35+00:00">
+                2017-12-25
               </time>
             
     
@@ -542,8 +1768,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index">
-                    <span itemprop="name">hive</span>
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
                   </a>
                 </span>
     
@@ -560,8 +1786,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/11/Hive报错集/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/11/Hive报错集/" itemprop="commentCount"></span>
+                <a href="/2017/12/25/Google-Bigtable-中文版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/25/Google-Bigtable-中文版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -569,7 +1795,7 @@
     
           
           
-             <span id="/2017/12/11/Hive报错集/" class="leancloud_visitors" data-flag-title="Hive报错集">
+             <span id="/2017/12/25/Google-Bigtable-中文版/" class="leancloud_visitors" data-flag-title="Google Bigtable 中文版">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -601,12 +1827,13 @@
     
       
         
-          <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
-<p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
-<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的 hive 问题全部记录在这里，搞清楚问题，自信向前。<br>
+          <div class="note info"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2></div>
+<p>Bigtable 是一个分布式的结构化数据存储系统，它被设计用来处理海量数据:通常是分布在数千台普通服务器上的 PB 级的数据。</p>
+<p>Google 的很多项目使用 Bigtable 存储数据，包括 Web 索引、Google Earth、Google Finance。这些应用对 Bigtable 提出的要求差异非常大，无论是在数据量上(从 URL 到网页到卫星图像)还是在响应速度上(从后端的批量处理到实时数据服务)。尽管应用需求差异很大，但是，针对 Google 的这些产品，Bigtable 还是成功的提供了一个灵活的、高性能的解决方案。</p>
+<p>本论文描述了 Bigtable 提供的简单的数据模型。利用这个模型，用户可以动态的控制数据的分布和格式。 我们还将描述 Bigtable 的设计和实现。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/11/Hive报错集/#more" rel="contents">
+            <a class="btn" href="/2017/12/25/Google-Bigtable-中文版/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -661,7 +1888,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/11/Hive锁介绍-翻译自官方文档/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/16/Google-MapReduce-中文版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -680,7 +1907,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/11/Hive锁介绍-翻译自官方文档/" itemprop="url">Hive锁介绍-翻译自官方文档</a></h1>
+                <a class="post-title-link" href="/2017/12/16/Google-MapReduce-中文版/" itemprop="url">Google MapReduce 中文版</a></h1>
         
     
         <div class="post-meta">
@@ -692,8 +1919,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T09:58:58+00:00">
-                2017-12-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T10:06:41+00:00">
+                2017-12-16
               </time>
             
     
@@ -715,8 +1942,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index">
-                    <span itemprop="name">hive</span>
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
                   </a>
                 </span>
     
@@ -733,8 +1960,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/11/Hive锁介绍-翻译自官方文档/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/11/Hive锁介绍-翻译自官方文档/" itemprop="commentCount"></span>
+                <a href="/2017/12/16/Google-MapReduce-中文版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/16/Google-MapReduce-中文版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -742,7 +1969,7 @@
     
           
           
-             <span id="/2017/12/11/Hive锁介绍-翻译自官方文档/" class="leancloud_visitors" data-flag-title="Hive锁介绍-翻译自官方文档">
+             <span id="/2017/12/16/Google-MapReduce-中文版/" class="leancloud_visitors" data-flag-title="Google MapReduce 中文版">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -774,1239 +2001,13 @@
     
       
         
-          <p>在数据库中，并发性支持是必须的，而且它们的用例也很容易理解。至少，我们希望尽可能支持并发的读和写。添加一个机制来发现已获得的当前锁是很有用的。没有立即添加API来显式获取任何锁的需求，因此所有锁都是隐式获得的。以下锁定模式将在hive中定义(注意，不需要意图锁)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享(S)</span><br><span class="line">独占(X)</span><br></pre></td></tr></table></figure>
-<p>顾名思义，可以同时获得多个共享锁，而X锁可以阻止所有其他锁。<br>兼容性矩阵如下:<br><img src="http://oliji9s3j.bkt.clouddn.com/15129574898000.jpg" alt><br>对于某些操作，锁在本质上是分层的——例如，对于某些分区操作，表也被锁定(以确保在创建新分区时不能删除表)。<br>
+          <div class="note info"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2></div>
+<p>MapReduce 是一个编程模型，也是一个处理和生成超大数据集的算法模型的相关实现。用户首先创建一 个 Map 函数处理一个基于 key/value pair 的数据集合，输出中间的基于 key/value pair 的数据集合;然后再创建 一个 Reduce 函数用来合并所有的具有相同中间 key 值的中间 value 值。现实世界中有很多满足上述处理模型 的例子，本论文将详细描述这个模型。</p>
+<p>MapReduce 架构的程序能够在大量的普通配置的计算机上实现并行化处理。这个系统在运行时只关心: 如何分割输入数据，在大量计算机组成的集群上的调度，集群中计算机的错误处理，管理集群中计算机之间 必要的通信。采用 MapReduce 架构可以使那些没有并行计算和分布式处理系统开发经验的程序员有效利用分 布式系统的丰富资源。</p>
+<p>我们的 MapReduce 实现运行在规模可以灵活调整的由普通机器组成的集群上:一个典型的 MapReduce 计算往往由几千台机器组成、处理以 TB 计算的数据。程序员发现这个系统非常好用:已经实现了数以百计 的 MapReduce 程序，在 Google 的集群上，每天都有 1000 多个 MapReduce 程序在执行。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/11/Hive锁介绍-翻译自官方文档/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/" itemprop="url">Hexo + AppVeyor 持续集成</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T11:30:06+00:00">
-                2017-12-07
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/" class="leancloud_visitors" data-flag-title="Hexo + AppVeyor 持续集成">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
-<p>今天查看 Spark 源码的时候，无意发现了 AppVeyor ，才知道 持续集成（Continuous Integration，简称CI）,简单理解为可以自动化构建项目的工具。在 Spark 中，SparkR 的项目使用了 AppVeyor 持续集成工具。</p>
-<p>看到网络上一些大佬用 AppVeyor 联合 Hexo，作为博客代码的部署工具，一方面可以使部署代码更加简单（全自动化，虽然之前也只有 hexo -clean ,hexo -g ,hexo -d 三步，但现在完全在后台自动部署），另一方面也可以解决博客源码多电脑书写的局限性（之前只能在一台电脑上进行博客的创作，面临着项目备份的问题），现在将项目完全托管在 GitHub上，无需担心电脑换了，或是磁盘损坏造成的数据丢失，也无需使用云备份工具费时费力的维护项目。<br><div class="note info"><h2 id="核心步骤"><a href="#核心步骤" class="headerlink" title="核心步骤"></a>核心步骤</h2></div></p>
-<h3 id="新建代码仓库"><a href="#新建代码仓库" class="headerlink" title="新建代码仓库"></a>新建代码仓库</h3><p>首先我们先确定，将项目托管在 GitHub 上，这里有两种方案，一种是在存放博客静态代码的仓库（如：xxx.github.io）中新添加分支;另一种则是新建一个仓库用于存放项目。我这里使用的第二种方式，新建了一个仓库：hexo-github-source 。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/07/Hexo 优化-使用 AppVeyor 进行部署/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/12/01/Hive事务管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/01/Hive事务管理/" itemprop="url">Hive事务管理</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T11:30:06+00:00">
-                2017-12-01
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index">
-                    <span itemprop="name">hive</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/01/Hive事务管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/01/Hive事务管理/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/12/01/Hive事务管理/" class="leancloud_visitors" data-flag-title="Hive事务管理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2></div>
-<p>Hive作为Hadoop家族历史最悠久的组件之一，一直以其优秀的兼容性支持和稳定性而著称，越来越多的企业将业务数据从传统数据库迁移至Hadoop平台，并通过Hive来进行数据分析。但是我们在迁移的过程中难免会碰到如何将传统数据库的功能也迁移到Hadoop的问题，比如说事务。事务作为传统数据库很重要的一个功能，在Hive中是如何实现的呢？Hive的实现有什么不一样的地方呢？我们将传统数据库的应用迁移到Hive如果有事务相关的场景我们该如何去转换并要注意什么问题呢？</p>
-<p>本文会通过很多真实测试案例来比较Hive与传统数据库事务的区别，并在文末给出一些在Hive平台上使用事务相关的功能时的指导和建议。<br><div class="note info"><h2 id="ACID与实现原理"><a href="#ACID与实现原理" class="headerlink" title="ACID与实现原理"></a>ACID与实现原理</h2></div><br>为了方便解释和说明后面的一些问题，这里重提传统数据库事务相关的概念，以下内容来源于网络。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/01/Hive事务管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/30/SparkSQL-Catalyst优化理解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/30/SparkSQL-Catalyst优化理解/" itemprop="url">SparkSQL-Catalyst优化理解</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T11:32:26+00:00">
-                2017-11-30
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/30/SparkSQL-Catalyst优化理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/30/SparkSQL-Catalyst优化理解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/11/30/SparkSQL-Catalyst优化理解/" class="leancloud_visitors" data-flag-title="SparkSQL-Catalyst优化理解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
-<p>本文主要介绍SparkSQL的优化器系统Catalyst，其设计思路基本都来自于传统型数据库，而且和大多数当前的大数据SQL处理引擎设计基本相同（Impala、Presto、Hive（Calcite）等）。</p>
-<p>SQL优化器核心执行策略主要分为两个大的方向：</p>
-<ol>
-<li>基于规则优化（RBO）：是一种经验式、启发式地优化思路，更多地依靠前辈总结出来的优化规则，简单易行且能够覆盖到大部分优化逻辑，但是对于核心优化算子Join却显得有点力不从心。</li>
-<li>基于代价优化 (CBO)：根据代价估算确定一种代价最小的方案。</li>
-</ol>
-<p>举个简单的例子，两个表执行Join到底应该使用BroadcastHashJoin还是SortMergeJoin？当前SparkSQL的方式是通过手工设定参数来确定，如果一个表的数据量小于这个值就使用BroadcastHashJoin，但是这种方案显得很不优雅，很不灵活。基于代价优化就是为了解决这类问题，它会针对每个Join评估当前两张表使用每种Join策略的代价，根据代价估算确定一种代价最小的方案。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/30/SparkSQL-Catalyst优化理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/29/spark容错机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/29/spark容错机制/" itemprop="url">spark容错机制</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:16:32+00:00">
-                2017-11-29
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/29/spark容错机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/29/spark容错机制/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/11/29/spark容错机制/" class="leancloud_visitors" data-flag-title="spark容错机制">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <div class="note info"><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2></div>
-<p>一般来说，分布式数据集的容错性有两种方式： 数据检查点 和 记录数据的更新 。面向大规模数据分析，数据检查点操作成本很高，需要通过数据中心的网络连接在机器之间复制庞大的数据集，而网络带宽往往比内存带宽低得多，同时还需要消耗更多的存储资源。因此，Spark选择记录更新的方式。</p>
-<p>但是，如果更新粒度太细太多，那么记录更新成本也不低。因此，RDD只支持粗粒度转换，即只记录单个块上执行的单个操作，然后将创建RDD的一系列变换序列（每个RDD都包含了他是如何由其他RDD变换过来的以及如何重建某一块数据的信息。因此RDD的容错机制又称“血统(Lineage)”容错）记录下来，以便恢复丢失的分区。 </p>
-<p>Lineage本质上很类似于数据库中的重做日志（Redo Log），只不过这个重做日志粒度很大，是对全局数据做同样的重做进而恢复数据。<br><div class="note info"><h2 id="Lineage机制"><a href="#Lineage机制" class="headerlink" title="Lineage机制"></a>Lineage机制</h2></div></p>
-<h3 id="Lineage简介"><a href="#Lineage简介" class="headerlink" title="Lineage简介"></a>Lineage简介</h3><p>相比其他系统的细颗粒度的内存数据更新级别的备份或者LOG机制，RDD的Lineage记录的是粗颗粒度的特定数据Transformation操作（如filter、map、join等）行为。当这个RDD的部分分区数据丢失时，它可以通过Lineage获取足够的信息来重新运算和恢复丢失的数据分区。因为这种粗颗粒的数据模型，限制了Spark的运用场合，所以Spark并不适用于所有高性能要求的场景，但同时相比细颗粒度的数据模型，也带来了性能的提升。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/29/spark容错机制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="url">ORC与PARQUET文件类型的比较</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T10:29:04+00:00">
-                2017-11-29
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/29/ORC与PARQUET文件类型的比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/11/29/ORC与PARQUET文件类型的比较/" class="leancloud_visitors" data-flag-title="ORC与PARQUET文件类型的比较">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <h2 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h2><p>由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum等)，实现部分的谓词下推。</span><br><span class="line">由于每一列的成员都是同构的，可以针对不同的数据类型使用更高效的数据压缩算法，进一步减小I/O。</span><br><span class="line">由于每一列的成员的同构性，可以使用更加适合CPU pipeline的编码方式，减小CPU的缓存失效。</span><br></pre></td></tr></table></figure>
-<center><img src="http://oliji9s3j.bkt.clouddn.com/15119228873171.jpg" alt></center><br><center>图1 行式存储VS列式存储</center>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/29/ORC与PARQUET文件类型的比较/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/27/spark分层取样/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/spark分层取样/" itemprop="url">spark分层取样</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T16:57:10+00:00">
-                2017-11-27
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/27/spark分层取样/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/27/spark分层取样/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/11/27/spark分层取样/" class="leancloud_visitors" data-flag-title="spark分层取样">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <p>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
-<p>与存在于<code>spark.mllib</code>中的其它统计函数不同，分层采样方法<code>sampleByKey</code>和<code>sampleByKeyExact</code>可以在<code>key-value</code>对的<code>RDD</code>上执行。在分层采样中，可以认为<code>key</code>是一个标签，<br><code>value</code>是特定的属性。例如，<code>key</code>可以是男人或者女人或者文档<code>id</code>,它相应的<code>value</code>可能是一组年龄或者是文档中的词。<code>sampleByKey</code>方法通过掷硬币的方式决定是否采样一个观察数据，<br>因此它需要我们传递（<code>pass over</code>）数据并且提供期望的数据大小(<code>size</code>)。<code>sampleByKeyExact</code>比每层使用<code>sampleByKey</code>随机抽样需要更多的有意义的资源，但是它能使样本大小的准确性达到了<code>99.99%</code>。</p>
-<p><a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="noopener">sampleByKeyExact()</a>允许用户准确抽取<code>f_k * n_k</code>个样本，<br>这里<code>f_k</code>表示期望获取键为<code>k</code>的样本的比例，<code>n_k</code>表示键为<code>k</code>的键值对的数量。下面是一个使用的例子：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/27/spark分层取样/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-    
-    
-    <footer class="post-footer">
-      
-    
-      
-    
-      
-    
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/23/Dataset-scala/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="森">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-    
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="东篱下">
-    </span>
-    
-    
-      <header class="post-header">
-    
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/Dataset-scala/" itemprop="url">Dataset.scala</a></h1>
-        
-    
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T09:34:44+00:00">
-                2017-11-23
-              </time>
-            
-    
-            
-    
-            
-          </span>
-    
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
-                  </a>
-                </span>
-    
-                
-                
-              
-            </span>
-          
-    
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/23/Dataset-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/23/Dataset-scala/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-    
-          
-          
-             <span id="/2017/11/23/Dataset-scala/" class="leancloud_visitors" data-flag-title="Dataset.scala">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-    
-          
-    
-          
-    
-          
-    
-        </div>
-      </header>
-    
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-    
-      
-      
-    
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
-<blockquote>
-<p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p>
-</blockquote>
-<p>Dataset是懒加载的，例如：只有提交动作的时候才会触发计算。在内部，Datasets表示一个逻辑计划，它描述生成数据所需的计算。当提交动作时，Spark的查询优化器会优化逻辑计划，并以并行和分布式的方式生成有效执行的物理计划。请使用<code>explain</code> 功能，探索逻辑计划和优化的物理计划。</p>
-<p>为了有效地支持特定于领域的对象，需要[[Encoder]]。编码器将特定类型的“T”映射到Spark的内部类型系统。例如：给一个 <code>Person</code> 类，并带有两个属性：<code>name</code> (string) and <code>age</code> (int),编码器告诉Spark在运行时生成代码，序列化 <code>Person</code> 对象为二进制结构。</p>
-<p>通常有两种创建Dataset的方法:</p>
-<blockquote>
-<p>使用 <code>SparkSession</code> 上可用的 <code>read</code> 方法读取 Spark 指向的存储系统上的文件。<br>用现存的 Datasets 转换而来。</p>
-</blockquote>
-<p>Dataset操作也可以是无类型的，通过多种领域专用语言（DSL）方法定义：这些操作非常类似于 R或Python语言中的 数据框架抽象中可用的操作。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/23/Dataset-scala/#more" rel="contents">
+            <a class="btn" href="/2017/12/16/Google-MapReduce-中文版/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2052,7 +2053,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2090,7 +2091,7 @@
               <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
-              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+              <p class="site-description motion-element" itemprop="description">技术改变世界，阅读塑造人生</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -2100,7 +2101,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

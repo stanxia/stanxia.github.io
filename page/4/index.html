@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="采菊东篱下，悠然见南山">
+<meta name="description" content="技术改变世界，阅读塑造人生">
 <meta property="og:type" content="website">
 <meta property="og:title" content="东篱下">
 <meta property="og:url" content="https://stanxia.github.io/page/4/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="采菊东篱下，悠然见南山">
+<meta property="og:description" content="技术改变世界，阅读塑造人生">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="东篱下">
-<meta name="twitter:description" content="采菊东篱下，悠然见南山">
+<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
 
 
 
@@ -134,7 +134,7 @@
 
 
 
-</head>
+<script src="/assets/js/DPlayer.min.js"></script></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -314,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/28/mac使用小技巧/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -333,7 +333,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/28/mac使用小技巧/" itemprop="url">mac使用小技巧</a></h1>
+                <a class="post-title-link" href="/2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="url">ORC与PARQUET文件类型的比较</a></h1>
         
     
         <div class="post-meta">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T01:13:44+00:00">
-                2017-10-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T10:29:04+00:00">
+                2017-11-29
               </time>
             
     
@@ -368,8 +368,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
                   </a>
                 </span>
     
@@ -386,8 +386,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/28/mac使用小技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/28/mac使用小技巧/" itemprop="commentCount"></span>
+                <a href="/2017/11/29/ORC与PARQUET文件类型的比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/29/ORC与PARQUET文件类型的比较/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,7 +395,7 @@
     
           
           
-             <span id="/2017/10/28/mac使用小技巧/" class="leancloud_visitors" data-flag-title="mac使用小技巧">
+             <span id="/2017/11/29/ORC与PARQUET文件类型的比较/" class="leancloud_visitors" data-flag-title="ORC与PARQUET文件类型的比较">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -427,15 +427,366 @@
     
       
         
-          <div class="note info"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></div>
-<p>记录mac使用的小技巧和一些问题。不定期更新ing<br><div class="note info"><h2 id="文件损坏的解决办法"><a href="#文件损坏的解决办法" class="headerlink" title="文件损坏的解决办法"></a>文件损坏的解决办法</h2></div><br>在安装一些网上下载的应用时，如果报错显示：<font color="red">文件已经损坏，请移至废纸篓</font>。请不要惊慌，其实别不是文件真的损坏了，根本原因是 mac 系统的安全验证机制，默认是不允许某些应用的安装。要想避开该安全认证，其实方法也很简单，如下：</p>
-<p>第一步：打开系统偏好设置中的 <code>安全性与隐私</code> ，<code>解开锁</code>，选择 <code>任何来源</code> ，完成。</p>
-<p>第二步：在这里关键是很多朋友没找到这个 <code>任何来源</code> ，不要着急，咱们接着往来下，打开 <code>终端</code>，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure>
-<p>成功输入以上命令，再去执行第一步操作，完成，现在可以去开心的安装应用了。<br><img src="http://oliji9s3j.bkt.clouddn.com/aqwt.png" alt="aqwt"><br>
+          <h2 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h2><p>由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum等)，实现部分的谓词下推。</span><br><span class="line">由于每一列的成员都是同构的，可以针对不同的数据类型使用更高效的数据压缩算法，进一步减小I/O。</span><br><span class="line">由于每一列的成员的同构性，可以使用更加适合CPU pipeline的编码方式，减小CPU的缓存失效。</span><br></pre></td></tr></table></figure>
+<center><img src="http://oliji9s3j.bkt.clouddn.com/15119228873171.jpg" alt></center><br><center>图1 行式存储VS列式存储</center>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/28/mac使用小技巧/#more" rel="contents">
+            <a class="btn" href="/2017/11/29/ORC与PARQUET文件类型的比较/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/27/spark分层取样/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/spark分层取样/" itemprop="url">spark分层取样</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T16:57:10+00:00">
+                2017-11-27
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/27/spark分层取样/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/27/spark分层取样/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/27/spark分层取样/" class="leancloud_visitors" data-flag-title="spark分层取样">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <p>先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code>spark.mllib</code>中，用<code>key</code>来分层。</p>
+<p>与存在于<code>spark.mllib</code>中的其它统计函数不同，分层采样方法<code>sampleByKey</code>和<code>sampleByKeyExact</code>可以在<code>key-value</code>对的<code>RDD</code>上执行。在分层采样中，可以认为<code>key</code>是一个标签，<br><code>value</code>是特定的属性。例如，<code>key</code>可以是男人或者女人或者文档<code>id</code>,它相应的<code>value</code>可能是一组年龄或者是文档中的词。<code>sampleByKey</code>方法通过掷硬币的方式决定是否采样一个观察数据，<br>因此它需要我们传递（<code>pass over</code>）数据并且提供期望的数据大小(<code>size</code>)。<code>sampleByKeyExact</code>比每层使用<code>sampleByKey</code>随机抽样需要更多的有意义的资源，但是它能使样本大小的准确性达到了<code>99.99%</code>。</p>
+<p><a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="noopener">sampleByKeyExact()</a>允许用户准确抽取<code>f_k * n_k</code>个样本，<br>这里<code>f_k</code>表示期望获取键为<code>k</code>的样本的比例，<code>n_k</code>表示键为<code>k</code>的键值对的数量。下面是一个使用的例子：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/spark分层取样/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/23/Dataset-scala/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/Dataset-scala/" itemprop="url">Dataset.scala</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T09:34:44+00:00">
+                2017-11-23
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/23/Dataset-scala/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/23/Dataset-scala/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/23/Dataset-scala/" class="leancloud_visitors" data-flag-title="Dataset.scala">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Dataset 是一种强类型的领域特定对象集合，可以在使用功能或关系操作的同时进行转换。每个 Dataset 也有一个名为 “DataFrame” 的无类型视图，它是 [[Row]] 的 Dataset。<br>Dataset 上可用的操作分为转换和动作:</p>
+<blockquote>
+<p>转换：产生新的 Dataset ；包括 map, filter, select, and aggregate (<code>groupBy</code>).<br>动作：触发计算并返回结果 ；包括 count, show, or 写数据到文件系统。</p>
+</blockquote>
+<p>Dataset是懒加载的，例如：只有提交动作的时候才会触发计算。在内部，Datasets表示一个逻辑计划，它描述生成数据所需的计算。当提交动作时，Spark的查询优化器会优化逻辑计划，并以并行和分布式的方式生成有效执行的物理计划。请使用<code>explain</code> 功能，探索逻辑计划和优化的物理计划。</p>
+<p>为了有效地支持特定于领域的对象，需要[[Encoder]]。编码器将特定类型的“T”映射到Spark的内部类型系统。例如：给一个 <code>Person</code> 类，并带有两个属性：<code>name</code> (string) and <code>age</code> (int),编码器告诉Spark在运行时生成代码，序列化 <code>Person</code> 对象为二进制结构。</p>
+<p>通常有两种创建Dataset的方法:</p>
+<blockquote>
+<p>使用 <code>SparkSession</code> 上可用的 <code>read</code> 方法读取 Spark 指向的存储系统上的文件。<br>用现存的 Datasets 转换而来。</p>
+</blockquote>
+<p>Dataset操作也可以是无类型的，通过多种领域专用语言（DSL）方法定义：这些操作非常类似于 R或Python语言中的 数据框架抽象中可用的操作。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/23/Dataset-scala/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -485,12 +836,12 @@
   
   
 
-  <article class="post post-type-picture" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/1999/10/27/photo/">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/21/JavaRDDLike-scala/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="森">
@@ -503,6 +854,95 @@
     </span>
     
     
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/21/JavaRDDLike-scala/" itemprop="url">JavaRDDLike.scala</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T14:21:23+00:00">
+                2017-11-21
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/21/JavaRDDLike-scala/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/21/JavaRDDLike-scala/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/21/JavaRDDLike-scala/" class="leancloud_visitors" data-flag-title="JavaRDDLike.scala">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
     
     
     
@@ -514,12 +954,1057 @@
     
       
         
+          <div class="note info"><p>使用Java开发Spark程序，JavaRDD的功能算子中英文注释<br>JavaRDDLike的实现应该扩展这个虚拟抽象类，而不是直接继承这个特性。</p></div>
+<!--请开始装逼-->
+<h2 id="JavaRDD"><a href="#JavaRDD" class="headerlink" title="JavaRDD"></a>JavaRDD</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.spark.api.java</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>[spark] <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractJavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]]</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">/**</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">Defines</span> <span class="title">operations</span> <span class="title">common</span> <span class="title">to</span> <span class="title">several</span> <span class="title">Java</span> <span class="title">RDD</span> <span class="title">implementations</span>.</span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">定义几个Java</span> <span class="title">RDD实现的常见操作。</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span> <span class="title">@note</span> <span class="title">This</span> <span class="title">trait</span> <span class="title">is</span> <span class="title">not</span> <span class="title">intended</span> <span class="title">to</span> <span class="title">be</span> <span class="title">implemented</span> <span class="title">by</span> <span class="title">user</span> <span class="title">code</span>.</span></span><br><span class="line"><span class="class">  <span class="title">*</span></span></span><br><span class="line"><span class="class">  <span class="title">*</span>       <span class="title">该特性不打算由用户代码实现。</span></span></span><br><span class="line"><span class="class">  <span class="title">*/</span></span></span><br><span class="line"><span class="class"><span class="title">trait</span> <span class="title">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span> &lt;: <span class="type">JavaRDDLike</span>[<span class="type">T</span>, <span class="type">This</span>]] <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">wrapRDD</span></span>(rdd: <span class="type">RDD</span>[<span class="type">T</span>]): <span class="type">This</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> classTag: <span class="type">ClassTag</span>[<span class="type">T</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">rdd</span></span>: <span class="type">RDD</span>[<span class="type">T</span>]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/21/JavaRDDLike-scala/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/06/spark源码注释翻译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/spark源码注释翻译/" itemprop="url">spark源码注释翻译</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T16:57:05+00:00">
+                2017-11-06
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
           
-            <a href="/1999/10/27/photo/"><!--请开始装逼-->
-<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://oliji9s3j.bkt.clouddn.com/%E4%B8%80%E8%B7%AF%E9%80%86%E9%A3%8E.png" alt></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://oliji9s3j.bkt.clouddn.com/%E5%86%8D%E8%A7%81mtv.png" alt></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://oliji9s3j.bkt.clouddn.com/%E6%96%B0%E7%9A%84%E5%BF%83%E8%B7%B3.png" alt></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="http://oliji9s3j.bkt.clouddn.com/15120957661673.jpg" alt></div><div class="group-picture-column" style="width: 50%;"><img src="http://oliji9s3j.bkt.clouddn.com/15120957755072.jpg" alt></div></div><div class="group-picture-row"></div></div></div>
-<!--对不起，到时间了，请停止装逼-->
-</a>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
           
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/06/spark源码注释翻译/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/06/spark源码注释翻译/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/06/spark源码注释翻译/" class="leancloud_visitors" data-flag-title="spark源码注释翻译">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>版本：spark2.1.1<br>目的：方便中文用户阅读源码，把时间花在理解而不是翻译上</p></div>
+<!--请开始装逼-->
+<h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>开始立项进行翻译，一方面方便日后阅读源码，另一方面先粗粒度的熟悉下spark框架和组件。优化完之后希望能帮助更多的中文用户，节省翻译时间。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/06/spark源码注释翻译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/01/spark关于parquet的优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/spark关于parquet的优化/" itemprop="url">spark关于parquet的优化</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T14:53:13+00:00">
+                2017-11-01
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/01/spark关于parquet的优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/01/spark关于parquet的优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/01/spark关于parquet的优化/" class="leancloud_visitors" data-flag-title="spark关于parquet的优化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>parquet是一种列式存储。可以提供面向列的存储和查询。</p></div>
+<h2 id="Parquet的优势"><a href="#Parquet的优势" class="headerlink" title="Parquet的优势"></a>Parquet的优势</h2><p>在sparkSQL程序中使用parquet格式存储文件，在存储空间和查询性能方面都有很高的效率。</p>
+<h3 id="存储方面"><a href="#存储方面" class="headerlink" title="存储方面"></a>存储方面</h3><p>因为是面向列的存储，同一列的类型相同，因而在存储的过程中可以使用更高效的压缩方案，可以节省大量的存储空间。</p>
+<h3 id="查询方面"><a href="#查询方面" class="headerlink" title="查询方面"></a>查询方面</h3><p>在执行查询任务时，只会扫描需要的列，而不是全部，高度灵活性使查询变得非常高效。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/01/spark关于parquet的优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/11/01/三步走战略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/三步走战略/" itemprop="url">三步走战略</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T10:45:09+00:00">
+                2017-11-01
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/规划/" itemprop="url" rel="index">
+                    <span itemprop="name">规划</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/01/三步走战略/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/01/三步走战略/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/11/01/三步走战略/" class="leancloud_visitors" data-flag-title="三步走战略">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>设定中长期规划<br>稳扎稳打，逐个击破，实现技术上的重大突破</p></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/01/三步走战略/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/31/手把手搭建vps和shadowsocks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/手把手搭建vps和shadowsocks/" itemprop="url">手把手搭建vps和shadowsocks</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T00:16:22+00:00">
+                2017-10-31
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vps/" itemprop="url" rel="index">
+                    <span itemprop="name">vps</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/31/手把手搭建vps和shadowsocks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/31/手把手搭建vps和shadowsocks/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/10/31/手把手搭建vps和shadowsocks/" class="leancloud_visitors" data-flag-title="手把手搭建vps和shadowsocks">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <div class="note info"><p>记性不好，做个记录，日后有需要时难得费神。</p></div>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>了解一些原理，熟悉一些名词，也方便理解接下来安装过程中的操作。</p>
+<h3 id="vps"><a href="#vps" class="headerlink" title="vps"></a>vps</h3><p>VPS(Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。</p>
+<h3 id="vultr"><a href="#vultr" class="headerlink" title="vultr"></a>vultr</h3><p><a href="https://www.vultr.com/" target="_blank" rel="noopener">Vultr</a> 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等多地的 VPS。它家的服务器以性价比高闻名，按时间计费，最低的资费为每月 $2.5。</p>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>Linux 是免费开源的操作系统，大概被世界上过半服务器所采用。有大量优秀的开源软件可以安装，上述 Shadowsocks 就是其一。你可以通过命令行来直接给 Linux 操作系统「下命令」，比如 $ cd ~/Desktop 就是进入你根目录下的 Desktop 文件夹。</p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p> SSH 是一种网络协议，作为每一台 Linux 电脑的标准配置，用于计算机之间的加密登录。当你为租用的 VPS 安装 Linux 系统后，只要借助一些工具，就可以用 SSH 在你自己的 Mac/PC 电脑上远程登录该 VPS 了。</p>
+<h3 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h3><p>Shadowsocks(ss) 是由 <a href="https://github.com/Clowwindy" target="_blank" rel="noopener">Clowwindy</a> 开发的一款软件，其作用本来是加密传输资料。当然，也正因为它加密传输资料的特性，使得 GFW 没法将由它传输的资料和其他普通资料区分开来，也就不能干扰我们访问那些「不存在」的网站了。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/31/手把手搭建vps和shadowsocks/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/30/spark报错集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/spark报错集/" itemprop="url">spark报错集</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T13:58:58+00:00">
+                2017-10-30
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/30/spark报错集/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/30/spark报错集/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/10/30/spark报错集/" class="leancloud_visitors" data-flag-title="spark报错集">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <h2 id="有话要说"><a href="#有话要说" class="headerlink" title="有话要说"></a>有话要说</h2><p>针对一个老毛病：有些错误屡犯屡改，屡改屡犯，没有引起根本上的注意，或者没有从源头理解错误发生的底层原理，导致做很多无用功。</p>
+<p>总结历史，并从中吸取教训，减少无用功造成的时间浪费。特此将从目前遇到的spark问题全部记录在这里，搞清楚问题，自信向前。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/30/spark报错集/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+    
+    
+    <footer class="post-footer">
+      
+    
+      
+    
+      
+    
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://stanxia.github.io/2017/10/29/life/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="森">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东篱下">
+    </span>
+    
+    
+      <header class="post-header">
+    
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/29/life/" itemprop="url">life</a></h1>
+        
+    
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T11:00:42+00:00">
+                2017-10-29
+              </time>
+            
+    
+            
+    
+            
+          </span>
+    
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/movie/" itemprop="url" rel="index">
+                    <span itemprop="name">movie</span>
+                  </a>
+                </span>
+    
+                
+                
+              
+            </span>
+          
+    
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/29/life/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/29/life/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+    
+          
+          
+             <span id="/2017/10/29/life/" class="leancloud_visitors" data-flag-title="life">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+    
+          
+    
+          
+    
+          
+    
+        </div>
+      </header>
+    
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+    
+      
+        
+          <!--请开始装逼-->
+<!--视频start-->
+<div id="dplayer0" class="dplayer" style="margin-bottom: 20px;"></div><script>var dplayer0 = new DPlayer({"element":document.getElementById("dplayer0"),"autoplay":0,"theme":"#FADFA3","loop":1,"video":{"url":"http://oliji9s3j.bkt.clouddn.com/Unbroken%20-%20Motivational%20Video.mp4","pic":"/images/pic/life.jpeg"}});</script>
+<div class="note info"><p>Life is simple &amp;&amp; funny.</p></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/29/life/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -561,7 +2046,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -599,7 +2084,7 @@
               <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="森">
             
               <p class="site-author-name" itemprop="name">森</p>
-              <p class="site-description motion-element" itemprop="description">采菊东篱下，悠然见南山</p>
+              <p class="site-description motion-element" itemprop="description">技术改变世界，阅读塑造人生</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -609,7 +2094,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1336,4 +2821,4 @@
 
 <script type="text/javascript" src="/js/src/love.js"></script>
 
-</body></html>
+<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"></link>
