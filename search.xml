@@ -4,21 +4,93 @@
   
     
     <entry>
-      <title><![CDATA[Why British wage growth is picking up at last]]></title>
-      <url>https://stanxia.github.io/2020/02/05/new%20page/</url>
-      <content type="html"><![CDATA[<h2 id="欢迎👏"><a href="#欢迎👏" class="headerlink" title="欢迎👏"></a>欢迎👏</h2><p>阔别</p>
-]]></content>
+      <title><![CDATA[链表]]></title>
+      <url>https://stanxia.github.io/2020/02/05/%E9%93%BE%E8%A1%A8/</url>
+      <content type="html"><![CDATA[<div class="note info"><p><img src="../pics/image-20200206000127487.png" alt="image"></p></div>
+<a id="more"></a>
+<div class="note info"><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2></div>
+<p>链表不需要连续的内存，通过指针将零散的内存块关联起来。</p>
+<h4 id="数组与链表的比较"><a href="#数组与链表的比较" class="headerlink" title="数组与链表的比较"></a>数组与链表的比较</h4><p>最直观的比较是数组是连续的内存块，而链表不需要连续。</p>
+<p><a href="https://github.com/stanxia/algo2020/blob/master/pics/d5d5bee4be28326ba3c28373808a62cd.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/d5d5bee4be28326ba3c28373808a62cd.jpg" alt="img"></a></p>
+<p>性能比较：</p>
+<p><a href="https://github.com/stanxia/algo2020/blob/master/pics/4f63e92598ec2551069a0eef69db7168.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/4f63e92598ec2551069a0eef69db7168.jpg" alt="img"></a></p>
+<div class="note info"><h2 id="常见分类"><a href="#常见分类" class="headerlink" title="常见分类"></a>常见分类</h2></div>
+<p>常见的链表有单链表，双向链表，循环链表，双向循环链表等。</p>
+<h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p>顾名思义，单链表是单方向的，链表由<code>数据结点</code>和<code>后继指针</code>组成。</p>
+<p><a href="https://github.com/stanxia/algo2020/blob/master/pics/b93e7ade9bb927baad1348d9a806ddeb.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/b93e7ade9bb927baad1348d9a806ddeb.jpg" alt="img"></a></p>
+<p><strong>特点</strong></p>
+<h4 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h4><p><a href="https://github.com/stanxia/algo2020/blob/master/pics/86cb7dc331ea958b0a108b911f38d155.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/86cb7dc331ea958b0a108b911f38d155.jpg" alt="img"></a></p>
+<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p><a href="https://github.com/stanxia/algo2020/blob/master/pics/cbc8ab20276e2f9312030c313a9ef70b.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/cbc8ab20276e2f9312030c313a9ef70b.jpg" alt="img"></a></p>
+<h4 id="双向循环链表"><a href="#双向循环链表" class="headerlink" title="双向循环链表"></a>双向循环链表</h4><p><a href="https://github.com/stanxia/algo2020/blob/master/pics/d1665043b283ecdf79b157cfc9e5ed91.jpg" target="_blank" rel="noopener"><img src="https://github.com/stanxia/algo2020/raw/master/pics/d1665043b283ecdf79b157cfc9e5ed91.jpg" alt="img"></a></p>
+<div class="note info"><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2></div>
+<div class="note info"><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2></div>
+<div class="note info"><h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2></div>
+<p>此处使用<code>scala</code>实现常见的链表样例。</p>
+<h3 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h3><h3 id="回文"><a href="#回文" class="headerlink" title="回文"></a>回文</h3>]]></content>
       
         <categories>
             
-            <category> spark </category>
+            <category> algo </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> spark </tag>
+            <tag> algo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数组]]></title>
+      <url>https://stanxia.github.io/2020/02/05/%E6%95%B0%E7%BB%84/</url>
+      <content type="html"><![CDATA[<div class="note info"><p><img src="https://github.com/stanxia/algo2020/raw/master/pics/image-20200205011633913.png" alt="image"></p></div>
+<a id="more"></a>
+<div class="note info"><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2></div>
+<p><strong>数组（Array）\</strong>是一种**线性表**数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。</p>
+<div class="note info"><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2></div>
+<h4 id="数组下标由0开始"><a href="#数组下标由0开始" class="headerlink" title="数组下标由0开始"></a>数组下标由0开始</h4><p>为什么？</p>
+<p>数组查找数据时的寻址公式为：<code>start_address + n*data_block_size</code>。</p>
+<p>一方面是按照上述公式，如果下标由1开始，则公式为：<code>start_address + (n-1)*data_block_size</code></p>
+<p>每次寻址时会做一次 <code>n-1</code>的运算。</p>
+<p>另一方面是历史原因，都是从0开始的。</p>
+<h4 id="快速查找"><a href="#快速查找" class="headerlink" title="快速查找"></a>快速查找</h4><p>根据下标随机查找，时间复杂度为O(1)。</p>
+<h4 id="插入、删除慢"><a href="#插入、删除慢" class="headerlink" title="插入、删除慢"></a>插入、删除慢</h4><p>插入、删除会导致数组后续元素的后移，时间复杂度为O(n)。</p>
+<div class="note info"><h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2></div>]]></content>
+      
+        <categories>
+            
+            <category> algo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> algo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[new 2020]]></title>
+      <url>https://stanxia.github.io/2020/02/05/new%20page/</url>
+      <content type="html"><![CDATA[<h2 id="欢迎👏"><a href="#欢迎👏" class="headerlink" title="欢迎👏"></a>欢迎👏</h2><p>阔别</p>
+]]></content>
+      
+        <categories>
+            
+            <category> think </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> think </tag>
             
         </tags>
         
