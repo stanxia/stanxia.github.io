@@ -4,9 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[Github作为图床]]></title>
+      <url>https://stanxia.github.io/2020/02/06/Github%E4%BD%9C%E4%B8%BA%E5%9B%BE%E5%BA%8A/</url>
+      <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/stanxia/blog-pics/master/20200206010126.png" alt></p>
+<a id="more"></a>
+<div class="note info"><h2 id="为什么使用Github"><a href="#为什么使用Github" class="headerlink" title="为什么使用Github"></a>为什么使用Github</h2></div>
+<p>因为免费。</p>
+<div class="note info"><h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2></div>
+<p>因为目前的使用的是Mac电脑，在网上冲浪时了解上传的图床的工具，推荐较多的为一款叫<code>ipic</code>的软件，但是该软件：</p>
+<ul>
+<li>免费版本只支持新浪微博</li>
+<li>不支持Github作为图床</li>
+</ul>
+<p>所以放弃使用该软件。</p>
+<p>继续网上冲浪之后，了解到一款叫做<code>picgo</code>的软件，有两点吸引我：</p>
+<ul>
+<li>开源</li>
+<li>支持Github</li>
+</ul>
+<div class="note info"><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2></div>
+<p><a href="https://picgo.github.io/PicGo-Doc/zh/" target="_blank" rel="noopener">戳我了解PicGo</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> tools </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[链表]]></title>
       <url>https://stanxia.github.io/2020/02/05/%E9%93%BE%E8%A1%A8/</url>
-      <content type="html"><![CDATA[<div class="note info"><p><img src="../pics/image-20200206000127487.png" alt="image"></p></div>
+      <content type="html"><![CDATA[<div class="note info"><p><img src="https://raw.githubusercontent.com/stanxia/blog-pics/master/20200206004523.png" alt></p></div>
 <a id="more"></a>
 <div class="note info"><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2></div>
 <p>链表不需要连续的内存，通过指针将零散的内存块关联起来。</p>
