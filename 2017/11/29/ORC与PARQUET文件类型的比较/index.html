@@ -6,7 +6,7 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="spark,orc,parquet,">
+  <meta name="keywords" content="spark,parquet,orc,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="列式存储由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化： 123查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum">
-<meta name="keywords" content="spark,orc,parquet">
+<meta name="keywords" content="spark,parquet,orc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ORC与PARQUET文件类型的比较">
 <meta property="og:url" content="https://stanxia.github.io/2017/11/29/ORC与PARQUET文件类型的比较/index.html">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119243950348.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119244638287.jpg">
 <meta property="og:image" content="http://oliji9s3j.bkt.clouddn.com/15119245211902.jpg">
-<meta property="og:updated_time" content="2019-04-17T06:08:31.936Z">
+<meta property="og:updated_time" content="2020-02-05T05:08:35.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ORC与PARQUET文件类型的比较">
 <meta name="twitter:description" content="列式存储由于OLAP查询的特点，列式存储可以提升其查询性能，但是它是如何做到的呢？这就要从列式存储的原理说起，从图1中可以看到，相对于关系数据库中通常使用的行式存储，在使用列式存储时每一列的所有元素都是顺序存储的。由此特点可以给查询带来如下的优化： 123查询的时候不需要扫描全部的数据，而只需要读取每次查询涉及的列，这样可以将I/O消耗降低N倍，另外可以保存每一列的统计信息(min、max、sum">
@@ -617,9 +617,9 @@
           
             <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
           
-            <a href="/tags/orc/" rel="tag"><i class="fa fa-tag"></i> orc</a>
-          
             <a href="/tags/parquet/" rel="tag"><i class="fa fa-tag"></i> parquet</a>
+          
+            <a href="/tags/orc/" rel="tag"><i class="fa fa-tag"></i> orc</a>
           
         </div>
       
@@ -733,7 +733,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -842,7 +842,7 @@
     
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-paw"></i>
   </span>
